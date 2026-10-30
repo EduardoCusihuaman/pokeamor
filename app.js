@@ -33,11 +33,17 @@ let ambientSide=0,lastPalette='',pulseTimer;
 function setScene(p){
  const palette=p.palette||{h:210,s:20,v:40},h=palette.h,comp=(h+180)%360,triad=(h+120)%360;
  const key=[h,palette.s,palette.v].join(':');if(key===lastPalette)return;lastPalette=key;
- const saturation=Math.max(16,Math.min(34,palette.s*.45)),a=$('#ambient-a'),b=$('#ambient-b'),next=ambientSide? a:b,old=ambientSide?b:a;ambientSide=1-ambientSide;
- next.style.background=`radial-gradient(ellipse at 50% 40%,hsl(${h} ${saturation}% 29% / .9),transparent 72%),radial-gradient(ellipse at 100% 90%,hsl(${triad} 24% 21% / .55),transparent 65%),linear-gradient(150deg,hsl(${comp} 19% 14%),hsl(${h} 22% 12%))`;
+ const saturation=Math.max(28,Math.min(52,palette.s*.65)),a=$('#ambient-a'),b=$('#ambient-b'),next=ambientSide? a:b,old=ambientSide?b:a;ambientSide=1-ambientSide;
+ next.style.background=`radial-gradient(ellipse at 50% 40%,hsl(${h} ${saturation}% 84% / .5),transparent 72%),radial-gradient(ellipse at 100% 90%,hsl(${triad} 48% 89% / .4),transparent 65%),linear-gradient(150deg,hsl(${comp} 42% 97%),hsl(${h} 45% 94%))`;
  next.style.opacity='1';old.style.opacity='0';
 }
-function signalDecision(value){const glow=$('#decision-glow');clearTimeout(pulseTimer);glow.classList.remove('confirm-yes','confirm-no');void glow.offsetWidth;glow.classList.add(value==='yes'?'confirm-yes':'confirm-no');pulseTimer=setTimeout(()=>glow.classList.remove('confirm-yes','confirm-no'),560)}
+function signalDecision(value){
+ const glow=$('#decision-glow'),stage=$('#stage').getBoundingClientRect(),collection=$('#open').getBoundingClientRect();
+ const x=stage.left+stage.width*(value==='yes'?.72:.28),y=stage.top+stage.height*.53;
+ glow.style.setProperty('--origin-x',x+'px');glow.style.setProperty('--origin-y',y+'px');
+ glow.style.setProperty('--travel-x',(collection.left+collection.width/2-x)+'px');glow.style.setProperty('--travel-y',(collection.top+collection.height/2-y)+'px');
+ clearTimeout(pulseTimer);glow.classList.remove('confirm-yes','confirm-no');void glow.offsetWidth;glow.classList.add(value==='yes'?'confirm-yes':'confirm-no');pulseTimer=setTimeout(()=>glow.classList.remove('confirm-yes','confirm-no'),680)
+}
 function fitCard(){const stage=$('#stage');stage.style.setProperty('--card-width',Math.max(0,Math.min(stage.clientWidth-2,(stage.clientHeight-6)*.716))+'px')}
 new ResizeObserver(fitCard).observe($('#stage'));
 function clearFeedback(){cancelAnimationFrame(frame);$('#yes').classList.remove('ready');$('#no').classList.remove('ready');document.documentElement.style.setProperty('--yes-intent','0');document.documentElement.style.setProperty('--no-intent','0')}
@@ -58,7 +64,7 @@ function makeCard(p,under=false){
  c.onpointermove=e=>{if(!start)return;const now=performance.now();vx=(e.clientX-lastX)/Math.max(1,now-lastTime);lastX=e.clientX;lastTime=lastMove=now;dx=e.clientX-start.x;dy=e.clientY-start.y;const {px,py}=light(e.clientX,e.clientY);const threshold=Math.min(78,c.clientWidth*.21),strength=Math.min(Math.abs(dx)/threshold,1),direction=dx>0?1:-1;
  move({x:dx,y:dy*.18-Math.min(Math.abs(dx)*.035,5),r:dx/26,rx:(50-py)*.055,ry:(px-50)*.065,s:1.012});
  const newArmed=Math.abs(dx)>=threshold?direction:Math.abs(dx)<threshold*.72?0:armed;if(newArmed&&newArmed!==armed)tactile('edge');armed=newArmed;
- stamp.textContent=dx>0?'♡':'×';stamp.style.color=dx>0?'#ffe0ed':'#c4eafa';stamp.style.left=dx>0?'18px':'auto';stamp.style.right=dx>0?'auto':'18px';stamp.style.opacity=Math.abs(dx)<16?0:Math.min(1,(Math.abs(dx)-16)/(threshold-16));stamp.style.transform=`scale(${.65+strength*.35}) rotate(${direction*-9}deg)`;
+ stamp.textContent=dx>0?'♡':'×';stamp.style.color=dx>0?'#cb6c94':'#84a9b9';stamp.style.left=dx>0?'18px':'auto';stamp.style.right=dx>0?'auto':'18px';stamp.style.opacity=Math.abs(dx)<16?0:Math.min(1,(Math.abs(dx)-16)/(threshold-16));stamp.style.transform=`scale(${.65+strength*.35}) rotate(${direction*-9}deg)`;
  $('#yes').classList.toggle('ready',armed===1);$('#no').classList.toggle('ready',armed===-1);document.documentElement.style.setProperty('--yes-intent',String(dx>0?strength*.8:0));document.documentElement.style.setProperty('--no-intent',String(dx<0?strength*.75:0));c.style.setProperty('--love',String(dx>0?strength:0));c.style.setProperty('--pass',String(dx<0?strength:0));
  const u=undercard();if(u&&!reducedMotion.matches){u.style.transform=`translateY(${7*(1-strength)}px) scale(${.968+strength*.032})`;u.style.filter=`brightness(${.98+strength*.02})`}
  };
