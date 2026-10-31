@@ -153,14 +153,19 @@ $('#import').onclick=()=>$('#file').click();$('#file').onchange=async e=>{try{co
 $('#share').onclick=()=>{if($('#collection-options').open)$('#collection-options').close();$('#link').value=location.href;$('#cloudstatus').textContent=dirty?'Todavía hay cambios sin sincronizar. Conservá también una exportación.':'El enlace recupera la última colección sincronizada.';$('#sharing').showModal();if(dirty)sync()};$('#copy').onclick=async()=>{try{await navigator.clipboard.writeText(location.href);toast('Enlace copiado')}catch{$('#link').select();toast('Mantené pulsado el enlace para copiarlo.')}};$('#dismiss').onclick=()=>$('#sharing').close();
 async function init(){try{catalog=await(await fetch('/catalog.json',{cache:'no-cache'})).json();const ids=[...new Set(popular)];order=[...ids.map(id=>catalog.find(p=>p.id===id)).filter(Boolean),...catalog.filter(p=>!ids.includes(p.id))];render();restore()}catch{$('#stage').innerHTML='<p>No pudimos cargar el catálogo. <a href="">Reintentar</a></p>'}}init();
 
-function browseDetail(direction){const i=collectionCards.findIndex(p=>p.id===detailPokemon?.id),p=collectionCards[i+direction];if(p)inspectCard(p)}
+function browseDetail(direction){const i=collectionCards.findIndex(p=>p.id===detailPokemon?.id),p=collectionCards[i+direction];if(p){detailOrigin=document.querySelector('.memory-card[data-pokemon="'+p.id+'"]');inspectCard(p)}}
 $('#detail-prev').onclick=()=>browseDetail(-1);$('#detail-next').onclick=()=>browseDetail(1);
-let detailStart=null;$('#detail-art').onpointerdown=e=>{detailStart={x:e.clientX,y:e.clientY}};$('#detail-art').onpointerup=e=>{if(!detailStart)return;const dx=e.clientX-detailStart.x,dy=e.clientY-detailStart.y;detailStart=null;if(dy>80&&dy>Math.abs(dx))$('#card-detail').close();else if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))browseDetail(dx<0?1:-1)};
+let detailStart=null;$('#detail-art').onpointerdown=e=>{detailStart={x:e.clientX,y:e.clientY}};$('#detail-art').onpointerup=e=>{if(!detailStart)return;const dx=e.clientX-detailStart.x,dy=e.clientY-detailStart.y;detailStart=null;if(dy>80&&dy>Math.abs(dx))closeDetail();else if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))browseDetail(dx<0?1:-1)};
 
 
 function showCollectionTab(rounds){$('#sheet').classList.toggle('rounds-mode',rounds);$('#show-rounds').classList.toggle('selected',rounds);$('#show-liked').classList.toggle('selected',!rounds)}
 $('#show-rounds').onclick=()=>{showCollectionTab(true);window.PokeJourney?.compose()};$('#show-liked').onclick=()=>showCollectionTab(false);
 
-window.PokeInspect=p=>{if(!collectionCards.some(c=>c.id===p.id))collectionCards=catalog.filter(c=>state.votes[c.id]?.value==='yes');inspectCard(p)};
+let detailOrigin=null;
+window.PokeInspect=(p,group,tile)=>{collectionCards=group||[p];detailOrigin=tile;inspectCard(p);animateCardOrigin(false)};
+function animateCardOrigin(reverse){const image=$('#detail-art img'),origin=detailOrigin?.querySelector?.('img');if(!image||!origin||!image.animate||matchMedia('(prefers-reduced-motion: reduce)').matches)return;const a=origin.getBoundingClientRect(),b=image.getBoundingClientRect();if(!a.width||!b.width)return;const transform=`translate(${a.left-b.left}px,${a.top-b.top}px) scale(${a.width/b.width},${a.height/b.height})`;return image.animate(reverse?[{transform:'none'},{transform,opacity:.4}]:[{transform,opacity:.4},{transform:'none',opacity:1}],{duration:200,easing:'cubic-bezier(.2,.7,.2,1)',fill:'none'}).finished.catch(()=>{})}
+async function closeDetail(){if(!$('#card-detail').open)return;await animateCardOrigin(true);$('#card-detail').close()}
+$('#detail-close').onclick=closeDetail;
+
 
 $('#collection-settings').onclick=()=>showCollectionTab(false);
