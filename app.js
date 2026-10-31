@@ -385,7 +385,7 @@ const recordVote=vote;vote=function(value,...rest){
  xp.metrics.newDecisions=(xp.metrics.newDecisions||0)+(n>before?1:0);xp.metrics.startedAt=xp.metrics.startedAt||Date.now();xp.metrics.lastAt=Date.now();
  if(value==='yes'&&Object.values(state.votes).filter(v=>v.value==='yes').length%15===0){eventPauseUntil=n+8;state.refinementSchedule={...(state.refinementSchedule||{}),nextSeen:Math.max(n+8,state.refinementSchedule?.nextSeen||0),time:Date.now()}}
  const milestone=n===20||n>0&&n%50===0;
- if(milestone&&!xp.milestones[n]){xp.milestones[n]=true;seenLabel.classList.remove('discovery-milestone');void seenLabel.offsetWidth;seenLabel.classList.add('discovery-milestone');if(!wasEncounter)sound('round');if(n>=100){const leaders=catalog.filter(p=>state.votes[p.id]?.value==='yes'&&(state.ratings[p.id]?.played||0)>0).sort((a,b)=>score(b)-score(a)).slice(0,3);if(leaders.length){const reward=$('#round-reward');reward.onclick=()=>{reward.classList.remove('show');window.PokeInspect(leaders[0],leaders,null)};reward.replaceChildren(...leaders.map(p=>img(p)));reward.classList.add('show');setTimeout(()=>reward.classList.remove('show'),1600)}}}
+ if(milestone&&!xp.milestones[n]){xp.milestones[n]=true;seenLabel.classList.remove('discovery-milestone');void seenLabel.offsetWidth;seenLabel.classList.add('discovery-milestone');if(!wasEncounter)sound('round');}
  save();scheduleEvents();
 };
 $('#stage').addEventListener('pointerdown',()=>{$('#stage .first-gesture')?.classList.remove('first-gesture')},{passive:true});
