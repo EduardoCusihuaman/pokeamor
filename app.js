@@ -64,13 +64,15 @@ function sound(kind='choose'){
    const osc=audio.createOscillator(),gain=audio.createGain(),filter=audio.createBiquadFilter();
    osc.type=wave;osc.frequency.setValueAtTime(freq,when);
    filter.type='lowpass';filter.frequency.setValueAtTime(4200,when);
-   gain.gain.setValueAtTime(.0001,when);gain.gain.exponentialRampToValueAtTime(level,when+.008);
+   gain.gain.setValueAtTime(.0001,when);gain.gain.exponentialRampToValueAtTime(level*.58,when+.008);
    gain.gain.exponentialRampToValueAtTime(.0001,when+dur);
    osc.connect(filter).connect(gain).connect(audio.destination);osc.start(when);osc.stop(when+dur+.01);
    osc.onended=()=>{osc.disconnect();filter.disconnect();gain.disconnect()};
   };
   if(kind==='like'){
    tone(784,t,.09,.032,'sine');tone(1175,t+.038,.12,.026,'triangle');tone(1568,t+.086,.15,.022,'sine');tone(2352,t+.105,.09,.006,'sine');
+  }else if(kind==='round'){
+   tone(659,t,.16,.022,'sine');tone(988,t+.07,.19,.017,'triangle');tone(1318,t+.15,.23,.012,'sine');
   }else if(kind==='lift'){
    tone(540,t,.035,.012,'sine');
   }else{
@@ -78,6 +80,7 @@ function sound(kind='choose'){
   }
  }catch{}
 }
+window.PokePlaySound=sound;
 $('#sound-setting').checked=feel.sound;$('#touch-setting').checked=feel.touch;
 $('#sound-setting').onchange=e=>{feel.sound=e.target.checked;localStorage.setItem('pokeamor-sound',String(feel.sound));sound('like')};
 $('#touch-setting').onchange=e=>{feel.touch=e.target.checked;localStorage.setItem('pokeamor-touch',String(feel.touch))};
