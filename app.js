@@ -332,7 +332,7 @@ function paintRefinement(){
  $('#front-refine').innerHTML=inlinePair?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6 6 6-6 6m10-12v12"/></svg>':refineIcon;
  $('#front-refine').setAttribute('aria-label',inlinePair?'Saltar comparación':'Afinar mis favoritos');
  if(!inlinePair)return;
- for(const c of stage.querySelectorAll('.card')){c.stopMotion?.();c.hidden=true}
+ for(const c of stage.querySelectorAll('.card')){if(c.activated)c.setUnder?.();c.hidden=true}
  const pairSignature=inlinePair.map(p=>p.id+':'+p.card).join('|');if(pairBox.dataset.signature===pairSignature)return;pairBox.dataset.signature=pairSignature;pairBox.replaceChildren();inlinePair.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Prefiero '+p.name);b.append(img(p,true));b.onclick=()=>chooseRefinement(i);pairBox.append(b)});
 }
 function chooseRefinement(winner){
