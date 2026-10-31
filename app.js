@@ -8,7 +8,7 @@ function fallbackPersist(){try{localStorage.setItem(key,JSON.stringify(state));l
 function persist(){clearTimeout(diskTimer);diskTimer=setTimeout(()=>{if(!profileDB){fallbackPersist();return}try{const tx=profileDB.transaction('profiles','readwrite');tx.objectStore('profiles').put({state,dirty},key);tx.oncomplete=()=>{$('#save').textContent='Guardado en este iPhone'};tx.onerror=()=>fallbackPersist()}catch{fallbackPersist()}},100);return true}
 
 function trackChanges(){for(const [field,observed,times] of [['votes',observedVotes,state.voteTimes],['ratings',observedRatings,state.ratingTimes]])for(const id of new Set([...Object.keys(observed),...Object.keys(state[field])]))if(JSON.stringify(observed[id])!==JSON.stringify(state[field][id]))times[id]=Math.max(Date.now(),(times[id]||0)+1);observedVotes=clone(state.votes);observedRatings=clone(state.ratings)}
-function save(){scheduleEngine();trackChanges();state.revision++;dirty=true;if(persist())$('#save').textContent='Guardado en este iPhone';else toast('Exportá tu colección para conservarla.');clearTimeout(syncTimer);syncTimer=setTimeout(sync,700)}
+function save(change){scheduleEngine();if(change?.votes){for(const id of change.votes){state.voteTimes[id]=Math.max(Date.now(),(state.voteTimes[id]||0)+1);if(state.votes[id])observedVotes[id]=clone(state.votes[id]);else delete observedVotes[id]}}else trackChanges();state.revision++;dirty=true;if(persist())$('#save').textContent='Guardando…';else toast('Exportá tu colección para conservarla.');clearTimeout(syncTimer);syncTimer=setTimeout(sync,700)}
 function refreshAfterMerge(){clearTimeout(refreshTimer);if($('.card.active')){refreshTimer=setTimeout(refreshAfterMerge,150);return}render();if($('#sheet').classList.contains('open'))collection()}
 function mergeRemote(remote){
  const votes={},voteTimes={},ratings={},ratingTimes={},local=state;
@@ -112,8 +112,8 @@ function fitCard(){const stage=$('#stage'),front=stage.querySelector('.card:not(
 new ResizeObserver(fitCard).observe($('#stage'));
 function clearFeedback(){cancelAnimationFrame(frame);$('#yes').classList.remove('ready');$('#no').classList.remove('ready');document.documentElement.style.setProperty('--yes-intent','0');document.documentElement.style.setProperty('--no-intent','0')}
 function makeCard(p,under=false){
- const c=document.createElement('div');c.className='card'+(under?' under':'')+(!p.image?' official':'');const artwork=img(p,true);artwork.decoding='async';const fitArt=()=>{c.materialFrontReady=!!(artwork.materialSource&&!c.classList.contains('art-fallback')&&artwork.naturalWidth>0);if(c.classList.contains('official')||!artwork.naturalWidth||!artwork.naturalHeight)return;c.artRatio=artwork.naturalWidth/artwork.naturalHeight;c.style.aspectRatio=String(c.artRatio);if(!under){fitCard();window.PokeMaterial?.refresh()}};artwork.onload=fitArt;c.append(artwork);if(artwork.complete)queueMicrotask(fitArt);
- if(under){c.setAttribute('aria-hidden','true');return c}
+ const c=document.createElement('div');c.pokemon=p;c.className='card'+(under?' under':'')+(!p.image?' official':'');const source=warmArt.get(p.surface?.assets?.front||p.image||fallback(p));const artwork=source?.complete&&source.naturalWidth?source:img(p,true);warmArt.delete(p.surface?.assets?.front||p.image||fallback(p));artwork.decoding='async';const fitArt=()=>{c.materialFrontReady=!!(artwork.materialSource&&!c.classList.contains('art-fallback')&&artwork.naturalWidth>0);if(c.classList.contains('official')||!artwork.naturalWidth||!artwork.naturalHeight)return;c.artRatio=artwork.naturalWidth/artwork.naturalHeight;c.style.aspectRatio=String(c.artRatio);if(!under){fitCard();window.PokeMaterial?.refresh()}};artwork.onload=fitArt;c.append(artwork);if(artwork.complete)queueMicrotask(fitArt);
+ c.activate=()=>{if(c.activated)return;c.activated=true;under=false;c.classList.remove('under');c.style.transform='';c.style.filter='';c.removeAttribute('aria-hidden');
  c.pokemon=p;c.setAttribute('aria-label',p.name);const choice=document.createElement('div');choice.className='choice-light';c.append(choice);const stamp=document.createElement('div');stamp.className='stamp';stamp.setAttribute('aria-hidden','true');stamp.innerHTML='<svg class=heart viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.1-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.8a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z"/></svg><svg class=cross viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';c.append(stamp);
  let surface=null;let start=null,dx=0,dy=0,vx=0,lastX=0,lastTime=0,lastMove=0,releaseTimer,held=false,armed=0,raf=0,previous=0;
  const position={x:0,y:0,r:0,rx:0,ry:0,s:1},velocity={x:0,y:0,r:0,rx:0,ry:0,s:0},target={...position};
@@ -123,6 +123,7 @@ function makeCard(p,under=false){
  const undercard=()=>$('#stage').querySelector('.under');
  const light=(x,y)=>{const bounds=$('#stage').getBoundingClientRect(),width=c.clientWidth,height=c.clientHeight;const px=Math.max(0,Math.min(100,(x-(bounds.left+(bounds.width-width)/2))/width*100));const py=Math.max(0,Math.min(100,(y-(bounds.top+(bounds.height-height)/2))/height*100));c.style.setProperty('--x',px+'%');c.style.setProperty('--y',py+'%');c.style.setProperty('--angle',(100+px*.4)+'deg');surface?.pointer(px/100,py/100);return{px,py}};
  const reset=()=>{held=false;armed=0;clearFeedback();move({x:0,y:0,r:0,rx:0,ry:0,s:1});stamp.style.opacity=0;stamp.classList.remove('armed');c.style.setProperty('--love','0');c.style.setProperty('--pass','0');c.classList.remove('active','lifted');surface?.release();const u=undercard();if(u){u.style.transform='';u.style.filter=''}};
+ c.setUnder=()=>{c.stopMotion();under=true;c.activated=false;c.classList.add('under');c.setAttribute('aria-hidden','true');for(const n of c.querySelectorAll('.choice-light,.stamp'))n.remove()};
  c.stopMotion=()=>{cancelAnimationFrame(raf);clearTimeout(releaseTimer);start=null;surface?.dispose()};
  c.onpointerdown=e=>{if(busy||!e.isPrimary||e.button>0)return;clearTimeout(releaseTimer);start={x:e.clientX,y:e.clientY};lastX=e.clientX;lastTime=lastMove=performance.now();dx=dy=vx=0;armed=0;held=true;c.setPointerCapture(e.pointerId);c.style.transition='none';c.classList.remove('dealt','returned');c.classList.add('active','lifted');const {px,py}=light(e.clientX,e.clientY);move({s:1.012,rx:(50-py)*.065,ry:(px-50)*.065});sound('lift')};
  c.onpointermove=e=>{if(!start)return;const now=performance.now();vx=vx*.25+((e.clientX-lastX)/Math.max(1,now-lastTime))*.75;lastX=e.clientX;lastTime=lastMove=now;dx=e.clientX-start.x;dy=e.clientY-start.y;const {px,py}=light(e.clientX,e.clientY);const threshold=Math.min(78,c.clientWidth*.21),strength=Math.min(Math.abs(dx)/threshold,1),direction=dx>0?1:-1;
@@ -133,19 +134,19 @@ function makeCard(p,under=false){
  const u=undercard();if(u&&!reducedMotion.matches){u.style.transform=`translateY(${4*(1-strength)}px) scale(${.98+strength*.02})`;u.style.filter='none'}
  };
  c.onpointerup=()=>{if(!start)return;start=null;const flick=performance.now()-lastMove<90&&Math.abs(vx)>.5&&Math.abs(dx)>28&&Math.abs(dx)>Math.abs(dy)*.65&&Math.sign(vx)===Math.sign(dx);if((armed!==0&&Math.sign(dx)===armed)||flick){c.stopMotion();clearFeedback();vote(dx>0?'yes':'no',{vx,dy})}else if(Math.abs(dx)<9&&Math.abs(dy)<9){move({s:1.018,rx:0,ry:0});releaseTimer=setTimeout(reset,160)}else reset()};
- c.onpointercancel=()=>{start=null;reset()};c.onlostpointercapture=()=>{if(start){start=null;reset()}};surface=window.PokeHolo?.attach(c,p,{onTilt:(rx,ry)=>{if(!held&&!start)move({rx,ry})}});return c
+ c.onpointercancel=()=>{start=null;reset()};c.onlostpointercapture=()=>{if(start){start=null;reset()}};surface=window.PokeHolo?.attach(c,p,{onTilt:(rx,ry)=>{if(!held&&!start)move({rx,ry})}});};if(under)c.setAttribute('aria-hidden','true');else c.activate();return c
 }
 const warmArt=new Map();
 function warmArtwork(p){const url=p.surface?.assets?.front||p.image||fallback(p);if(warmArt.has(url))return;const art=img(p,true);warmArt.set(url,art);art.addEventListener?.('load',()=>{if(typeof scheduleEvents==='function')scheduleEvents()},{once:true});art.decode?.().catch(()=>{});if(warmArt.size>24)warmArt.delete(warmArt.keys().next().value)}
 function render(){clearFeedback();const queue=pending(),p=queue[0],n=Object.keys(state.votes).length,likes=Object.values(state.votes).filter(v=>v.value==='yes').length;$('#likes').innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.1-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.8a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z"/></svg><span>'+likes+'</span>';$('#open').setAttribute('aria-label','Mi colección, '+likes+' Pokémon');$('#count').textContent=n+' de '+catalog.length;const seenCounter=$('#album-seen');if(seenCounter){seenCounter.textContent=n+'/'+catalog.length;seenCounter.setAttribute('aria-label',n+' de '+catalog.length+' Pokémon vistos')}$('#progress').style.width=(n/catalog.length*100)+'%';$('#undo').disabled=!state.history.length;
- window.PokeJourney?.update(catalog,state,key);const stage=$('#stage'),flights=[...stage.querySelectorAll('.exiting')].slice(-2);for(const c of stage.querySelectorAll('.card:not(.exiting)'))c.stopMotion?.();stage.replaceChildren(...flights);$('#yes').disabled=$('#no').disabled=!p;$('#name').textContent=p?p.name:'Tu colección está completa ♡';$('#art').textContent=p?.reencounter?'Otra mirada':'';$('#dex').textContent='';
- if(!p){const b=document.createElement('button');b.className='pill';b.textContent='Ver mi colección';b.onclick=()=>$('#open').click();stage.append(b);return}
+ window.PokeJourney?.update(catalog,state,key);const stage=$('#stage'),flights=[...stage.querySelectorAll('.exiting')].slice(-2);$('#yes').disabled=$('#no').disabled=!p;$('#name').textContent=p?p.name:'Tu colección está completa ♡';$('#art').textContent=p?.reencounter?'Otra mirada':'';$('#dex').textContent='';
+ if(!p){for(const c of stage.querySelectorAll('.card'))c.stopMotion?.();stage.replaceChildren();const b=document.createElement('button');b.className='pill';b.textContent='Ver mi colección';b.onclick=()=>$('#open').click();stage.append(b);return}
  setScene(p);window.PokeMaterial?.prepare(queue.slice(0,4));
- if(queue[1])stage.append(makeCard(queue[1],true));stage.append(makeCard(p));fitCard();for(const next of queue.slice(1,4))warmArtwork(next)
+ reconcileDeck(stage,queue,flights);fitCard();for(const next of queue.slice(1,4))warmArtwork(next)
 }
 function vote(value,momentum={}){
  if(busy||!current())return;busy=true;clearFeedback();const c=$('.card:not(.under):not(.exiting)'),p=c?.pokemon||current();tactile(value==='yes'?'like':'choose');sound(value==='yes'?'like':'choose');
- if(p.reencounter){state.refinementSchedule={...(state.refinementSchedule||{}),nextSeen:Object.keys(state.votes).length+28,time:Date.now()};const event={id:p.id,card:p.card,value,time:Date.now(),checkpoint:p.checkpoint};state.encounters=state.encounters||{};state.encounters[event.card+':'+event.checkpoint]=event;state.history.push({id:p.id,direction:value,encounterKey:event.card+':'+event.checkpoint});activeEncounter=null}else{state.history.push({id:p.id,previous:state.votes[p.id]||null,direction:value});state.votes[p.id]={value,card:p.card,time:Date.now()}}save();
+ if(p.reencounter){state.refinementSchedule={...(state.refinementSchedule||{}),nextSeen:Object.keys(state.votes).length+28,time:Date.now()};const event={id:p.id,card:p.card,value,time:Date.now(),checkpoint:p.checkpoint};state.encounters=state.encounters||{};state.encounters[event.card+':'+event.checkpoint]=event;state.history.push({id:p.id,direction:value,encounterKey:event.card+':'+event.checkpoint});activeEncounter=null}else{state.history.push({id:p.id,previous:state.votes[p.id]||null,direction:value});state.votes[p.id]={value,card:p.card,time:Date.now()}}save({votes:p.reencounter?[]:[p.id]});
  if(!p.reencounter&&value==='yes'&&Object.values(state.votes).filter(v=>v.value==='yes').length%15===0)state.refinementSchedule={...(state.refinementSchedule||{}),nextSeen:Math.max(Object.keys(state.votes).length+8,state.refinementSchedule?.nextSeen||0),time:Date.now()};
  if(c){const badge=c.querySelector('.stamp');if(badge){badge.classList.toggle('love',value==='yes');badge.classList.add('armed');badge.style.setProperty('--decision-color',value==='yes'?'#a52e5a':'#2e647c');badge.style.opacity='1';badge.style.transform='scale(1)';}c.style.setProperty(value==='yes'?'--love':'--pass','1');c.stopMotion?.();c.classList.add('exiting');c.classList.remove('lifted','dealt','returned','active');c.setAttribute('aria-hidden','true');c.style.pointerEvents='none'}
  render();const next=$('.card:not(.under):not(.exiting)');if(next)next.classList.add('dealt');signalDecision(value);window.PokeJourney?.celebrate();
@@ -173,8 +174,8 @@ $('#detail-choice').onclick=()=>{if(!detailPokemon)return;const p=detailPokemon,
 $('#detail-undo').onclick=()=>{const change=detailChange;if(!change)return;if(JSON.stringify(state.votes[change.id])!==change.after){toast('Esta elección cambió en otro dispositivo.');$('#detail-undo').hidden=true;return}if(change.before)state.votes[change.id]=change.before;else delete state.votes[change.id];const index=state.history.indexOf(change.record);if(index>=0)state.history.splice(index,1);detailChange=null;save();render();collection();detailLabel();$('#detail-undo').hidden=true};
 $('#options-close').onclick=()=>showCollectionTab(true);
 $('#team-open').onclick=()=>{$('#teamview').classList.add('open');window.PokeJourney?.compose()};$('#team-back').onclick=()=>$('#teamview').classList.remove('open');
-$('#memories-open').onclick=()=>{if($('#collection-options').open)$('#collection-options').close();$('#sheet').classList.add('open');collection();showCollectionTab(true);window.PokeJourney?.compose()};$('#memories-back').onclick=()=>$('#memoriesview').classList.remove('open');
-$('#open').onclick=()=>{filter='yes';$('#sheet').classList.add('open');collection();showCollectionTab(true);window.PokeJourney?.compose()};$('#close').onclick=()=>$('#sheet').classList.remove('open');$('#tabs').onclick=e=>{if(!e.target.dataset.filter)return;filter=e.target.dataset.filter;showCollectionTab(false);visibleCards=40;if($('#collection-options').open)$('#collection-options').close();$('#tabs').querySelectorAll('button').forEach(b=>b.classList.toggle('selected',b===e.target));collection()};
+$('#memories-open').onclick=()=>{if($('#collection-options').open)$('#collection-options').close();$('#sheet').classList.add('open');showCollectionTab(true);window.PokeJourney?.compose()};$('#memories-back').onclick=()=>$('#memoriesview').classList.remove('open');
+$('#open').onclick=()=>{filter='yes';$('#sheet').classList.add('open');showCollectionTab(true);window.PokeJourney?.compose()};$('#close').onclick=()=>$('#sheet').classList.remove('open');$('#tabs').onclick=e=>{if(!e.target.dataset.filter)return;filter=e.target.dataset.filter;showCollectionTab(false);visibleCards=40;if($('#collection-options').open)$('#collection-options').close();$('#tabs').querySelectorAll('button').forEach(b=>b.classList.toggle('selected',b===e.target));collection()};
 function nextPair(){const likes=catalog.filter(p=>state.votes[p.id]?.value==='yes');if(likes.length<2){toast('Elegí al menos dos Pokémon que te gusten.');return false}const candidates=[...likes].sort((a,b)=>(state.ratings[a.id]?.played||0)-(state.ratings[b.id]?.played||0));let a=candidates[Math.floor(Math.random()*Math.min(4,candidates.length))];let others=likes.filter(p=>p.id!==a.id).sort((x,y)=>Math.abs(score(x)-score(a))-Math.abs(score(y)-score(a)));let b=others[Math.floor(Math.random()*Math.min(5,others.length))];if(likes.length>2&&[a.id,b.id].sort().join()===lastPair)b=others.find(p=>p.id!==b.id)||b;pair=[a,b];lastPair=pair.map(p=>p.id).sort().join();$('#pair').replaceChildren();pair.forEach((p,i)=>{const btn=document.createElement('button');btn.append(img(p));const n=document.createElement('p');n.textContent=p.name;btn.append(n);btn.onclick=()=>duel(i);$('#pair').append(btn)});$('#duelcount').textContent=state.duels+' duelos guardados · El orden se afina con cada elección.';return true}
 function duel(winner){const [a,b]=pair;const ra=score(a),rb=score(b),expected=1/(1+10**((rb-ra)/400)),actual=winner===2?.5:winner===0?1:0;for(const [p,s] of [[a,ra+28*(actual-expected)],[b,rb-28*(actual-expected)]])state.ratings[p.id]={score:s,played:(state.ratings[p.id]?.played||0)+1};state.duels++;save();nextPair()}
 $('#duel').onclick=()=>{if(nextPair())$('#duelsheet').classList.add('open')};$('#endduel').onclick=()=>{$('#duelsheet').classList.remove('open');collection();window.PokeJourney?.compose()};$('#both').onclick=()=>duel(2);$('#skip').onclick=nextPair;
@@ -271,7 +272,7 @@ function adaptiveQueue(){
   const candidate=eligible.sort((a,b)=>Object.values(state.encounters||{}).filter(e=>e.id===a.id).length-Object.values(state.encounters||{}).filter(e=>e.id===b.id).length||a.id-b.id).find(p=>alternateCards.has(p.id));
   if(candidate){const art=alternateCards.get(candidate.id),url=art.image,im=warmArt.get(url);if(im?.complete&&im.naturalWidth>0)activeEncounter={...candidate,...art,surface:null,reencounter:true,checkpoint};else warmArtwork({...candidate,...art,surface:null})}
  }
- if(!alternateBusy&&likes>=6)prepareAlternate();
+ if(!alternateBusy&&likes>=6)scheduleAlternate();
  const by=new Map(catalog.map(p=>[p.id,p])),queue=adaptiveIds.filter(id=>!state.votes[id]).map(id=>by.get(id)).filter(Boolean);
  return activeEncounter?[activeEncounter,...queue]:queue;
 }
@@ -332,7 +333,7 @@ function paintRefinement(){
  $('#front-refine').setAttribute('aria-label',inlinePair?'Saltar comparación':'Afinar mis favoritos');
  if(!inlinePair)return;
  for(const c of stage.querySelectorAll('.card')){c.stopMotion?.();c.hidden=true}
- pairBox.replaceChildren();inlinePair.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Prefiero '+p.name);b.append(img(p,true));b.onclick=()=>chooseRefinement(i);pairBox.append(b)});
+ const pairSignature=inlinePair.map(p=>p.id+':'+p.card).join('|');if(pairBox.dataset.signature===pairSignature)return;pairBox.dataset.signature=pairSignature;pairBox.replaceChildren();inlinePair.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Prefiero '+p.name);b.append(img(p,true));b.onclick=()=>chooseRefinement(i);pairBox.append(b)});
 }
 function chooseRefinement(winner){
  if(!inlinePair||inlineBusy)return;inlineBusy=true;
@@ -388,7 +389,7 @@ const recordVote=vote;vote=function(value,...rest){
  if(value==='yes'&&Object.values(state.votes).filter(v=>v.value==='yes').length%15===0){eventPauseUntil=n+8;state.refinementSchedule={...(state.refinementSchedule||{}),nextSeen:Math.max(n+8,state.refinementSchedule?.nextSeen||0),time:Date.now()}}
  const milestone=n===20||n>0&&n%50===0;
  if(milestone&&!xp.milestones[n]){xp.milestones[n]=true;seenLabel.classList.remove('discovery-milestone');void seenLabel.offsetWidth;seenLabel.classList.add('discovery-milestone');if(!wasEncounter)sound('round');}
- save();scheduleEvents();
+ persist();scheduleEvents();
 };
 $('#stage').addEventListener('pointerdown',()=>{$('#stage .first-gesture')?.classList.remove('first-gesture')},{passive:true});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)scheduleEvents()});
@@ -411,11 +412,25 @@ startRefinement=function(manual=false){const ok=singleStartRefinement(manual);if
 $('#front-refine').onclick=()=>{if(inlineBusy)return;if(inlinePair)finishRefinement(true);else beginManualRefinement()};
 $('#refine-favorites').onclick=beginManualRefinement;$('#duel').onclick=beginManualRefinement;
 
-let engineWorker=null,engineResult=null,engineTimer,engineRevision=0;
-function startEngine(){try{engineWorker=new Worker('/recommender.js');engineWorker.onmessage=({data})=>{if(data.error){engineWorker.terminate();engineWorker=null;return}if(data.revision!==engineRevision)return;engineResult=data;window.PokeEngineStats={computeMs:data.ms,observations:data.observations,model:'online-logistic-v1'};};engineWorker.onerror=()=>{engineWorker?.terminate();engineWorker=null};engineWorker.postMessage({type:'init',catalog:catalog.map(({id,traits,communityVotes2020})=>({id,traits,communityVotes2020})),state:engineState(),revision:++engineRevision})}catch{engineWorker=null}}
+let engineWorker=null,engineResult=null,engineTimer,engineRevision=0,engineSent=null;
+function startEngine(){try{engineWorker=new Worker('/recommender.js');engineWorker.onmessage=({data})=>{if(data.error){engineWorker.terminate();engineWorker=null;return}if(data.revision!==engineRevision)return;engineResult=data;window.PokeEngineStats={computeMs:data.ms,observations:data.observations,model:'online-logistic-v1'};};engineWorker.onerror=()=>{engineWorker?.terminate();engineWorker=null};engineWorker.postMessage({type:'init',catalog:catalog.map(({id,traits,communityVotes2020})=>({id,traits,communityVotes2020})),state:(engineSent=clone(engineState())),revision:++engineRevision})}catch{engineWorker=null}}
 function engineState(){return {votes:state.votes,encounters:state.encounters,comparisons:state.comparisons}}
-function scheduleEngine(){clearTimeout(engineTimer);engineTimer=setTimeout(()=>{if(engineWorker)engineWorker.postMessage({type:'update',state:engineState(),revision:++engineRevision})},160)}
+function scheduleEngine(){clearTimeout(engineTimer);engineTimer=setTimeout(()=>{if(!engineWorker)return;const next=clone(engineState()),votes={};for(const id of new Set([...Object.keys(engineSent?.votes||{}),...Object.keys(next.votes)]))if(JSON.stringify(engineSent?.votes?.[id])!==JSON.stringify(next.votes[id]))votes[id]=next.votes[id]||null;engineWorker.postMessage({type:'delta',votes,encounters:next.encounters,comparisons:next.comparisons,revision:++engineRevision});engineSent=next},160)}
 
 let profileDB=null,diskTimer;
 async function restoreLocalProfile(){return new Promise(resolve=>{let done=false;const finish=()=>{if(!done){done=true;resolve()}};setTimeout(finish,900);try{const req=indexedDB.open('pokeamor-profiles',1);req.onupgradeneeded=()=>req.result.createObjectStore('profiles');req.onerror=finish;req.onsuccess=()=>{profileDB=req.result;if(done)return;const read=profileDB.transaction('profiles').objectStore('profiles').get(key);read.onsuccess=()=>{const record=read.result;if(record?.state&&(record.state.revision||0)>=(state.revision||0)){state=record.state;dirty=record.dirty;observedVotes=clone(state.votes);observedRatings=clone(state.ratings)}finish()};read.onerror=finish}}catch{finish()}})}
 window.addEventListener('pagehide',()=>{clearTimeout(diskTimer);fallbackPersist()});
+
+function reconcileDeck(stage,queue,flights){
+ const existing=[...stage.querySelectorAll('.card:not(.exiting)')];
+ const key=p=>p.id+':'+p.card;
+ const take=(p,under)=>{let c=existing.find(c=>key(c.pokemon)===key(p));if(!c)c=makeCard(p,under);c.hidden=false;if(under&&c.activated)c.setUnder?.();if(!under)c.activate?.();return c};
+ const front=take(queue[0],false),back=queue[1]?take(queue[1],true):null;
+ for(const c of existing)if(c!==front&&c!==back){c.stopMotion?.();c.remove()}
+ for(const c of stage.querySelectorAll('.exiting'))if(!flights.includes(c))c.remove();
+ // insertBefore moves existing nodes without rebuilding their artwork or listeners.
+ if(back)stage.insertBefore(back,stage.firstChild);
+ if(front.parentElement!==stage)stage.append(front);
+}
+let alternateTimer;
+function scheduleAlternate(){if(alternateTimer)return;alternateTimer=setTimeout(()=>{alternateTimer=null;if(!busy&&!$('.card.active'))prepareAlternate()},450)}
