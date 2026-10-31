@@ -1,0 +1,59 @@
+{
+  "policy": "Prefer distinctive, full-color artwork in Spanish. Avoid gold/silver silhouette prints that obscure the Pokémon. Keep existing colorful alternate illustrations. These selections preserve species IDs and votes.",
+  "selections": [
+    {
+      "pokemonId": 249,
+      "name": "Lugia",
+      "previousCard": "swsh12-211",
+      "card": "swsh12-186",
+      "language": "es",
+      "source": "https://api.tcgdex.net/v2/es/cards/swsh12-186",
+      "reason": "Full-color art with a clearly visible Pokémon, replacing gold or silver artwork."
+    },
+    {
+      "pokemonId": 483,
+      "name": "Dialga",
+      "previousCard": "xy4-122",
+      "card": "sm5-146",
+      "language": "es",
+      "source": "https://api.tcgdex.net/v2/es/cards/sm5-146",
+      "reason": "Full-color art with a clearly visible Pokémon, replacing gold or silver artwork."
+    },
+    {
+      "pokemonId": 487,
+      "name": "Giratina",
+      "previousCard": "swsh11-212",
+      "card": "swsh11-185",
+      "language": "es",
+      "source": "https://api.tcgdex.net/v2/es/cards/swsh11-185",
+      "reason": "Full-color art with a clearly visible Pokémon, replacing gold or silver artwork."
+    },
+    {
+      "pokemonId": 493,
+      "name": "Arceus",
+      "previousCard": "swsh9-184",
+      "card": "swsh9-166",
+      "language": "es",
+      "source": "https://api.tcgdex.net/v2/es/cards/swsh9-166",
+      "reason": "Full-color art with a clearly visible Pokémon, replacing gold or silver artwork."
+    },
+    {
+      "pokemonId": 791,
+      "name": "Solgaleo",
+      "previousCard": "sm5-173",
+      "card": "sm1-143",
+      "language": "es",
+      "source": "https://api.tcgdex.net/v2/es/cards/sm1-143",
+      "reason": "Full-color art with a clearly visible Pokémon, replacing gold or silver artwork."
+    },
+    {
+      "pokemonId": 792,
+      "name": "Lunala",
+      "previousCard": "sm5-172",
+      "card": "sm1-141",
+      "language": "es",
+      "source": "https://api.tcgdex.net/v2/es/cards/sm1-141",
+      "reason": "Full-color art with a clearly visible Pokémon, replacing gold or silver artwork."
+    }
+  ]
+}
