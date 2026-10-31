@@ -140,7 +140,7 @@ function render(){clearFeedback();const queue=pending(),p=queue[0],n=Object.keys
 }
 function vote(value,momentum={}){
  if(busy||!current())return;busy=true;clearFeedback();const c=$('.card:not(.under):not(.exiting)'),p=c?.pokemon||current();tactile(value==='yes'?'like':'choose');sound(value==='yes'?'like':'choose');
- if(p.reencounter){const event={id:p.id,card:p.card,value,time:Date.now(),checkpoint:p.checkpoint};state.encounters=state.encounters||{};state.encounters[event.card+':'+event.checkpoint]=event;state.history.push({id:p.id,direction:value,encounterKey:event.card+':'+event.checkpoint});activeEncounter=null}else{state.history.push({id:p.id,previous:state.votes[p.id]||null,direction:value});state.votes[p.id]={value,card:p.card,time:Date.now()}}save();
+ if(p.reencounter){state.refinementSchedule={...(state.refinementSchedule||{}),nextSeen:Object.keys(state.votes).length+10};const event={id:p.id,card:p.card,value,time:Date.now(),checkpoint:p.checkpoint};state.encounters=state.encounters||{};state.encounters[event.card+':'+event.checkpoint]=event;state.history.push({id:p.id,direction:value,encounterKey:event.card+':'+event.checkpoint});activeEncounter=null}else{state.history.push({id:p.id,previous:state.votes[p.id]||null,direction:value});state.votes[p.id]={value,card:p.card,time:Date.now()}}save();
  if(c){const badge=c.querySelector('.stamp');if(badge){badge.classList.toggle('love',value==='yes');badge.classList.add('armed');badge.style.setProperty('--decision-color',value==='yes'?'#a52e5a':'#2e647c');badge.style.opacity='1';badge.style.transform='scale(1)';}c.style.setProperty(value==='yes'?'--love':'--pass','1');c.stopMotion?.();c.classList.add('exiting');c.classList.remove('lifted','dealt','returned','active');c.setAttribute('aria-hidden','true');c.style.pointerEvents='none'}
  render();const next=$('.card:not(.under):not(.exiting)');if(next)next.classList.add('dealt');signalDecision(value);window.PokeJourney?.celebrate();
  if(c){void c.offsetWidth;const duration=reducedMotion.matches?0:Math.max(125,175-Math.abs(momentum.vx||0)*22);c.style.transition=`transform ${duration}ms cubic-bezier(.22,.55,.45,1),opacity ${duration}ms ease`;c.style.transform=`translate3d(${value==='yes'?innerWidth+100:-innerWidth-100}px,${Math.max(-80,Math.min(80,(momentum.dy||0)*.4))-20}px,0) rotate(${value==='yes'?22:-22}deg) scale(1.015)`;c.style.opacity=0;setTimeout(()=>c.remove(),duration+20)}
@@ -245,6 +245,7 @@ function adaptiveQueue(){
   for(const p of catalog){const v=state.votes[p.id];if(!v)continue;for(const f of preferenceFeatures(p)){const e=evidence.get(f)||[0,0];e[0]+=v.value==='yes'?1:0;e[1]++;evidence.set(f,e)}}
   for(const event of Object.values(state.encounters||{})){const p=catalog.find(p=>p.id===event.id);if(!p)continue;for(const f of preferenceFeatures(p)){const e=evidence.get(f)||[0,0];e[0]+=event.value==='yes'?.5:0;e[1]+=.5;evidence.set(f,e)}}
   const prior=p=>p.communityVotes2020?Math.log1p(p.communityVotes2020)/Math.log1p(140559):.45;
+  for(const p of catalog){const r=state.ratings?.[p.id];if(!r?.played)continue;const weight=Math.min(1.5,r.played*.2),preference=1/(1+10**((1000-r.score)/400));for(const f of preferenceFeatures(p)){const e=evidence.get(f)||[0,0];e[0]+=preference*weight;e[1]+=weight;evidence.set(f,e)}}
   const affinity=p=>{const fs=preferenceFeatures(p);return fs.length?fs.reduce((sum,f)=>{const e=evidence.get(f)||[0,0];return sum+(e[0]+2)/(e[1]+4)},0)/fs.length:.5};
   const confidence=Math.min(.75,n/100);
   const score=p=>confidence*affinity(p)+(1-confidence)*prior(p);
@@ -285,20 +286,73 @@ $('#refine-favorites').onclick=()=>{if(nextPair())$('#duelsheet').classList.add(
 
 $('#front-refine').onclick=()=>{if(nextPair())$('#duelsheet').classList.add('open')};
 
-// Five quick comparisons, with a reversible choice and a quiet pause.
-let roundChoices=0,duelSnapshot=null,duelChoosing=false;
-const basicNextPair=nextPair;nextPair=function(){const ok=basicNextPair();if(ok){if(Math.random()<.5){pair.reverse();const box=$('#pair');box.replaceChildren();pair.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Elegir '+p.name);b.append(img(p));b.onclick=()=>duel(i);box.append(b)})}$('#duelsheet').style.setProperty('--duel-a',pair[0]?.palette?.h||325);$('#duelsheet').style.setProperty('--duel-b',pair[1]?.palette?.h||240);$('#duel-step').textContent='●'.repeat(roundChoices)+'○'.repeat(5-roundChoices);$('#duel-step').setAttribute('aria-label',roundChoices+' de 5 comparaciones');for(const p of pair)warmArtwork(p)}return ok};
-const basicDuel=duel;duel=function(winner){if(duelChoosing)return;duelChoosing=true;duelSnapshot={pair:[...pair],ratings:clone(state.ratings),duels:state.duels,roundChoices};sound('like');tactile('like');const buttons=[...$('#pair').querySelectorAll('button')];buttons.forEach((b,i)=>{b.style.opacity=winner===2||winner===i?'1':'.3';if(winner===2||winner===i)b.style.transform='scale(1.025)'});setTimeout(()=>{roundChoices++;basicDuel(winner);duelChoosing=false;if(roundChoices===5){roundChoices=0;const box=$('#duel-summary');box.replaceChildren();catalog.filter(p=>state.votes[p.id]?.value==='yes').sort((a,b)=>score(b)-score(a)).slice(0,3).forEach(p=>box.append(img(p)));for(const [text,action] of [['Volver al mazo',()=>{$('#duelsheet').classList.remove('open');$('#sheet').classList.remove('open');box.hidden=true}],['Seguir afinando',()=>{box.hidden=true;nextPair()}]]){const b=document.createElement('button');b.textContent=text;b.onclick=action;box.append(b)}box.hidden=false;sound('round')}},reducedMotion.matches?0:140)};
-$('#duel-undo').onclick=()=>{if(!duelSnapshot||duelChoosing)return;state.ratings=duelSnapshot.ratings;state.duels=duelSnapshot.duels;roundChoices=duelSnapshot.roundChoices;pair=duelSnapshot.pair;duelSnapshot=null;$('#duel-summary').hidden=true;save();const box=$('#pair');box.replaceChildren();pair.forEach((p,i)=>{const b=document.createElement('button');b.append(img(p));b.setAttribute('aria-label','Elegir '+p.name);b.onclick=()=>duel(i);box.append(b)});$('#duel-step').textContent='●'.repeat(roundChoices)+'○'.repeat(5-roundChoices)};
 
-// Equal comparison panels; long press inspects without casting a vote.
-$('#duel-undo').innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5-5 5 5 5M4 10h9a6 6 0 0 1 0 12"/></svg>';
-$('#endduel').innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7"/></svg>';
-$('#skip').innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6 6 6-6 6m10-12v12"/></svg>';
-let duelHoldTimer,duelHeld=false,duelHoldStart;
-const duelBox=$('#pair');
-duelBox.addEventListener('pointerdown',e=>{const b=e.target.closest('button');if(!b)return;duelHeld=false;duelHoldStart={x:e.clientX,y:e.clientY};clearTimeout(duelHoldTimer);duelHoldTimer=setTimeout(()=>{const image=b.querySelector('img');if(!image)return;duelHeld=true;const full=$('#duel-full-card');full.querySelector('img').src=image.currentSrc||image.src;full.querySelector('img').alt=image.alt;full.hidden=false},320)});
-duelBox.addEventListener('pointermove',e=>{if(duelHoldStart&&Math.hypot(e.clientX-duelHoldStart.x,e.clientY-duelHoldStart.y)>10)clearTimeout(duelHoldTimer)});
-function endDuelHold(){clearTimeout(duelHoldTimer);$('#duel-full-card').hidden=true;duelHoldStart=null}
-duelBox.addEventListener('pointerup',endDuelHold);duelBox.addEventListener('pointercancel',()=>{endDuelHold();duelHeld=false});
-duelBox.addEventListener('click',e=>{if(duelHeld){e.preventDefault();e.stopImmediatePropagation();duelHeld=false}},true);
+// Refinement is a single event in the same card stage.
+let inlinePair=null,inlineBusy=false;
+const eventLayer=document.createElement('div');eventLayer.id='refinement-event';eventLayer.hidden=true;
+eventLayer.setAttribute('role','group');eventLayer.setAttribute('aria-label','¿Cuál te gusta más?');
+const pairBox=$('#pair'),equalTools=$('#both').parentElement;
+eventLayer.append(pairBox,equalTools);$('#stage').append(eventLayer);
+const refineIcon=$('#front-refine').innerHTML;
+function eventSeen(){return Object.keys(state.votes).length}
+function finishRefinement(skipped=false){
+ if(!inlinePair)return;
+ state.refinementSchedule={lastSeen:eventSeen(),nextSeen:eventSeen()+(skipped?30:20),started:true};
+ inlinePair=null;inlineBusy=false;save();render();
+}
+function startRefinement(manual=false){
+ if(inlinePair||busy)return false;
+ const likes=catalog.filter(p=>state.votes[p.id]?.value==='yes');
+ if(likes.length<2){if(manual)toast('Elegí al menos dos favoritos.');return false}
+ const log=state.comparisons||[];
+ const recent=new Set(log.slice(-4).flatMap(e=>e.ids));
+ const candidates=[...likes].sort((a,b)=>(state.ratings[a.id]?.played||0)-(state.ratings[b.id]?.played||0)||Number(recent.has(a.id))-Number(recent.has(b.id)));
+ const a=candidates[0];
+ const previous=new Set(log.slice(-6).map(e=>[...e.ids].sort((x,y)=>x-y).join(':')));
+ const others=likes.filter(p=>p.id!==a.id).sort((x,y)=>Number(previous.has([a.id,x.id].sort((a,b)=>a-b).join(':')))-Number(previous.has([a.id,y.id].sort((a,b)=>a-b).join(':')))||Math.abs(score(x)-score(a))-Math.abs(score(y)-score(a)));
+ const b=others[0];
+ // Automatic events never interrupt to download an image.
+ if(!manual&&![a,b].every(p=>{const im=warmArt.get(p.surface?.assets?.front||p.image||fallback(p));return im?.complete&&im.naturalWidth>0})){warmArtwork(a);warmArtwork(b);return false}
+ inlinePair=Math.random()<.5?[a,b]:[b,a];
+ $('#sheet').classList.remove('open');$('#duelsheet').classList.remove('open');render();return true;
+}
+function paintRefinement(){
+ const n=eventSeen(),likes=Object.values(state.votes).filter(v=>v.value==='yes').length;
+ if(!inlinePair&&likes>=15&&!activeEncounter&&n>=(state.refinementSchedule?.nextSeen||0)){
+  if(startRefinement(false))return;
+ }
+ const stage=$('#stage');stage.append(eventLayer);eventLayer.hidden=!inlinePair;
+ $('#app').classList.toggle('refining',!!inlinePair);
+ $('#front-refine').innerHTML=inlinePair?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6 6 6-6 6m10-12v12"/></svg>':refineIcon;
+ $('#front-refine').setAttribute('aria-label',inlinePair?'Saltar comparación':'Afinar mis favoritos');
+ if(!inlinePair)return;
+ for(const c of stage.querySelectorAll('.card')){c.stopMotion?.();c.hidden=true}
+ pairBox.replaceChildren();inlinePair.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Prefiero '+p.name);b.append(img(p,true));b.onclick=()=>chooseRefinement(i);pairBox.append(b)});
+}
+function chooseRefinement(winner){
+ if(!inlinePair||inlineBusy)return;inlineBusy=true;
+ const ids=inlinePair.map(p=>p.id),before=clone(state.ratings),previousSchedule=clone(state.refinementSchedule||{});
+ const [a,b]=inlinePair,ra=score(a),rb=score(b),expected=1/(1+10**((rb-ra)/400)),actual=winner===2?.5:winner===0?1:0;
+ for(const [p,v] of [[a,ra+28*(actual-expected)],[b,rb-28*(actual-expected)]])state.ratings[p.id]={score:v,played:(state.ratings[p.id]?.played||0)+1};
+ const event={id:crypto.randomUUID(),ids,winner,time:Date.now()};
+ state.comparisons=state.comparisons||[];state.comparisons.push(event);state.duels++;
+ state.history.push({refinement:true,eventId:event.id,ratings:before,previousSchedule,ids});
+ adaptiveBlock='';sound('like');tactile('like');
+ [...pairBox.children].forEach((b,i)=>{b.classList.toggle('chosen',winner===2||winner===i);b.classList.toggle('unchosen',winner!==2&&winner!==i)});
+ setTimeout(()=>finishRefinement(),reducedMotion.matches?0:150);
+}
+const renderDiscovery=render;render=function(){renderDiscovery();paintRefinement()};
+const voteDiscovery=vote;vote=function(...args){if(!inlinePair)voteDiscovery(...args)};
+const undoDiscovery=$('#undo').onclick;
+$('#undo').onclick=()=>{
+ if(inlineBusy)return;
+ if(inlinePair){inlinePair=null;state.refinementSchedule={...(state.refinementSchedule||{}),nextSeen:eventSeen()+10};render();return}
+ const h=state.history.at(-1);
+ if(!h?.refinement){undoDiscovery();return}
+ state.history.pop();state.ratings=h.ratings;state.duels=Math.max(0,state.duels-1);state.comparisons=(state.comparisons||[]).filter(e=>e.id!==h.eventId);state.refinementSchedule=h.previousSchedule;adaptiveBlock='';
+ inlinePair=h.ids.map(id=>catalog.find(p=>p.id===id));save();render();
+};
+$('#both').onclick=()=>chooseRefinement(2);
+$('#front-refine').onclick=()=>inlinePair?finishRefinement(true):startRefinement(true);
+$('#refine-favorites').onclick=()=>startRefinement(true);
+$('#duel').onclick=()=>startRefinement(true);
