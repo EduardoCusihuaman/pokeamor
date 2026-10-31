@@ -16,11 +16,11 @@ Finger movement controls the reflection. The optional motion control requests se
 
 ## Asset delivery
 
-The Worker only fetches known, versioned `/materials/` paths. Requests identify the app with a descriptive `Pokeamor/1.0` User-Agent. Successful PNG responses are validated, size limited and cached at the edge and in the existing R2 bucket under `material-cache/`; simultaneous cold requests share one upstream download; session data uses a separate prefix. Errors and HTML denial pages are never cached as images. This avoids browser hotlink dependence; it does not guarantee that an upstream provider will always allow requests.
+The Worker only fetches known, versioned `/materials/` paths. Requests identify the app with a descriptive `Pokeamor/1.0` User-Agent. Successful PNG responses are validated, size limited and cached in the existing R2 bucket under `material-cache/`; session data uses a separate prefix. Errors and HTML denial pages are never cached as images. This host rejected the attempted Cache API optimization; material delivery retains the previously working R2 route, with lookahead and reuse in the client. This avoids browser hotlink dependence; it does not guarantee that an upstream provider will always allow requests.
 
 ## Validation and limits
 
-Tests cover lookahead reuse, bounded memory, concurrent download sharing, edge caching, retryable failures, exact print matching, nonfoil and unverified fallbacks, route whitelisting, caching, denied downloads, motion lifecycle and existing swipe/sync behavior. The actual shader compiles and renders against a downloaded Spanish foil/etch pair in an offscreen GLES2 test. The managed browser preview service was unavailable during this update. Physical iPhone Safari appearance, sensor behavior and GPU performance still need a device check.
+Tests cover lookahead reuse, bounded memory, shared client downloads, retryable failures, exact print matching, nonfoil and unverified fallbacks, route whitelisting, caching, denied downloads, motion lifecycle and existing swipe/sync behavior. The actual shader compiles and renders against a downloaded Spanish foil/etch pair in an offscreen GLES2 test. The managed browser preview service was unavailable during this update. Physical iPhone Safari appearance, sensor behavior and GPU performance still need a device check.
 
 Sources and attribution:
 - Malie.io / nago static exports: https://malie.io/static/
