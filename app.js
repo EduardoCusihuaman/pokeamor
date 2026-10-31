@@ -1,8 +1,39 @@
-const $=s=>document.querySelector(s);let catalog=[],order=[],filter='yes',busy=false,pair=[],lastPair='',syncTimer,toastTimer;const q=new URLSearchParams(location.hash.slice(1)),token=q.get('s')||localStorage.getItem('pokeamor-token')||crypto.randomUUID().replaceAll('-','')+crypto.randomUUID().replaceAll('-','');localStorage.setItem('pokeamor-token',token);history.replaceState(null,'','#s='+token);const key='pokeamor-'+token;let state;try{state=JSON.parse(localStorage.getItem(key))}catch{}state=state||{votes:{},ratings:{},duels:0,history:[],revision:0};let etag=null,cloudReady=false,dirty=false;
+const $=s=>document.querySelector(s);let catalog=[],order=[],filter='yes',busy=false,pair=[],lastPair='',syncTimer,toastTimer;
+const q=new URLSearchParams(location.hash.slice(1)),token=q.get('s')||localStorage.getItem('pokeamor-token')||crypto.randomUUID().replaceAll('-','')+crypto.randomUUID().replaceAll('-','');localStorage.setItem('pokeamor-token',token);history.replaceState(null,'','#s='+token);const key='pokeamor-'+token;
+let state;try{state=JSON.parse(localStorage.getItem(key))}catch{}state=state||{votes:{},ratings:{},duels:0,history:[],revision:0};state.voteTimes=state.voteTimes||{};state.ratingTimes=state.ratingTimes||{};
+let etag=null,cloudReady=false,dirty=localStorage.getItem(key+'-pending')==='1',syncing=false,restoring=null,retryDelay=1200,refreshTimer;
+const clone=v=>JSON.parse(JSON.stringify(v));let observedVotes=clone(state.votes),observedRatings=clone(state.ratings);
 function toast(s){$('#toast').textContent=s;$('#toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),2600)}
-function save(){state.revision++;try{localStorage.setItem(key,JSON.stringify(state));$('#save').textContent='Guardado en este iPhone'}catch{$('#save').textContent='No se pudo guardar';toast('Exportá tu colección para conservarla.')}dirty=true;clearTimeout(syncTimer);syncTimer=setTimeout(sync,700)}
-async function restore(){try{const r=await fetch('/api/session/'+token);if(!r.ok&&r.status!==404)throw Error();if(r.ok){const v=await r.json();etag=r.headers.get('ETag');if(!dirty&&v.revision>state.revision){state=v;localStorage.setItem(key,JSON.stringify(state));render();if($('#sheet').classList.contains('open'))collection()}}cloudReady=true;if(dirty)sync();else $('#save').textContent='Colección sincronizada'}catch{$('#save').textContent='Guardado en este iPhone'}}
-async function sync(){if(!cloudReady)return;const snapshot=JSON.stringify(state);try{const r=await fetch('/api/session/'+token,{method:'PUT',headers:{'Content-Type':'application/json',...(etag?{'If-Match':etag}:{'If-None-Match':'*'})},body:snapshot});if(r.status===412){toast('La colección cambió en otro dispositivo. Exportá esta copia antes de recargar.');$('#save').textContent='Hay otra versión en la nube';return}if(!r.ok)throw Error();etag=r.headers.get('ETag');if(snapshot===JSON.stringify(state))dirty=false;$('#save').textContent='Colección sincronizada'}catch{$('#save').textContent='Guardado local · sin conexión'}}
+function persist(){try{localStorage.setItem(key,JSON.stringify(state));localStorage.setItem(key+'-pending',dirty?'1':'0');return true}catch{$('#save').textContent='No se pudo guardar';return false}}
+function trackChanges(){for(const [field,observed,times] of [['votes',observedVotes,state.voteTimes],['ratings',observedRatings,state.ratingTimes]])for(const id of new Set([...Object.keys(observed),...Object.keys(state[field])]))if(JSON.stringify(observed[id])!==JSON.stringify(state[field][id]))times[id]=Math.max(Date.now(),(times[id]||0)+1);observedVotes=clone(state.votes);observedRatings=clone(state.ratings)}
+function save(){trackChanges();state.revision++;dirty=true;if(persist())$('#save').textContent='Guardado en este iPhone';else toast('Exportá tu colección para conservarla.');clearTimeout(syncTimer);syncTimer=setTimeout(sync,700)}
+function refreshAfterMerge(){clearTimeout(refreshTimer);if($('.card.active')){refreshTimer=setTimeout(refreshAfterMerge,150);return}render();if($('#sheet').classList.contains('open'))collection()}
+function mergeRemote(remote){
+ const votes={},voteTimes={},ratings={},ratingTimes={},local=state;
+ for(const id of new Set([...Object.keys(local.votes),...Object.keys(remote.votes||{}),...Object.keys(local.voteTimes),...Object.keys(remote.voteTimes||{})])){
+  const lt=local.voteTimes[id]||local.votes[id]?.time||0,rt=remote.voteTimes?.[id]||remote.votes?.[id]?.time||0;
+  const takeRemote=rt>lt||(!local.votes[id]&&!lt),value=takeRemote?remote.votes?.[id]:local.votes[id];if(value)votes[id]=value;voteTimes[id]=Math.max(lt,rt);
+ }
+ for(const id of new Set([...Object.keys(local.ratings),...Object.keys(remote.ratings||{})])){
+  const lt=local.ratingTimes[id]||0,rt=remote.ratingTimes?.[id]||0;
+  const takeRemote=rt>lt||(!lt&&!rt&&(remote.ratings?.[id]?.played||0)>(local.ratings[id]?.played||0));
+  const value=takeRemote?remote.ratings[id]:local.ratings[id];if(value)ratings[id]=value;ratingTimes[id]=Math.max(lt,rt);
+ }
+ const changed=JSON.stringify(local.votes)!==JSON.stringify(votes);
+ state={...local,votes,voteTimes,ratings,ratingTimes,duels:Math.max(local.duels,remote.duels||0),revision:Math.max(local.revision,remote.revision||0)+1};observedVotes=clone(votes);observedRatings=clone(ratings);dirty=true;persist();if(changed)refreshAfterMerge();
+}
+async function readRemote(){const r=await fetch('/api/session/'+token,{cache:'no-store'});if(!r.ok&&r.status!==404)throw Error('read failed');etag=r.ok?r.headers.get('ETag'):null;if(r.ok){const remote=await r.json();mergeRemote(remote)}}
+async function restore(){if(restoring)return restoring;restoring=(async()=>{try{await readRemote();cloudReady=true;retryDelay=1200;if(dirty)await sync();else $('#save').textContent='Colección sincronizada'}catch{$('#save').textContent='Guardado en este iPhone';clearTimeout(syncTimer);syncTimer=setTimeout(restore,retryDelay);retryDelay=Math.min(retryDelay*2,30000)}finally{restoring=null}})();return restoring}
+async function sync(){
+ if(!cloudReady||syncing||!dirty)return;syncing=true;clearTimeout(syncTimer);let failed=false;
+ try{
+  for(let attempts=0;dirty&&attempts<4;attempts++){
+   const snapshot=JSON.stringify(state),r=await fetch('/api/session/'+token,{method:'PUT',headers:{'Content-Type':'application/json',...(etag?{'If-Match':etag}:{'If-None-Match':'*'})},body:snapshot});
+   if(r.status===412){await readRemote();continue}
+   if(!r.ok)throw Error('write failed');etag=r.headers.get('ETag');if(snapshot===JSON.stringify(state))dirty=false;persist();$('#save').textContent=dirty?'Guardado en este iPhone':'Colección sincronizada';retryDelay=1200;
+  }
+ }catch{failed=true;$('#save').textContent='Guardado local · sin conexión'}finally{syncing=false;if(dirty){clearTimeout(syncTimer);syncTimer=setTimeout(sync,failed?retryDelay:700);if(failed)retryDelay=Math.min(retryDelay*2,30000)}}
+}
 window.addEventListener('online',()=>{if(cloudReady)sync();else restore()});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&dirty)sync()});
 const popular=[658,448,778,6,197,700,445,384,282,94,133,25,151,143,38,196,149,249,248,257,722,330,359,405,447,763,471,470,134,135,136,3,9,39,35,175,131,181,393,653,16,54,27,37,58,77,79,83,92,96,104,113,123,129,132,147,150,155,158,172,183,194,195,200,215,216,228,230,243,244,245,251,252,255,258,280,302,303,304,333,334,349,350,355,359,363,380,381,385,387,390,403,425,427,443,447,468,475,479,487,491,492,495,498,501,570,571,572,573,607,609,610,612,635,650,653,656,674,677,704,705,706,710,714,715,719,725,728,744,745,753,754,759,761,764,771,774,777,789,791,792,800,807,810,813,816,831,835,848,849,854,855,856,858,868,869,872,873,885,887,888,889,906,909,912,921,924,925,926,927,928,935,936,937,938,939,950,951,952,957,958,959,963,964,970,971,972,974,975,978,979,980,981,982,983,1000,1007,1008,1017,1024,1025];
 const fallback=p=>'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'+p.id+'.png';
@@ -51,7 +82,7 @@ function clearFeedback(){cancelAnimationFrame(frame);$('#yes').classList.remove(
 function makeCard(p,under=false){
  const c=document.createElement('div');c.className='card'+(under?' under':'')+(!p.image?' official':'');const artwork=img(p);artwork.decoding='async';const fitArt=()=>{if(c.classList.contains('official')||!artwork.naturalWidth||!artwork.naturalHeight)return;c.artRatio=artwork.naturalWidth/artwork.naturalHeight;c.style.aspectRatio=String(c.artRatio);if(!under)fitCard()};artwork.onload=fitArt;c.append(artwork);if(artwork.complete)queueMicrotask(fitArt);
  if(under){c.setAttribute('aria-hidden','true');return c}
- c.setAttribute('aria-label',p.name);const foil=document.createElement('div');foil.className='foil';if(p.holo)c.append(foil);const glint=document.createElement('div');glint.className='glint';c.append(glint);const choice=document.createElement('div');choice.className='choice-light';c.append(choice);const stamp=document.createElement('div');stamp.className='stamp';stamp.setAttribute('aria-hidden','true');stamp.innerHTML='<svg class=heart viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 21s-9-5.5-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-9 12-9 12Z"/></svg><svg class=cross viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';c.append(stamp);
+ c.pokemon=p;c.setAttribute('aria-label',p.name);const foil=document.createElement('div');foil.className='foil';if(p.holo)c.append(foil);const glint=document.createElement('div');glint.className='glint';c.append(glint);const choice=document.createElement('div');choice.className='choice-light';c.append(choice);const stamp=document.createElement('div');stamp.className='stamp';stamp.setAttribute('aria-hidden','true');stamp.innerHTML='<svg class=heart viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 21s-9-5.5-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-9 12-9 12Z"/></svg><svg class=cross viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';c.append(stamp);
  let start=null,dx=0,dy=0,vx=0,lastX=0,lastTime=0,lastMove=0,releaseTimer,held=false,armed=0,raf=0,previous=0;
  const position={x:0,y:0,r:0,rx:0,ry:0,s:1},velocity={x:0,y:0,r:0,rx:0,ry:0,s:0},target={...position};
  const paint=()=>{c.style.transform=`translate3d(${position.x}px,${position.y}px,0) rotate(${position.r}deg) rotateX(${position.rx}deg) rotateY(${position.ry}deg) scale(${position.s})`};
@@ -79,7 +110,7 @@ function render(){clearFeedback();const queue=pending(),p=queue[0],n=Object.keys
  if(queue[1])stage.append(makeCard(queue[1],true));stage.append(makeCard(p));fitCard();for(const next of queue.slice(1,7)){const i=new Image();i.src=next.image||fallback(next)}
 }
 function vote(value,momentum={}){
- if(busy||!current())return;busy=true;clearFeedback();const p=current(),c=$('.card:not(.under):not(.exiting)');tactile(value==='yes'?'like':'choose');sound(value==='yes'?'like':'choose');
+ if(busy||!current())return;busy=true;clearFeedback();const c=$('.card:not(.under):not(.exiting)'),p=c?.pokemon||current();tactile(value==='yes'?'like':'choose');sound(value==='yes'?'like':'choose');
  state.history.push({id:p.id,previous:state.votes[p.id]||null});state.votes[p.id]={value,card:p.card,time:Date.now()};save();
  if(c){const badge=c.querySelector('.stamp');if(badge){badge.classList.toggle('love',value==='yes');badge.classList.add('armed');badge.style.color=value==='yes'?'#a52e5a':'#2e647c';badge.style.opacity='1';badge.style.transform='scale(1)';}c.style.setProperty(value==='yes'?'--love':'--pass','1');c.stopMotion?.();c.classList.add('exiting');c.classList.remove('lifted','dealt','returned','active');c.setAttribute('aria-hidden','true');c.style.pointerEvents='none'}
  render();const next=$('.card:not(.under):not(.exiting)');if(next)next.classList.add('dealt');signalDecision(value);
