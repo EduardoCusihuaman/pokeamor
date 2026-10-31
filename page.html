@@ -217,14 +217,14 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.sheet::-webkit-scrollbar,.sheet
 #duelsheet header{position:relative;flex:0 0 44px;padding:0 4px;display:grid;grid-template-columns:44px 1fr 44px;align-items:center;background:transparent;z-index:4}
 #duelsheet header .brand,#duelsheet h2,#duelcount{display:none}
 #duel-step{font-size:10px;letter-spacing:4px;text-align:center;color:#b885a5}
-#duelsheet #pair{position:relative;display:block;grid-template-columns:none;grid-template-rows:none;flex:1;min-height:0;margin:4px 0 0;overflow:hidden;border-radius:14px}
-#duelsheet #pair>button{position:absolute;left:0;right:0;width:100%;height:auto;aspect-ratio:.716;display:block;padding:0;border-radius:14px;background:transparent;overflow:hidden;box-shadow:0 3px 14px #664c6426;transition:transform 140ms ease,opacity 140ms ease;touch-action:manipulation}
+#duelsheet #pair{position:relative;display:block;isolation:isolate;grid-template-columns:none;grid-template-rows:none;flex:1;min-height:0;margin:4px 0 0;overflow:hidden;border-radius:14px}
+#duelsheet #pair>button{position:absolute;left:0;right:0;bottom:auto;float:none;max-width:none;margin:0;transform:none;width:100%;height:auto;aspect-ratio:.716;display:block;padding:0;border-radius:14px;background:transparent;overflow:hidden;box-shadow:0 3px 14px #664c6426;transition:transform 140ms ease,opacity 140ms ease;touch-action:manipulation}
 #duelsheet #pair>button:first-child{top:0;z-index:1}
-#duelsheet #pair>button:nth-child(2){top:46%;z-index:2}
+#duelsheet #pair>button:nth-child(2){top:44%;z-index:2}
 #duelsheet #pair img{display:block;width:100%;height:auto;object-fit:contain;border-radius:14px;user-select:none;-webkit-touch-callout:none;-webkit-user-drag:none}
 #duelsheet #pair p{display:none}
 #duelsheet #pair>button:active{transform:scale(.995)}
-#duelsheet .tools{position:absolute;top:calc(44px + (100% - 44px)*.46);left:0;right:0;height:44px;transform:translateY(-50%);z-index:4;display:flex;align-items:center;justify-content:center;margin:0;pointer-events:none}
+#duelsheet .tools{position:absolute;top:calc(44px + (100% - 44px)*.44);left:0;right:0;height:44px;transform:translateY(-50%);z-index:4;display:flex;align-items:center;justify-content:center;margin:0;pointer-events:none}
 #duelsheet #both{position:static;transform:none;width:46px;height:46px;border-radius:50%;padding:0;display:grid;place-items:center;background:#fffafbf5;box-shadow:0 2px 12px #795f7428;border:1px solid #eadfe7;font-size:24px;color:#946b86;pointer-events:auto}
 #duelsheet #skip{position:absolute;right:10px;border-radius:50%;background:#fffafbf0;box-shadow:0 2px 10px #795f7418;pointer-events:auto}
 #duel-undo,#duelsheet #endduel,#duelsheet #skip{display:grid;place-items:center;width:44px;height:44px;padding:11px;color:#98758b}
