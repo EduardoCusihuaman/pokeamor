@@ -178,7 +178,7 @@ $('#show-rounds').onclick=()=>{showCollectionTab(true);window.PokeJourney?.compo
 let detailOrigin=null;
 window.PokeInspect=(p,group,tile)=>{collectionCards=group||[p];detailOrigin=tile;inspectCard(p);animateCardOrigin(false)};
 function animateCardOrigin(reverse){const image=$('#viewer-surface img'),origin=detailOrigin?.querySelector?.('img');if(!image||!origin||!image.animate||matchMedia('(prefers-reduced-motion: reduce)').matches)return;const a=origin.getBoundingClientRect(),b=image.getBoundingClientRect();if(!a.width||!b.width)return;const transform=`translate(${a.left-b.left}px,${a.top-b.top}px) scale(${a.width/b.width},${a.height/b.height})`;return image.animate(reverse?[{transform:'none'},{transform,opacity:.4}]:[{transform,opacity:.4},{transform:'none',opacity:1}],{duration:200,easing:'cubic-bezier(.2,.7,.2,1)',fill:'none'}).finished.catch(()=>{})}
-function closeDetail(){const dialog=$('#card-detail');if(!dialog.open)return;viewerEpoch++;viewerSettling=false;detailStart=null;clearTimeout(viewerScrollTimer);viewerHolo?.dispose();viewerHolo=null;viewerPreview?.remove();viewerPreview=null;dialog.close();setTimeout(()=>{if(!dialog.open)render()},0)}
+function closeDetail(){const dialog=$('#card-detail');if(!dialog.open)return;viewerEpoch++;viewerSettling=false;detailStart=null;clearTimeout(viewerScrollTimer);viewerHolo?.dispose();viewerHolo=null;viewerPreview?.remove();viewerPreview=null;dialog.close();if(detailOrigin?.classList){detailOrigin.classList.add('return-highlight');setTimeout(()=>detailOrigin?.classList.remove('return-highlight'),650)}setTimeout(()=>{if(!dialog.open)render()},0)}
 
 $('#detail-close').onclick=closeDetail;
 
