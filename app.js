@@ -159,6 +159,8 @@ let detailStart=null;$('#detail-art').onpointerdown=e=>{detailStart={x:e.clientX
 $('#team-menu').onclick=()=>{$('#collection-options').close();$('#team-open').onclick()};
 
 function showCollectionTab(rounds){$('#sheet').classList.toggle('rounds-mode',rounds);$('#show-rounds').classList.toggle('selected',rounds);$('#show-liked').classList.toggle('selected',!rounds)}
-$('#show-rounds').onclick=()=>{showCollectionTab(true);window.PokeJourney?.compose()};$('#show-liked').onclick=()=>{filter='all';collection();showCollectionTab(false)};
+$('#show-rounds').onclick=()=>{showCollectionTab(true);window.PokeJourney?.compose()};$('#show-liked').onclick=()=>{if($('#collection-options').open)$('#collection-options').close();filter='all';collection();showCollectionTab(false)};
 
 window.PokeInspect=p=>{if(!collectionCards.some(c=>c.id===p.id))collectionCards=catalog.filter(c=>state.votes[c.id]?.value==='yes');inspectCard(p)};
+
+$('#collection-settings').onclick=()=>$('#collection-options').showModal();
