@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 p=Path(__file__).parent
 prefix='const HTML='+json.dumps((p/'page.html').read_text())+';\nconst JS='+json.dumps((p/'app.js').read_text())+';\nconst JOURNEY='+json.dumps((p/'journey.js').read_text())+';\nconst HOLO='+json.dumps((p/'holo.js').read_text())+';\nconst ASSET_JS='+json.dumps((p/'material-assets.js').read_text())+';\nconst MATERIAL_JS='+json.dumps((p/'material-renderer.js').read_text())+';\nconst MATERIALS='+(p/'materials.json').read_text()+';\nconst CATALOG='+ (p/'catalog.json').read_text()+';\n'
+prefix+='const RECOMMENDER='+json.dumps((p/'recommender.js').read_text())+';\n'
 worker=r'''
 const response=(body,status=200,extra={})=>new Response(body,{status,headers:{'Content-Type':'application/json','Cache-Control':'no-store',...extra}});
 export default {async fetch(request,env,ctx){
@@ -44,6 +45,7 @@ if(u.pathname==='/material-assets.js')return new Response(ASSET_JS,{headers:{...
 if(u.pathname==='/material-renderer.js')return new Response(MATERIAL_JS,{headers:{...headers,'Content-Type':'text/javascript','Cache-Control':'no-cache'}});
 if(u.pathname==='/holo.js')return new Response(HOLO,{headers:{...headers,'Content-Type':'text/javascript','Cache-Control':'no-cache'}});
 if(u.pathname==='/journey.js')return new Response(JOURNEY,{headers:{...headers,'Content-Type':'text/javascript','Cache-Control':'no-cache'}});
+if(u.pathname==='/recommender.js')return new Response(RECOMMENDER,{headers:{...headers,'Content-Type':'text/javascript','Cache-Control':'no-cache'}});
 if(u.pathname==='/app.js')return new Response(JS,{headers:{...headers,'Content-Type':'text/javascript','Cache-Control':'no-cache'}});
 if(u.pathname!=='/')return new Response('Not found',{status:404});
 return new Response(HTML,{headers:{...headers,'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-cache'}})
