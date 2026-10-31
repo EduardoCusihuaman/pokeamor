@@ -281,6 +281,8 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.sheet::-webkit-scrollbar,.sheet
 #app>header{grid-template-columns:44px minmax(0,1fr) auto 52px}
 #app>header>#round-progress{position:relative;grid-column:auto;grid-row:auto;inset:auto;flex:0 0 auto;width:auto;height:32px;min-width:0;padding:0 4px;margin-left:auto;border:0;border-radius:0;background:transparent;color:#94617f;font-size:11px;font-weight:600;box-shadow:none}
 #app>header>#open{margin-left:0}
+#app>header>#round-progress{appearance:none!important;-webkit-appearance:none!important;background:none!important;border:0!important;box-shadow:none!important;outline:0!important;border-radius:0!important}
+#app>header>#round-progress:before,#app>header>#round-progress:after{content:none!important;display:none!important}
 #app>header>#round-progress .round-ring{display:none!important}
 #app>header>#round-progress #round-number{font-size:11px;white-space:nowrap}
 #refinement-event .tools{right:7px}
