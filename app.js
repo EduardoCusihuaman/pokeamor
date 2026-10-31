@@ -70,11 +70,11 @@ function sound(kind='choose'){
    osc.onended=()=>{osc.disconnect();filter.disconnect();gain.disconnect()};
   };
   if(kind==='like'){
-   tone(880,t,.105,.045,'sine');tone(1320,t+.045,.14,.035,'triangle');tone(1760,t+.095,.12,.018,'sine');
+   tone(784,t,.09,.032,'sine');tone(1175,t+.038,.12,.026,'triangle');tone(1568,t+.086,.15,.022,'sine');tone(2352,t+.105,.09,.006,'sine');
   }else if(kind==='lift'){
    tone(540,t,.035,.012,'sine');
   }else{
-   tone(415,t,.095,.032,'triangle');tone(310,t+.035,.11,.018,'sine');
+   tone(392,t,.075,.021,'sine');tone(294,t+.028,.09,.012,'triangle');
   }
  }catch{}
 }
