@@ -282,3 +282,5 @@ async function prepareAlternate(){
 }
 
 $('#refine-favorites').onclick=()=>{if(nextPair())$('#duelsheet').classList.add('open')};
+
+$('#front-refine').onclick=()=>{if(nextPair())$('#duelsheet').classList.add('open')};
