@@ -32,9 +32,10 @@ for s in shaders:attach(program,s)
 fn('glLinkProgram',None,ui)(program);ok=it();fn('glGetProgramiv',None,ui,ui,C.POINTER(it))(program,0x8B82,C.byref(ok));assert ok.value,'link failed';fn('glUseProgram',None,ui)(program)
 buffer=ui();fn('glGenBuffers',None,it,C.POINTER(ui))(1,C.byref(buffer));fn('glBindBuffer',None,ui,ui)(0x8892,buffer);data=(fl*8)(-1,-1,1,-1,-1,1,1,1);fn('glBufferData',None,ui,C.c_ssize_t,vp,ui)(0x8892,C.sizeof(data),data,0x88E4)
 pos=fn('glGetAttribLocation',it,ui,C.c_char_p)(program,b'a_position');fn('glEnableVertexAttribArray',None,ui)(pos);fn('glVertexAttribPointer',None,ui,it,ui,C.c_ubyte,it,vp)(pos,2,0x1406,0,0,None);fn('glViewport',None,it,it,it,it)(0,0,16,16)
-loc=fn('glGetUniformLocation',it,ui,C.c_char_p);u1=fn('glUniform1f',None,it,fl);u2=fn('glUniform2f',None,it,fl,fl);u1(loc(program,b'u_full'),1);u1(loc(program,b'u_energy'),.8)
+loc=fn('glGetUniformLocation',it,ui,C.c_char_p);u1=fn('glUniform1f',None,it,fl);u2=fn('glUniform2f',None,it,fl,fl);u1(loc(program,b'u_full'),1);u1(loc(program,b'u_finish'),2);u2(loc(program,b'u_resolution'),16,16);u1(loc(program,b'u_energy'),.8)
 def render(x,y):
  u2(loc(program,b'u_light'),x,y);fn('glDrawArrays',None,ui,it,it)(5,0,4);pixels=(C.c_ubyte*1024)();fn('glReadPixels',None,it,it,it,it,ui,ui,vp)(0,0,16,16,0x1908,0x1401,pixels);return bytes(pixels)
-a=render(-.6,.1);b=render(.6,.4);assert a!=b,'tilting must change the reflection';assert 0<max(a[3::4])<=98,'foil must remain translucent'
-print('PASS: actual GLES2 shader compilation, linking, rendering, tilt response and translucent output.')
+a=render(-.6,.1);b=render(.6,.4);assert a!=b,'tilting must change the reflection';assert 0<max(a[3::4])<=134,'foil must remain translucent'
+u1(loc(program,b'u_finish'),0);regular=render(.6,.4);assert regular!=b,'foil finishes must differ';u1(loc(program,b'u_full'),0);window=render(.6,.4);assert max(window[3::4])>0 and not any(window[3:64:4]),'window foil must preserve the printed margins';u1(loc(program,b'u_energy'),0);assert not any(render(0,0)[3::4]),'zero energy must be transparent'
+print('PASS: actual GLSL compile/render, angle response, distinct foil finishes, margin mask and transparency.')
 e.eglMakeCurrent(d,None,None,None);e.eglDestroyContext.argtypes=[vp,vp];e.eglDestroyContext(d,ctx);e.eglDestroySurface.argtypes=[vp,vp];e.eglDestroySurface(d,surface);e.eglTerminate.argtypes=[vp];e.eglTerminate(d)
