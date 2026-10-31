@@ -395,3 +395,16 @@ window.PokeOpenBatch=function(ids){
  $('#open').click();showCollectionTab(true);window.PokeJourney?.compose();
  requestAnimationFrame(()=>{const tile=document.querySelector('.memory-card[data-pokemon="'+ids[0]+'"]'),section=tile?.closest('.batch-group');if(!section)return;const sheet=$('#sheet'),header=sheet.querySelector('header');sheet.scrollTo({top:sheet.scrollTop+section.getBoundingClientRect().top-sheet.getBoundingClientRect().top-(header?.getBoundingClientRect().height||50)-12,behavior:'instant'});section.classList.add('return-highlight');setTimeout(()=>section.classList.remove('return-highlight'),850)});
 };
+
+// Optional short refinement session; automatic encounters remain single choices.
+let manualSession=null;
+const manualIcon='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="7" height="12" rx="2" transform="rotate(-10 6 13)"/><rect x="13" y="7" width="7" height="12" rx="2" transform="rotate(10 16 13)"/><path d="m12 2 .8 2.2L15 5l-2.2.8L12 8l-.8-2.2L9 5l2.2-.8Z"/></svg>';
+const oldPaintRefinement=paintRefinement;
+paintRefinement=function(){oldPaintRefinement();const b=$('#front-refine');if(manualSession){b.innerHTML='<span class="refine-dots" aria-hidden="true">'+Array.from({length:manualSession.target},(_,i)=>'<i class="'+(i<manualSession.done?'filled':'')+'"></i>').join('')+'</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>';b.setAttribute('aria-label','Salir del afinador, '+manualSession.done+' de '+manualSession.target)}else if(!inlinePair)b.innerHTML=manualIcon};
+function beginManualRefinement(){const count=catalog.filter(p=>state.votes[p.id]?.value==='yes').length;if(count<2){toast('Elegí al menos dos favoritos.');return}manualSession={done:0,target:Math.min(3,count*(count-1)/2),used:new Set()};startRefinement(true)}
+const singleFinishRefinement=finishRefinement;
+finishRefinement=function(skipped=false){if(manualSession&&!skipped){manualSession.used.add(inlinePair.map(p=>p.id).sort((a,b)=>a-b).join(':'));manualSession.done++;if(manualSession.done<manualSession.target){inlinePair=null;inlineBusy=false;startRefinement(true);return}sound('round')}manualSession=null;singleFinishRefinement(skipped)};
+const singleStartRefinement=startRefinement;
+startRefinement=function(manual=false){const ok=singleStartRefinement(manual);if(ok&&manualSession&&inlinePair){const likes=catalog.filter(p=>state.votes[p.id]?.value==='yes');if(manualSession.used.has(inlinePair.map(p=>p.id).sort((a,b)=>a-b).join(':'))){let replacement=null;for(let i=0;i<likes.length&&!replacement;i++)for(let j=i+1;j<likes.length;j++)if(!manualSession.used.has([likes[i].id,likes[j].id].sort((a,b)=>a-b).join(':'))){replacement=[likes[i],likes[j]];break}if(replacement){inlinePair=replacement;render()}else{manualSession=null;singleFinishRefinement()}}for(const p of inlinePair||[])warmArtwork(p)}return ok};
+$('#front-refine').onclick=()=>{if(inlineBusy)return;if(inlinePair)finishRefinement(true);else beginManualRefinement()};
+$('#refine-favorites').onclick=beginManualRefinement;$('#duel').onclick=beginManualRefinement;
