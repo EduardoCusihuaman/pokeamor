@@ -20,7 +20,7 @@ function mergeRemote(remote){
   const value=takeRemote?remote.ratings[id]:local.ratings[id];if(value)ratings[id]=value;ratingTimes[id]=Math.max(lt,rt);
  }
  const changed=JSON.stringify(local.votes)!==JSON.stringify(votes);
- state={...local,votes,voteTimes,ratings,ratingTimes,duels:Math.max(local.duels,remote.duels||0),revision:Math.max(local.revision,remote.revision||0)+1};observedVotes=clone(votes);observedRatings=clone(ratings);dirty=true;persist();if(changed)refreshAfterMerge();
+ state={...local,encounters:{...(remote.encounters||{}),...(local.encounters||{})},votes,voteTimes,ratings,ratingTimes,duels:Math.max(local.duels,remote.duels||0),revision:Math.max(local.revision,remote.revision||0)+1};observedVotes=clone(votes);observedRatings=clone(ratings);dirty=true;persist();if(changed)refreshAfterMerge();
 }
 async function readRemote(){const r=await fetch('/api/session/'+token,{cache:'no-store'});if(!r.ok&&r.status!==404)throw Error('read failed');etag=r.ok?r.headers.get('ETag'):null;if(r.ok){const remote=await r.json();mergeRemote(remote)}}
 async function restore(){if(restoring)return restoring;restoring=(async()=>{try{await readRemote();cloudReady=true;retryDelay=1200;if(dirty)await sync();else $('#save').textContent='Colección sincronizada'}catch{$('#save').textContent='Guardado en este iPhone';clearTimeout(syncTimer);syncTimer=setTimeout(restore,retryDelay);retryDelay=Math.min(retryDelay*2,30000)}finally{restoring=null}})();return restoring}
@@ -43,7 +43,7 @@ function img(p,exact=false){
  if(exact&&material&&p.fallbackImage&&!cached){const source=window.PokeAssets?window.PokeAssets.front(p):Promise.resolve(p.image);source.then(url=>{if(!im.isConnected)return;const front=new Image();front.decoding='async';front.onload=()=>{if(im.isConnected){im.parentElement?.classList.remove('art-fallback','official');im.materialSource=true;im.src=url}};front.src=url}).catch(()=>{})}
  return im
 }
-function pending(){return order.filter(p=>!state.votes[p.id])}function current(){return pending()[0]}
+function pending(){return adaptiveQueue()}function current(){return pending()[0]}
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
 let frame=0,audio=null,lastTactile=0;
 const feel={sound:localStorage.getItem('pokeamor-sound')==='true',touch:localStorage.getItem('pokeamor-touch')!=='false'};
@@ -133,14 +133,14 @@ function makeCard(p,under=false){
 const warmArt=new Map();
 function warmArtwork(p){const url=p.surface?.assets?.front||p.image||fallback(p);if(warmArt.has(url))return;const art=img(p,true);warmArt.set(url,art);art.decode?.().catch(()=>{});if(warmArt.size>6)warmArt.delete(warmArt.keys().next().value)}
 function render(){clearFeedback();const queue=pending(),p=queue[0],n=Object.keys(state.votes).length,likes=Object.values(state.votes).filter(v=>v.value==='yes').length;$('#likes').innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.1-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.8a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z"/></svg><span>'+likes+'</span>';$('#open').setAttribute('aria-label','Mi colección, '+likes+' Pokémon');$('#count').textContent=n+' de '+catalog.length;const seenCounter=$('#album-seen');if(seenCounter){seenCounter.textContent=n+'/'+catalog.length;seenCounter.setAttribute('aria-label',n+' de '+catalog.length+' Pokémon vistos')}$('#progress').style.width=(n/catalog.length*100)+'%';$('#undo').disabled=!state.history.length;
- window.PokeJourney?.update(catalog,state,key);const stage=$('#stage'),flights=[...stage.querySelectorAll('.exiting')].slice(-2);for(const c of stage.querySelectorAll('.card:not(.exiting)'))c.stopMotion?.();stage.replaceChildren(...flights);$('#yes').disabled=$('#no').disabled=!p;$('#name').textContent=p?p.name:'Tu colección está completa ♡';$('#art').textContent='';$('#dex').textContent='';
+ window.PokeJourney?.update(catalog,state,key);const stage=$('#stage'),flights=[...stage.querySelectorAll('.exiting')].slice(-2);for(const c of stage.querySelectorAll('.card:not(.exiting)'))c.stopMotion?.();stage.replaceChildren(...flights);$('#yes').disabled=$('#no').disabled=!p;$('#name').textContent=p?p.name:'Tu colección está completa ♡';$('#art').textContent=p?.reencounter?'Otra mirada':'';$('#dex').textContent='';
  if(!p){const b=document.createElement('button');b.className='pill';b.textContent='Ver mi colección';b.onclick=()=>$('#open').click();stage.append(b);return}
  setScene(p);window.PokeMaterial?.prepare(queue.slice(0,4));
  if(queue[1])stage.append(makeCard(queue[1],true));stage.append(makeCard(p));fitCard();for(const next of queue.slice(1,4))warmArtwork(next)
 }
 function vote(value,momentum={}){
  if(busy||!current())return;busy=true;clearFeedback();const c=$('.card:not(.under):not(.exiting)'),p=c?.pokemon||current();tactile(value==='yes'?'like':'choose');sound(value==='yes'?'like':'choose');
- state.history.push({id:p.id,previous:state.votes[p.id]||null,direction:value});state.votes[p.id]={value,card:p.card,time:Date.now()};save();
+ if(p.reencounter){const event={id:p.id,card:p.card,value,time:Date.now(),checkpoint:p.checkpoint};state.encounters=state.encounters||{};state.encounters[event.card+':'+event.checkpoint]=event;state.history.push({id:p.id,direction:value,encounterKey:event.card+':'+event.checkpoint});activeEncounter=null}else{state.history.push({id:p.id,previous:state.votes[p.id]||null,direction:value});state.votes[p.id]={value,card:p.card,time:Date.now()}}save();
  if(c){const badge=c.querySelector('.stamp');if(badge){badge.classList.toggle('love',value==='yes');badge.classList.add('armed');badge.style.setProperty('--decision-color',value==='yes'?'#a52e5a':'#2e647c');badge.style.opacity='1';badge.style.transform='scale(1)';}c.style.setProperty(value==='yes'?'--love':'--pass','1');c.stopMotion?.();c.classList.add('exiting');c.classList.remove('lifted','dealt','returned','active');c.setAttribute('aria-hidden','true');c.style.pointerEvents='none'}
  render();const next=$('.card:not(.under):not(.exiting)');if(next)next.classList.add('dealt');signalDecision(value);window.PokeJourney?.celebrate();
  if(c){void c.offsetWidth;const duration=reducedMotion.matches?0:Math.max(125,175-Math.abs(momentum.vx||0)*22);c.style.transition=`transform ${duration}ms cubic-bezier(.22,.55,.45,1),opacity ${duration}ms ease`;c.style.transform=`translate3d(${value==='yes'?innerWidth+100:-innerWidth-100}px,${Math.max(-80,Math.min(80,(momentum.dy||0)*.4))-20}px,0) rotate(${value==='yes'?22:-22}deg) scale(1.015)`;c.style.opacity=0;setTimeout(()=>c.remove(),duration+20)}
@@ -150,7 +150,7 @@ function vote(value,momentum={}){
 $('#yes').onclick=()=>vote('yes');$('#no').onclick=()=>vote('no');$('#undo').onclick=()=>{
  if(busy)return;const h=state.history.pop();if(!h)return;const direction=h.direction||state.votes[h.id]?.value||'no';
  cancelDecisionFeedback();for(const card of $('#stage').querySelectorAll('.exiting'))card.remove();
- if(h.previous)state.votes[h.id]=h.previous;else delete state.votes[h.id];tactile('choose');save();render();
+ if(h.encounterKey){delete state.encounters[h.encounterKey];activeEncounter=null}else if(h.previous)state.votes[h.id]=h.previous;else delete state.votes[h.id];if(!h.encounterKey){adaptiveIds=[h.id,...adaptiveIds.filter(id=>id!==h.id)]}adaptiveBlock='';tactile('choose');save();render();
  const restored=$('.card:not(.under):not(.exiting)');if(restored?.pokemon?.id===h.id){restored.style.setProperty('--return-x',((direction==='yes'?1:-1)*Math.min(innerWidth+40,560))+'px');restored.style.setProperty('--return-r',(direction==='yes'?'14':'-14')+'deg');restored.classList.add('returned')}
 };document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT'||$('.sheet.open')||document.querySelector('dialog[open]'))return;if(e.key==='ArrowRight')vote('yes');if(e.key==='ArrowLeft')vote('no')});
 function score(p){return state.ratings[p.id]?.score||1000}
@@ -230,3 +230,55 @@ $('#album-settings').onclick=()=>{const rounds=!$('#sheet').classList.contains('
 
 let deleteStage=0,deleteTimer;
 $('#delete-all').onclick=()=>{const b=$('#delete-all');if(deleteStage===0){deleteStage=1;b.innerHTML='¿Borrar todos los Pokémon? <span>Cancelar</span>';b.setAttribute('aria-label','Confirmar borrado de toda la colección');deleteTimer=setTimeout(()=>{deleteStage=0;b.innerHTML='Borrar toda la colección <span>⌫'},4500);return}if(deleteStage===1){deleteStage=2;b.innerHTML='Tocá otra vez para borrar <span>Cancelar</span>';clearTimeout(deleteTimer);deleteTimer=setTimeout(()=>{deleteStage=0;b.innerHTML='Borrar toda la colección <span>⌫'},3000);return}if(deleteStage===2){clearTimeout(deleteTimer);localStorage.removeItem(key);location.reload()}};
+
+// Small local content model. Community votes are a prior, not personal affinity.
+let adaptiveIds=[],adaptiveBlock='',activeEncounter=null,alternateBusy=false;
+const alternateCards=new Map();
+function preferenceFeatures(p){return p.traits||[]}
+function adaptiveQueue(){
+ const unseen=order.filter(p=>!state.votes[p.id]);if(!catalog.some(p=>p.traits?.length))return unseen;
+ const likes=Object.values(state.votes).filter(v=>v.value==='yes').length,n=Object.keys(state.votes).length;
+ const block=Math.floor(n/20)+':'+Math.floor(likes/15);
+ if(block!==adaptiveBlock||!adaptiveIds.length){
+  const locked=adaptiveIds.filter(id=>!state.votes[id]).slice(0,3);
+  const evidence=new Map();
+  for(const p of catalog){const v=state.votes[p.id];if(!v)continue;for(const f of preferenceFeatures(p)){const e=evidence.get(f)||[0,0];e[0]+=v.value==='yes'?1:0;e[1]++;evidence.set(f,e)}}
+  for(const event of Object.values(state.encounters||{})){const p=catalog.find(p=>p.id===event.id);if(!p)continue;for(const f of preferenceFeatures(p)){const e=evidence.get(f)||[0,0];e[0]+=event.value==='yes'?.5:0;e[1]+=.5;evidence.set(f,e)}}
+  const prior=p=>p.communityVotes2020?Math.log1p(p.communityVotes2020)/Math.log1p(140559):.45;
+  const affinity=p=>{const fs=preferenceFeatures(p);return fs.length?fs.reduce((sum,f)=>{const e=evidence.get(f)||[0,0];return sum+(e[0]+2)/(e[1]+4)},0)/fs.length:.5};
+  const confidence=Math.min(.75,n/100);
+  const score=p=>confidence*affinity(p)+(1-confidence)*prior(p);
+  const ranked=unseen.filter(p=>!locked.includes(p.id)).sort((a,b)=>score(b)-score(a)||a.id-b.id);
+  const diverse=[...ranked].sort((a,b)=>((a.id*2654435761+n*97)>>>0)-((b.id*2654435761+n*97)>>>0));
+  const popular=[...ranked].sort((a,b)=>prior(b)-prior(a)||a.id-b.id);
+  const used=new Set(locked),ids=[...locked];let slot=0;
+  while(ids.length<unseen.length){const list=slot%20<12?ranked:slot%20<17?diverse:popular;const next=list.find(p=>!used.has(p.id));if(!next)break;used.add(next.id);ids.push(next.id);slot++}
+  adaptiveIds=ids;adaptiveBlock=block;
+ }
+ // Prepare alternatives asynchronously; never block the next normal card.
+ const checkpoint=Math.floor(likes/30);
+ const done=Object.values(state.encounters||{}).some(e=>e.checkpoint===checkpoint);
+ if(checkpoint>0&&!done&&!activeEncounter){
+  const eligible=catalog.filter(p=>state.votes[p.id]?.value==='yes'&&n-(state.history||[]).findIndex(h=>h.id===p.id)>20);
+  const candidate=eligible.sort((a,b)=>Object.values(state.encounters||{}).filter(e=>e.id===a.id).length-Object.values(state.encounters||{}).filter(e=>e.id===b.id).length||a.id-b.id).find(p=>alternateCards.has(p.id));
+  if(candidate)activeEncounter={...candidate,...alternateCards.get(candidate.id),surface:null,reencounter:true,checkpoint};
+ }
+ if(!alternateBusy&&likes>=20&&[...alternateCards.keys()].filter(k=>typeof k==='number').length<4)prepareAlternate();
+ const by=new Map(catalog.map(p=>[p.id,p])),queue=adaptiveIds.filter(id=>!state.votes[id]).map(id=>by.get(id)).filter(Boolean);
+ return activeEncounter?[activeEncounter,...queue]:queue;
+}
+async function prepareAlternate(){
+ const candidate=catalog.find(p=>state.votes[p.id]?.value==='yes'&&!alternateCards.has(p.id)&&!alternateCards.has('tried:'+p.id));if(!candidate)return;
+ alternateBusy=true;alternateCards.set('tried:'+candidate.id,true);
+ try{
+  const res=await fetch('https://api.tcgdex.net/v2/es/cards?name='+encodeURIComponent(candidate.name),{signal:AbortSignal.timeout(7000)});
+  if(!res.ok)return;const list=await res.json();
+  const choices=list.filter(c=>c.name===candidate.name&&c.id!==candidate.card&&c.image).reverse().slice(0,12);
+  for(const c of choices){const r=await fetch('https://api.tcgdex.net/v2/es/cards/'+encodeURIComponent(c.id),{signal:AbortSignal.timeout(5000)});if(!r.ok)continue;const detail=await r.json();
+   if(!/illustration rare|special illustration rare|art rare|rare illustration/i.test(detail.rarity||''))continue;
+   alternateCards.set(candidate.id,{card:c.id,image:c.image+'/high.webp',fallbackImage:c.image+'/high.webp',rarity:detail.rarity,artist:detail.illustrator||''});break;
+  }
+ }catch{}finally{alternateBusy=false}
+}
+
+$('#refine-favorites').onclick=()=>{if(nextPair())$('#duelsheet').classList.add('open')};
