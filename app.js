@@ -141,7 +141,7 @@ $('#gallery-more').onclick=()=>{visibleCards+=40;collection()};
 $('#detail-close').onclick=()=>$('#card-detail').close();
 $('#detail-choice').onclick=()=>{if(!detailPokemon)return;const p=detailPokemon,before=state.votes[p.id]?clone(state.votes[p.id]):null;const after={value:before?.value==='yes'?'no':'yes',card:p.card,time:Date.now()};const record={id:p.id,previous:before};state.history.push(record);state.votes[p.id]=after;detailChange={id:p.id,before,after:JSON.stringify(after),record};save();render();collection();detailLabel();$('#detail-undo').hidden=false};
 $('#detail-undo').onclick=()=>{const change=detailChange;if(!change)return;if(JSON.stringify(state.votes[change.id])!==change.after){toast('Esta elección cambió en otro dispositivo.');$('#detail-undo').hidden=true;return}if(change.before)state.votes[change.id]=change.before;else delete state.votes[change.id];const index=state.history.indexOf(change.record);if(index>=0)state.history.splice(index,1);detailChange=null;save();render();collection();detailLabel();$('#detail-undo').hidden=true};
-$('#collection-menu').onclick=()=>$('#collection-options').showModal();$('#options-close').onclick=()=>$('#collection-options').close();
+$('#options-close').onclick=()=>$('#collection-options').close();
 $('#team-open').onclick=()=>{$('#teamview').classList.add('open');window.PokeJourney?.compose()};$('#team-back').onclick=()=>$('#teamview').classList.remove('open');
 $('#memories-open').onclick=()=>{if($('#collection-options').open)$('#collection-options').close();$('#sheet').classList.add('open');showCollectionTab(true);window.PokeJourney?.compose()};$('#memories-back').onclick=()=>$('#memoriesview').classList.remove('open');
 $('#open').onclick=()=>{filter='yes';$('#sheet').classList.add('open');collection();showCollectionTab(true);window.PokeJourney?.compose()};$('#close').onclick=()=>$('#sheet').classList.remove('open');$('#tabs').onclick=e=>{if(!e.target.dataset.filter)return;filter=e.target.dataset.filter;showCollectionTab(false);visibleCards=40;if($('#collection-options').open)$('#collection-options').close();$('#tabs').querySelectorAll('button').forEach(b=>b.classList.toggle('selected',b===e.target));collection()};
@@ -156,10 +156,10 @@ async function init(){try{catalog=await(await fetch('/catalog.json',{cache:'no-c
 function browseDetail(direction){const i=collectionCards.findIndex(p=>p.id===detailPokemon?.id),p=collectionCards[i+direction];if(p)inspectCard(p)}
 $('#detail-prev').onclick=()=>browseDetail(-1);$('#detail-next').onclick=()=>browseDetail(1);
 let detailStart=null;$('#detail-art').onpointerdown=e=>{detailStart={x:e.clientX,y:e.clientY}};$('#detail-art').onpointerup=e=>{if(!detailStart)return;const dx=e.clientX-detailStart.x,dy=e.clientY-detailStart.y;detailStart=null;if(dy>80&&dy>Math.abs(dx))$('#card-detail').close();else if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))browseDetail(dx<0?1:-1)};
-$('#team-menu').onclick=()=>{$('#collection-options').close();$('#team-open').onclick()};
+
 
 function showCollectionTab(rounds){$('#sheet').classList.toggle('rounds-mode',rounds);$('#show-rounds').classList.toggle('selected',rounds);$('#show-liked').classList.toggle('selected',!rounds)}
-$('#show-rounds').onclick=()=>{showCollectionTab(true);window.PokeJourney?.compose()};$('#show-liked').onclick=()=>{if($('#collection-options').open)$('#collection-options').close();filter='all';collection();showCollectionTab(false)};
+$('#show-rounds').onclick=()=>{showCollectionTab(true);window.PokeJourney?.compose()};$('#show-liked').onclick=()=>{if($('#collection-options').open)$('#collection-options').close();filter='yes';collection();showCollectionTab(false)};
 
 window.PokeInspect=p=>{if(!collectionCards.some(c=>c.id===p.id))collectionCards=catalog.filter(c=>state.votes[c.id]?.value==='yes');inspectCard(p)};
 
