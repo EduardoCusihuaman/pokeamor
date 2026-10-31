@@ -264,7 +264,7 @@ function adaptiveQueue(){
  // Prepare alternatives asynchronously; never block the next normal card.
  const checkpoint=Math.floor(likes/30);
  const done=Object.values(state.encounters||{}).some(e=>e.checkpoint===checkpoint);
- if(checkpoint>0&&!done&&!activeEncounter&&n>=(state.refinementSchedule?.nextSeen||20)){
+ if(eventBoundary&&!inlinePair&&checkpoint>0&&!done&&!activeEncounter&&n>=(state.refinementSchedule?.nextSeen||20)){
   const eligible=catalog.filter(p=>state.votes[p.id]?.value==='yes'&&state.history.slice(-10).every(h=>h.id!==p.id));
   const candidate=eligible.sort((a,b)=>Object.values(state.encounters||{}).filter(e=>e.id===a.id).length-Object.values(state.encounters||{}).filter(e=>e.id===b.id).length||a.id-b.id).find(p=>alternateCards.has(p.id));
   if(candidate){const art=alternateCards.get(candidate.id),url=art.image,im=warmArt.get(url);if(im?.complete&&im.naturalWidth>0)activeEncounter={...candidate,...art,surface:null,reencounter:true,checkpoint};else warmArtwork({...candidate,...art,surface:null})}
@@ -293,7 +293,7 @@ $('#front-refine').onclick=()=>{if(nextPair())$('#duelsheet').classList.add('ope
 
 
 // Refinement is a single event in the same card stage.
-let inlinePair=null,inlineBusy=false;
+let inlinePair=null,inlineBusy=false,queuedPair=null,eventBoundary=false;
 const eventLayer=document.createElement('div');eventLayer.id='refinement-event';eventLayer.hidden=true;
 eventLayer.setAttribute('role','group');eventLayer.setAttribute('aria-label','¿Cuál te gusta más?');
 const pairBox=$('#pair'),equalTools=$('#both').parentElement;
@@ -303,7 +303,7 @@ function eventSeen(){return Object.keys(state.votes).length}
 function finishRefinement(skipped=false){
  if(!inlinePair)return;
  state.refinementSchedule={lastSeen:eventSeen(),nextSeen:eventSeen()+(skipped?40:26+(state.duels%10)),started:true,time:Date.now()};
- inlinePair=null;inlineBusy=false;save();render();
+ inlineBusy=true;queuedPair=null;eventLayer.classList.add('event-leaving');setTimeout(()=>{inlinePair=null;inlineBusy=false;eventLayer.classList.remove('event-leaving');save();render()},reducedMotion.matches?0:170);
 }
 function startRefinement(manual=false){
  if(inlinePair||busy)return false;
@@ -318,7 +318,7 @@ function startRefinement(manual=false){
  const b=others[0];
  // Automatic events never interrupt to download an image.
  if(!manual&&![a,b].every(p=>{const im=warmArt.get(p.surface?.assets?.front||p.image||fallback(p));return im?.complete&&im.naturalWidth>0})){for(const p of [a,b]){warmArtwork(p);const im=warmArt.get(p.surface?.assets?.front||p.image||fallback(p));im?.addEventListener('load',scheduleEvents,{once:true})}return false}
- inlinePair=Math.random()<.5?[a,b]:[b,a];
+ const prepared=Math.random()<.5?[a,b]:[b,a];if(!manual){queuedPair=prepared;return true}queuedPair=null;inlinePair=prepared;
  $('#sheet').classList.remove('open');$('#duelsheet').classList.remove('open');render();return true;
 }
 function paintRefinement(){
@@ -344,7 +344,7 @@ function chooseRefinement(winner){
  [...pairBox.children].forEach((b,i)=>{b.classList.toggle('chosen',winner===2||winner===i);b.classList.toggle('unchosen',winner!==2&&winner!==i)});
  setTimeout(()=>finishRefinement(),reducedMotion.matches?0:150);
 }
-const renderDiscovery=render;render=function(){renderDiscovery();paintRefinement()};
+const renderDiscovery=render;render=function(){if(eventBoundary&&queuedPair&&!activeEncounter&&eventSeen()>=(state.refinementSchedule?.nextSeen||20)){inlinePair=queuedPair;queuedPair=null}renderDiscovery();paintRefinement()};
 const voteDiscovery=vote;vote=function(...args){if(!inlinePair)voteDiscovery(...args)};
 const undoDiscovery=$('#undo').onclick;
 $('#undo').onclick=()=>{
@@ -366,9 +366,9 @@ function scheduleEvents(){clearTimeout(eventTimer);eventTimer=setTimeout(runEven
 function runEvents(){
  if(busy||inlinePair||document.hidden||$('.card.active')||$('.sheet.open')||document.querySelector('dialog[open]'))return;
  const n=eventSeen(),likes=Object.values(state.votes).filter(v=>v.value==='yes').length;
- if(!activeEncounter&&n>=20&&n>=(state.refinementSchedule?.nextSeen||20)){const next=current();if(next?.reencounter){render();return}}
+ 
  if(n<20||likes<6||n<eventPauseUntil||n<(state.refinementSchedule?.nextSeen||20)||activeEncounter)return;
- startRefinement(false);
+ if(!queuedPair)startRefinement(false);
 }
 const seenLabel=document.createElement('span');seenLabel.id='discovery-count';$('#app').append(seenLabel);
 const originalRender=render;render=function(){
@@ -379,13 +379,19 @@ const originalRender=render;render=function(){
 const recordVote=vote;vote=function(value,...rest){
  if(inlinePair||busy)return;const before=eventSeen(),wasEncounter=!!current()?.reencounter;
  localStorage.setItem(key+'-introduced','1');$('#stage .first-gesture')?.classList.remove('first-gesture');
- recordVote(value,...rest);const n=eventSeen();if(n<=before&&!wasEncounter)return;
+ const front=$('#stage .card:not(.under):not(.exiting)');const art=front?.querySelector('img');if(art?.complete&&art.naturalWidth)window.PokeJourney?.remember?.(front.pokemon,art);
+ eventBoundary=true;try{recordVote(value,...rest)}finally{eventBoundary=false}const n=eventSeen();if(n<=before&&!wasEncounter)return;
  state.experience=state.experience||{milestones:{},metrics:{}};const xp=state.experience;xp.milestones=xp.milestones||{};xp.metrics=xp.metrics||{};
  xp.metrics.newDecisions=(xp.metrics.newDecisions||0)+(n>before?1:0);xp.metrics.startedAt=xp.metrics.startedAt||Date.now();xp.metrics.lastAt=Date.now();
  if(value==='yes'&&Object.values(state.votes).filter(v=>v.value==='yes').length%15===0){eventPauseUntil=n+8;state.refinementSchedule={...(state.refinementSchedule||{}),nextSeen:Math.max(n+8,state.refinementSchedule?.nextSeen||0),time:Date.now()}}
  const milestone=n===20||n>0&&n%50===0;
- if(milestone&&!xp.milestones[n]){xp.milestones[n]=true;seenLabel.classList.remove('discovery-milestone');void seenLabel.offsetWidth;seenLabel.classList.add('discovery-milestone');if(!wasEncounter)sound('round');if(n>=100){const leaders=catalog.filter(p=>state.votes[p.id]?.value==='yes'&&(state.ratings[p.id]?.played||0)>0).sort((a,b)=>score(b)-score(a)).slice(0,3);if(leaders.length){const reward=$('#round-reward');reward.replaceChildren(...leaders.map(p=>img(p)));reward.classList.add('show');setTimeout(()=>reward.classList.remove('show'),1600)}}}
+ if(milestone&&!xp.milestones[n]){xp.milestones[n]=true;seenLabel.classList.remove('discovery-milestone');void seenLabel.offsetWidth;seenLabel.classList.add('discovery-milestone');if(!wasEncounter)sound('round');if(n>=100){const leaders=catalog.filter(p=>state.votes[p.id]?.value==='yes'&&(state.ratings[p.id]?.played||0)>0).sort((a,b)=>score(b)-score(a)).slice(0,3);if(leaders.length){const reward=$('#round-reward');reward.onclick=()=>{reward.classList.remove('show');window.PokeInspect(leaders[0],leaders,null)};reward.replaceChildren(...leaders.map(p=>img(p)));reward.classList.add('show');setTimeout(()=>reward.classList.remove('show'),1600)}}}
  save();scheduleEvents();
 };
 $('#stage').addEventListener('pointerdown',()=>{$('#stage .first-gesture')?.classList.remove('first-gesture')},{passive:true});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)scheduleEvents()});
+
+window.PokeOpenBatch=function(ids){
+ $('#open').click();showCollectionTab(true);window.PokeJourney?.compose();
+ requestAnimationFrame(()=>{const tile=document.querySelector('.memory-card[data-pokemon="'+ids[0]+'"]'),section=tile?.closest('.batch-group');if(!section)return;const sheet=$('#sheet'),header=sheet.querySelector('header');sheet.scrollTo({top:sheet.scrollTop+section.getBoundingClientRect().top-sheet.getBoundingClientRect().top-(header?.getBoundingClientRect().height||50)-12,behavior:'instant'});section.classList.add('return-highlight');setTimeout(()=>section.classList.remove('return-highlight'),850)});
+};
