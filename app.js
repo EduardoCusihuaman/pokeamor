@@ -208,3 +208,6 @@ const originalTab=showCollectionTab;showCollectionTab=function(rounds){originalT
 })();
 
 $('#album-settings').onclick=()=>{const rounds=!$('#sheet').classList.contains('rounds-mode');showCollectionTab(rounds);$('#album-heading').textContent=rounds?'Tus tandas':'Ajustes y respaldo';$('#album-settings').setAttribute('aria-label',rounds?'Ajustes y respaldo':'Volver a tus tandas');if(rounds)window.PokeJourney?.compose()};
+
+let deleteStage=0,deleteTimer;
+$('#delete-all').onclick=()=>{const b=$('#delete-all');if(deleteStage===0){deleteStage=1;b.innerHTML='¿Borrar todos los Pokémon? <span>Cancelar</span>';b.setAttribute('aria-label','Confirmar borrado de toda la colección');deleteTimer=setTimeout(()=>{deleteStage=0;b.innerHTML='Borrar toda la colección <span>⌫'},4500);return}if(deleteStage===1){deleteStage=2;b.innerHTML='Tocá otra vez para borrar <span>Cancelar</span>';clearTimeout(deleteTimer);deleteTimer=setTimeout(()=>{deleteStage=0;b.innerHTML='Borrar toda la colección <span>⌫'},3000);return}if(deleteStage===2){clearTimeout(deleteTimer);localStorage.removeItem(key);location.reload()}};
