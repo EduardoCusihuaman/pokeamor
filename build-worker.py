@@ -1,10 +1,10 @@
 import json
 from pathlib import Path
 p=Path(__file__).parent
-prefix='const HTML='+json.dumps((p/'page.html').read_text())+';\nconst JS='+json.dumps((p/'app.js').read_text())+';\nconst HOLO='+json.dumps((p/'holo.js').read_text())+';\nconst CATALOG='+ (p/'catalog.json').read_text()+';\n'
+prefix='const HTML='+json.dumps((p/'page.html').read_text())+';\nconst JS='+json.dumps((p/'app.js').read_text())+';\nconst HOLO='+json.dumps((p/'holo.js').read_text())+';\nconst MATERIAL_JS='+json.dumps((p/'material-renderer.js').read_text())+';\nconst MATERIALS='+(p/'materials.json').read_text()+';\nconst CATALOG='+ (p/'catalog.json').read_text()+';\n'
 worker=r'''
 const response=(body,status=200,extra={})=>new Response(body,{status,headers:{'Content-Type':'application/json','Cache-Control':'no-store',...extra}});
-export default {async fetch(request,env){
+export default {async fetch(request,env,ctx){
 const u=new URL(request.url);
 if(u.pathname.startsWith('/api/session/')){
 const id=u.pathname.slice(13);if(!/^[a-f0-9]{64}$/.test(id))return response('{}',400);
@@ -24,8 +24,23 @@ const obj=await env.BUCKET.put(key,body,{onlyIf:request.headers,httpMetadata:{co
 }catch{return response('{"error":"storage_unavailable"}',503)}
 }
 if(request.method!=='GET'&&request.method!=='HEAD')return response('{}',405);
+if(MATERIALS[u.pathname]){
+ const source=MATERIALS[u.pathname],key='material-cache'+u.pathname;
+ const headers={'Content-Type':source.contentType,'Cache-Control':'public,max-age=31536000,immutable','X-Content-Type-Options':'nosniff'};
+ try{
+  if(env.BUCKET){const cached=await env.BUCKET.get(key);if(cached)return new Response(request.method==='HEAD'?null:cached.body,{headers:{...headers,...(cached.httpEtag?{'ETag':cached.httpEtag}:{})}})}
+  const upstream=await fetch(source.url,{headers:{'User-Agent':'Pokeamor/1.0 (+https://pokeamor-cartas.h4lconn.chatgpt.site)','Accept':'image/png'},signal:AbortSignal.timeout(20000)});
+  if(!upstream.ok||Number(upstream.headers.get('Content-Length')||0)>8388608)return response('{"error":"material_unavailable"}',502);
+  const bytes=await upstream.arrayBuffer(),signature=new Uint8Array(bytes,0,Math.min(8,bytes.byteLength));
+  if(bytes.byteLength<24||bytes.byteLength>8388608||signature.join(',')!=='137,80,78,71,13,10,26,10')return response('{"error":"invalid_material"}',502);
+  if(env.BUCKET){const put=env.BUCKET.put(key,bytes,{httpMetadata:{contentType:source.contentType}}).catch(()=>{});if(ctx?.waitUntil)ctx.waitUntil(put);else await put}
+  return new Response(request.method==='HEAD'?null:bytes,{headers});
+ }catch{return response('{"error":"material_unavailable"}',502)}
+}
+
 const headers={'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'};
 if(u.pathname==='/catalog.json')return new Response(JSON.stringify(CATALOG),{headers:{...headers,'Content-Type':'application/json','Cache-Control':'no-cache'}});
+if(u.pathname==='/material-renderer.js')return new Response(MATERIAL_JS,{headers:{...headers,'Content-Type':'text/javascript','Cache-Control':'no-cache'}});
 if(u.pathname==='/holo.js')return new Response(HOLO,{headers:{...headers,'Content-Type':'text/javascript','Cache-Control':'no-cache'}});
 if(u.pathname==='/app.js')return new Response(JS,{headers:{...headers,'Content-Type':'text/javascript','Cache-Control':'no-cache'}});
 if(u.pathname!=='/')return new Response('Not found',{status:404});

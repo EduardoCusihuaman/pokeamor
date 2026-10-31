@@ -37,7 +37,12 @@ async function sync(){
 window.addEventListener('online',()=>{if(cloudReady)sync();else restore()});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&dirty)sync()});
 const popular=[658,448,778,6,197,700,445,384,282,94,133,25,151,143,38,196,149,249,248,257,722,330,359,405,447,763,471,470,134,135,136,3,9,39,35,175,131,181,393,653,16,54,27,37,58,77,79,83,92,96,104,113,123,129,132,147,150,155,158,172,183,194,195,200,215,216,228,230,243,244,245,251,252,255,258,280,302,303,304,333,334,349,350,355,359,363,380,381,385,387,390,403,425,427,443,447,468,475,479,487,491,492,495,498,501,570,571,572,573,607,609,610,612,635,650,653,656,674,677,704,705,706,710,714,715,719,725,728,744,745,753,754,759,761,764,771,774,777,789,791,792,800,807,810,813,816,831,835,848,849,854,855,856,858,868,869,872,873,885,887,888,889,906,909,912,921,924,925,926,927,928,935,936,937,938,939,950,951,952,957,958,959,963,964,970,971,972,974,975,978,979,980,981,982,983,1000,1007,1008,1017,1024,1025];
 const fallback=p=>'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'+p.id+'.png';
-function img(p){const im=document.createElement('img');im.src=p.image||fallback(p);im.alt=p.name;im.draggable=false;im.onerror=()=>{if(im.src!==fallback(p)){im.src=fallback(p);im.parentElement?.classList.add('official')}else{im.onerror=null;im.alt=p.name+' · imagen no disponible'}};return im}
+function img(p,exact=false){
+ const im=document.createElement('img'),material=p.surface?.effect==='asset-foil';im.materialSource=!!(exact&&material&&!p.fallbackImage);im.src=(material?p.fallbackImage||p.image:p.image)||fallback(p);im.alt=p.name;im.draggable=false;let usedFallback=material&&!!p.fallbackImage;
+ im.onerror=()=>{im.materialSource=false;im.parentElement?.classList.add('art-fallback');if(!usedFallback&&p.fallbackImage){usedFallback=true;im.src=p.fallbackImage}else if(im.src!==fallback(p)){im.src=fallback(p);im.parentElement?.classList.add('official')}else{im.onerror=null;im.alt=p.name+' · imagen no disponible'}};
+ if(exact&&material&&p.fallbackImage){const front=new Image();front.decoding='async';front.onload=()=>{if(im.isConnected){im.parentElement?.classList.remove('art-fallback','official');im.materialSource=true;im.src=p.image}};front.src=p.image}
+ return im
+}
 function pending(){return order.filter(p=>!state.votes[p.id])}function current(){return pending()[0]}
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
 let frame=0,audio=null,lastTactile=0;
@@ -83,7 +88,7 @@ function fitCard(){const stage=$('#stage'),front=stage.querySelector('.card:not(
 new ResizeObserver(fitCard).observe($('#stage'));
 function clearFeedback(){cancelAnimationFrame(frame);$('#yes').classList.remove('ready');$('#no').classList.remove('ready');document.documentElement.style.setProperty('--yes-intent','0');document.documentElement.style.setProperty('--no-intent','0')}
 function makeCard(p,under=false){
- const c=document.createElement('div');c.className='card'+(under?' under':'')+(!p.image?' official':'');const artwork=img(p);artwork.decoding='async';const fitArt=()=>{if(c.classList.contains('official')||!artwork.naturalWidth||!artwork.naturalHeight)return;c.artRatio=artwork.naturalWidth/artwork.naturalHeight;c.style.aspectRatio=String(c.artRatio);if(!under)fitCard()};artwork.onload=fitArt;c.append(artwork);if(artwork.complete)queueMicrotask(fitArt);
+ const c=document.createElement('div');c.className='card'+(under?' under':'')+(!p.image?' official':'');const artwork=img(p,true);artwork.decoding='async';const fitArt=()=>{c.materialFrontReady=!!(artwork.materialSource&&!c.classList.contains('art-fallback')&&artwork.naturalWidth>0);if(c.classList.contains('official')||!artwork.naturalWidth||!artwork.naturalHeight)return;c.artRatio=artwork.naturalWidth/artwork.naturalHeight;c.style.aspectRatio=String(c.artRatio);if(!under){fitCard();window.PokeMaterial?.refresh()}};artwork.onload=fitArt;c.append(artwork);if(artwork.complete)queueMicrotask(fitArt);
  if(under){c.setAttribute('aria-hidden','true');return c}
  c.pokemon=p;c.setAttribute('aria-label',p.name);const choice=document.createElement('div');choice.className='choice-light';c.append(choice);const stamp=document.createElement('div');stamp.className='stamp';stamp.setAttribute('aria-hidden','true');stamp.innerHTML='<svg class=heart viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 21s-9-5.5-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-9 12-9 12Z"/></svg><svg class=cross viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';c.append(stamp);
  let surface=null;let start=null,dx=0,dy=0,vx=0,lastX=0,lastTime=0,lastMove=0,releaseTimer,held=false,armed=0,raf=0,previous=0;
@@ -110,7 +115,7 @@ function render(){clearFeedback();const queue=pending(),p=queue[0],n=Object.keys
  const stage=$('#stage'),flights=[...stage.querySelectorAll('.exiting')].slice(-2);for(const c of stage.querySelectorAll('.card:not(.exiting)'))c.stopMotion?.();stage.replaceChildren(...flights);$('#yes').disabled=$('#no').disabled=!p;$('#name').textContent=p?p.name:'Tu colección está completa ♡';$('#art').textContent='';$('#dex').textContent='';
  if(!p){const b=document.createElement('button');b.className='pill';b.textContent='Ver mi colección';b.onclick=()=>$('#open').click();stage.append(b);return}
  setScene(p);
- if(queue[1])stage.append(makeCard(queue[1],true));stage.append(makeCard(p));fitCard();for(const next of queue.slice(1,7)){const i=new Image();i.src=next.image||fallback(next)}
+ if(queue[1])stage.append(makeCard(queue[1],true));stage.append(makeCard(p));fitCard();for(const next of queue.slice(1,7)){const i=new Image();i.src=next.fallbackImage||next.image||fallback(next)}
 }
 function vote(value,momentum={}){
  if(busy||!current())return;busy=true;clearFeedback();const c=$('.card:not(.under):not(.exiting)'),p=c?.pokemon||current();tactile(value==='yes'?'like':'choose');sound(value==='yes'?'like':'choose');
