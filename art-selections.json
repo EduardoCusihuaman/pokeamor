@@ -1,5 +1,5 @@
 {
-  "policy": "Prefer distinctive, full-color artwork in Spanish. Avoid gold/silver silhouette prints and rainbow VMAX prints that obscure the Pokémon. Keep existing colorful alternate illustrations. These selections preserve species IDs and votes.",
+  "policy": "Prefer distinctive, full-color artwork in Spanish and non-shiny Pokémon. Avoid gold/silver silhouette prints, metallic TURBO/BREAK and rainbow VMAX prints that obscure the Pokémon. Keep existing colorful alternate illustrations. These selections preserve species IDs and votes.",
   "selections": [
     {
       "pokemonId": 249,
@@ -225,6 +225,42 @@
       "language": "es",
       "source": "https://api.tcgdex.net/v2/es/cards/swsh12-175",
       "reason": "Full-color artwork with natural Pokémon colors and a clearer silhouette, replacing a rainbow VMAX."
+    },
+    {
+      "pokemonId": 55,
+      "name": "Golduck",
+      "previousCard": "xy9-18",
+      "card": "sv03.5-055",
+      "language": "es",
+      "source": "https://api.tcgdex.net/v2/es/cards/sv03.5-055",
+      "reason": "Natural Pokémon colors and a clearly visible body, replacing metallic TURBO/BREAK artwork. Non-shiny printing."
+    },
+    {
+      "pokemonId": 105,
+      "name": "Marowak",
+      "previousCard": "xy8-79",
+      "card": "A1-264",
+      "language": "es",
+      "source": "https://api.tcgdex.net/v2/es/cards/A1-264",
+      "reason": "Natural Pokémon colors and a clearly visible body, replacing metallic TURBO/BREAK artwork. Non-shiny printing."
+    },
+    {
+      "pokemonId": 139,
+      "name": "Omastar",
+      "previousCard": "xy10-19",
+      "card": "swsh12-174",
+      "language": "es",
+      "source": "https://api.tcgdex.net/v2/es/cards/swsh12-174",
+      "reason": "Natural Pokémon colors and a clearly visible body, replacing metallic TURBO/BREAK artwork. Non-shiny printing."
+    },
+    {
+      "pokemonId": 715,
+      "name": "Noivern",
+      "previousCard": "xy8-113",
+      "card": "swsh7-195",
+      "language": "es",
+      "source": "https://api.tcgdex.net/v2/es/cards/swsh7-195",
+      "reason": "Natural Pokémon colors and a clearly visible body, replacing metallic TURBO/BREAK artwork. Non-shiny printing."
     }
   ]
 }
