@@ -40,7 +40,7 @@ function setScene(p){
 }
 function signalDecision(value){
  const glow=$('#decision-glow'),stage=$('#stage').getBoundingClientRect(),collection=$('#open').getBoundingClientRect();
- const x=stage.left+stage.width*(value==='yes'?.72:.28),y=stage.top+stage.height*.53;
+ const x=stage.left+stage.width*.5,y=stage.top+stage.height*.53;
  glow.style.setProperty('--origin-x',x+'px');glow.style.setProperty('--origin-y',y+'px');
  glow.style.setProperty('--travel-x',(collection.left+collection.width/2-x)+'px');glow.style.setProperty('--travel-y',(collection.top+collection.height/2-y)+'px');
  clearTimeout(pulseTimer);glow.classList.remove('confirm-yes','confirm-no');void glow.offsetWidth;glow.classList.add(value==='yes'?'confirm-yes':'confirm-no');pulseTimer=setTimeout(()=>glow.classList.remove('confirm-yes','confirm-no'),800)
@@ -65,7 +65,7 @@ function makeCard(p,under=false){
  c.onpointermove=e=>{if(!start)return;const now=performance.now();vx=(e.clientX-lastX)/Math.max(1,now-lastTime);lastX=e.clientX;lastTime=lastMove=now;dx=e.clientX-start.x;dy=e.clientY-start.y;const {px,py}=light(e.clientX,e.clientY);const threshold=Math.min(78,c.clientWidth*.21),strength=Math.min(Math.abs(dx)/threshold,1),direction=dx>0?1:-1;
  move({x:dx,y:dy*.18-Math.min(Math.abs(dx)*.035,5),r:dx/26,rx:(50-py)*.055,ry:(px-50)*.065,s:1.012});
  const newArmed=Math.abs(dx)>=threshold?direction:Math.abs(dx)<threshold*.72?0:armed;if(newArmed&&newArmed!==armed)tactile('edge');armed=newArmed;
- stamp.classList.toggle('love',dx>0);stamp.classList.toggle('armed',armed!==0);stamp.style.color=dx>0?'#a52e5a':'#2e647c';stamp.style.left=dx>0?'auto':'18px';stamp.style.right=dx>0?'18px':'auto';stamp.style.opacity=Math.abs(dx)<8?0:Math.min(1,(Math.abs(dx)-8)/(threshold*.45));stamp.style.transform=`scale(${.82+strength*.18}) rotate(${direction*-7}deg)`;
+ stamp.classList.toggle('love',dx>0);stamp.classList.toggle('armed',armed!==0);stamp.style.color=dx>0?'#a52e5a':'#2e647c';stamp.style.opacity=Math.abs(dx)<8?0:Math.min(1,(Math.abs(dx)-8)/(threshold*.45));stamp.style.transform=`scale(${.82+strength*.18}) rotate(${direction*-7}deg)`;
  $('#yes').classList.toggle('ready',armed===1);$('#no').classList.toggle('ready',armed===-1);document.documentElement.style.setProperty('--yes-intent',String(dx>0?strength*.8:0));document.documentElement.style.setProperty('--no-intent',String(dx<0?strength*.75:0));c.style.setProperty('--love',String(dx>0?strength:0));c.style.setProperty('--pass',String(dx<0?strength:0));
  const u=undercard();if(u&&!reducedMotion.matches){u.style.transform=`translateY(${4*(1-strength)}px) scale(${.98+strength*.02})`;u.style.filter='none'}
  };
@@ -81,7 +81,7 @@ function render(){clearFeedback();const queue=pending(),p=queue[0],n=Object.keys
 function vote(value,momentum={}){
  if(busy||!current())return;busy=true;clearFeedback();const p=current(),c=$('.card:not(.under):not(.exiting)');tactile(value==='yes'?'like':'choose');sound(value==='yes'?'like':'choose');
  state.history.push({id:p.id,previous:state.votes[p.id]||null});state.votes[p.id]={value,card:p.card,time:Date.now()};save();
- if(c){const badge=c.querySelector('.stamp');if(badge){badge.classList.toggle('love',value==='yes');badge.classList.add('armed');badge.style.color=value==='yes'?'#a52e5a':'#2e647c';badge.style.opacity='1';badge.style.transform='scale(1)';badge.style.left=value==='yes'?'auto':'18px';badge.style.right=value==='yes'?'18px':'auto'}c.style.setProperty(value==='yes'?'--love':'--pass','1');c.stopMotion?.();c.classList.add('exiting');c.classList.remove('lifted','dealt','returned','active');c.setAttribute('aria-hidden','true');c.style.pointerEvents='none'}
+ if(c){const badge=c.querySelector('.stamp');if(badge){badge.classList.toggle('love',value==='yes');badge.classList.add('armed');badge.style.color=value==='yes'?'#a52e5a':'#2e647c';badge.style.opacity='1';badge.style.transform='scale(1)';}c.style.setProperty(value==='yes'?'--love':'--pass','1');c.stopMotion?.();c.classList.add('exiting');c.classList.remove('lifted','dealt','returned','active');c.setAttribute('aria-hidden','true');c.style.pointerEvents='none'}
  render();const next=$('.card:not(.under):not(.exiting)');if(next)next.classList.add('dealt');signalDecision(value);
  if(c){void c.offsetWidth;const duration=reducedMotion.matches?0:Math.max(145,205-Math.abs(momentum.vx||0)*25);c.style.transition=`transform ${duration}ms cubic-bezier(.22,.55,.45,1),opacity ${duration}ms ease`;c.style.transform=`translate3d(${value==='yes'?innerWidth+100:-innerWidth-100}px,${Math.max(-80,Math.min(80,(momentum.dy||0)*.4))-20}px,0) rotate(${value==='yes'?22:-22}deg) scale(1.015)`;c.style.opacity=0;setTimeout(()=>c.remove(),duration+20)}
  if(value==='yes'){const button=$('#open');button.classList.remove('bump');void button.offsetWidth;button.classList.add('bump')}
