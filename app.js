@@ -56,10 +56,26 @@ function tactile(kind='choose'){
 }
 function sound(kind='choose'){
  if(!feel.sound||reducedMotion.matches)return;
- try{if(!audio){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;audio=new AC()}if(audio.state==='suspended')audio.resume();
- const t=audio.currentTime,duration=kind==='lift'?.032:.048,buffer=audio.createBuffer(1,Math.ceil(audio.sampleRate*duration),audio.sampleRate),out=buffer.getChannelData(0);
- for(let i=0;i<out.length;i++)out[i]=(Math.random()*2-1)*Math.pow(1-i/out.length,2);
- const src=audio.createBufferSource(),filter=audio.createBiquadFilter(),gain=audio.createGain();src.buffer=buffer;filter.type='bandpass';filter.frequency.value=kind==='like'?2600:kind==='lift'?1400:1900;filter.Q.value=.65;gain.gain.value=kind==='lift'?.022:.045;src.connect(filter).connect(gain).connect(audio.destination);src.start(t);src.onended=()=>{src.disconnect();filter.disconnect();gain.disconnect()};
+ try{
+  if(!audio){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;audio=new AC()}
+  if(audio.state==='suspended')audio.resume();
+  const t=audio.currentTime;
+  const tone=(freq,when,dur,level,wave='sine')=>{
+   const osc=audio.createOscillator(),gain=audio.createGain(),filter=audio.createBiquadFilter();
+   osc.type=wave;osc.frequency.setValueAtTime(freq,when);
+   filter.type='lowpass';filter.frequency.setValueAtTime(4200,when);
+   gain.gain.setValueAtTime(.0001,when);gain.gain.exponentialRampToValueAtTime(level,when+.008);
+   gain.gain.exponentialRampToValueAtTime(.0001,when+dur);
+   osc.connect(filter).connect(gain).connect(audio.destination);osc.start(when);osc.stop(when+dur+.01);
+   osc.onended=()=>{osc.disconnect();filter.disconnect();gain.disconnect()};
+  };
+  if(kind==='like'){
+   tone(880,t,.105,.045,'sine');tone(1320,t+.045,.14,.035,'triangle');tone(1760,t+.095,.12,.018,'sine');
+  }else if(kind==='lift'){
+   tone(540,t,.035,.012,'sine');
+  }else{
+   tone(415,t,.095,.032,'triangle');tone(310,t+.035,.11,.018,'sine');
+  }
  }catch{}
 }
 $('#sound-setting').checked=feel.sound;$('#touch-setting').checked=feel.touch;
