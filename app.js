@@ -38,9 +38,9 @@ window.addEventListener('online',()=>{if(cloudReady)sync();else restore()});docu
 const popular=[658,448,778,6,197,700,445,384,282,94,133,25,151,143,38,196,149,249,248,257,722,330,359,405,447,763,471,470,134,135,136,3,9,39,35,175,131,181,393,653,16,54,27,37,58,77,79,83,92,96,104,113,123,129,132,147,150,155,158,172,183,194,195,200,215,216,228,230,243,244,245,251,252,255,258,280,302,303,304,333,334,349,350,355,359,363,380,381,385,387,390,403,425,427,443,447,468,475,479,487,491,492,495,498,501,570,571,572,573,607,609,610,612,635,650,653,656,674,677,704,705,706,710,714,715,719,725,728,744,745,753,754,759,761,764,771,774,777,789,791,792,800,807,810,813,816,831,835,848,849,854,855,856,858,868,869,872,873,885,887,888,889,906,909,912,921,924,925,926,927,928,935,936,937,938,939,950,951,952,957,958,959,963,964,970,971,972,974,975,978,979,980,981,982,983,1000,1007,1008,1017,1024,1025];
 const fallback=p=>'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'+p.id+'.png';
 function img(p,exact=false){
- const im=document.createElement('img'),material=p.surface?.effect==='asset-foil';im.materialSource=!!(exact&&material&&!p.fallbackImage);im.src=(material?p.fallbackImage||p.image:p.image)||fallback(p);im.alt=p.name;im.draggable=false;let usedFallback=material&&!!p.fallbackImage;
+ const im=document.createElement('img'),material=p.surface?.effect==='asset-foil',cached=exact&&material?window.PokeAssets?.peekFront(p):null;im.materialSource=!!cached||!!(exact&&material&&!p.fallbackImage);im.src=cached||(material?p.fallbackImage||p.image:p.image)||fallback(p);im.alt=p.name;im.draggable=false;let usedFallback=material&&!!p.fallbackImage&&!cached;
  im.onerror=()=>{im.materialSource=false;im.parentElement?.classList.add('art-fallback');if(!usedFallback&&p.fallbackImage){usedFallback=true;im.src=p.fallbackImage}else if(im.src!==fallback(p)){im.src=fallback(p);im.parentElement?.classList.add('official')}else{im.onerror=null;im.alt=p.name+' · imagen no disponible'}};
- if(exact&&material&&p.fallbackImage){const front=new Image();front.decoding='async';front.onload=()=>{if(im.isConnected){im.parentElement?.classList.remove('art-fallback','official');im.materialSource=true;im.src=p.image}};front.src=p.image}
+ if(exact&&material&&p.fallbackImage&&!cached){const source=window.PokeAssets?window.PokeAssets.front(p):Promise.resolve(p.image);source.then(url=>{if(!im.isConnected)return;const front=new Image();front.decoding='async';front.onload=()=>{if(im.isConnected){im.parentElement?.classList.remove('art-fallback','official');im.materialSource=true;im.src=url}};front.src=url}).catch(()=>{})}
  return im
 }
 function pending(){return order.filter(p=>!state.votes[p.id])}function current(){return pending()[0]}
@@ -114,8 +114,8 @@ function makeCard(p,under=false){
 function render(){clearFeedback();const queue=pending(),p=queue[0],n=Object.keys(state.votes).length,likes=Object.values(state.votes).filter(v=>v.value==='yes').length;$('#likes').textContent='♡ '+likes;$('#open').setAttribute('aria-label','Mi colección, '+likes+' Pokémon');$('#count').textContent=n+' de '+catalog.length;$('#progress').style.width=(n/catalog.length*100)+'%';$('#undo').disabled=!state.history.length;
  const stage=$('#stage'),flights=[...stage.querySelectorAll('.exiting')].slice(-2);for(const c of stage.querySelectorAll('.card:not(.exiting)'))c.stopMotion?.();stage.replaceChildren(...flights);$('#yes').disabled=$('#no').disabled=!p;$('#name').textContent=p?p.name:'Tu colección está completa ♡';$('#art').textContent='';$('#dex').textContent='';
  if(!p){const b=document.createElement('button');b.className='pill';b.textContent='Ver mi colección';b.onclick=()=>$('#open').click();stage.append(b);return}
- setScene(p);
- if(queue[1])stage.append(makeCard(queue[1],true));stage.append(makeCard(p));fitCard();for(const next of queue.slice(1,7)){const i=new Image();i.src=next.fallbackImage||next.image||fallback(next)}
+ setScene(p);window.PokeMaterial?.prepare(queue.slice(0,4));
+ if(queue[1])stage.append(makeCard(queue[1],true));stage.append(makeCard(p));fitCard();for(const next of queue.slice(1,4)){if(next.surface?.effect==='asset-foil')continue;const i=new Image();i.src=next.image||fallback(next)}
 }
 function vote(value,momentum={}){
  if(busy||!current())return;busy=true;clearFeedback();const c=$('.card:not(.under):not(.exiting)'),p=c?.pokemon||current();tactile(value==='yes'?'like':'choose');sound(value==='yes'?'like':'choose');

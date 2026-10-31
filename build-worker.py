@@ -1,8 +1,9 @@
 import json
 from pathlib import Path
 p=Path(__file__).parent
-prefix='const HTML='+json.dumps((p/'page.html').read_text())+';\nconst JS='+json.dumps((p/'app.js').read_text())+';\nconst HOLO='+json.dumps((p/'holo.js').read_text())+';\nconst MATERIAL_JS='+json.dumps((p/'material-renderer.js').read_text())+';\nconst MATERIALS='+(p/'materials.json').read_text()+';\nconst CATALOG='+ (p/'catalog.json').read_text()+';\n'
+prefix='const HTML='+json.dumps((p/'page.html').read_text())+';\nconst JS='+json.dumps((p/'app.js').read_text())+';\nconst HOLO='+json.dumps((p/'holo.js').read_text())+';\nconst ASSET_JS='+json.dumps((p/'material-assets.js').read_text())+';\nconst MATERIAL_JS='+json.dumps((p/'material-renderer.js').read_text())+';\nconst MATERIALS='+(p/'materials.json').read_text()+';\nconst CATALOG='+ (p/'catalog.json').read_text()+';\n'
 worker=r'''
+const materialInflight=new Map();
 const response=(body,status=200,extra={})=>new Response(body,{status,headers:{'Content-Type':'application/json','Cache-Control':'no-store',...extra}});
 export default {async fetch(request,env,ctx){
 const u=new URL(request.url);
@@ -27,19 +28,29 @@ if(request.method!=='GET'&&request.method!=='HEAD')return response('{}',405);
 if(MATERIALS[u.pathname]){
  const source=MATERIALS[u.pathname],key='material-cache'+u.pathname;
  const headers={'Content-Type':source.contentType,'Cache-Control':'public,max-age=31536000,immutable','X-Content-Type-Options':'nosniff'};
+ const cache=typeof caches!=='undefined'?caches.default:null,cacheRequest=new Request(u.origin+u.pathname);
+ const defer=p=>{if(ctx?.waitUntil)ctx.waitUntil(p.catch(()=>{}));else p.catch(()=>{})};
  try{
-  if(env.BUCKET){const cached=await env.BUCKET.get(key);if(cached)return new Response(request.method==='HEAD'?null:cached.body,{headers:{...headers,...(cached.httpEtag?{'ETag':cached.httpEtag}:{})}})}
-  const upstream=await fetch(source.url,{headers:{'User-Agent':'Pokeamor/1.0 (+https://pokeamor-cartas.h4lconn.chatgpt.site)','Accept':'image/png'},signal:AbortSignal.timeout(20000)});
-  if(!upstream.ok||Number(upstream.headers.get('Content-Length')||0)>8388608)return response('{"error":"material_unavailable"}',502);
-  const bytes=await upstream.arrayBuffer(),signature=new Uint8Array(bytes,0,Math.min(8,bytes.byteLength));
-  if(bytes.byteLength<24||bytes.byteLength>8388608||signature.join(',')!=='137,80,78,71,13,10,26,10')return response('{"error":"invalid_material"}',502);
-  if(env.BUCKET){const put=env.BUCKET.put(key,bytes,{httpMetadata:{contentType:source.contentType}}).catch(()=>{});if(ctx?.waitUntil)ctx.waitUntil(put);else await put}
-  return new Response(request.method==='HEAD'?null:bytes,{headers});
+  if(cache){const hit=await cache.match(cacheRequest);if(hit){const result=new Response(request.method==='HEAD'?null:hit.body,hit);result.headers.set('X-Material-Cache','edge');return result}}
+  let pending=materialInflight.get(key);
+  if(!pending){pending=(async()=>{
+   if(env.BUCKET){const cached=await env.BUCKET.get(key);if(cached)return {bytes:await cached.arrayBuffer(),headers:{...headers,'X-Material-Cache':'r2',...(cached.httpEtag?{'ETag':cached.httpEtag}:{})}}}
+   const upstream=await fetch(source.url,{headers:{'User-Agent':'Pokeamor/1.0 (+https://pokeamor-cartas.h4lconn.chatgpt.site)','Accept':'image/png'},signal:AbortSignal.timeout(12000)});
+   if(!upstream.ok||Number(upstream.headers.get('Content-Length')||0)>8388608)return {error:'material_unavailable'};
+   const bytes=await upstream.arrayBuffer(),signature=new Uint8Array(bytes,0,Math.min(8,bytes.byteLength));
+   if(bytes.byteLength<24||bytes.byteLength>8388608||signature.join(',')!=='137,80,78,71,13,10,26,10')return {error:'invalid_material'};
+   if(env.BUCKET){const put=env.BUCKET.put(key,bytes,{httpMetadata:{contentType:source.contentType}}).catch(()=>{});if(ctx?.waitUntil)ctx.waitUntil(put);else await put}
+   return {bytes,headers:{...headers,'X-Material-Cache':'origin'}};
+  })();materialInflight.set(key,pending);if(ctx?.waitUntil)ctx.waitUntil(pending.catch(()=>{}));pending.finally(()=>{if(materialInflight.get(key)===pending)materialInflight.delete(key)}).catch(()=>{})}
+  const loaded=await pending;if(loaded.error)return response(JSON.stringify({error:loaded.error}),502);
+  const result=new Response(loaded.bytes,{headers:loaded.headers});if(cache)defer(cache.put(cacheRequest,result.clone()));
+  return request.method==='HEAD'?new Response(null,{status:result.status,headers:result.headers}):result;
  }catch{return response('{"error":"material_unavailable"}',502)}
 }
 
 const headers={'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'};
 if(u.pathname==='/catalog.json')return new Response(JSON.stringify(CATALOG),{headers:{...headers,'Content-Type':'application/json','Cache-Control':'no-cache'}});
+if(u.pathname==='/material-assets.js')return new Response(ASSET_JS,{headers:{...headers,'Content-Type':'text/javascript','Cache-Control':'no-cache'}});
 if(u.pathname==='/material-renderer.js')return new Response(MATERIAL_JS,{headers:{...headers,'Content-Type':'text/javascript','Cache-Control':'no-cache'}});
 if(u.pathname==='/holo.js')return new Response(HOLO,{headers:{...headers,'Content-Type':'text/javascript','Cache-Control':'no-cache'}});
 if(u.pathname==='/app.js')return new Response(JS,{headers:{...headers,'Content-Type':'text/javascript','Cache-Control':'no-cache'}});
