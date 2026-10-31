@@ -87,7 +87,7 @@ $('#touch-setting').onchange=e=>{feel.touch=e.target.checked;localStorage.setIte
 let ambientSide=0,lastPalette='',pulseTimer;
 function setScene(p){
  const palette=p.palette||{h:210,s:20,v:40},h=palette.h,comp=(h+180)%360,triad=(h+120)%360;
- const key=[h,palette.s,palette.v].join(':');if(key===lastPalette)return;lastPalette=key;
+ document.documentElement.style.setProperty('--journey-hue',String(h));const key=[h,palette.s,palette.v].join(':');if(key===lastPalette)return;lastPalette=key;
  document.documentElement.style.setProperty('--card-paper',`hsl(${h} 35% 95%)`);
  const saturation=Math.max(28,Math.min(52,palette.s*.65)),a=$('#ambient-a'),b=$('#ambient-b'),next=ambientSide? a:b,old=ambientSide?b:a;ambientSide=1-ambientSide;
  next.style.background=`radial-gradient(ellipse at 50% 40%,hsl(${h} ${saturation}% 84% / .5),transparent 72%),radial-gradient(ellipse at 100% 90%,hsl(${triad} 48% 89% / .4),transparent 65%),linear-gradient(150deg,hsl(${comp} 42% 97%),hsl(${h} 45% 94%))`;
