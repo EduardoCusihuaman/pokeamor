@@ -44,6 +44,7 @@ function img(p,exact=false){
  return im
 }
 function pending(){return adaptiveQueue()}function current(){return pending()[0]}
+const roundCounter=$('#round-progress');if(roundCounter&&$('#open')&&!roundCounter.closest('#app>header'))$('#app>header').insertBefore(roundCounter,$('#open'));
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
 let frame=0,audio=null,lastTactile=0;
 const feel={sound:localStorage.getItem('pokeamor-sound')==='true',touch:localStorage.getItem('pokeamor-touch')!=='false'};
