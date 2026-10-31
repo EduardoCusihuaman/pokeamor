@@ -188,3 +188,7 @@ $('#collection-settings').onclick=()=>showCollectionTab(false);
 $('#card-detail').oncancel=e=>{e.preventDefault();closeDetail()};
 
 function addViewerNeighbors(p){const i=collectionCards.findIndex(c=>c.id===p.id);for(const [offset,side] of [[-1,'left'],[1,'right']]){const neighbor=collectionCards[i+offset];if(!neighbor)continue;const button=document.createElement('button');button.className='viewer-neighbor '+side;button.setAttribute('aria-label',(offset<0?'Carta anterior: ':'Carta siguiente: ')+neighbor.name);button.append(img(neighbor));button.onpointerdown=e=>e.stopPropagation();button.onpointerup=e=>e.stopPropagation();button.onclick=e=>{e.stopPropagation();browseDetail(offset)};$('#detail-art').append(button)}}
+
+function setAlbumDensity(detail){const sheet=$('#sheet'),groups=[...document.querySelectorAll('#round-memories .batch-group')],anchor=groups.find(el=>el.getBoundingClientRect().bottom>120),before=anchor?.getBoundingClientRect().top;sheet.classList.toggle('album-detail',detail);$('#album-overview').setAttribute('aria-pressed',String(!detail));$('#album-detail').setAttribute('aria-pressed',String(detail));if(anchor)sheet.scrollTop+=anchor.getBoundingClientRect().top-before;try{localStorage.setItem('pokeamor-album-detail',String(detail))}catch{}}
+$('#album-overview').onclick=()=>setAlbumDensity(false);$('#album-detail').onclick=()=>setAlbumDensity(true);
+try{if(localStorage.getItem('pokeamor-album-detail')==='true')setAlbumDensity(true)}catch{}
