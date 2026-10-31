@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 p=Path(__file__).parent
-prefix='const HTML='+json.dumps((p/'page.html').read_text())+';\nconst JS='+json.dumps((p/'app.js').read_text())+';\nconst CATALOG='+ (p/'catalog.json').read_text()+';\n'
+prefix='const HTML='+json.dumps((p/'page.html').read_text())+';\nconst JS='+json.dumps((p/'app.js').read_text())+';\nconst HOLO='+json.dumps((p/'holo.js').read_text())+';\nconst CATALOG='+ (p/'catalog.json').read_text()+';\n'
 worker=r'''
 const response=(body,status=200,extra={})=>new Response(body,{status,headers:{'Content-Type':'application/json','Cache-Control':'no-store',...extra}});
 export default {async fetch(request,env){
@@ -26,6 +26,7 @@ const obj=await env.BUCKET.put(key,body,{onlyIf:request.headers,httpMetadata:{co
 if(request.method!=='GET'&&request.method!=='HEAD')return response('{}',405);
 const headers={'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'};
 if(u.pathname==='/catalog.json')return new Response(JSON.stringify(CATALOG),{headers:{...headers,'Content-Type':'application/json','Cache-Control':'no-cache'}});
+if(u.pathname==='/holo.js')return new Response(HOLO,{headers:{...headers,'Content-Type':'text/javascript','Cache-Control':'no-cache'}});
 if(u.pathname==='/app.js')return new Response(JS,{headers:{...headers,'Content-Type':'text/javascript','Cache-Control':'no-cache'}});
 if(u.pathname!=='/')return new Response('Not found',{status:404});
 return new Response(HTML,{headers:{...headers,'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-cache'}})
