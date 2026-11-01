@@ -160,7 +160,7 @@ $('#yes').onclick=()=>vote('yes');$('#no').onclick=()=>vote('no');$('#undo').onc
  if(h.encounterKey){delete state.encounters[h.encounterKey];activeEncounter=null}else if(h.previous)state.votes[h.id]=h.previous;else delete state.votes[h.id];if(!h.encounterKey){adaptiveIds=[h.id,...adaptiveIds.filter(id=>id!==h.id)]}adaptiveBlock='';tactile('choose');save();render();
  const restored=$('.card:not(.under):not(.exiting)');if(restored?.pokemon?.id===h.id){restored.style.setProperty('--return-x',((direction==='yes'?1:-1)*Math.min(innerWidth+40,560))+'px');restored.style.setProperty('--return-r',(direction==='yes'?'14':'-14')+'deg');restored.classList.add('returned')}
 };document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT'||$('.sheet.open')||document.querySelector('dialog[open]'))return;if(e.key==='ArrowRight')vote('yes');if(e.key==='ArrowLeft')vote('no')});
-function score(p){return state.ratings[p.id]?.score||1000}
+function score(p){return window.PokePreference?1000+174*window.PokePreference.model(state).score(p.id):1000}
 let visibleCards=40,detailPokemon=null,detailChange=null,collectionCards=[];
 function detailLabel(){if(!detailPokemon)return;const liked=state.votes[detailPokemon.id]?.value==='yes',button=$('#detail-choice');button.setAttribute('aria-label',liked?'Quitar de favoritos':'Agregar a favoritos');button.setAttribute('aria-pressed',String(liked));button.innerHTML='<svg viewBox="0 0 24 24" fill="'+(liked?'currentColor':'none')+'"><path d="M20.8 8.8c0 5.1-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.8a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z"/></svg>'}
 let viewerScrollTimer,viewerItems=[];
@@ -313,12 +313,7 @@ function startRefinement(manual=false){
  const likes=catalog.filter(p=>state.votes[p.id]?.value==='yes');
  if(likes.length<2){if(manual)toast('Elegí al menos dos favoritos.');return false}
  const log=state.comparisons||[];
- const recent=new Set(log.slice(-4).flatMap(e=>e.ids));
- const candidates=[...likes].sort((a,b)=>Number(recent.has(a.id))-Number(recent.has(b.id))||((state.ratings[a.id]?.played||0)-Math.max(0,score(a)-1000)/80)-((state.ratings[b.id]?.played||0)-Math.max(0,score(b)-1000)/80));
- const a=candidates[0];
- const previous=new Set(log.slice(-6).map(e=>[...e.ids].sort((x,y)=>x-y).join(':')));
- const others=likes.filter(p=>p.id!==a.id).sort((x,y)=>Number(previous.has([a.id,x.id].sort((a,b)=>a-b).join(':')))-Number(previous.has([a.id,y.id].sort((a,b)=>a-b).join(':')))||Math.abs(score(x)-score(a))-Math.abs(score(y)-score(a)));
- const b=others[0];
+ const selected=window.PokePreference.pair(catalog,state);if(!selected)return false;const [a,b]=selected;
  // Automatic events never interrupt to download an image.
  if(!manual&&![a,b].every(p=>{const im=warmArt.get(p.surface?.assets?.front||p.image||fallback(p));return im?.complete&&im.naturalWidth>0})){for(const p of [a,b]){warmArtwork(p);const im=warmArt.get(p.surface?.assets?.front||p.image||fallback(p));im?.addEventListener('load',scheduleEvents,{once:true})}return false}
  const prepared=Math.random()<.5?[a,b]:[b,a];if(!manual){queuedPair=prepared;return true}queuedPair=null;inlinePair=prepared;
