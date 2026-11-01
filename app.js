@@ -11,6 +11,7 @@ function trackChanges(){for(const [field,observed,times] of [['votes',observedVo
 function save(change){scheduleEngine();if(change?.votes){for(const id of change.votes){state.voteTimes[id]=Math.max(Date.now(),(state.voteTimes[id]||0)+1);if(state.votes[id])observedVotes[id]=clone(state.votes[id]);else delete observedVotes[id]}}else trackChanges();state.revision++;dirty=true;if(persist())$('#save').textContent='Guardando…';else toast('Exportá tu colección para conservarla.');clearTimeout(syncTimer);syncTimer=setTimeout(sync,700)}
 function refreshAfterMerge(){clearTimeout(refreshTimer);if($('.card.active')){refreshTimer=setTimeout(refreshAfterMerge,150);return}render();if($('#sheet').classList.contains('open'))collection()}
 function mergeRemote(remote){
+ if(state.resetAt&&(state.resetAt>(remote.resetAt||0))){dirty=true;return}
  const votes={},voteTimes={},ratings={},ratingTimes={},local=state;
  for(const id of new Set([...Object.keys(local.votes),...Object.keys(remote.votes||{}),...Object.keys(local.voteTimes),...Object.keys(remote.voteTimes||{})])){
   const lt=local.voteTimes[id]||local.votes[id]?.time||0,rt=remote.voteTimes?.[id]||remote.votes?.[id]?.time||0;
@@ -237,7 +238,17 @@ const originalTab=showCollectionTab;showCollectionTab=function(rounds){originalT
 $('#album-settings').onclick=()=>{const rounds=!$('#sheet').classList.contains('rounds-mode');showCollectionTab(rounds);$('#album-heading').textContent=rounds?'Tu colección':'Ajustes y respaldo';$('#album-settings').setAttribute('aria-label',rounds?'Ajustes y respaldo':'Volver a tus tandas');if(rounds)window.PokeJourney?.compose()};
 
 let deleteStage=0,deleteTimer;
-$('#delete-all').onclick=()=>{const b=$('#delete-all');if(deleteStage===0){deleteStage=1;b.innerHTML='¿Borrar todos los Pokémon? <span>Cancelar</span>';b.setAttribute('aria-label','Confirmar borrado de toda la colección');deleteTimer=setTimeout(()=>{deleteStage=0;b.innerHTML='Borrar toda la colección <span>⌫'},4500);return}if(deleteStage===1){deleteStage=2;b.innerHTML='Tocá otra vez para borrar <span>Cancelar</span>';clearTimeout(deleteTimer);deleteTimer=setTimeout(()=>{deleteStage=0;b.innerHTML='Borrar toda la colección <span>⌫'},3000);return}if(deleteStage===2){clearTimeout(deleteTimer);localStorage.removeItem(key);location.reload()}};
+async function resetCollection(){
+ clearTimeout(deleteTimer);clearTimeout(syncTimer);clearTimeout(diskTimer);syncing=false;
+ const revision=(state.revision||0)+1;
+ state={votes:{},ratings:{},duels:0,history:[],comparisons:[],comparisonDeleted:{},encounters:{},voteTimes:{},ratingTimes:{},refinementSchedule:null,revision,resetAt:Date.now()};
+ observedVotes={};observedRatings={};dirty=true;etag=null;
+ localStorage.removeItem(key);localStorage.removeItem(key+'-pending');localStorage.removeItem(key+'-journey');localStorage.removeItem(key+'-alternates');
+ try{profileDB?.transaction('profiles','readwrite').objectStore('profiles').delete(key)}catch{}
+ if(cloudReady)await sync();
+ $('#sheet').classList.remove('open');showCollectionTab(true);deleteStage=0;const b=$('#delete-all');b.innerHTML='Borrar toda la colección <span>⌫';b.setAttribute('aria-label','Borrar toda la colección');render();toast('Colección borrada');
+}
+$('#delete-all').onclick=()=>{const b=$('#delete-all');if(deleteStage===0){deleteStage=1;b.innerHTML='¿Borrar todos los Pokémon? <span>Cancelar</span>';b.setAttribute('aria-label','Confirmar borrado de toda la colección');deleteTimer=setTimeout(()=>{deleteStage=0;b.innerHTML='Borrar toda la colección <span>⌫'},4500);return}if(deleteStage===1){deleteStage=2;b.innerHTML='Tocá otra vez para borrar <span>Cancelar</span>';clearTimeout(deleteTimer);deleteTimer=setTimeout(()=>{deleteStage=0;b.innerHTML='Borrar toda la colección <span>⌫'},3000);return}resetCollection()};
 
 // Small local content model. Community votes are a prior, not personal affinity.
 let adaptiveIds=[],adaptiveBlock='',activeEncounter=null,alternateBusy=false;
