@@ -140,7 +140,8 @@ const warmArt=new Map();
 function warmArtwork(p){const url=p.surface?.assets?.front||p.image||fallback(p);if(warmArt.has(url))return;const art=img(p,true);warmArt.set(url,art);art.addEventListener?.('load',()=>{if(typeof scheduleEvents==='function')scheduleEvents()},{once:true});art.decode?.().catch(()=>{});if(warmArt.size>24)warmArt.delete(warmArt.keys().next().value)}
 function render(){clearFeedback();const queue=pending(),p=queue[0],n=Object.keys(state.votes).length,likes=Object.values(state.votes).filter(v=>v.value==='yes').length;$('#likes').innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.1-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.8a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z"/></svg><span>'+likes+'</span>';$('#open').setAttribute('aria-label','Mi colección, '+likes+' Pokémon');$('#count').textContent=n+' de '+catalog.length;const seenCounter=$('#album-seen');if(seenCounter){seenCounter.textContent=n+'/'+catalog.length;seenCounter.setAttribute('aria-label',n+' de '+catalog.length+' Pokémon vistos')}$('#progress').style.width=(n/catalog.length*100)+'%';$('#undo').disabled=!state.history.length;
  window.PokeJourney?.update(catalog,state,key);const stage=$('#stage'),flights=[...stage.querySelectorAll('.exiting')].slice(-2);$('#yes').disabled=$('#no').disabled=!p;$('#name').textContent=p?p.name:'Tu colección está completa ♡';$('#art').textContent=p?.reencounter?'Otra mirada':'';$('#dex').textContent='';
- if(!p){for(const c of stage.querySelectorAll('.card'))c.stopMotion?.();stage.replaceChildren();const b=document.createElement('button');b.className='pill';b.textContent='Ver mi colección';b.onclick=()=>$('#open').click();stage.append(b);return}
+ updateCompletedNavigation();
+ if(!p){for(const c of stage.querySelectorAll('.card'))c.stopMotion?.();stage.replaceChildren();if(discoveryComplete()&&!inlinePair){$('#sheet').classList.add('open');showCollectionTab(true);window.PokeJourney?.compose()}return}
  setScene(p);window.PokeMaterial?.prepare(queue.slice(0,4));
  reconcileDeck(stage,queue,flights);fitCard();for(const next of queue.slice(1,4))warmArtwork(next)
 }
@@ -175,7 +176,7 @@ $('#detail-undo').onclick=()=>{const change=detailChange;if(!change)return;if(JS
 $('#options-close').onclick=()=>showCollectionTab(true);
 $('#team-open').onclick=()=>{$('#teamview').classList.add('open');window.PokeJourney?.compose()};$('#team-back').onclick=()=>$('#teamview').classList.remove('open');
 $('#memories-open').onclick=()=>{if($('#collection-options').open)$('#collection-options').close();$('#sheet').classList.add('open');showCollectionTab(true);window.PokeJourney?.compose()};$('#memories-back').onclick=()=>$('#memoriesview').classList.remove('open');
-$('#open').onclick=()=>{filter='yes';$('#sheet').classList.add('open');showCollectionTab(true);window.PokeJourney?.compose()};$('#close').onclick=()=>$('#sheet').classList.remove('open');$('#tabs').onclick=e=>{if(!e.target.dataset.filter)return;filter=e.target.dataset.filter;showCollectionTab(false);visibleCards=40;if($('#collection-options').open)$('#collection-options').close();$('#tabs').querySelectorAll('button').forEach(b=>b.classList.toggle('selected',b===e.target));collection()};
+$('#open').onclick=()=>{filter='yes';$('#sheet').classList.add('open');showCollectionTab(true);window.PokeJourney?.compose()};$('#close').onclick=()=>{if(discoveryComplete()){beginManualRefinement();return}$('#sheet').classList.remove('open')};$('#tabs').onclick=e=>{if(!e.target.dataset.filter)return;filter=e.target.dataset.filter;showCollectionTab(false);visibleCards=40;if($('#collection-options').open)$('#collection-options').close();$('#tabs').querySelectorAll('button').forEach(b=>b.classList.toggle('selected',b===e.target));collection()};
 function nextPair(){const likes=catalog.filter(p=>state.votes[p.id]?.value==='yes');if(likes.length<2){toast('Elegí al menos dos Pokémon que te gusten.');return false}const candidates=[...likes].sort((a,b)=>(state.ratings[a.id]?.played||0)-(state.ratings[b.id]?.played||0));let a=candidates[Math.floor(Math.random()*Math.min(4,candidates.length))];let others=likes.filter(p=>p.id!==a.id).sort((x,y)=>Math.abs(score(x)-score(a))-Math.abs(score(y)-score(a)));let b=others[Math.floor(Math.random()*Math.min(5,others.length))];if(likes.length>2&&[a.id,b.id].sort().join()===lastPair)b=others.find(p=>p.id!==b.id)||b;pair=[a,b];lastPair=pair.map(p=>p.id).sort().join();$('#pair').replaceChildren();pair.forEach((p,i)=>{const btn=document.createElement('button');btn.append(img(p));const n=document.createElement('p');n.textContent=p.name;btn.append(n);btn.onclick=()=>duel(i);$('#pair').append(btn)});$('#duelcount').textContent=state.duels+' duelos guardados · El orden se afina con cada elección.';return true}
 function duel(winner){const [a,b]=pair;const ra=score(a),rb=score(b),expected=1/(1+10**((rb-ra)/400)),actual=winner===2?.5:winner===0?1:0;for(const [p,s] of [[a,ra+28*(actual-expected)],[b,rb-28*(actual-expected)]])state.ratings[p.id]={score:s,played:(state.ratings[p.id]?.played||0)+1};state.duels++;save();nextPair()}
 $('#duel').onclick=()=>{if(nextPair())$('#duelsheet').classList.add('open')};$('#endduel').onclick=()=>{$('#duelsheet').classList.remove('open');collection();window.PokeJourney?.compose()};$('#both').onclick=()=>duel(2);$('#skip').onclick=nextPair;
@@ -429,3 +430,12 @@ function reconcileDeck(stage,queue,flights){
 }
 let alternateTimer;
 function scheduleAlternate(){if(alternateTimer)return;alternateTimer=setTimeout(()=>{alternateTimer=null;if(!busy&&!$('.card.active'))prepareAlternate()},450)}
+
+function discoveryComplete(){return catalog.length>0&&catalog.every(p=>!!state.votes[p.id])}
+function updateCompletedNavigation(){
+ const complete=discoveryComplete(),button=$('#close');
+ button.classList.toggle('refine-entry',complete);
+ button.innerHTML=complete?manualIcon:'←';
+ button.setAttribute('aria-label',complete?'Afinar mis favoritos':'Volver a las cartas');
+ button.disabled=complete&&catalog.filter(p=>state.votes[p.id]?.value==='yes').length<2;
+}
