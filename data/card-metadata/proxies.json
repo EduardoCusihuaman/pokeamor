@@ -5073,5 +5073,205 @@
     "name": "Durant",
     "set": "WHT",
     "number": "150"
+  },
+  "lc-54": {
+    "name": "Metapod",
+    "set": "LC",
+    "number": "54"
+  },
+  "lc-99": {
+    "name": "Weedle",
+    "set": "LC",
+    "number": "99"
+  },
+  "lc-50": {
+    "name": "Kakuna",
+    "set": "LC",
+    "number": "50"
+  },
+  "lc-89": {
+    "name": "Rattata",
+    "set": "LC",
+    "number": "89"
+  },
+  "gym1-7": {
+    "name": "Lt. Surge's Fearow",
+    "set": "GYM",
+    "number": "7"
+  },
+  "lc-82": {
+    "name": "Nidoran ♀",
+    "set": "LC",
+    "number": "82"
+  },
+  "lc-55": {
+    "name": "Nidorina",
+    "set": "LC",
+    "number": "55"
+  },
+  "lc-83": {
+    "name": "Nidoran ♂",
+    "set": "LC",
+    "number": "83"
+  },
+  "lc-56": {
+    "name": "Nidorino",
+    "set": "LC",
+    "number": "56"
+  },
+  "ecard3-68": {
+    "name": "Jigglypuff",
+    "set": "SK",
+    "number": "68"
+  },
+  "ecard2-97": {
+    "name": "Oddish",
+    "set": "AQ",
+    "number": "97"
+  },
+  "sm12-211": {
+    "name": "Vileplume GX",
+    "set": "CEC",
+    "number": "211"
+  },
+  "ecard3-112": {
+    "name": "Venonat",
+    "set": "SK",
+    "number": "112"
+  },
+  "sm10-193": {
+    "name": "Venomoth GX",
+    "set": "UNB",
+    "number": "193"
+  },
+  "lc-81": {
+    "name": "Mankey",
+    "set": "LC",
+    "number": "81"
+  },
+  "lc-59": {
+    "name": "Primeape",
+    "set": "LC",
+    "number": "59"
+  },
+  "ecard3-87": {
+    "name": "Poliwag",
+    "set": "SK",
+    "number": "87"
+  },
+  "lc-67": {
+    "name": "Abra",
+    "set": "LC",
+    "number": "67"
+  },
+  "lc-49": {
+    "name": "Kadabra",
+    "set": "LC",
+    "number": "49"
+  },
+  "lc-96": {
+    "name": "Tentacool",
+    "set": "LC",
+    "number": "96"
+  },
+  "ex9-107": {
+    "name": "Farfetch'd",
+    "set": "EM",
+    "number": "107"
+  },
+  "lc-71": {
+    "name": "Doduo",
+    "set": "LC",
+    "number": "71"
+  },
+  "lc-41": {
+    "name": "Dodrio",
+    "set": "LC",
+    "number": "41"
+  },
+  "lc-92": {
+    "name": "Seel",
+    "set": "LC",
+    "number": "92"
+  },
+  "ecard1-8": {
+    "name": "Cloyster",
+    "set": "EX",
+    "number": "8"
+  },
+  "ecard1-115": {
+    "name": "Krabby",
+    "set": "EX",
+    "number": "115"
+  },
+  "lc-97": {
+    "name": "Voltorb",
+    "set": "LC",
+    "number": "97"
+  },
+  "ex6-107": {
+    "name": "Electrode ex",
+    "set": "RG",
+    "number": "107"
+  },
+  "ex7-51": {
+    "name": "Cubone",
+    "set": "TRR",
+    "number": "51"
+  },
+  "lc-13": {
+    "name": "Hitmonlee",
+    "set": "LC",
+    "number": "13"
+  },
+  "ex7-98": {
+    "name": "Rocket's Hitmonchan ex",
+    "set": "TRR",
+    "number": "98"
+  },
+  "ecard2-59": {
+    "name": "Seaking",
+    "set": "AQ",
+    "number": "59"
+  },
+  "ecard3-104": {
+    "name": "Staryu",
+    "set": "SK",
+    "number": "104"
+  },
+  "ex7-102": {
+    "name": "Rocket's Scyther ex",
+    "set": "TRR",
+    "number": "102"
+  },
+  "ecard3-H21": {
+    "name": "Nidoqueen",
+    "set": "SK",
+    "number": "H21"
+  },
+  "swsh12.5gg-GG32": {
+    "name": "Paras",
+    "set": "CRZ",
+    "number": "GG32"
+  },
+  "swsh11tg-TG01": {
+    "name": "Parasect",
+    "set": "LOR",
+    "number": "TG01"
+  },
+  "ecard2-H26": {
+    "name": "Tentacruel",
+    "set": "AQ",
+    "number": "H26"
+  },
+  "ecard2-H12": {
+    "name": "Hypno",
+    "set": "AQ",
+    "number": "H12"
+  },
+  "swsh10tg-TG13": {
+    "name": "Starmie V",
+    "set": "ASR",
+    "number": "TG13"
   }
 }

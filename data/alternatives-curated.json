@@ -1,571 +1,577 @@
 {
   "schema": 1,
   "pokemon": {
-    "1": [
+    "11": [
       {
-        "printId": "me01-133",
-        "image": "https://assets.tcgdex.net/es/me/me01/133/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "mashu",
+        "printId": "lc-54",
+        "image": "https://assets.tcgdex.net/es/lc/lc/54/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
-        }
-      },
-      {
-        "printId": "sv03.5-166",
-        "image": "https://assets.tcgdex.net/es/sv/sv03.5/166/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Yoriyuki Ikegami",
-        "enabled": true,
-        "reviewStatus": "pending-user",
-        "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "2": [
+    "12": [
       {
-        "printId": "me01-134",
-        "image": "https://assets.tcgdex.net/es/me/me01/134/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "mashu",
+        "printId": "swsh3-177",
+        "image": "https://assets.tcgdex.net/es/swsh/swsh3/177/high.webp",
+        "rarity": "Arte completo",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "208": [
+    "13": [
       {
-        "printId": "me01-150",
-        "image": "https://assets.tcgdex.net/es/me/me01/150/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Tonji Matsuno",
+        "printId": "lc-99",
+        "image": "https://assets.tcgdex.net/es/lc/lc/99/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "52": [
+    "14": [
       {
-        "printId": "me02-106",
-        "image": "https://assets.tcgdex.net/es/me/me02/106/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Uninori",
+        "printId": "lc-50",
+        "image": "https://assets.tcgdex.net/es/lc/lc/50/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "54": [
+    "19": [
       {
-        "printId": "me02.5-226",
-        "image": "https://assets.tcgdex.net/es/me/me02.5/226/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "REND",
+        "printId": "lc-89",
+        "image": "https://assets.tcgdex.net/es/lc/lc/89/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "361": [
+    "22": [
       {
-        "printId": "me02.5-227",
-        "image": "https://assets.tcgdex.net/es/me/me02.5/227/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "June",
+        "printId": "gym1-7",
+        "image": "https://assets.tcgdex.net/es/gym/gym1/7/high.webp",
+        "rarity": "Holográfica",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "695": [
+    "29": [
       {
-        "printId": "me02.5-229",
-        "image": "https://assets.tcgdex.net/es/me/me02.5/229/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Takeshi Nakamura",
+        "printId": "lc-82",
+        "image": "https://assets.tcgdex.net/es/lc/lc/82/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "183": [
+    "30": [
       {
-        "printId": "me02.5-232",
-        "image": "https://assets.tcgdex.net/es/me/me02.5/232/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Rond",
+        "printId": "lc-55",
+        "image": "https://assets.tcgdex.net/es/lc/lc/55/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "476": [
+    "32": [
       {
-        "printId": "me03-096",
-        "image": "https://assets.tcgdex.net/es/me/me03/096/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Kinu Nishimura",
+        "printId": "lc-83",
+        "image": "https://assets.tcgdex.net/es/lc/lc/83/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "505": [
+    "33": [
       {
-        "printId": "me04-097",
-        "image": "https://assets.tcgdex.net/es/me/me04/097/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "MARINA Chikazawa",
+        "printId": "lc-56",
+        "image": "https://assets.tcgdex.net/es/lc/lc/56/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "936": [
+    "39": [
       {
-        "printId": "sv01-203",
-        "image": "https://assets.tcgdex.net/es/sv/sv01/203/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "nagimiso",
+        "printId": "ecard3-68",
+        "image": "https://assets.tcgdex.net/es/ecard/ecard3/68/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "551": [
+    "43": [
       {
-        "printId": "sv01-216",
-        "image": "https://assets.tcgdex.net/es/sv/sv01/216/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Nurikabe",
+        "printId": "ecard2-97",
+        "image": "https://assets.tcgdex.net/es/ecard/ecard2/97/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "875": [
+    "45": [
       {
-        "printId": "sv02-205",
-        "image": "https://assets.tcgdex.net/es/sv/sv02/205/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Nelnal",
+        "printId": "sm12-211",
+        "image": "https://assets.tcgdex.net/es/sm/sm12/211/high.webp",
+        "rarity": "Arte completo con Erika",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "575": [
+    "48": [
       {
-        "printId": "sv02-213",
-        "image": "https://assets.tcgdex.net/es/sv/sv02/213/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "SIE NANAHARA",
+        "printId": "ecard3-112",
+        "image": "https://assets.tcgdex.net/es/ecard/ecard3/112/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "925": [
+    "49": [
       {
-        "printId": "sv02-226",
-        "image": "https://assets.tcgdex.net/es/sv/sv02/226/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Mizue",
+        "printId": "sm10-193",
+        "image": "https://assets.tcgdex.net/es/sm/sm10/193/high.webp",
+        "rarity": "Arte completo",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "964": [
+    "56": [
       {
-        "printId": "sv03-200",
-        "image": "https://assets.tcgdex.net/es/sv/sv03/200/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Akira Komayama",
+        "printId": "lc-81",
+        "image": "https://assets.tcgdex.net/es/lc/lc/81/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "7": [
+    "57": [
       {
-        "printId": "sv03.5-170",
-        "image": "https://assets.tcgdex.net/es/sv/sv03.5/170/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Mitsuhiro Arita",
+        "printId": "lc-59",
+        "image": "https://assets.tcgdex.net/es/lc/lc/59/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "25": [
+    "60": [
       {
-        "printId": "sv03.5-173",
-        "image": "https://assets.tcgdex.net/es/sv/sv03.5/173/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Hiroyuki Yamamoto",
+        "printId": "ecard3-87",
+        "image": "https://assets.tcgdex.net/es/ecard/ecard3/87/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "558": [
+    "63": [
       {
-        "printId": "sv04-183",
-        "image": "https://assets.tcgdex.net/es/sv/sv04/183/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "OKUBO",
+        "printId": "lc-67",
+        "image": "https://assets.tcgdex.net/es/lc/lc/67/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
-        }
-      },
-      {
-        "printId": "sv10-186",
-        "image": "https://assets.tcgdex.net/es/sv/sv10/186/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Takumi Wada",
-        "enabled": true,
-        "reviewStatus": "pending-user",
-        "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "583": [
+    "64": [
       {
-        "printId": "sv04-190",
-        "image": "https://assets.tcgdex.net/es/sv/sv04/190/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Taiga Kayama",
+        "printId": "lc-49",
+        "image": "https://assets.tcgdex.net/es/lc/lc/49/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "522": [
+    "72": [
       {
-        "printId": "sv04-195",
-        "image": "https://assets.tcgdex.net/es/sv/sv04/195/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "matazo",
+        "printId": "lc-96",
+        "image": "https://assets.tcgdex.net/es/lc/lc/96/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "595": [
+    "83": [
       {
-        "printId": "sv04-196",
-        "image": "https://assets.tcgdex.net/es/sv/sv04/196/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Atsushi Furusawa",
+        "printId": "ex9-107",
+        "image": "https://assets.tcgdex.net/es/ex/ex9/107/high.webp",
+        "rarity": "Rara secreta",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
-        }
-      },
-      {
-        "printId": "sv07-150",
-        "image": "https://assets.tcgdex.net/es/sv/sv07/150/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "MARINA Chikazawa",
-        "enabled": true,
-        "reviewStatus": "pending-user",
-        "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "620": [
+    "84": [
       {
-        "printId": "sv04-200",
-        "image": "https://assets.tcgdex.net/es/sv/sv04/200/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Taira Akitsu",
+        "printId": "lc-71",
+        "image": "https://assets.tcgdex.net/es/lc/lc/71/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "1016": [
+    "85": [
       {
-        "printId": "sv06.5-073",
-        "image": "https://assets.tcgdex.net/es/sv/sv06.5/073/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "KEIICHIRO ITO",
+        "printId": "lc-41",
+        "image": "https://assets.tcgdex.net/es/lc/lc/41/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "1014": [
+    "86": [
       {
-        "printId": "sv06.5-074",
-        "image": "https://assets.tcgdex.net/es/sv/sv06.5/074/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "AKIRA EGAWA",
+        "printId": "lc-92",
+        "image": "https://assets.tcgdex.net/es/lc/lc/92/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "570": [
+    "91": [
       {
-        "printId": "sv06.5-075",
-        "image": "https://assets.tcgdex.net/es/sv/sv06.5/075/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "REND",
+        "printId": "ecard1-8",
+        "image": "https://assets.tcgdex.net/es/ecard/ecard1/8/high.webp",
+        "rarity": "Holográfica",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "611": [
+    "98": [
       {
-        "printId": "sv06.5-077",
-        "image": "https://assets.tcgdex.net/es/sv/sv06.5/077/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "MINAMINAMI Take",
+        "printId": "ecard1-115",
+        "image": "https://assets.tcgdex.net/es/ecard/ecard1/115/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "1018": [
+    "100": [
       {
-        "printId": "sv07-155",
-        "image": "https://assets.tcgdex.net/es/sv/sv07/155/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Toshinao Aoki",
+        "printId": "lc-97",
+        "image": "https://assets.tcgdex.net/es/lc/lc/97/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "636": [
+    "101": [
       {
-        "printId": "sv08-196",
-        "image": "https://assets.tcgdex.net/es/sv/sv08/196/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Whisker",
+        "printId": "ex6-107",
+        "image": "https://assets.tcgdex.net/es/ex/ex6/107/high.webp",
+        "rarity": "Ultrarrara",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "937": [
+    "104": [
       {
-        "printId": "sv08-197",
-        "image": "https://assets.tcgdex.net/es/sv/sv08/197/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Rond",
+        "printId": "ex7-51",
+        "image": "https://assets.tcgdex.net/es/ex/ex7/51/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "618": [
+    "106": [
       {
-        "printId": "sv08-202",
-        "image": "https://assets.tcgdex.net/es/sv/sv08/202/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "N-DESIGN Inc.",
+        "printId": "lc-13",
+        "image": "https://assets.tcgdex.net/es/lc/lc/13/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "628": [
+    "107": [
       {
-        "printId": "sv08-214",
-        "image": "https://assets.tcgdex.net/es/sv/sv08/214/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Gapao",
+        "printId": "ex7-98",
+        "image": "https://assets.tcgdex.net/es/ex/ex7/98/high.webp",
+        "rarity": "Ultrarrara",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "556": [
+    "119": [
       {
-        "printId": "sv09-160",
-        "image": "https://assets.tcgdex.net/es/sv/sv09/160/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Ounishi",
+        "printId": "ecard2-59",
+        "image": "https://assets.tcgdex.net/es/ecard/ecard2/59/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "1019": [
+    "120": [
       {
-        "printId": "sv10-188",
-        "image": "https://assets.tcgdex.net/es/sv/sv10/188/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Jerky",
+        "printId": "ecard3-104",
+        "image": "https://assets.tcgdex.net/es/ecard/ecard3/104/high.webp",
+        "rarity": "Reverso holográfico",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "479": [
+    "123": [
       {
-        "printId": "sv10-197",
-        "image": "https://assets.tcgdex.net/es/sv/sv10/197/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Taiga Kayama",
+        "printId": "ex7-102",
+        "image": "https://assets.tcgdex.net/es/ex/ex7/102/high.webp",
+        "rarity": "Ultrarrara",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied exact print; matched TCGdex English print ID",
+          "imageDecoded": false
         }
       }
     ],
-    "573": [
+    "31": [
       {
-        "printId": "sv10.5b-153",
-        "image": "https://assets.tcgdex.net/es/sv/sv10.5b/153/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "tono",
+        "printId": "ecard3-H21",
+        "image": "https://assets.tcgdex.net/es/ecard/ecard3/H21/high.webp",
+        "rarity": "Holográfica",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied print",
+          "imageDecoded": false
         }
       }
     ],
-    "596": [
+    "46": [
       {
-        "printId": "sv10.5w-117",
-        "image": "https://assets.tcgdex.net/es/sv/sv10.5w/117/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Akira Komayama",
+        "printId": "swsh12.5gg-GG32",
+        "image": "https://assets.tcgdex.net/es/swsh/swsh12.5gg/GG32/high.webp",
+        "rarity": "Galería de Galar",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied print",
+          "imageDecoded": false
         }
       }
     ],
-    "632": [
+    "47": [
       {
-        "printId": "sv10.5w-150",
-        "image": "https://assets.tcgdex.net/es/sv/sv10.5w/150/high.webp",
-        "rarity": "Rara Ilustración",
-        "artist": "Scav",
+        "printId": "swsh11tg-TG01",
+        "image": "https://assets.tcgdex.net/es/swsh/swsh11tg/TG01/high.webp",
+        "rarity": "Galería de Entrenadores",
+        "artist": "",
         "enabled": true,
-        "reviewStatus": "pending-user",
+        "reviewStatus": "user-selected",
         "technicalCheck": {
-          "source": "TCGdex ES + EN",
-          "imageDecoded": true
+          "source": "user supplied print",
+          "imageDecoded": false
+        }
+      }
+    ],
+    "73": [
+      {
+        "printId": "ecard2-H26",
+        "image": "https://assets.tcgdex.net/es/ecard/ecard2/H26/high.webp",
+        "rarity": "Holográfica",
+        "artist": "",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "user supplied print",
+          "imageDecoded": false
+        }
+      }
+    ],
+    "97": [
+      {
+        "printId": "ecard2-H12",
+        "image": "https://assets.tcgdex.net/es/ecard/ecard2/H12/high.webp",
+        "rarity": "Holográfica",
+        "artist": "",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "user supplied print",
+          "imageDecoded": false
+        }
+      }
+    ],
+    "121": [
+      {
+        "printId": "swsh10tg-TG13",
+        "image": "https://assets.tcgdex.net/es/swsh/swsh10tg/TG13/high.webp",
+        "rarity": "Galería con Misty",
+        "artist": "",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "user supplied print",
+          "imageDecoded": false
         }
       }
     ]
