@@ -7,11 +7,11 @@
         "image": "https://assets.tcgdex.net/es/me/me01/133/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "mashu",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       },
       {
@@ -19,11 +19,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv03.5/166/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Yoriyuki Ikegami",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -33,11 +33,11 @@
         "image": "https://assets.tcgdex.net/es/me/me01/134/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "mashu",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -47,11 +47,11 @@
         "image": "https://assets.tcgdex.net/es/me/me01/150/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Tonji Matsuno",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -61,11 +61,11 @@
         "image": "https://assets.tcgdex.net/es/me/me02/106/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Uninori",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -75,11 +75,11 @@
         "image": "https://assets.tcgdex.net/es/me/me02.5/226/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "REND",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -89,11 +89,11 @@
         "image": "https://assets.tcgdex.net/es/me/me02.5/227/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "June",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -103,11 +103,11 @@
         "image": "https://assets.tcgdex.net/es/me/me02.5/229/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Takeshi Nakamura",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -117,11 +117,11 @@
         "image": "https://assets.tcgdex.net/es/me/me02.5/232/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Rond",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -131,11 +131,11 @@
         "image": "https://assets.tcgdex.net/es/me/me03/096/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Kinu Nishimura",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -145,11 +145,11 @@
         "image": "https://assets.tcgdex.net/es/me/me04/097/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "MARINA Chikazawa",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -159,11 +159,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv01/203/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "nagimiso",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -173,11 +173,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv01/216/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Nurikabe",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -187,11 +187,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv02/205/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Nelnal",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -201,11 +201,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv02/213/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "SIE NANAHARA",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -215,11 +215,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv02/226/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Mizue",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -229,11 +229,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv03/200/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Akira Komayama",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -243,11 +243,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv03.5/170/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Mitsuhiro Arita",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -257,11 +257,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv03.5/173/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Hiroyuki Yamamoto",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -271,11 +271,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv04/183/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "OKUBO",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       },
       {
@@ -283,11 +283,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv10/186/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Takumi Wada",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -297,11 +297,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv04/190/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Taiga Kayama",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -311,11 +311,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv04/195/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "matazo",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -325,11 +325,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv04/196/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Atsushi Furusawa",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       },
       {
@@ -337,11 +337,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv07/150/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "MARINA Chikazawa",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -351,11 +351,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv04/200/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Taira Akitsu",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -365,11 +365,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv06.5/073/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "KEIICHIRO ITO",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -379,11 +379,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv06.5/074/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "AKIRA EGAWA",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -393,11 +393,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv06.5/075/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "REND",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -407,11 +407,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv06.5/077/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "MINAMINAMI Take",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -421,11 +421,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv07/155/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Toshinao Aoki",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -435,11 +435,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv08/196/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Whisker",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -449,11 +449,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv08/197/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Rond",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -463,11 +463,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv08/202/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "N-DESIGN Inc.",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -477,11 +477,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv08/214/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Gapao",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -491,11 +491,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv09/160/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Ounishi",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -505,11 +505,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv10/188/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Jerky",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -519,11 +519,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv10/197/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Taiga Kayama",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -533,11 +533,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv10.5b/153/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "tono",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -547,11 +547,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv10.5w/117/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Akira Komayama",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ],
@@ -561,11 +561,11 @@
         "image": "https://assets.tcgdex.net/es/sv/sv10.5w/150/high.webp",
         "rarity": "Rara Ilustración",
         "artist": "Scav",
-        "approved": true,
-        "verification": {
+        "enabled": true,
+        "reviewStatus": "pending-user",
+        "technicalCheck": {
           "source": "TCGdex ES + EN",
-          "imageDecoded": true,
-          "rule": "single-species exact-name ordinary Illustration Rare; no ex/SIR/shiny rarity"
+          "imageDecoded": true
         }
       }
     ]

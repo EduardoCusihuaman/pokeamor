@@ -11,11 +11,11 @@ def build():
  pokemon={}
  by={str(p['id']):p for p in catalog}
  for pid,rows in curated['pokemon'].items():
-  accepted=[r for r in rows if r.get('approved')]
+  accepted=[r for r in rows if r.get('enabled')]
   assert pid in by and len(accepted)<=2
   assert len({r['printId'] for r in accepted})==len(accepted)
   for r in accepted:
-   assert r['printId']!=by[pid].get('card') and r.get('verification')
+   assert r['printId']!=by[pid].get('card') and r.get('technicalCheck')
    assert r['printId'] in records
   if accepted:pokemon[pid]=[[r['printId'],r['image'],r['rarity'],r.get('artist','')] for r in accepted]
  sets=sorted({r['set'] for r in records.values()})
