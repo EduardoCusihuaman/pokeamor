@@ -1,0 +1,5077 @@
+{
+  "sv07-143": {
+    "name": "Bulbasaur",
+    "set": "SCR",
+    "number": "143"
+  },
+  "sv03.5-167": {
+    "name": "Ivysaur",
+    "set": "MEW",
+    "number": "167"
+  },
+  "sv03.5-198": {
+    "name": "Venusaur ex",
+    "set": "MEW",
+    "number": "198"
+  },
+  "sv03.5-168": {
+    "name": "Charmander",
+    "set": "MEW",
+    "number": "168"
+  },
+  "sv03.5-169": {
+    "name": "Charmeleon",
+    "set": "MEW",
+    "number": "169"
+  },
+  "sv03.5-199": {
+    "name": "Charizard ex",
+    "set": "MEW",
+    "number": "199"
+  },
+  "sv07-148": {
+    "name": "Squirtle",
+    "set": "SCR",
+    "number": "148"
+  },
+  "sv03.5-171": {
+    "name": "Wartortle",
+    "set": "MEW",
+    "number": "171"
+  },
+  "sv03.5-200": {
+    "name": "Blastoise ex",
+    "set": "MEW",
+    "number": "200"
+  },
+  "sv03.5-172": {
+    "name": "Caterpie",
+    "set": "MEW",
+    "number": "172"
+  },
+  "swsh8-2": {
+    "name": "Metapod",
+    "set": "FST",
+    "number": "2"
+  },
+  "swsh3-177": {
+    "name": "Butterfree V",
+    "set": "DAA",
+    "number": "177"
+  },
+  "xy5-1": {
+    "name": "Weedle",
+    "set": "PRC",
+    "number": "1"
+  },
+  "xy5-2": {
+    "name": "Kakuna",
+    "set": "PRC",
+    "number": "2"
+  },
+  "me04-098": {
+    "name": "Beedrill ex",
+    "set": "CRI",
+    "number": "98"
+  },
+  "sv03-207": {
+    "name": "Pidgey",
+    "set": "OBF",
+    "number": "207"
+  },
+  "sv03-208": {
+    "name": "Pidgeotto",
+    "set": "OBF",
+    "number": "208"
+  },
+  "sv03-225": {
+    "name": "Pidgeot ex",
+    "set": "OBF",
+    "number": "225"
+  },
+  "sv03.5-019": {
+    "name": "Rattata",
+    "set": "MEW",
+    "number": "19"
+  },
+  "me03-099": {
+    "name": "Raticate",
+    "set": "POR",
+    "number": "99"
+  },
+  "me01-151": {
+    "name": "Spearow",
+    "set": "MEG",
+    "number": "151"
+  },
+  "swsh5-112": {
+    "name": "Fearow",
+    "set": "BST",
+    "number": "112"
+  },
+  "sv05-176": {
+    "name": "Arbok",
+    "set": "TEF",
+    "number": "176"
+  },
+  "sv08-238": {
+    "name": "Pikachu ex",
+    "set": "SSP",
+    "number": "238"
+  },
+  "sv02-211": {
+    "name": "Raichu",
+    "set": "PAL",
+    "number": "211"
+  },
+  "xy8-75": {
+    "name": "Sandshrew",
+    "set": "BKT",
+    "number": "75"
+  },
+  "xy8-76": {
+    "name": "Sandslash",
+    "set": "BKT",
+    "number": "76"
+  },
+  "xy5-66": {
+    "name": "Nidoran♀",
+    "set": "PRC",
+    "number": "66"
+  },
+  "xy5-67": {
+    "name": "Nidorina",
+    "set": "PRC",
+    "number": "67"
+  },
+  "xy5-69": {
+    "name": "Nidoqueen",
+    "set": "PRC",
+    "number": "69"
+  },
+  "xy12-43": {
+    "name": "Nidoran♂",
+    "set": "EVO",
+    "number": "43"
+  },
+  "xy12-44": {
+    "name": "Nidorino",
+    "set": "EVO",
+    "number": "44"
+  },
+  "sv03.5-174": {
+    "name": "Nidoking",
+    "set": "MEW",
+    "number": "174"
+  },
+  "me03-094": {
+    "name": "Clefairy",
+    "set": "POR",
+    "number": "94"
+  },
+  "xy9-82": {
+    "name": "Clefable",
+    "set": "BKP",
+    "number": "82"
+  },
+  "me01-138": {
+    "name": "Vulpix",
+    "set": "MEG",
+    "number": "138"
+  },
+  "sv03-199": {
+    "name": "Ninetales",
+    "set": "OBF",
+    "number": "199"
+  },
+  "sv04.5-198": {
+    "name": "Jigglypuff",
+    "set": "PAF",
+    "number": "198"
+  },
+  "me02-105": {
+    "name": "Wigglytuff",
+    "set": "PFL",
+    "number": "105"
+  },
+  "swsh5-89": {
+    "name": "Zubat",
+    "set": "BST",
+    "number": "89"
+  },
+  "sv04.5-092": {
+    "name": "Oddish",
+    "set": "PAF",
+    "number": "92"
+  },
+  "sv03-198": {
+    "name": "Gloom",
+    "set": "OBF",
+    "number": "198"
+  },
+  "sv04.5-094": {
+    "name": "Vileplume",
+    "set": "PAF",
+    "number": "94"
+  },
+  "swsh3-3": {
+    "name": "Paras",
+    "set": "DAA",
+    "number": "3"
+  },
+  "swsh3-4": {
+    "name": "Parasect",
+    "set": "DAA",
+    "number": "4"
+  },
+  "swsh12-001": {
+    "name": "Venonat",
+    "set": "SIT",
+    "number": "1"
+  },
+  "sm10-216": {
+    "name": "Venomoth GX",
+    "set": "UNB",
+    "number": "216"
+  },
+  "sv08-208": {
+    "name": "Alolan Dugtrio",
+    "set": "SSP",
+    "number": "208"
+  },
+  "me03-121": {
+    "name": "Meowth ex",
+    "set": "POR",
+    "number": "121"
+  },
+  "sv06.5-078": {
+    "name": "Persian",
+    "set": "SFA",
+    "number": "78"
+  },
+  "sv03.5-175": {
+    "name": "Psyduck",
+    "set": "MEW",
+    "number": "175"
+  },
+  "xy9-18": {
+    "name": "Golduck BREAK",
+    "set": "BKP",
+    "number": "18"
+  },
+  "sv04.5-169": {
+    "name": "Mankey",
+    "set": "PAF",
+    "number": "169"
+  },
+  "sv04.5-170": {
+    "name": "Primeape",
+    "set": "PAF",
+    "number": "170"
+  },
+  "sv06-181": {
+    "name": "Hisuian Growlithe",
+    "set": "TWM",
+    "number": "181"
+  },
+  "sv01-224": {
+    "name": "Arcanine ex",
+    "set": "SVI",
+    "number": "224"
+  },
+  "xy3-15": {
+    "name": "Poliwag",
+    "set": "FFI",
+    "number": "15"
+  },
+  "sv03.5-176": {
+    "name": "Poliwhirl",
+    "set": "MEW",
+    "number": "176"
+  },
+  "xy3-17": {
+    "name": "Poliwrath",
+    "set": "FFI",
+    "number": "17"
+  },
+  "sv04.5-148": {
+    "name": "Abra",
+    "set": "PAF",
+    "number": "148"
+  },
+  "sv04.5-149": {
+    "name": "Kadabra",
+    "set": "PAF",
+    "number": "149"
+  },
+  "sv03.5-201": {
+    "name": "Alakazam ex",
+    "set": "MEW",
+    "number": "201"
+  },
+  "xy3-44": {
+    "name": "Machop",
+    "set": "FFI",
+    "number": "44"
+  },
+  "sv03.5-177": {
+    "name": "Machoke",
+    "set": "MEW",
+    "number": "177"
+  },
+  "swsh10-172": {
+    "name": "Machamp V",
+    "set": "ASR",
+    "number": "172"
+  },
+  "xy3-1": {
+    "name": "Bellsprout",
+    "set": "FFI",
+    "number": "1"
+  },
+  "xy3-2": {
+    "name": "Weepinbell",
+    "set": "FFI",
+    "number": "2"
+  },
+  "xy3-3": {
+    "name": "Victreebel",
+    "set": "FFI",
+    "number": "3"
+  },
+  "swsh7-26": {
+    "name": "Tentacool",
+    "set": "EVS",
+    "number": "26"
+  },
+  "swsh7-27": {
+    "name": "Tentacruel",
+    "set": "EVS",
+    "number": "27"
+  },
+  "xy2-45": {
+    "name": "Geodude",
+    "set": "FLF",
+    "number": "45"
+  },
+  "xy2-46": {
+    "name": "Graveler",
+    "set": "FLF",
+    "number": "46"
+  },
+  "sv03.5-189": {
+    "name": "Golem ex",
+    "set": "MEW",
+    "number": "189"
+  },
+  "swsh12-021": {
+    "name": "Ponyta",
+    "set": "SIT",
+    "number": "21"
+  },
+  "sv10-189": {
+    "name": "Rapidash",
+    "set": "DRI",
+    "number": "189"
+  },
+  "sv01-204": {
+    "name": "Slowpoke",
+    "set": "SVI",
+    "number": "204"
+  },
+  "me05-090": {
+    "name": "Slowbro",
+    "set": "PBL",
+    "number": "90"
+  },
+  "sm12-242": {
+    "name": "Magnemite",
+    "set": "CEC",
+    "number": "242"
+  },
+  "sma-SV28": {
+    "name": "Magneton",
+    "set": "HIF",
+    "number": "SV28"
+  },
+  "xy12-68": {
+    "name": "Farfetch'd",
+    "set": "EVO",
+    "number": "68"
+  },
+  "sv04.5-199": {
+    "name": "Doduo",
+    "set": "PAF",
+    "number": "199"
+  },
+  "sv04.5-200": {
+    "name": "Dodrio",
+    "set": "PAF",
+    "number": "200"
+  },
+  "swsh12.5-029": {
+    "name": "Seel",
+    "set": "CRZ",
+    "number": "29"
+  },
+  "me02-097": {
+    "name": "Dewgong",
+    "set": "PFL",
+    "number": "97"
+  },
+  "swsh9-084": {
+    "name": "Grimer",
+    "set": "BRS",
+    "number": "84"
+  },
+  "sm3-84": {
+    "name": "Alolan Muk GX",
+    "set": "BUS",
+    "number": "84"
+  },
+  "xy9-23": {
+    "name": "Shellder",
+    "set": "BKP",
+    "number": "23"
+  },
+  "xy9-24": {
+    "name": "Cloyster",
+    "set": "BKP",
+    "number": "24"
+  },
+  "sv05-177": {
+    "name": "Gastly",
+    "set": "TEF",
+    "number": "177"
+  },
+  "30th-154": {
+    "name": "Gengar ex",
+    "set": "30C",
+    "number": "154"
+  },
+  "sm115-36": {
+    "name": "Onix GX",
+    "set": "HIF",
+    "number": "36"
+  },
+  "sv01-210": {
+    "name": "Drowzee",
+    "set": "SVI",
+    "number": "210"
+  },
+  "xy9-51": {
+    "name": "Hypno",
+    "set": "BKP",
+    "number": "51"
+  },
+  "xy4-13": {
+    "name": "Krabby",
+    "set": "PHF",
+    "number": "13"
+  },
+  "swsh9-029": {
+    "name": "Kingler VMAX",
+    "set": "BRS",
+    "number": "29"
+  },
+  "sv04.5-133": {
+    "name": "Voltorb",
+    "set": "PAF",
+    "number": "133"
+  },
+  "xy6-22": {
+    "name": "Electrode",
+    "set": "ROS",
+    "number": "22"
+  },
+  "sv08-192": {
+    "name": "Exeggcute",
+    "set": "SSP",
+    "number": "192"
+  },
+  "me01-135": {
+    "name": "Exeggutor",
+    "set": "MEG",
+    "number": "135"
+  },
+  "xy8-77": {
+    "name": "Cubone",
+    "set": "BKT",
+    "number": "77"
+  },
+  "xy3-47": {
+    "name": "Hitmonlee",
+    "set": "FFI",
+    "number": "47"
+  },
+  "xy3-48": {
+    "name": "Hitmonchan",
+    "set": "FFI",
+    "number": "48"
+  },
+  "sv05-180": {
+    "name": "Lickitung",
+    "set": "TEF",
+    "number": "180"
+  },
+  "sm12-243": {
+    "name": "Koffing",
+    "set": "CEC",
+    "number": "243"
+  },
+  "swsh11-089": {
+    "name": "Rhyhorn",
+    "set": "LOR",
+    "number": "89"
+  },
+  "swsh11-090": {
+    "name": "Rhydon",
+    "set": "LOR",
+    "number": "90"
+  },
+  "sv06-187": {
+    "name": "Chansey",
+    "set": "TWM",
+    "number": "187"
+  },
+  "sv03.5-178": {
+    "name": "Tangela",
+    "set": "MEW",
+    "number": "178"
+  },
+  "sv10-204": {
+    "name": "Kangaskhan",
+    "set": "DRI",
+    "number": "204"
+  },
+  "sv06.5-067": {
+    "name": "Horsea",
+    "set": "SFA",
+    "number": "67"
+  },
+  "xy5-31": {
+    "name": "Seadra",
+    "set": "PRC",
+    "number": "31"
+  },
+  "me05-087": {
+    "name": "Goldeen",
+    "set": "PBL",
+    "number": "87"
+  },
+  "swsh1-47": {
+    "name": "Seaking",
+    "set": "SSH",
+    "number": "47"
+  },
+  "sv04.5-118": {
+    "name": "Staryu",
+    "set": "PAF",
+    "number": "118"
+  },
+  "xy8-30": {
+    "name": "Starmie",
+    "set": "BKT",
+    "number": "30"
+  },
+  "sv03.5-179": {
+    "name": "Mr. Mime",
+    "set": "MEW",
+    "number": "179"
+  },
+  "sv04.5-095": {
+    "name": "Scyther",
+    "set": "PAF",
+    "number": "95"
+  },
+  "sv03.5-191": {
+    "name": "Jynx ex",
+    "set": "MEW",
+    "number": "191"
+  },
+  "xy9-42": {
+    "name": "Electabuzz",
+    "set": "BKP",
+    "number": "42"
+  },
+  "xy3-10": {
+    "name": "Magmar",
+    "set": "FFI",
+    "number": "10"
+  },
+  "sv06-168": {
+    "name": "Pinsir",
+    "set": "TWM",
+    "number": "168"
+  },
+  "me04-096": {
+    "name": "Tauros",
+    "set": "CRI",
+    "number": "96"
+  },
+  "sv02-203": {
+    "name": "Magikarp",
+    "set": "PAL",
+    "number": "203"
+  },
+  "sv01-225": {
+    "name": "Gyarados ex",
+    "set": "SVI",
+    "number": "225"
+  },
+  "30th-131": {
+    "name": "Lapras",
+    "set": "30C",
+    "number": "131"
+  },
+  "sv04.5-201": {
+    "name": "Ditto",
+    "set": "PAF",
+    "number": "201"
+  },
+  "sv06-188": {
+    "name": "Eevee",
+    "set": "TWM",
+    "number": "188"
+  },
+  "g1-24": {
+    "name": "Vaporeon EX",
+    "set": "GEN",
+    "number": "24"
+  },
+  "g1-28": {
+    "name": "Jolteon EX",
+    "set": "GEN",
+    "number": "28"
+  },
+  "g1-RC28": {
+    "name": "Flareon EX",
+    "set": "GEN",
+    "number": "RC28"
+  },
+  "sv03.5-180": {
+    "name": "Omanyte",
+    "set": "MEW",
+    "number": "180"
+  },
+  "swsh12-174": {
+    "name": "Omastar V",
+    "set": "SIT",
+    "number": "174"
+  },
+  "xy10-38": {
+    "name": "Kabuto",
+    "set": "FCO",
+    "number": "38"
+  },
+  "xy10-39": {
+    "name": "Kabutops",
+    "set": "FCO",
+    "number": "39"
+  },
+  "swsh11-199": {
+    "name": "Aerodactyl VSTAR",
+    "set": "LOR",
+    "number": "199"
+  },
+  "svp-051": {
+    "name": "Snorlax",
+    "set": "SVP",
+    "number": "51"
+  },
+  "sv09-161": {
+    "name": "Articuno",
+    "set": "JTG",
+    "number": "161"
+  },
+  "sv03.5-202": {
+    "name": "Zapdos ex",
+    "set": "MEW",
+    "number": "202"
+  },
+  "30th-130": {
+    "name": "Moltres",
+    "set": "30C",
+    "number": "130"
+  },
+  "swsh12-129": {
+    "name": "Dratini",
+    "set": "SIT",
+    "number": "129"
+  },
+  "sv03.5-181": {
+    "name": "Dragonair",
+    "set": "MEW",
+    "number": "181"
+  },
+  "swsh10.5-076": {
+    "name": "Dragonite V",
+    "set": "PGO",
+    "number": "76"
+  },
+  "30th-151": {
+    "name": "Mewtwo ex",
+    "set": "30C",
+    "number": "151"
+  },
+  "30th-152": {
+    "name": "Mew ex",
+    "set": "30C",
+    "number": "152"
+  },
+  "xy9-1": {
+    "name": "Chikorita",
+    "set": "BKP",
+    "number": "1"
+  },
+  "me02.5-009": {
+    "name": "Bayleef",
+    "set": "ASC",
+    "number": "9"
+  },
+  "me01-010": {
+    "name": "Meganium",
+    "set": "MEG",
+    "number": "10"
+  },
+  "xy8-18": {
+    "name": "Cyndaquil",
+    "set": "BKT",
+    "number": "18"
+  },
+  "swsh10-024": {
+    "name": "Quilava",
+    "set": "ASR",
+    "number": "24"
+  },
+  "xy8-20": {
+    "name": "Typhlosion",
+    "set": "BKT",
+    "number": "20"
+  },
+  "xy4-15": {
+    "name": "Totodile",
+    "set": "PHF",
+    "number": "15"
+  },
+  "swsh8-56": {
+    "name": "Croconaw",
+    "set": "FST",
+    "number": "56"
+  },
+  "swsh8-57": {
+    "name": "Feraligatr",
+    "set": "FST",
+    "number": "57"
+  },
+  "xy2-81": {
+    "name": "Sentret",
+    "set": "FLF",
+    "number": "81"
+  },
+  "sv09-168": {
+    "name": "Furret",
+    "set": "JTG",
+    "number": "168"
+  },
+  "xy8-119": {
+    "name": "Hoothoot",
+    "set": "BKT",
+    "number": "119"
+  },
+  "swsh6-4": {
+    "name": "Ledyba",
+    "set": "CRE",
+    "number": "4"
+  },
+  "sv07-144": {
+    "name": "Ledian",
+    "set": "SCR",
+    "number": "144"
+  },
+  "xy7-5": {
+    "name": "Spinarak",
+    "set": "AOR",
+    "number": "5"
+  },
+  "xy7-6": {
+    "name": "Ariados",
+    "set": "AOR",
+    "number": "6"
+  },
+  "me04-093": {
+    "name": "Crobat",
+    "set": "CRI",
+    "number": "93"
+  },
+  "swsh7-52": {
+    "name": "Chinchou",
+    "set": "EVS",
+    "number": "52"
+  },
+  "xy5-58": {
+    "name": "Lanturn",
+    "set": "PRC",
+    "number": "58"
+  },
+  "sv03-202": {
+    "name": "Cleffa",
+    "set": "OBF",
+    "number": "202"
+  },
+  "sm12-168": {
+    "name": "Igglybuff",
+    "set": "CEC",
+    "number": "168"
+  },
+  "xy6-44": {
+    "name": "Togetic",
+    "set": "ROS",
+    "number": "44"
+  },
+  "sv04.5-151": {
+    "name": "Natu",
+    "set": "PAF",
+    "number": "151"
+  },
+  "sv04.5-152": {
+    "name": "Xatu",
+    "set": "PAF",
+    "number": "152"
+  },
+  "swsh7-54": {
+    "name": "Mareep",
+    "set": "EVS",
+    "number": "54"
+  },
+  "xy11-39": {
+    "name": "Flaaffy",
+    "set": "STS",
+    "number": "39"
+  },
+  "me04-090": {
+    "name": "Ampharos",
+    "set": "CRI",
+    "number": "90"
+  },
+  "xy7-4": {
+    "name": "Bellossom",
+    "set": "AOR",
+    "number": "4"
+  },
+  "sv02-204": {
+    "name": "Marill",
+    "set": "PAL",
+    "number": "204"
+  },
+  "xy5-104": {
+    "name": "Azumarill",
+    "set": "PRC",
+    "number": "104"
+  },
+  "sv02-219": {
+    "name": "Sudowoodo",
+    "set": "PAL",
+    "number": "219"
+  },
+  "swsh11-032": {
+    "name": "Politoed",
+    "set": "LOR",
+    "number": "32"
+  },
+  "sv04.5-096": {
+    "name": "Hoppip",
+    "set": "PAF",
+    "number": "96"
+  },
+  "sv04.5-097": {
+    "name": "Skiploom",
+    "set": "PAF",
+    "number": "97"
+  },
+  "sv04.5-098": {
+    "name": "Jumpluff",
+    "set": "PAF",
+    "number": "98"
+  },
+  "sv04-211": {
+    "name": "Aipom",
+    "set": "PAR",
+    "number": "211"
+  },
+  "swsh12.5-007": {
+    "name": "Sunkern",
+    "set": "CRZ",
+    "number": "7"
+  },
+  "sv06-169": {
+    "name": "Sunflora",
+    "set": "TWM",
+    "number": "169"
+  },
+  "sv10-183": {
+    "name": "Yanma",
+    "set": "DRI",
+    "number": "183"
+  },
+  "sv02-221": {
+    "name": "Paldean Wooper",
+    "set": "PAL",
+    "number": "221"
+  },
+  "sma-SV10": {
+    "name": "Quagsire",
+    "set": "HIF",
+    "number": "SV10"
+  },
+  "xy9-52": {
+    "name": "Espeon EX",
+    "set": "BKP",
+    "number": "52"
+  },
+  "xy10-55": {
+    "name": "Umbreon EX",
+    "set": "FCO",
+    "number": "55"
+  },
+  "sv04.5-181": {
+    "name": "Murkrow",
+    "set": "PAF",
+    "number": "181"
+  },
+  "sv02-238": {
+    "name": "Slowking ex",
+    "set": "PAL",
+    "number": "238"
+  },
+  "me02.5-233": {
+    "name": "Misdreavus",
+    "set": "ASC",
+    "number": "233"
+  },
+  "swsh12-199": {
+    "name": "Unown VSTAR",
+    "set": "SIT",
+    "number": "199"
+  },
+  "swsh1-191": {
+    "name": "Wobbuffet V",
+    "set": "SSH",
+    "number": "191"
+  },
+  "swsh4-65": {
+    "name": "Girafarig",
+    "set": "VIV",
+    "number": "65"
+  },
+  "sv04.5-099": {
+    "name": "Pineco",
+    "set": "PAF",
+    "number": "99"
+  },
+  "sv04.5-212": {
+    "name": "Forretress ex",
+    "set": "PAF",
+    "number": "212"
+  },
+  "swsh8-207": {
+    "name": "Dunsparce",
+    "set": "FST",
+    "number": "207"
+  },
+  "xy6-36": {
+    "name": "Gligar",
+    "set": "ROS",
+    "number": "36"
+  },
+  "sv04-208": {
+    "name": "Steelix",
+    "set": "PAR",
+    "number": "208"
+  },
+  "xy8-98": {
+    "name": "Snubbull",
+    "set": "BKT",
+    "number": "98"
+  },
+  "swsh9-159": {
+    "name": "Granbull V",
+    "set": "BRS",
+    "number": "159"
+  },
+  "xy2-21": {
+    "name": "Qwilfish",
+    "set": "FLF",
+    "number": "21"
+  },
+  "sv03-205": {
+    "name": "Scizor",
+    "set": "OBF",
+    "number": "205"
+  },
+  "me01-136": {
+    "name": "Shuckle",
+    "set": "MEG",
+    "number": "136"
+  },
+  "sv02-194": {
+    "name": "Heracross",
+    "set": "PAL",
+    "number": "194"
+  },
+  "sv04.5-182": {
+    "name": "Sneasel",
+    "set": "PAF",
+    "number": "182"
+  },
+  "swsh7-126": {
+    "name": "Teddiursa",
+    "set": "EVS",
+    "number": "126"
+  },
+  "swsh7-127": {
+    "name": "Ursaring",
+    "set": "EVS",
+    "number": "127"
+  },
+  "swsh8-34": {
+    "name": "Slugma",
+    "set": "FST",
+    "number": "34"
+  },
+  "sv06-191": {
+    "name": "Magcargo ex",
+    "set": "TWM",
+    "number": "191"
+  },
+  "sv09-165": {
+    "name": "Swinub",
+    "set": "JTG",
+    "number": "165"
+  },
+  "swsh10-032": {
+    "name": "Piloswine",
+    "set": "ASR",
+    "number": "32"
+  },
+  "xy9-29": {
+    "name": "Corsola",
+    "set": "BKP",
+    "number": "29"
+  },
+  "swsh5-36": {
+    "name": "Remoraid",
+    "set": "BST",
+    "number": "36"
+  },
+  "xy8-33": {
+    "name": "Octillery",
+    "set": "BKT",
+    "number": "33"
+  },
+  "me01-152": {
+    "name": "Delibird",
+    "set": "MEG",
+    "number": "152"
+  },
+  "sv08-209": {
+    "name": "Skarmory",
+    "set": "SSP",
+    "number": "209"
+  },
+  "sv03-204": {
+    "name": "Houndour",
+    "set": "OBF",
+    "number": "204"
+  },
+  "sv06.5-066": {
+    "name": "Houndoom",
+    "set": "SFA",
+    "number": "66"
+  },
+  "sv06.5-080": {
+    "name": "Kingdra ex",
+    "set": "SFA",
+    "number": "80"
+  },
+  "sv08-205": {
+    "name": "Phanpy",
+    "set": "SSP",
+    "number": "205"
+  },
+  "swsh4-87": {
+    "name": "Donphan",
+    "set": "VIV",
+    "number": "87"
+  },
+  "swsh6-117": {
+    "name": "Porygon2",
+    "set": "CRE",
+    "number": "117"
+  },
+  "xy9-91": {
+    "name": "Stantler",
+    "set": "BKP",
+    "number": "91"
+  },
+  "xy8-123": {
+    "name": "Smeargle",
+    "set": "BKT",
+    "number": "123"
+  },
+  "sm10-100": {
+    "name": "Tyrogue",
+    "set": "UNB",
+    "number": "100"
+  },
+  "me02.5-240": {
+    "name": "Hitmontop",
+    "set": "ASC",
+    "number": "240"
+  },
+  "sv08-075": {
+    "name": "Smoochum",
+    "set": "SSP",
+    "number": "75"
+  },
+  "sv04-059": {
+    "name": "Elekid",
+    "set": "PAR",
+    "number": "59"
+  },
+  "sv04-186": {
+    "name": "Magby",
+    "set": "PAR",
+    "number": "186"
+  },
+  "swsh10-126": {
+    "name": "Miltank",
+    "set": "ASR",
+    "number": "126"
+  },
+  "sv06-201": {
+    "name": "Blissey ex",
+    "set": "TWM",
+    "number": "201"
+  },
+  "xy8-55": {
+    "name": "Raikou",
+    "set": "BKT",
+    "number": "55"
+  },
+  "sv04.5-112": {
+    "name": "Entei",
+    "set": "PAF",
+    "number": "112"
+  },
+  "sm8-220": {
+    "name": "Suicune GX",
+    "set": "LOT",
+    "number": "220"
+  },
+  "sv03-203": {
+    "name": "Larvitar",
+    "set": "OBF",
+    "number": "203"
+  },
+  "swsh3-87": {
+    "name": "Pupitar",
+    "set": "DAA",
+    "number": "87"
+  },
+  "sv02-222": {
+    "name": "Tyranitar",
+    "set": "PAL",
+    "number": "222"
+  },
+  "swsh12-186": {
+    "name": "Lugia V",
+    "set": "SIT",
+    "number": "186"
+  },
+  "xy9-92": {
+    "name": "Ho-Oh EX",
+    "set": "BKP",
+    "number": "92"
+  },
+  "swsh8-245": {
+    "name": "Celebi V",
+    "set": "FST",
+    "number": "245"
+  },
+  "xy5-6": {
+    "name": "Treecko",
+    "set": "PRC",
+    "number": "6"
+  },
+  "xy5-7": {
+    "name": "Grovyle",
+    "set": "PRC",
+    "number": "7"
+  },
+  "sm8-216": {
+    "name": "Sceptile GX",
+    "set": "LOT",
+    "number": "216"
+  },
+  "swsh3-22": {
+    "name": "Torchic",
+    "set": "DAA",
+    "number": "22"
+  },
+  "swsh3-23": {
+    "name": "Combusken",
+    "set": "DAA",
+    "number": "23"
+  },
+  "sv10-192": {
+    "name": "Blaziken",
+    "set": "DRI",
+    "number": "192"
+  },
+  "swsh8-62": {
+    "name": "Mudkip",
+    "set": "FST",
+    "number": "62"
+  },
+  "swsh8-63": {
+    "name": "Marshtomp",
+    "set": "FST",
+    "number": "63"
+  },
+  "swsh8-64": {
+    "name": "Swampert",
+    "set": "FST",
+    "number": "64"
+  },
+  "swsh4-103": {
+    "name": "Poochyena",
+    "set": "VIV",
+    "number": "103"
+  },
+  "me02.5-243": {
+    "name": "Mightyena",
+    "set": "ASC",
+    "number": "243"
+  },
+  "sv03-167": {
+    "name": "Zigzagoon",
+    "set": "OBF",
+    "number": "167"
+  },
+  "sv03-168": {
+    "name": "Linoone",
+    "set": "OBF",
+    "number": "168"
+  },
+  "swsh11-006": {
+    "name": "Wurmple",
+    "set": "LOR",
+    "number": "6"
+  },
+  "swsh11-007": {
+    "name": "Silcoon",
+    "set": "LOR",
+    "number": "7"
+  },
+  "me02.5-219": {
+    "name": "Beautifly",
+    "set": "ASC",
+    "number": "219"
+  },
+  "swsh11-009": {
+    "name": "Cascoon",
+    "set": "LOR",
+    "number": "9"
+  },
+  "me02.5-220": {
+    "name": "Dustox",
+    "set": "ASC",
+    "number": "220"
+  },
+  "swsh7-32": {
+    "name": "Lotad",
+    "set": "EVS",
+    "number": "32"
+  },
+  "swsh7-33": {
+    "name": "Lombre",
+    "set": "EVS",
+    "number": "33"
+  },
+  "me02-095": {
+    "name": "Ludicolo",
+    "set": "PFL",
+    "number": "95"
+  },
+  "swsh7-5": {
+    "name": "Seedot",
+    "set": "EVS",
+    "number": "5"
+  },
+  "swsh7-96": {
+    "name": "Nuzleaf",
+    "set": "EVS",
+    "number": "96"
+  },
+  "sv05-163": {
+    "name": "Shiftry",
+    "set": "TEF",
+    "number": "163"
+  },
+  "swsh4-133": {
+    "name": "Taillow",
+    "set": "VIV",
+    "number": "133"
+  },
+  "swsh4-134": {
+    "name": "Swellow",
+    "set": "VIV",
+    "number": "134"
+  },
+  "sv04.5-203": {
+    "name": "Wingull",
+    "set": "PAF",
+    "number": "203"
+  },
+  "sv04.5-204": {
+    "name": "Pelipper",
+    "set": "PAF",
+    "number": "204"
+  },
+  "sv01-211": {
+    "name": "Ralts",
+    "set": "SVI",
+    "number": "211"
+  },
+  "sv01-212": {
+    "name": "Kirlia",
+    "set": "SVI",
+    "number": "212"
+  },
+  "sv01-245": {
+    "name": "Gardevoir ex",
+    "set": "SVI",
+    "number": "245"
+  },
+  "swsh2-10": {
+    "name": "Surskit",
+    "set": "RCL",
+    "number": "10"
+  },
+  "swsh2-11": {
+    "name": "Masquerain",
+    "set": "RCL",
+    "number": "11"
+  },
+  "swsh9-003": {
+    "name": "Shroomish",
+    "set": "BRS",
+    "number": "3"
+  },
+  "swsh8-6": {
+    "name": "Breloom V",
+    "set": "FST",
+    "number": "6"
+  },
+  "sv08-212": {
+    "name": "Slakoth",
+    "set": "SSP",
+    "number": "212"
+  },
+  "swsh7-130": {
+    "name": "Vigoroth",
+    "set": "EVS",
+    "number": "130"
+  },
+  "sv08-227": {
+    "name": "Slaking ex",
+    "set": "SSP",
+    "number": "227"
+  },
+  "swsh4-13": {
+    "name": "Nincada",
+    "set": "VIV",
+    "number": "13"
+  },
+  "me01-137": {
+    "name": "Ninjask",
+    "set": "MEG",
+    "number": "137"
+  },
+  "me01-144": {
+    "name": "Shedinja",
+    "set": "MEG",
+    "number": "144"
+  },
+  "swsh4-135": {
+    "name": "Whismur",
+    "set": "VIV",
+    "number": "135"
+  },
+  "sv04-212": {
+    "name": "Loudred",
+    "set": "PAR",
+    "number": "212"
+  },
+  "swsh4-137": {
+    "name": "Exploud",
+    "set": "VIV",
+    "number": "137"
+  },
+  "xy3-51": {
+    "name": "Makuhita",
+    "set": "FFI",
+    "number": "51"
+  },
+  "swsh8-143": {
+    "name": "Hariyama",
+    "set": "FST",
+    "number": "143"
+  },
+  "sm12-146": {
+    "name": "Azurill",
+    "set": "CEC",
+    "number": "146"
+  },
+  "swsh8-210": {
+    "name": "Skitty",
+    "set": "FST",
+    "number": "210"
+  },
+  "xy5-114": {
+    "name": "Delcatty",
+    "set": "PRC",
+    "number": "114"
+  },
+  "swsh1-194": {
+    "name": "Sableye V",
+    "set": "SSH",
+    "number": "194"
+  },
+  "me02.5-246": {
+    "name": "Mawile",
+    "set": "ASC",
+    "number": "246"
+  },
+  "swsh6-109": {
+    "name": "Aron",
+    "set": "CRE",
+    "number": "109"
+  },
+  "sv06-184": {
+    "name": "Lairon",
+    "set": "TWM",
+    "number": "184"
+  },
+  "xy5-93": {
+    "name": "Aggron EX",
+    "set": "PRC",
+    "number": "93"
+  },
+  "sv07-153": {
+    "name": "Meditite",
+    "set": "SCR",
+    "number": "153"
+  },
+  "me02.5-241": {
+    "name": "Medicham",
+    "set": "ASC",
+    "number": "241"
+  },
+  "sv10-196": {
+    "name": "Electrike",
+    "set": "DRI",
+    "number": "196"
+  },
+  "me05-089": {
+    "name": "Manectric",
+    "set": "PBL",
+    "number": "89"
+  },
+  "sv04-193": {
+    "name": "Plusle",
+    "set": "PAR",
+    "number": "193"
+  },
+  "sv04-194": {
+    "name": "Minun",
+    "set": "PAR",
+    "number": "194"
+  },
+  "sv06-009": {
+    "name": "Volbeat",
+    "set": "TWM",
+    "number": "9"
+  },
+  "sv06-010": {
+    "name": "Illumise",
+    "set": "TWM",
+    "number": "10"
+  },
+  "swsh11-014": {
+    "name": "Roselia",
+    "set": "LOR",
+    "number": "14"
+  },
+  "sv07-154": {
+    "name": "Gulpin",
+    "set": "SCR",
+    "number": "154"
+  },
+  "sv07-092": {
+    "name": "Swalot",
+    "set": "SCR",
+    "number": "92"
+  },
+  "swsh8-162": {
+    "name": "Carvanha",
+    "set": "FST",
+    "number": "162"
+  },
+  "swsh8-163": {
+    "name": "Sharpedo",
+    "set": "FST",
+    "number": "163"
+  },
+  "swsh4-31": {
+    "name": "Wailmer",
+    "set": "VIV",
+    "number": "31"
+  },
+  "sv09-162": {
+    "name": "Wailord",
+    "set": "JTG",
+    "number": "162"
+  },
+  "me02.5-223": {
+    "name": "Numel",
+    "set": "ASC",
+    "number": "223"
+  },
+  "xy5-29": {
+    "name": "Camerupt EX",
+    "set": "PRC",
+    "number": "29"
+  },
+  "sv06-172": {
+    "name": "Torkoal",
+    "set": "TWM",
+    "number": "172"
+  },
+  "swsh5-55": {
+    "name": "Spoink",
+    "set": "BST",
+    "number": "55"
+  },
+  "swsh5-56": {
+    "name": "Grumpig",
+    "set": "BST",
+    "number": "56"
+  },
+  "swsh12-141": {
+    "name": "Spinda",
+    "set": "SIT",
+    "number": "141"
+  },
+  "swsh9-074": {
+    "name": "Trapinch",
+    "set": "BRS",
+    "number": "74"
+  },
+  "sv08-206": {
+    "name": "Vibrava",
+    "set": "SSP",
+    "number": "206"
+  },
+  "me02-101": {
+    "name": "Flygon",
+    "set": "PFL",
+    "number": "101"
+  },
+  "xy8-4": {
+    "name": "Cacnea",
+    "set": "BKT",
+    "number": "4"
+  },
+  "swsh5-5": {
+    "name": "Cacturne",
+    "set": "BST",
+    "number": "5"
+  },
+  "sv04-213": {
+    "name": "Swablu",
+    "set": "PAR",
+    "number": "213"
+  },
+  "sv04-253": {
+    "name": "Altaria ex",
+    "set": "PAR",
+    "number": "253"
+  },
+  "swsh6-120": {
+    "name": "Zangoose",
+    "set": "CRE",
+    "number": "120"
+  },
+  "sma-SV15": {
+    "name": "Seviper",
+    "set": "HIF",
+    "number": "SV15"
+  },
+  "swsh3-72": {
+    "name": "Lunatone",
+    "set": "DAA",
+    "number": "72"
+  },
+  "swsh3-92": {
+    "name": "Solrock",
+    "set": "DAA",
+    "number": "92"
+  },
+  "swsh2-99": {
+    "name": "Barboach",
+    "set": "RCL",
+    "number": "99"
+  },
+  "swsh2-100": {
+    "name": "Whiscash",
+    "set": "RCL",
+    "number": "100"
+  },
+  "swsh9-032": {
+    "name": "Corphish",
+    "set": "BRS",
+    "number": "32"
+  },
+  "swsh9-033": {
+    "name": "Crawdaunt",
+    "set": "BRS",
+    "number": "33"
+  },
+  "swsh9-058": {
+    "name": "Baltoy",
+    "set": "BRS",
+    "number": "58"
+  },
+  "me04-092": {
+    "name": "Claydol",
+    "set": "CRI",
+    "number": "92"
+  },
+  "sv07-145": {
+    "name": "Lileep",
+    "set": "SCR",
+    "number": "145"
+  },
+  "sv07-006": {
+    "name": "Cradily",
+    "set": "SCR",
+    "number": "6"
+  },
+  "swsh12-095": {
+    "name": "Anorith",
+    "set": "SIT",
+    "number": "95"
+  },
+  "swsh12-096": {
+    "name": "Armaldo",
+    "set": "SIT",
+    "number": "96"
+  },
+  "sv08-198": {
+    "name": "Feebas",
+    "set": "SSP",
+    "number": "198"
+  },
+  "sv08-237": {
+    "name": "Milotic ex",
+    "set": "SSP",
+    "number": "237"
+  },
+  "sv08-195": {
+    "name": "Castform Sunny Form",
+    "set": "SSP",
+    "number": "195"
+  },
+  "sv08-213": {
+    "name": "Kecleon",
+    "set": "SSP",
+    "number": "213"
+  },
+  "sma-SV16": {
+    "name": "Shuppet",
+    "set": "HIF",
+    "number": "SV16"
+  },
+  "me02.5-234": {
+    "name": "Banette",
+    "set": "ASC",
+    "number": "234"
+  },
+  "sv06.5-068": {
+    "name": "Duskull",
+    "set": "SFA",
+    "number": "68"
+  },
+  "sv06.5-069": {
+    "name": "Dusclops",
+    "set": "SFA",
+    "number": "69"
+  },
+  "sv02-195": {
+    "name": "Tropius",
+    "set": "PAL",
+    "number": "195"
+  },
+  "sv06-179": {
+    "name": "Chimecho",
+    "set": "TWM",
+    "number": "179"
+  },
+  "sv03-214": {
+    "name": "Absol ex",
+    "set": "OBF",
+    "number": "214"
+  },
+  "sm11-77": {
+    "name": "Wynaut",
+    "set": "UNM",
+    "number": "77"
+  },
+  "sv04-188": {
+    "name": "Snorunt",
+    "set": "PAR",
+    "number": "188"
+  },
+  "xy8-34": {
+    "name": "Glalie EX",
+    "set": "BKT",
+    "number": "34"
+  },
+  "sv08-199": {
+    "name": "Spheal",
+    "set": "SSP",
+    "number": "199"
+  },
+  "swsh6-38": {
+    "name": "Sealeo",
+    "set": "CRE",
+    "number": "38"
+  },
+  "swsh6-39": {
+    "name": "Walrein",
+    "set": "CRE",
+    "number": "39"
+  },
+  "sv10-195": {
+    "name": "Clamperl",
+    "set": "DRI",
+    "number": "195"
+  },
+  "swsh8-66": {
+    "name": "Huntail",
+    "set": "FST",
+    "number": "66"
+  },
+  "swsh8-67": {
+    "name": "Gorebyss",
+    "set": "FST",
+    "number": "67"
+  },
+  "sv05-173": {
+    "name": "Relicanth",
+    "set": "TEF",
+    "number": "173"
+  },
+  "swsh7-39": {
+    "name": "Luvdisc",
+    "set": "EVS",
+    "number": "39"
+  },
+  "swsh7-107": {
+    "name": "Bagon",
+    "set": "EVS",
+    "number": "107"
+  },
+  "swsh7-108": {
+    "name": "Shelgon",
+    "set": "EVS",
+    "number": "108"
+  },
+  "sv09-187": {
+    "name": "Salamence ex",
+    "set": "JTG",
+    "number": "187"
+  },
+  "sma-SV30": {
+    "name": "Beldum",
+    "set": "HIF",
+    "number": "SV30"
+  },
+  "me04-094": {
+    "name": "Metang",
+    "set": "CRI",
+    "number": "94"
+  },
+  "sv05-178": {
+    "name": "Metagross",
+    "set": "TEF",
+    "number": "178"
+  },
+  "sv10-214": {
+    "name": "Regirock ex",
+    "set": "DRI",
+    "number": "214"
+  },
+  "swsh10-037": {
+    "name": "Regice",
+    "set": "ASR",
+    "number": "37"
+  },
+  "bw6-122": {
+    "name": "Registeel-EX",
+    "set": "DRX",
+    "number": "122"
+  },
+  "sv08-239": {
+    "name": "Latias ex",
+    "set": "SSP",
+    "number": "239"
+  },
+  "sv08-203": {
+    "name": "Latios",
+    "set": "SSP",
+    "number": "203"
+  },
+  "xy5-54": {
+    "name": "Kyogre EX",
+    "set": "PRC",
+    "number": "54"
+  },
+  "sv04-199": {
+    "name": "Groudon",
+    "set": "PAR",
+    "number": "199"
+  },
+  "swsh7-218": {
+    "name": "Rayquaza VMAX",
+    "set": "EVS",
+    "number": "218"
+  },
+  "30th-155": {
+    "name": "Jirachi ex",
+    "set": "30C",
+    "number": "155"
+  },
+  "bw9-111": {
+    "name": "Deoxys-EX",
+    "set": "PLF",
+    "number": "111"
+  },
+  "sv05-164": {
+    "name": "Grotle",
+    "set": "TEF",
+    "number": "164"
+  },
+  "sv05-185": {
+    "name": "Torterra ex",
+    "set": "TEF",
+    "number": "185"
+  },
+  "xy11-19": {
+    "name": "Monferno",
+    "set": "STS",
+    "number": "19"
+  },
+  "sv06-173": {
+    "name": "Infernape",
+    "set": "TWM",
+    "number": "173"
+  },
+  "me02-098": {
+    "name": "Piplup",
+    "set": "PFL",
+    "number": "98"
+  },
+  "swsh9-036": {
+    "name": "Prinplup",
+    "set": "BRS",
+    "number": "36"
+  },
+  "me02-114": {
+    "name": "Empoleon ex",
+    "set": "PFL",
+    "number": "114"
+  },
+  "sv01-221": {
+    "name": "Starly",
+    "set": "SVI",
+    "number": "221"
+  },
+  "swsh9-118": {
+    "name": "Staravia",
+    "set": "BRS",
+    "number": "118"
+  },
+  "xy5-118": {
+    "name": "Bibarel",
+    "set": "PRC",
+    "number": "118"
+  },
+  "swsh12.5-010": {
+    "name": "Kricketot",
+    "set": "CRZ",
+    "number": "10"
+  },
+  "swsh5-142": {
+    "name": "Kricketune V",
+    "set": "BST",
+    "number": "142"
+  },
+  "sv04.5-135": {
+    "name": "Shinx",
+    "set": "PAF",
+    "number": "135"
+  },
+  "sv04.5-136": {
+    "name": "Luxio",
+    "set": "PAF",
+    "number": "136"
+  },
+  "sv06-195": {
+    "name": "Luxray ex",
+    "set": "TWM",
+    "number": "195"
+  },
+  "me02.5-221": {
+    "name": "Budew",
+    "set": "ASC",
+    "number": "221"
+  },
+  "xy2-9": {
+    "name": "Roserade",
+    "set": "FLF",
+    "number": "9"
+  },
+  "swsh10-076": {
+    "name": "Cranidos",
+    "set": "ASR",
+    "number": "76"
+  },
+  "me05-100": {
+    "name": "Rampardos ex",
+    "set": "PBL",
+    "number": "100"
+  },
+  "swsh10-109": {
+    "name": "Shieldon",
+    "set": "ASR",
+    "number": "109"
+  },
+  "me05-093": {
+    "name": "Bastiodon",
+    "set": "PBL",
+    "number": "93"
+  },
+  "swsh9-009": {
+    "name": "Burmy",
+    "set": "BRS",
+    "number": "9"
+  },
+  "swsh9-098": {
+    "name": "Wormadam",
+    "set": "BRS",
+    "number": "98"
+  },
+  "swsh9-011": {
+    "name": "Mothim",
+    "set": "BRS",
+    "number": "11"
+  },
+  "sv03-212": {
+    "name": "Vespiquen ex",
+    "set": "OBF",
+    "number": "212"
+  },
+  "sv01-208": {
+    "name": "Pachirisu",
+    "set": "SVI",
+    "number": "208"
+  },
+  "xy2-28": {
+    "name": "Buizel",
+    "set": "FLF",
+    "number": "28"
+  },
+  "swsh9-012": {
+    "name": "Cherubi",
+    "set": "BRS",
+    "number": "12"
+  },
+  "swsh11-039": {
+    "name": "Shellos",
+    "set": "LOR",
+    "number": "39"
+  },
+  "me02-107": {
+    "name": "Ambipom",
+    "set": "PFL",
+    "number": "107"
+  },
+  "30th-136": {
+    "name": "Drifloon",
+    "set": "30C",
+    "number": "136"
+  },
+  "sv04.5-156": {
+    "name": "Drifblim",
+    "set": "PAF",
+    "number": "156"
+  },
+  "xy2-84": {
+    "name": "Buneary",
+    "set": "FLF",
+    "number": "84"
+  },
+  "swsh8-213": {
+    "name": "Lopunny",
+    "set": "FST",
+    "number": "213"
+  },
+  "sv02-212": {
+    "name": "Mismagius",
+    "set": "PAL",
+    "number": "212"
+  },
+  "sm10-223": {
+    "name": "Honchkrow GX",
+    "set": "UNB",
+    "number": "223"
+  },
+  "swsh5-116": {
+    "name": "Purugly",
+    "set": "BST",
+    "number": "116"
+  },
+  "swsh2-114": {
+    "name": "Stunky",
+    "set": "RCL",
+    "number": "114"
+  },
+  "swsh12-181": {
+    "name": "Skuntank V",
+    "set": "SIT",
+    "number": "181"
+  },
+  "sv05-170": {
+    "name": "Bronzor",
+    "set": "TEF",
+    "number": "170"
+  },
+  "xy10-62": {
+    "name": "Bronzong BREAK",
+    "set": "FCO",
+    "number": "62"
+  },
+  "sv03-110": {
+    "name": "Bonsly",
+    "set": "OBF",
+    "number": "110"
+  },
+  "sv04.5-157": {
+    "name": "Mime Jr.",
+    "set": "PAF",
+    "number": "157"
+  },
+  "sm10-161": {
+    "name": "Happiny",
+    "set": "UNB",
+    "number": "161"
+  },
+  "sv05-181": {
+    "name": "Chatot",
+    "set": "TEF",
+    "number": "181"
+  },
+  "me01-148": {
+    "name": "Spiritomb",
+    "set": "MEG",
+    "number": "148"
+  },
+  "sma-SV38": {
+    "name": "Gible",
+    "set": "HIF",
+    "number": "SV38"
+  },
+  "sma-SV39": {
+    "name": "Gabite",
+    "set": "HIF",
+    "number": "SV39"
+  },
+  "sv04-245": {
+    "name": "Garchomp ex",
+    "set": "PAR",
+    "number": "245"
+  },
+  "sm11-173": {
+    "name": "Munchlax",
+    "set": "UNM",
+    "number": "173"
+  },
+  "sv01-215": {
+    "name": "Riolu",
+    "set": "SVI",
+    "number": "215"
+  },
+  "xy3-54": {
+    "name": "Lucario EX",
+    "set": "FFI",
+    "number": "54"
+  },
+  "xy5-88": {
+    "name": "Hippowdon",
+    "set": "PRC",
+    "number": "88"
+  },
+  "swsh1-121": {
+    "name": "Skorupi",
+    "set": "SSH",
+    "number": "121"
+  },
+  "me03-097": {
+    "name": "Drapion",
+    "set": "POR",
+    "number": "97"
+  },
+  "sv01-232": {
+    "name": "Toxicroak ex",
+    "set": "SVI",
+    "number": "232"
+  },
+  "xy4-18": {
+    "name": "Finneon",
+    "set": "PHF",
+    "number": "18"
+  },
+  "swsh9-156": {
+    "name": "Lumineon V",
+    "set": "BRS",
+    "number": "156"
+  },
+  "sv04-189": {
+    "name": "Mantyke",
+    "set": "PAR",
+    "number": "189"
+  },
+  "me01-140": {
+    "name": "Snover",
+    "set": "MEG",
+    "number": "140"
+  },
+  "sv04.5-101": {
+    "name": "Abomasnow",
+    "set": "PAF",
+    "number": "101"
+  },
+  "me02.5-228": {
+    "name": "Weavile",
+    "set": "ASC",
+    "number": "228"
+  },
+  "sv01-226": {
+    "name": "Magnezone ex",
+    "set": "SVI",
+    "number": "226"
+  },
+  "xy3-79": {
+    "name": "Lickilicky",
+    "set": "FFI",
+    "number": "79"
+  },
+  "swsh3-181": {
+    "name": "Rhyperior V",
+    "set": "DAA",
+    "number": "181"
+  },
+  "sv10-212": {
+    "name": "Electivire ex",
+    "set": "DRI",
+    "number": "212"
+  },
+  "swsh9-020": {
+    "name": "Magmortar",
+    "set": "BRS",
+    "number": "20"
+  },
+  "me02.5-235": {
+    "name": "Togekiss",
+    "set": "ASC",
+    "number": "235"
+  },
+  "sv10-228": {
+    "name": "Yanmega ex",
+    "set": "DRI",
+    "number": "228"
+  },
+  "g1-10": {
+    "name": "Leafeon EX",
+    "set": "GEN",
+    "number": "10"
+  },
+  "xy10-20": {
+    "name": "Glaceon EX",
+    "set": "FCO",
+    "number": "20"
+  },
+  "swsh8-141": {
+    "name": "Gliscor",
+    "set": "FST",
+    "number": "141"
+  },
+  "sv09-174": {
+    "name": "Mamoswine ex",
+    "set": "JTG",
+    "number": "174"
+  },
+  "sv04-214": {
+    "name": "Porygon-Z",
+    "set": "PAR",
+    "number": "214"
+  },
+  "sm12-244": {
+    "name": "Gallade",
+    "set": "CEC",
+    "number": "244"
+  },
+  "sv06-182": {
+    "name": "Probopass",
+    "set": "TWM",
+    "number": "182"
+  },
+  "sv06.5-070": {
+    "name": "Dusknoir",
+    "set": "SFA",
+    "number": "70"
+  },
+  "sv06-174": {
+    "name": "Froslass",
+    "set": "TWM",
+    "number": "174"
+  },
+  "me02-126": {
+    "name": "Rotom ex",
+    "set": "PFL",
+    "number": "126"
+  },
+  "swsh10-065": {
+    "name": "Uxie",
+    "set": "ASR",
+    "number": "65"
+  },
+  "sv08-204": {
+    "name": "Mesprit",
+    "set": "SSP",
+    "number": "204"
+  },
+  "swsh10-067": {
+    "name": "Azelf",
+    "set": "ASR",
+    "number": "67"
+  },
+  "sm5-146": {
+    "name": "Dialga GX",
+    "set": "UPR",
+    "number": "146"
+  },
+  "sm6-132": {
+    "name": "Palkia GX",
+    "set": "FLI",
+    "number": "132"
+  },
+  "sm11-216": {
+    "name": "Heatran GX",
+    "set": "UNM",
+    "number": "216"
+  },
+  "bw4-99": {
+    "name": "Regigigas-EX",
+    "set": "NXD",
+    "number": "99"
+  },
+  "swsh11-185": {
+    "name": "Giratina V",
+    "set": "LOR",
+    "number": "185"
+  },
+  "sv06.5-071": {
+    "name": "Cresselia",
+    "set": "SFA",
+    "number": "71"
+  },
+  "sv06-175": {
+    "name": "Phione",
+    "set": "TWM",
+    "number": "175"
+  },
+  "xy9-32": {
+    "name": "Manaphy EX",
+    "set": "BKP",
+    "number": "32"
+  },
+  "sm3-158": {
+    "name": "Darkrai GX",
+    "set": "BUS",
+    "number": "158"
+  },
+  "sv10-185": {
+    "name": "Shaymin",
+    "set": "DRI",
+    "number": "185"
+  },
+  "swsh9-166": {
+    "name": "Arceus V",
+    "set": "BRS",
+    "number": "166"
+  },
+  "sv10.5w-172": {
+    "name": "Victini",
+    "set": "WHT",
+    "number": "172"
+  },
+  "sv10.5b-087": {
+    "name": "Snivy",
+    "set": "BLK",
+    "number": "87"
+  },
+  "sv10.5b-088": {
+    "name": "Servine",
+    "set": "BLK",
+    "number": "88"
+  },
+  "sv10.5b-164": {
+    "name": "Serperior ex",
+    "set": "BLK",
+    "number": "164"
+  },
+  "sv10.5w-096": {
+    "name": "Tepig",
+    "set": "WHT",
+    "number": "96"
+  },
+  "sv10.5w-097": {
+    "name": "Pignite",
+    "set": "WHT",
+    "number": "97"
+  },
+  "sv10.5w-098": {
+    "name": "Emboar",
+    "set": "WHT",
+    "number": "98"
+  },
+  "sv10.5w-105": {
+    "name": "Oshawott",
+    "set": "WHT",
+    "number": "105"
+  },
+  "sv10.5w-106": {
+    "name": "Dewott",
+    "set": "WHT",
+    "number": "106"
+  },
+  "sv10.5w-107": {
+    "name": "Samurott",
+    "set": "WHT",
+    "number": "107"
+  },
+  "sv10.5w-152": {
+    "name": "Patrat",
+    "set": "WHT",
+    "number": "152"
+  },
+  "sv10.5w-153": {
+    "name": "Watchog",
+    "set": "WHT",
+    "number": "153"
+  },
+  "sv10.5w-154": {
+    "name": "Lillipup",
+    "set": "WHT",
+    "number": "154"
+  },
+  "sv10.5w-155": {
+    "name": "Herdier",
+    "set": "WHT",
+    "number": "155"
+  },
+  "sv10.5w-156": {
+    "name": "Stoutland",
+    "set": "WHT",
+    "number": "156"
+  },
+  "sv10.5w-136": {
+    "name": "Purrloin",
+    "set": "WHT",
+    "number": "136"
+  },
+  "sv10.5w-137": {
+    "name": "Liepard",
+    "set": "WHT",
+    "number": "137"
+  },
+  "sv10.5b-089": {
+    "name": "Pansage",
+    "set": "BLK",
+    "number": "89"
+  },
+  "sv10.5b-090": {
+    "name": "Simisage",
+    "set": "BLK",
+    "number": "90"
+  },
+  "sv10.5w-099": {
+    "name": "Pansear",
+    "set": "WHT",
+    "number": "99"
+  },
+  "sv10.5w-100": {
+    "name": "Simisear",
+    "set": "WHT",
+    "number": "100"
+  },
+  "sv10.5b-101": {
+    "name": "Panpour",
+    "set": "BLK",
+    "number": "101"
+  },
+  "sv10.5b-102": {
+    "name": "Simipour",
+    "set": "BLK",
+    "number": "102"
+  },
+  "sv10.5b-116": {
+    "name": "Munna",
+    "set": "BLK",
+    "number": "116"
+  },
+  "sv10.5b-117": {
+    "name": "Musharna",
+    "set": "BLK",
+    "number": "117"
+  },
+  "sv10.5b-148": {
+    "name": "Pidove",
+    "set": "BLK",
+    "number": "148"
+  },
+  "sv10.5b-149": {
+    "name": "Tranquill",
+    "set": "BLK",
+    "number": "149"
+  },
+  "sv10.5b-150": {
+    "name": "Unfezant",
+    "set": "BLK",
+    "number": "150"
+  },
+  "sv10.5w-114": {
+    "name": "Blitzle",
+    "set": "WHT",
+    "number": "114"
+  },
+  "sv10.5w-115": {
+    "name": "Zebstrika",
+    "set": "WHT",
+    "number": "115"
+  },
+  "sv10.5w-127": {
+    "name": "Roggenrola",
+    "set": "WHT",
+    "number": "127"
+  },
+  "sv10.5w-128": {
+    "name": "Boldore",
+    "set": "WHT",
+    "number": "128"
+  },
+  "sv10.5w-129": {
+    "name": "Gigalith",
+    "set": "WHT",
+    "number": "129"
+  },
+  "sv10.5w-119": {
+    "name": "Woobat",
+    "set": "WHT",
+    "number": "119"
+  },
+  "sv10.5w-120": {
+    "name": "Swoobat",
+    "set": "WHT",
+    "number": "120"
+  },
+  "sv10.5b-124": {
+    "name": "Drilbur",
+    "set": "BLK",
+    "number": "124"
+  },
+  "sv10.5b-168": {
+    "name": "Excadrill ex",
+    "set": "BLK",
+    "number": "168"
+  },
+  "sv10.5b-151": {
+    "name": "Audino",
+    "set": "BLK",
+    "number": "151"
+  },
+  "sv10.5b-125": {
+    "name": "Timburr",
+    "set": "BLK",
+    "number": "125"
+  },
+  "sv10.5b-126": {
+    "name": "Gurdurr",
+    "set": "BLK",
+    "number": "126"
+  },
+  "sv10.5b-127": {
+    "name": "Conkeldurr",
+    "set": "BLK",
+    "number": "127"
+  },
+  "sv10.5b-103": {
+    "name": "Tympole",
+    "set": "BLK",
+    "number": "103"
+  },
+  "sv10.5b-104": {
+    "name": "Palpitoad",
+    "set": "BLK",
+    "number": "104"
+  },
+  "sv10.5b-105": {
+    "name": "Seismitoad",
+    "set": "BLK",
+    "number": "105"
+  },
+  "sv10.5b-128": {
+    "name": "Throh",
+    "set": "BLK",
+    "number": "128"
+  },
+  "sv10.5w-130": {
+    "name": "Sawk",
+    "set": "WHT",
+    "number": "130"
+  },
+  "sv10.5w-087": {
+    "name": "Sewaddle",
+    "set": "WHT",
+    "number": "87"
+  },
+  "sv10.5w-088": {
+    "name": "Swadloon",
+    "set": "WHT",
+    "number": "88"
+  },
+  "sv10.5w-089": {
+    "name": "Leavanny",
+    "set": "WHT",
+    "number": "89"
+  },
+  "sv10.5b-132": {
+    "name": "Venipede",
+    "set": "BLK",
+    "number": "132"
+  },
+  "sv10.5b-133": {
+    "name": "Whirlipede",
+    "set": "BLK",
+    "number": "133"
+  },
+  "sv10.5b-134": {
+    "name": "Scolipede",
+    "set": "BLK",
+    "number": "134"
+  },
+  "sv10.5w-090": {
+    "name": "Cottonee",
+    "set": "WHT",
+    "number": "90"
+  },
+  "sv10.5w-165": {
+    "name": "Whimsicott ex",
+    "set": "WHT",
+    "number": "165"
+  },
+  "sv10.5b-091": {
+    "name": "Petilil",
+    "set": "BLK",
+    "number": "91"
+  },
+  "sv10.5b-092": {
+    "name": "Lilligant",
+    "set": "BLK",
+    "number": "92"
+  },
+  "sv10.5w-108": {
+    "name": "Basculin",
+    "set": "WHT",
+    "number": "108"
+  },
+  "sv10.5b-135": {
+    "name": "Sandile",
+    "set": "BLK",
+    "number": "135"
+  },
+  "sv10.5b-136": {
+    "name": "Krokorok",
+    "set": "BLK",
+    "number": "136"
+  },
+  "sv10.5b-137": {
+    "name": "Krookodile",
+    "set": "BLK",
+    "number": "137"
+  },
+  "sv10.5b-097": {
+    "name": "Darumaka",
+    "set": "BLK",
+    "number": "97"
+  },
+  "sv10.5b-098": {
+    "name": "Darmanitan",
+    "set": "BLK",
+    "number": "98"
+  },
+  "sv10.5b-093": {
+    "name": "Maractus",
+    "set": "BLK",
+    "number": "93"
+  },
+  "sv10.5b-129": {
+    "name": "Dwebble",
+    "set": "BLK",
+    "number": "129"
+  },
+  "sv10.5b-130": {
+    "name": "Crustle",
+    "set": "BLK",
+    "number": "130"
+  },
+  "sv10.5w-138": {
+    "name": "Scraggy",
+    "set": "WHT",
+    "number": "138"
+  },
+  "sv10.5w-139": {
+    "name": "Scrafty",
+    "set": "WHT",
+    "number": "139"
+  },
+  "sv10.5w-121": {
+    "name": "Sigilyph",
+    "set": "WHT",
+    "number": "121"
+  },
+  "sv10.5w-122": {
+    "name": "Yamask",
+    "set": "WHT",
+    "number": "122"
+  },
+  "sv10.5w-123": {
+    "name": "Cofagrigus",
+    "set": "WHT",
+    "number": "123"
+  },
+  "sv10.5b-106": {
+    "name": "Tirtouga",
+    "set": "BLK",
+    "number": "106"
+  },
+  "sv10.5b-107": {
+    "name": "Carracosta",
+    "set": "BLK",
+    "number": "107"
+  },
+  "sv10.5w-131": {
+    "name": "Archen",
+    "set": "WHT",
+    "number": "131"
+  },
+  "sv10.5w-132": {
+    "name": "Archeops",
+    "set": "WHT",
+    "number": "132"
+  },
+  "sv10.5w-140": {
+    "name": "Trubbish",
+    "set": "WHT",
+    "number": "140"
+  },
+  "sv10.5w-141": {
+    "name": "Garbodor",
+    "set": "WHT",
+    "number": "141"
+  },
+  "sv10.5w-142": {
+    "name": "Zorua",
+    "set": "WHT",
+    "number": "142"
+  },
+  "sv10.5w-143": {
+    "name": "Zoroark",
+    "set": "WHT",
+    "number": "143"
+  },
+  "sv10.5b-152": {
+    "name": "Minccino",
+    "set": "BLK",
+    "number": "152"
+  },
+  "me04-119": {
+    "name": "Cinccino ex",
+    "set": "CRI",
+    "number": "119"
+  },
+  "sv10.5w-124": {
+    "name": "Gothita",
+    "set": "WHT",
+    "number": "124"
+  },
+  "sv10.5w-125": {
+    "name": "Gothorita",
+    "set": "WHT",
+    "number": "125"
+  },
+  "swsh3-75": {
+    "name": "Gothitelle",
+    "set": "DAA",
+    "number": "75"
+  },
+  "sv10.5b-118": {
+    "name": "Solosis",
+    "set": "BLK",
+    "number": "118"
+  },
+  "sv10.5b-119": {
+    "name": "Duosion",
+    "set": "BLK",
+    "number": "119"
+  },
+  "sv05-171": {
+    "name": "Reuniclus",
+    "set": "TEF",
+    "number": "171"
+  },
+  "sv10.5w-109": {
+    "name": "Ducklett",
+    "set": "WHT",
+    "number": "109"
+  },
+  "sv10.5w-110": {
+    "name": "Swanna",
+    "set": "WHT",
+    "number": "110"
+  },
+  "sv10.5w-111": {
+    "name": "Vanillite",
+    "set": "WHT",
+    "number": "111"
+  },
+  "sv10.5w-112": {
+    "name": "Vanillish",
+    "set": "WHT",
+    "number": "112"
+  },
+  "sv10.5w-113": {
+    "name": "Vanilluxe",
+    "set": "WHT",
+    "number": "113"
+  },
+  "sv10.5w-091": {
+    "name": "Deerling",
+    "set": "WHT",
+    "number": "91"
+  },
+  "sv10.5w-092": {
+    "name": "Sawsbuck",
+    "set": "WHT",
+    "number": "92"
+  },
+  "sv10.5b-112": {
+    "name": "Emolga",
+    "set": "BLK",
+    "number": "112"
+  },
+  "sv10.5b-094": {
+    "name": "Karrablast",
+    "set": "BLK",
+    "number": "94"
+  },
+  "sv10.5b-138": {
+    "name": "Escavalier",
+    "set": "BLK",
+    "number": "138"
+  },
+  "sv10.5b-095": {
+    "name": "Foongus",
+    "set": "BLK",
+    "number": "95"
+  },
+  "sv10.5b-096": {
+    "name": "Amoonguss",
+    "set": "BLK",
+    "number": "96"
+  },
+  "sv10.5w-126": {
+    "name": "Frillish",
+    "set": "WHT",
+    "number": "126"
+  },
+  "sv10.5w-168": {
+    "name": "Jellicent ex",
+    "set": "WHT",
+    "number": "168"
+  },
+  "sv10.5b-108": {
+    "name": "Alomomola",
+    "set": "BLK",
+    "number": "108"
+  },
+  "sv10.5w-116": {
+    "name": "Joltik",
+    "set": "WHT",
+    "number": "116"
+  },
+  "sv07-168": {
+    "name": "Galvantula ex",
+    "set": "SCR",
+    "number": "168"
+  },
+  "sv10.5w-148": {
+    "name": "Ferroseed",
+    "set": "WHT",
+    "number": "148"
+  },
+  "sv10.5w-149": {
+    "name": "Ferrothorn",
+    "set": "WHT",
+    "number": "149"
+  },
+  "sv10.5b-139": {
+    "name": "Klink",
+    "set": "BLK",
+    "number": "139"
+  },
+  "sv10.5b-140": {
+    "name": "Klang",
+    "set": "BLK",
+    "number": "140"
+  },
+  "sv10.5b-141": {
+    "name": "Klinklang",
+    "set": "BLK",
+    "number": "141"
+  },
+  "sv10.5b-113": {
+    "name": "Tynamo",
+    "set": "BLK",
+    "number": "113"
+  },
+  "sv10.5b-114": {
+    "name": "Eelektrik",
+    "set": "BLK",
+    "number": "114"
+  },
+  "sv10.5b-115": {
+    "name": "Eelektross",
+    "set": "BLK",
+    "number": "115"
+  },
+  "sv10.5b-120": {
+    "name": "Elgyem",
+    "set": "BLK",
+    "number": "120"
+  },
+  "sv10.5b-121": {
+    "name": "Beheeyem",
+    "set": "BLK",
+    "number": "121"
+  },
+  "sv10.5w-101": {
+    "name": "Litwick",
+    "set": "WHT",
+    "number": "101"
+  },
+  "sv10.5w-102": {
+    "name": "Lampent",
+    "set": "WHT",
+    "number": "102"
+  },
+  "sv10.5w-103": {
+    "name": "Chandelure",
+    "set": "WHT",
+    "number": "103"
+  },
+  "sv10.5b-145": {
+    "name": "Axew",
+    "set": "BLK",
+    "number": "145"
+  },
+  "sv10.5b-146": {
+    "name": "Fraxure",
+    "set": "BLK",
+    "number": "146"
+  },
+  "sv10.5b-147": {
+    "name": "Haxorus",
+    "set": "BLK",
+    "number": "147"
+  },
+  "sv10.5b-109": {
+    "name": "Cubchoo",
+    "set": "BLK",
+    "number": "109"
+  },
+  "sv10.5b-110": {
+    "name": "Beartic",
+    "set": "BLK",
+    "number": "110"
+  },
+  "sv10.5b-111": {
+    "name": "Cryogonal",
+    "set": "BLK",
+    "number": "111"
+  },
+  "sv10.5w-093": {
+    "name": "Shelmet",
+    "set": "WHT",
+    "number": "93"
+  },
+  "sv10.5w-094": {
+    "name": "Accelgor",
+    "set": "WHT",
+    "number": "94"
+  },
+  "sv10.5w-118": {
+    "name": "Stunfisk",
+    "set": "WHT",
+    "number": "118"
+  },
+  "sv10.5w-133": {
+    "name": "Mienfoo",
+    "set": "WHT",
+    "number": "133"
+  },
+  "sv10.5w-134": {
+    "name": "Mienshao",
+    "set": "WHT",
+    "number": "134"
+  },
+  "sv10.5w-151": {
+    "name": "Druddigon",
+    "set": "WHT",
+    "number": "151"
+  },
+  "sv10.5b-122": {
+    "name": "Golett",
+    "set": "BLK",
+    "number": "122"
+  },
+  "sv10.5b-123": {
+    "name": "Golurk",
+    "set": "BLK",
+    "number": "123"
+  },
+  "sv10.5b-142": {
+    "name": "Pawniard",
+    "set": "BLK",
+    "number": "142"
+  },
+  "sv10.5b-143": {
+    "name": "Bisharp",
+    "set": "BLK",
+    "number": "143"
+  },
+  "sv10.5w-170": {
+    "name": "Bouffalant ex",
+    "set": "WHT",
+    "number": "170"
+  },
+  "sv10.5b-154": {
+    "name": "Rufflet",
+    "set": "BLK",
+    "number": "154"
+  },
+  "sv10.5b-155": {
+    "name": "Braviary",
+    "set": "BLK",
+    "number": "155"
+  },
+  "sv10.5w-144": {
+    "name": "Vullaby",
+    "set": "WHT",
+    "number": "144"
+  },
+  "sv10.5w-145": {
+    "name": "Mandibuzz",
+    "set": "WHT",
+    "number": "145"
+  },
+  "sv10.5w-104": {
+    "name": "Heatmor",
+    "set": "WHT",
+    "number": "104"
+  },
+  "sv08-236": {
+    "name": "Durant ex",
+    "set": "SSP",
+    "number": "236"
+  },
+  "sv10.5w-146": {
+    "name": "Deino",
+    "set": "WHT",
+    "number": "146"
+  },
+  "sv10.5w-147": {
+    "name": "Zweilous",
+    "set": "WHT",
+    "number": "147"
+  },
+  "sv10.5w-169": {
+    "name": "Hydreigon ex",
+    "set": "WHT",
+    "number": "169"
+  },
+  "sv10.5b-099": {
+    "name": "Larvesta",
+    "set": "BLK",
+    "number": "99"
+  },
+  "sv10.5b-100": {
+    "name": "Volcarona",
+    "set": "BLK",
+    "number": "100"
+  },
+  "sv10.5b-144": {
+    "name": "Cobalion",
+    "set": "BLK",
+    "number": "144"
+  },
+  "sv10.5w-135": {
+    "name": "Terrakion",
+    "set": "WHT",
+    "number": "135"
+  },
+  "sv10.5w-095": {
+    "name": "Virizion",
+    "set": "WHT",
+    "number": "95"
+  },
+  "swsh6-185": {
+    "name": "Tornadus V",
+    "set": "CRE",
+    "number": "185"
+  },
+  "xy6-98": {
+    "name": "Thundurus EX",
+    "set": "ROS",
+    "number": "98"
+  },
+  "sv10.5w-166": {
+    "name": "Reshiram ex",
+    "set": "WHT",
+    "number": "166"
+  },
+  "sv10.5b-166": {
+    "name": "Zekrom ex",
+    "set": "BLK",
+    "number": "166"
+  },
+  "sv10.5b-131": {
+    "name": "Landorus",
+    "set": "BLK",
+    "number": "131"
+  },
+  "sv10.5b-165": {
+    "name": "Kyurem ex",
+    "set": "BLK",
+    "number": "165"
+  },
+  "sv10.5w-167": {
+    "name": "Keldeo ex",
+    "set": "WHT",
+    "number": "167"
+  },
+  "sv10.5b-167": {
+    "name": "Meloetta ex",
+    "set": "BLK",
+    "number": "167"
+  },
+  "sv10.5b-169": {
+    "name": "Genesect ex",
+    "set": "BLK",
+    "number": "169"
+  },
+  "me04-087": {
+    "name": "Chespin",
+    "set": "CRI",
+    "number": "87"
+  },
+  "me04-006": {
+    "name": "Quilladin",
+    "set": "CRI",
+    "number": "6"
+  },
+  "swsh12-171": {
+    "name": "Chesnaught V",
+    "set": "SIT",
+    "number": "171"
+  },
+  "swsh12-025": {
+    "name": "Fennekin",
+    "set": "SIT",
+    "number": "25"
+  },
+  "swsh12-026": {
+    "name": "Braixen",
+    "set": "SIT",
+    "number": "26"
+  },
+  "swsh11-173": {
+    "name": "Delphox V",
+    "set": "LOR",
+    "number": "173"
+  },
+  "me04-088": {
+    "name": "Froakie",
+    "set": "CRI",
+    "number": "88"
+  },
+  "me04-089": {
+    "name": "Frogadier",
+    "set": "CRI",
+    "number": "89"
+  },
+  "sv06-214": {
+    "name": "Greninja ex",
+    "set": "TWM",
+    "number": "214"
+  },
+  "swsh8-215": {
+    "name": "Diggersby",
+    "set": "FST",
+    "number": "215"
+  },
+  "swsh7-138": {
+    "name": "Fletchling",
+    "set": "EVS",
+    "number": "138"
+  },
+  "sv02-199": {
+    "name": "Fletchinder",
+    "set": "PAL",
+    "number": "199"
+  },
+  "me03-091": {
+    "name": "Talonflame",
+    "set": "POR",
+    "number": "91"
+  },
+  "swsh5-11": {
+    "name": "Scatterbug",
+    "set": "BST",
+    "number": "11"
+  },
+  "me03-089": {
+    "name": "Spewpa",
+    "set": "POR",
+    "number": "89"
+  },
+  "sv08-193": {
+    "name": "Vivillon",
+    "set": "SSP",
+    "number": "193"
+  },
+  "me01-139": {
+    "name": "Litleo",
+    "set": "MEG",
+    "number": "139"
+  },
+  "sv02-200": {
+    "name": "Pyroar",
+    "set": "PAL",
+    "number": "200"
+  },
+  "swsh7-72": {
+    "name": "Floette",
+    "set": "EVS",
+    "number": "72"
+  },
+  "swsh7-73": {
+    "name": "Florges",
+    "set": "EVS",
+    "number": "73"
+  },
+  "xy8-16": {
+    "name": "Skiddo",
+    "set": "BKT",
+    "number": "16"
+  },
+  "swsh4-18": {
+    "name": "Gogoat",
+    "set": "VIV",
+    "number": "18"
+  },
+  "xy9-71": {
+    "name": "Pancham",
+    "set": "BKP",
+    "number": "71"
+  },
+  "swsh8-174": {
+    "name": "Pangoro",
+    "set": "FST",
+    "number": "174"
+  },
+  "swsh6-126": {
+    "name": "Furfrou",
+    "set": "CRE",
+    "number": "126"
+  },
+  "me03-095": {
+    "name": "Espurr",
+    "set": "POR",
+    "number": "95"
+  },
+  "g1-37": {
+    "name": "Meowstic EX",
+    "set": "GEN",
+    "number": "37"
+  },
+  "swsh5-105": {
+    "name": "Honedge",
+    "set": "BST",
+    "number": "105"
+  },
+  "me03-098": {
+    "name": "Doublade",
+    "set": "POR",
+    "number": "98"
+  },
+  "sv04-210": {
+    "name": "Aegislash",
+    "set": "PAR",
+    "number": "210"
+  },
+  "sv08.5-038": {
+    "name": "Spritzee",
+    "set": "PRE",
+    "number": "38"
+  },
+  "sv08.5-039": {
+    "name": "Aromatisse",
+    "set": "PRE",
+    "number": "39"
+  },
+  "swsh6-67": {
+    "name": "Swirlix",
+    "set": "CRE",
+    "number": "67"
+  },
+  "me02.5-236": {
+    "name": "Slurpuff",
+    "set": "ASC",
+    "number": "236"
+  },
+  "sma-SV17": {
+    "name": "Inkay",
+    "set": "HIF",
+    "number": "SV17"
+  },
+  "swsh2-186": {
+    "name": "Malamar V",
+    "set": "RCL",
+    "number": "186"
+  },
+  "swsh2-103": {
+    "name": "Binacle",
+    "set": "RCL",
+    "number": "103"
+  },
+  "swsh2-104": {
+    "name": "Barbaracle",
+    "set": "RCL",
+    "number": "104"
+  },
+  "swsh12.5-081": {
+    "name": "Skrelp",
+    "set": "CRZ",
+    "number": "81"
+  },
+  "xy9-86": {
+    "name": "Dragalge",
+    "set": "BKP",
+    "number": "86"
+  },
+  "sv01-205": {
+    "name": "Clauncher",
+    "set": "SVI",
+    "number": "205"
+  },
+  "me01-141": {
+    "name": "Clawitzer",
+    "set": "MEG",
+    "number": "141"
+  },
+  "me01-143": {
+    "name": "Helioptile",
+    "set": "MEG",
+    "number": "143"
+  },
+  "sv06-177": {
+    "name": "Heliolisk",
+    "set": "TWM",
+    "number": "177"
+  },
+  "me03-044": {
+    "name": "Tyrunt",
+    "set": "POR",
+    "number": "44"
+  },
+  "xy3-62": {
+    "name": "Tyrantrum",
+    "set": "FFI",
+    "number": "62"
+  },
+  "me03-023": {
+    "name": "Amaura",
+    "set": "POR",
+    "number": "23"
+  },
+  "me03-092": {
+    "name": "Aurorus",
+    "set": "POR",
+    "number": "92"
+  },
+  "g1-RC21": {
+    "name": "Sylveon EX",
+    "set": "GEN",
+    "number": "RC21"
+  },
+  "xy8-87": {
+    "name": "Hawlucha",
+    "set": "BKT",
+    "number": "87"
+  },
+  "me03-093": {
+    "name": "Dedenne",
+    "set": "POR",
+    "number": "93"
+  },
+  "me02.5-242": {
+    "name": "Carbink",
+    "set": "ASC",
+    "number": "242"
+  },
+  "xy7-58": {
+    "name": "Goomy",
+    "set": "AOR",
+    "number": "58"
+  },
+  "me04-095": {
+    "name": "Sliggoo",
+    "set": "CRI",
+    "number": "95"
+  },
+  "swsh11-202": {
+    "name": "Hisuian Goodra VSTAR",
+    "set": "LOR",
+    "number": "202"
+  },
+  "sv04.5-159": {
+    "name": "Klefki",
+    "set": "PAF",
+    "number": "159"
+  },
+  "swsh8-16": {
+    "name": "Phantump",
+    "set": "FST",
+    "number": "16"
+  },
+  "xy9-66": {
+    "name": "Trevenant BREAK",
+    "set": "BKP",
+    "number": "66"
+  },
+  "swsh7-76": {
+    "name": "Pumpkaboo",
+    "set": "EVS",
+    "number": "76"
+  },
+  "me04-102": {
+    "name": "Gourgeist ex",
+    "set": "CRI",
+    "number": "102"
+  },
+  "swsh7-44": {
+    "name": "Bergmite",
+    "set": "EVS",
+    "number": "44"
+  },
+  "swsh7-45": {
+    "name": "Avalugg",
+    "set": "EVS",
+    "number": "45"
+  },
+  "sv09-169": {
+    "name": "Noibat",
+    "set": "JTG",
+    "number": "169"
+  },
+  "sv04.5-220": {
+    "name": "Noivern ex",
+    "set": "PAF",
+    "number": "220"
+  },
+  "me04-091": {
+    "name": "Xerneas",
+    "set": "CRI",
+    "number": "91"
+  },
+  "sv04-205": {
+    "name": "Yveltal",
+    "set": "PAR",
+    "number": "205"
+  },
+  "sm6-73": {
+    "name": "Zygarde GX",
+    "set": "FLI",
+    "number": "73"
+  },
+  "swsh4-79": {
+    "name": "Diancie",
+    "set": "VIV",
+    "number": "79"
+  },
+  "sv04-226": {
+    "name": "Hoopa ex",
+    "set": "PAR",
+    "number": "226"
+  },
+  "sv09-182": {
+    "name": "Volcanion ex",
+    "set": "JTG",
+    "number": "182"
+  },
+  "me03-090": {
+    "name": "Rowlet",
+    "set": "POR",
+    "number": "90"
+  },
+  "sma-SV3": {
+    "name": "Dartrix",
+    "set": "HIF",
+    "number": "SV3"
+  },
+  "sm2-146": {
+    "name": "Decidueye GX",
+    "set": "GRI",
+    "number": "146"
+  },
+  "sv05-167": {
+    "name": "Litten",
+    "set": "TEF",
+    "number": "167"
+  },
+  "swsh12-031": {
+    "name": "Torracat",
+    "set": "SIT",
+    "number": "31"
+  },
+  "sv05-187": {
+    "name": "Incineroar ex",
+    "set": "TEF",
+    "number": "187"
+  },
+  "sm8-65": {
+    "name": "Popplio",
+    "set": "LOT",
+    "number": "65"
+  },
+  "sm8-66": {
+    "name": "Brionne",
+    "set": "LOT",
+    "number": "66"
+  },
+  "me05-088": {
+    "name": "Primarina",
+    "set": "PBL",
+    "number": "88"
+  },
+  "swsh4-144": {
+    "name": "Trumbeak",
+    "set": "VIV",
+    "number": "144"
+  },
+  "me05-094": {
+    "name": "Toucannon",
+    "set": "PBL",
+    "number": "94"
+  },
+  "swsh12.5-117": {
+    "name": "Yungoos",
+    "set": "CRZ",
+    "number": "117"
+  },
+  "me01-153": {
+    "name": "Gumshoos",
+    "set": "MEG",
+    "number": "153"
+  },
+  "swsh8-18": {
+    "name": "Grubbin",
+    "set": "FST",
+    "number": "18"
+  },
+  "sv05-169": {
+    "name": "Charjabug",
+    "set": "TEF",
+    "number": "169"
+  },
+  "me02.5-230": {
+    "name": "Vikavolt",
+    "set": "ASC",
+    "number": "230"
+  },
+  "sv07-149": {
+    "name": "Crabominable",
+    "set": "SCR",
+    "number": "149"
+  },
+  "sv04.5-113": {
+    "name": "Oricorio",
+    "set": "PAF",
+    "number": "113"
+  },
+  "sv05-172": {
+    "name": "Cutiefly",
+    "set": "TEF",
+    "number": "172"
+  },
+  "swsh7-79": {
+    "name": "Ribombee",
+    "set": "EVS",
+    "number": "79"
+  },
+  "sma-SV23": {
+    "name": "Rockruff",
+    "set": "HIF",
+    "number": "SV23"
+  },
+  "sv09-166": {
+    "name": "Lycanroc",
+    "set": "JTG",
+    "number": "166"
+  },
+  "sm2-151": {
+    "name": "Wishiwashi GX",
+    "set": "GRI",
+    "number": "151"
+  },
+  "swsh3-51": {
+    "name": "Mareanie",
+    "set": "DAA",
+    "number": "51"
+  },
+  "sm2-154": {
+    "name": "Toxapex GX",
+    "set": "GRI",
+    "number": "154"
+  },
+  "swsh4-96": {
+    "name": "Mudbray",
+    "set": "VIV",
+    "number": "96"
+  },
+  "sv05-175": {
+    "name": "Mudsdale",
+    "set": "TEF",
+    "number": "175"
+  },
+  "swsh8-19": {
+    "name": "Dewpider",
+    "set": "FST",
+    "number": "19"
+  },
+  "swsh8-20": {
+    "name": "Araquanid",
+    "set": "FST",
+    "number": "20"
+  },
+  "me05-085": {
+    "name": "Fomantis",
+    "set": "PBL",
+    "number": "85"
+  },
+  "sm1-150": {
+    "name": "Lurantis GX",
+    "set": "SUM",
+    "number": "150"
+  },
+  "sv08-194": {
+    "name": "Shiinotic",
+    "set": "SSP",
+    "number": "194"
+  },
+  "me02.5-224": {
+    "name": "Salazzle",
+    "set": "ASC",
+    "number": "224"
+  },
+  "me01-154": {
+    "name": "Stufful",
+    "set": "MEG",
+    "number": "154"
+  },
+  "sv06.5-079": {
+    "name": "Bewear",
+    "set": "SFA",
+    "number": "79"
+  },
+  "swsh6-13": {
+    "name": "Bounsweet",
+    "set": "CRE",
+    "number": "13"
+  },
+  "swsh6-14": {
+    "name": "Steenee",
+    "set": "CRE",
+    "number": "14"
+  },
+  "sv04-220": {
+    "name": "Tsareena ex",
+    "set": "PAR",
+    "number": "220"
+  },
+  "swsh4-199": {
+    "name": "Oranguru",
+    "set": "VIV",
+    "number": "199"
+  },
+  "swsh6-88": {
+    "name": "Passimian",
+    "set": "CRE",
+    "number": "88"
+  },
+  "sv04-191": {
+    "name": "Wimpod",
+    "set": "PAR",
+    "number": "191"
+  },
+  "sv04-246": {
+    "name": "Golisopod ex",
+    "set": "PAR",
+    "number": "246"
+  },
+  "sv02-214": {
+    "name": "Sandygast",
+    "set": "PAL",
+    "number": "214"
+  },
+  "sv08-221": {
+    "name": "Palossand ex",
+    "set": "SSP",
+    "number": "221"
+  },
+  "swsh8-77": {
+    "name": "Pyukumuku",
+    "set": "FST",
+    "number": "77"
+  },
+  "sma-SV45": {
+    "name": "Type: Null",
+    "set": "HIF",
+    "number": "SV45"
+  },
+  "me05-095": {
+    "name": "Silvally",
+    "set": "PBL",
+    "number": "95"
+  },
+  "sv04-201": {
+    "name": "Minior",
+    "set": "PAR",
+    "number": "201"
+  },
+  "sv07-146": {
+    "name": "Turtonator",
+    "set": "SCR",
+    "number": "146"
+  },
+  "me02-104": {
+    "name": "Togedemaru",
+    "set": "PFL",
+    "number": "104"
+  },
+  "swsh5-148": {
+    "name": "Mimikyu V",
+    "set": "BST",
+    "number": "148"
+  },
+  "sv08-200": {
+    "name": "Bruxish",
+    "set": "SSP",
+    "number": "200"
+  },
+  "sv05-184": {
+    "name": "Drampa",
+    "set": "TEF",
+    "number": "184"
+  },
+  "me05-091": {
+    "name": "Dhelmise",
+    "set": "PBL",
+    "number": "91"
+  },
+  "sm4-75": {
+    "name": "Jangmo-o",
+    "set": "CIN",
+    "number": "75"
+  },
+  "sm4-76": {
+    "name": "Hakamo-o",
+    "set": "CIN",
+    "number": "76"
+  },
+  "30th-143": {
+    "name": "Kommo-o",
+    "set": "30C",
+    "number": "143"
+  },
+  "sv04-247": {
+    "name": "Tapu Koko ex",
+    "set": "PAR",
+    "number": "247"
+  },
+  "sm2-155": {
+    "name": "Tapu Lele GX",
+    "set": "GRI",
+    "number": "155"
+  },
+  "sv06.5-065": {
+    "name": "Tapu Bulu",
+    "set": "SFA",
+    "number": "65"
+  },
+  "sm3-152": {
+    "name": "Tapu Fini GX",
+    "set": "BUS",
+    "number": "152"
+  },
+  "sm9-70": {
+    "name": "Cosmoem",
+    "set": "TEU",
+    "number": "70"
+  },
+  "sm1-143": {
+    "name": "Solgaleo GX",
+    "set": "SUM",
+    "number": "143"
+  },
+  "sm1-141": {
+    "name": "Lunala GX",
+    "set": "SUM",
+    "number": "141"
+  },
+  "sm4-114": {
+    "name": "Nihilego GX",
+    "set": "CIN",
+    "number": "114"
+  },
+  "sm4-115": {
+    "name": "Buzzwole GX",
+    "set": "CIN",
+    "number": "115"
+  },
+  "sm5-158": {
+    "name": "Pheromosa GX",
+    "set": "UPR",
+    "number": "158"
+  },
+  "sm5-160": {
+    "name": "Xurkitree GX",
+    "set": "UPR",
+    "number": "160"
+  },
+  "sm5-162": {
+    "name": "Celesteela GX",
+    "set": "UPR",
+    "number": "162"
+  },
+  "sm4-117": {
+    "name": "Kartana GX",
+    "set": "CIN",
+    "number": "117"
+  },
+  "sm4-116": {
+    "name": "Guzzlord GX",
+    "set": "CIN",
+    "number": "116"
+  },
+  "sm3-153": {
+    "name": "Necrozma GX",
+    "set": "BUS",
+    "number": "153"
+  },
+  "xy11-75": {
+    "name": "Magearna EX",
+    "set": "STS",
+    "number": "75"
+  },
+  "me01-146": {
+    "name": "Marshadow",
+    "set": "MEG",
+    "number": "146"
+  },
+  "sma-SV19": {
+    "name": "Poipole",
+    "set": "HIF",
+    "number": "SV19"
+  },
+  "sm11-249": {
+    "name": "Naganadel GX",
+    "set": "UNM",
+    "number": "249"
+  },
+  "sm7-176": {
+    "name": "Stakataka GX",
+    "set": "CES",
+    "number": "176"
+  },
+  "sm8-219": {
+    "name": "Blacephalon GX",
+    "set": "LOT",
+    "number": "219"
+  },
+  "sv07-151": {
+    "name": "Zeraora",
+    "set": "SCR",
+    "number": "151"
+  },
+  "sv05-179": {
+    "name": "Meltan",
+    "set": "TEF",
+    "number": "179"
+  },
+  "swsh10.5-075": {
+    "name": "Melmetal V",
+    "set": "PGO",
+    "number": "75"
+  },
+  "swsh6-17": {
+    "name": "Thwackey",
+    "set": "CRE",
+    "number": "17"
+  },
+  "swsh8-23": {
+    "name": "Rillaboom VMAX",
+    "set": "FST",
+    "number": "23"
+  },
+  "me02.5-225": {
+    "name": "Scorbunny",
+    "set": "ASC",
+    "number": "225"
+  },
+  "sv07-147": {
+    "name": "Raboot",
+    "set": "SCR",
+    "number": "147"
+  },
+  "sv07-157": {
+    "name": "Cinderace ex",
+    "set": "SCR",
+    "number": "157"
+  },
+  "swsh6-42": {
+    "name": "Drizzile",
+    "set": "CRE",
+    "number": "42"
+  },
+  "me01-142": {
+    "name": "Inteleon",
+    "set": "MEG",
+    "number": "142"
+  },
+  "sv01-222": {
+    "name": "Skwovet",
+    "set": "SVI",
+    "number": "222"
+  },
+  "swsh8-272": {
+    "name": "Greedent VMAX",
+    "set": "FST",
+    "number": "272"
+  },
+  "sv02-225": {
+    "name": "Rookidee",
+    "set": "PAL",
+    "number": "225"
+  },
+  "swsh8-220": {
+    "name": "Corvisquire",
+    "set": "FST",
+    "number": "220"
+  },
+  "swsh5-156": {
+    "name": "Corviknight V",
+    "set": "BST",
+    "number": "156"
+  },
+  "swsh5-17": {
+    "name": "Blipbug",
+    "set": "BST",
+    "number": "17"
+  },
+  "sv04-184": {
+    "name": "Dottler",
+    "set": "PAR",
+    "number": "184"
+  },
+  "swsh4-186": {
+    "name": "Orbeetle VMAX",
+    "set": "VIV",
+    "number": "186"
+  },
+  "swsh7-104": {
+    "name": "Nickit",
+    "set": "EVS",
+    "number": "104"
+  },
+  "me05-092": {
+    "name": "Thievul",
+    "set": "PBL",
+    "number": "92"
+  },
+  "swsh2-176": {
+    "name": "Eldegoss V",
+    "set": "RCL",
+    "number": "176"
+  },
+  "swsh2-188": {
+    "name": "Dubwool V",
+    "set": "RCL",
+    "number": "188"
+  },
+  "swsh8-80": {
+    "name": "Chewtle",
+    "set": "FST",
+    "number": "80"
+  },
+  "swsh3.5-69": {
+    "name": "Drednaw V",
+    "set": "CPA",
+    "number": "69"
+  },
+  "me02-099": {
+    "name": "Yamper",
+    "set": "PFL",
+    "number": "99"
+  },
+  "swsh8-249": {
+    "name": "Boltund V",
+    "set": "FST",
+    "number": "249"
+  },
+  "swsh5-78": {
+    "name": "Rolycoly",
+    "set": "BST",
+    "number": "78"
+  },
+  "swsh5-79": {
+    "name": "Carkol",
+    "set": "BST",
+    "number": "79"
+  },
+  "swsh4-173": {
+    "name": "Coalossal V",
+    "set": "VIV",
+    "number": "173"
+  },
+  "sv06-185": {
+    "name": "Applin",
+    "set": "TWM",
+    "number": "185"
+  },
+  "sv08-210": {
+    "name": "Flapple",
+    "set": "SSP",
+    "number": "210"
+  },
+  "sv08-211": {
+    "name": "Appletun",
+    "set": "SSP",
+    "number": "211"
+  },
+  "swsh5-81": {
+    "name": "Silicobra",
+    "set": "BST",
+    "number": "81"
+  },
+  "swsh8-252": {
+    "name": "Sandaconda V",
+    "set": "FST",
+    "number": "252"
+  },
+  "sv06-176": {
+    "name": "Cramorant",
+    "set": "TWM",
+    "number": "176"
+  },
+  "swsh8-83": {
+    "name": "Barraskewda",
+    "set": "FST",
+    "number": "83"
+  },
+  "sv04.5-140": {
+    "name": "Toxel",
+    "set": "PAF",
+    "number": "140"
+  },
+  "me02-103": {
+    "name": "Toxtricity",
+    "set": "PFL",
+    "number": "103"
+  },
+  "swsh8-47": {
+    "name": "Sizzlipede",
+    "set": "FST",
+    "number": "47"
+  },
+  "swsh3-179": {
+    "name": "Centiskorch V",
+    "set": "DAA",
+    "number": "179"
+  },
+  "sv08-207": {
+    "name": "Clobbopus",
+    "set": "SSP",
+    "number": "207"
+  },
+  "swsh3.5-72": {
+    "name": "Grapploct V",
+    "set": "CPA",
+    "number": "72"
+  },
+  "swsh3-82": {
+    "name": "Sinistea",
+    "set": "DAA",
+    "number": "82"
+  },
+  "swsh6-72": {
+    "name": "Hattrem",
+    "set": "CRE",
+    "number": "72"
+  },
+  "swsh12.5-066": {
+    "name": "Hatterene VMAX",
+    "set": "CRZ",
+    "number": "66"
+  },
+  "swsh9-092": {
+    "name": "Impidimp",
+    "set": "BRS",
+    "number": "92"
+  },
+  "swsh9-093": {
+    "name": "Morgrem",
+    "set": "BRS",
+    "number": "93"
+  },
+  "me02.5-245": {
+    "name": "Galarian Obstagoon",
+    "set": "ASC",
+    "number": "245"
+  },
+  "swsh3.5-71": {
+    "name": "Galarian Cursola V",
+    "set": "CPA",
+    "number": "71"
+  },
+  "swsh4-174": {
+    "name": "Galarian Sirfetch'd V",
+    "set": "VIV",
+    "number": "174"
+  },
+  "swsh10-049": {
+    "name": "Galarian Mr. Rime V",
+    "set": "ASR",
+    "number": "49"
+  },
+  "sv07-152": {
+    "name": "Milcery",
+    "set": "SCR",
+    "number": "152"
+  },
+  "swsh4.5-73": {
+    "name": "Alcremie VMAX",
+    "set": "SHF",
+    "number": "73"
+  },
+  "swsh2-185": {
+    "name": "Falinks V",
+    "set": "RCL",
+    "number": "185"
+  },
+  "swsh2-72": {
+    "name": "Pincurchin V",
+    "set": "RCL",
+    "number": "72"
+  },
+  "sv05-168": {
+    "name": "Snom",
+    "set": "TEF",
+    "number": "168"
+  },
+  "swsh8-85": {
+    "name": "Frosmoth",
+    "set": "FST",
+    "number": "85"
+  },
+  "swsh1-193": {
+    "name": "Stonjourner V",
+    "set": "SSH",
+    "number": "193"
+  },
+  "sv03-222": {
+    "name": "Eiscue ex",
+    "set": "OBF",
+    "number": "222"
+  },
+  "swsh1-192": {
+    "name": "Indeedee V",
+    "set": "SSH",
+    "number": "192"
+  },
+  "me05-117": {
+    "name": "Morpeko ex",
+    "set": "PBL",
+    "number": "117"
+  },
+  "sv06.5-076": {
+    "name": "Cufant",
+    "set": "SFA",
+    "number": "76"
+  },
+  "sv02-245": {
+    "name": "Copperajah ex",
+    "set": "PAL",
+    "number": "245"
+  },
+  "swsh7-178": {
+    "name": "Dracozolt V",
+    "set": "EVS",
+    "number": "178"
+  },
+  "swsh9-114": {
+    "name": "Dracovish V",
+    "set": "BRS",
+    "number": "114"
+  },
+  "swsh7-176": {
+    "name": "Arctovish V",
+    "set": "EVS",
+    "number": "176"
+  },
+  "swsh7-220": {
+    "name": "Duraludon VMAX",
+    "set": "EVS",
+    "number": "220"
+  },
+  "me02.5-247": {
+    "name": "Dreepy",
+    "set": "ASC",
+    "number": "247"
+  },
+  "me02.5-248": {
+    "name": "Drakloak",
+    "set": "ASC",
+    "number": "248"
+  },
+  "sv08.5-165": {
+    "name": "Dragapult ex",
+    "set": "PRE",
+    "number": "165"
+  },
+  "me02-100": {
+    "name": "Zacian",
+    "set": "PFL",
+    "number": "100"
+  },
+  "sv10-201": {
+    "name": "Zamazenta",
+    "set": "DRI",
+    "number": "201"
+  },
+  "swsh6-93": {
+    "name": "Kubfu",
+    "set": "CRE",
+    "number": "93"
+  },
+  "swsh5-170": {
+    "name": "Rapid Strike Urshifu VMAX",
+    "set": "BST",
+    "number": "170"
+  },
+  "swsh4-167": {
+    "name": "Zarude V",
+    "set": "VIV",
+    "number": "167"
+  },
+  "swsh12-175": {
+    "name": "Regieleki V",
+    "set": "SIT",
+    "number": "175"
+  },
+  "swsh12-201": {
+    "name": "Regidrago VSTAR",
+    "set": "SIT",
+    "number": "201"
+  },
+  "swsh11-051": {
+    "name": "Glastrier",
+    "set": "LOR",
+    "number": "51"
+  },
+  "swsh11-081": {
+    "name": "Spectrier",
+    "set": "LOR",
+    "number": "81"
+  },
+  "swsh6-205": {
+    "name": "Shadow Rider Calyrex VMAX",
+    "set": "CRE",
+    "number": "205"
+  },
+  "swsh10-180": {
+    "name": "Wyrdeer V",
+    "set": "ASR",
+    "number": "180"
+  },
+  "swsh10-196": {
+    "name": "Kleavor VSTAR",
+    "set": "ASR",
+    "number": "196"
+  },
+  "swsh12-102": {
+    "name": "Ursaluna V",
+    "set": "SIT",
+    "number": "102"
+  },
+  "sv06-180": {
+    "name": "Enamorus",
+    "set": "TWM",
+    "number": "180"
+  },
+  "sv02-196": {
+    "name": "Sprigatito",
+    "set": "PAL",
+    "number": "196"
+  },
+  "sv02-197": {
+    "name": "Floragato",
+    "set": "PAL",
+    "number": "197"
+  },
+  "sv02-256": {
+    "name": "Meowscarada ex",
+    "set": "PAL",
+    "number": "256"
+  },
+  "sv02-201": {
+    "name": "Fuecoco",
+    "set": "PAL",
+    "number": "201"
+  },
+  "sv02-202": {
+    "name": "Crocalor",
+    "set": "PAL",
+    "number": "202"
+  },
+  "sv02-258": {
+    "name": "Skeledirge ex",
+    "set": "PAL",
+    "number": "258"
+  },
+  "sv02-206": {
+    "name": "Quaxly",
+    "set": "PAL",
+    "number": "206"
+  },
+  "sv02-207": {
+    "name": "Quaxwell",
+    "set": "PAL",
+    "number": "207"
+  },
+  "sv02-260": {
+    "name": "Quaquaval ex",
+    "set": "PAL",
+    "number": "260"
+  },
+  "sv03-209": {
+    "name": "Lechonk",
+    "set": "OBF",
+    "number": "209"
+  },
+  "sv04.5-208": {
+    "name": "Oinkologne",
+    "set": "PAF",
+    "number": "208"
+  },
+  "sv01-199": {
+    "name": "Tarountula",
+    "set": "SVI",
+    "number": "199"
+  },
+  "sv01-243": {
+    "name": "Spidops ex",
+    "set": "SVI",
+    "number": "243"
+  },
+  "me02-096": {
+    "name": "Nymble",
+    "set": "PFL",
+    "number": "96"
+  },
+  "sv09-100": {
+    "name": "Lokix",
+    "set": "JTG",
+    "number": "100"
+  },
+  "sv04.5-226": {
+    "name": "Pawmi",
+    "set": "PAF",
+    "number": "226"
+  },
+  "sv04.5-143": {
+    "name": "Pawmo",
+    "set": "PAF",
+    "number": "143"
+  },
+  "sv01-209": {
+    "name": "Pawmot",
+    "set": "SVI",
+    "number": "209"
+  },
+  "sv04.5-209": {
+    "name": "Tandemaus",
+    "set": "PAF",
+    "number": "209"
+  },
+  "30th-146": {
+    "name": "Maushold",
+    "set": "30C",
+    "number": "146"
+  },
+  "sv01-213": {
+    "name": "Fidough",
+    "set": "SVI",
+    "number": "213"
+  },
+  "sv07-169": {
+    "name": "Dachsbun ex",
+    "set": "SCR",
+    "number": "169"
+  },
+  "sv04.5-102": {
+    "name": "Smoliv",
+    "set": "PAF",
+    "number": "102"
+  },
+  "sv01-200": {
+    "name": "Dolliv",
+    "set": "SVI",
+    "number": "200"
+  },
+  "sv10-207": {
+    "name": "Arboliva ex",
+    "set": "DRI",
+    "number": "207"
+  },
+  "sv02-264": {
+    "name": "Squawkabilly ex",
+    "set": "PAL",
+    "number": "264"
+  },
+  "sv02-220": {
+    "name": "Nacli",
+    "set": "PAL",
+    "number": "220"
+  },
+  "sv04.5-177": {
+    "name": "Naclstack",
+    "set": "PAF",
+    "number": "177"
+  },
+  "me01-147": {
+    "name": "Garganacl",
+    "set": "MEG",
+    "number": "147"
+  },
+  "sv04.5-114": {
+    "name": "Charcadet",
+    "set": "PAF",
+    "number": "114"
+  },
+  "me05-086": {
+    "name": "Armarouge",
+    "set": "PBL",
+    "number": "86"
+  },
+  "sv08.5-147": {
+    "name": "Ceruledge ex",
+    "set": "PRE",
+    "number": "147"
+  },
+  "sv06-073": {
+    "name": "Tadbulb",
+    "set": "TWM",
+    "number": "73"
+  },
+  "sv03-201": {
+    "name": "Bellibolt",
+    "set": "OBF",
+    "number": "201"
+  },
+  "sv06-178": {
+    "name": "Wattrel",
+    "set": "TWM",
+    "number": "178"
+  },
+  "sv04.5-146": {
+    "name": "Kilowattrel",
+    "set": "PAF",
+    "number": "146"
+  },
+  "sv02-141": {
+    "name": "Maschiff",
+    "set": "PAL",
+    "number": "141"
+  },
+  "sv01-218": {
+    "name": "Mabosstiff",
+    "set": "SVI",
+    "number": "218"
+  },
+  "me01-149": {
+    "name": "Shroodle",
+    "set": "MEG",
+    "number": "149"
+  },
+  "sv02-223": {
+    "name": "Grafaiai",
+    "set": "PAL",
+    "number": "223"
+  },
+  "sv02-198": {
+    "name": "Bramblin",
+    "set": "PAL",
+    "number": "198"
+  },
+  "sv05-021": {
+    "name": "Brambleghast",
+    "set": "TEF",
+    "number": "21"
+  },
+  "sv01-201": {
+    "name": "Toedscool",
+    "set": "SVI",
+    "number": "201"
+  },
+  "sv04-185": {
+    "name": "Toedscruel",
+    "set": "PAR",
+    "number": "185"
+  },
+  "sv01-217": {
+    "name": "Klawf",
+    "set": "SVI",
+    "number": "217"
+  },
+  "sv04.5-106": {
+    "name": "Capsakid",
+    "set": "PAF",
+    "number": "106"
+  },
+  "sv01-202": {
+    "name": "Scovillain",
+    "set": "SVI",
+    "number": "202"
+  },
+  "sv04.5-108": {
+    "name": "Rellor",
+    "set": "PAF",
+    "number": "108"
+  },
+  "sv02-215": {
+    "name": "Rabsca",
+    "set": "PAL",
+    "number": "215"
+  },
+  "sv04.5-164": {
+    "name": "Flittle",
+    "set": "PAF",
+    "number": "164"
+  },
+  "sv04-197": {
+    "name": "Espathra",
+    "set": "PAR",
+    "number": "197"
+  },
+  "sv02-216": {
+    "name": "Tinkatink",
+    "set": "PAL",
+    "number": "216"
+  },
+  "sv02-217": {
+    "name": "Tinkatuff",
+    "set": "PAL",
+    "number": "217"
+  },
+  "sv02-262": {
+    "name": "Tinkaton ex",
+    "set": "PAL",
+    "number": "262"
+  },
+  "sv01-206": {
+    "name": "Wiglett",
+    "set": "SVI",
+    "number": "206"
+  },
+  "sv04.5-224": {
+    "name": "Wugtrio",
+    "set": "PAF",
+    "number": "224"
+  },
+  "sv01-219": {
+    "name": "Bombirdier",
+    "set": "SVI",
+    "number": "219"
+  },
+  "sv04.5-123": {
+    "name": "Finizen",
+    "set": "PAF",
+    "number": "123"
+  },
+  "sv08.5-151": {
+    "name": "Palafin ex",
+    "set": "PRE",
+    "number": "151"
+  },
+  "sv03-206": {
+    "name": "Varoom",
+    "set": "OBF",
+    "number": "206"
+  },
+  "sv03-224": {
+    "name": "Revavroom ex",
+    "set": "OBF",
+    "number": "224"
+  },
+  "sv04-215": {
+    "name": "Cyclizar",
+    "set": "PAR",
+    "number": "215"
+  },
+  "sv02-224": {
+    "name": "Orthworm",
+    "set": "PAL",
+    "number": "224"
+  },
+  "sv04.5-179": {
+    "name": "Glimmet",
+    "set": "PAF",
+    "number": "179"
+  },
+  "sv04.5-218": {
+    "name": "Glimmora ex",
+    "set": "PAF",
+    "number": "218"
+  },
+  "sv01-214": {
+    "name": "Greavard",
+    "set": "SVI",
+    "number": "214"
+  },
+  "me01-145": {
+    "name": "Houndstone",
+    "set": "MEG",
+    "number": "145"
+  },
+  "sv02-227": {
+    "name": "Flamigo",
+    "set": "PAL",
+    "number": "227"
+  },
+  "sv10-064": {
+    "name": "Cetoddle",
+    "set": "DRI",
+    "number": "64"
+  },
+  "sv08-201": {
+    "name": "Cetitan",
+    "set": "SSP",
+    "number": "201"
+  },
+  "sv04-192": {
+    "name": "Veluza",
+    "set": "PAR",
+    "number": "192"
+  },
+  "sv01-207": {
+    "name": "Dondozo",
+    "set": "SVI",
+    "number": "207"
+  },
+  "sv06-186": {
+    "name": "Tatsugiri",
+    "set": "TWM",
+    "number": "186"
+  },
+  "sv04.5-171": {
+    "name": "Annihilape",
+    "set": "PAF",
+    "number": "171"
+  },
+  "sv04.5-219": {
+    "name": "Paldean Clodsire ex",
+    "set": "PAF",
+    "number": "219"
+  },
+  "sv02-228": {
+    "name": "Farigiraf",
+    "set": "PAL",
+    "number": "228"
+  },
+  "sv02-229": {
+    "name": "Dudunsparce",
+    "set": "PAL",
+    "number": "229"
+  },
+  "sv01-220": {
+    "name": "Kingambit",
+    "set": "SVI",
+    "number": "220"
+  },
+  "sv01-246": {
+    "name": "Great Tusk ex",
+    "set": "SVI",
+    "number": "246"
+  },
+  "sv06-197": {
+    "name": "Scream Tail ex",
+    "set": "TWM",
+    "number": "197"
+  },
+  "sv04-207": {
+    "name": "Brute Bonnet",
+    "set": "PAR",
+    "number": "207"
+  },
+  "svp-097": {
+    "name": "Flutter Mane",
+    "set": "SVP",
+    "number": "97"
+  },
+  "sv04-203": {
+    "name": "Slither Wing",
+    "set": "PAR",
+    "number": "203"
+  },
+  "sv08.5-159": {
+    "name": "Sandy Shocks ex",
+    "set": "PRE",
+    "number": "159"
+  },
+  "sv01-248": {
+    "name": "Iron Treads ex",
+    "set": "SVI",
+    "number": "248"
+  },
+  "svp-066": {
+    "name": "Iron Bundle",
+    "set": "SVP",
+    "number": "66"
+  },
+  "sv08.5-154": {
+    "name": "Iron Hands ex",
+    "set": "PRE",
+    "number": "154"
+  },
+  "sv04-216": {
+    "name": "Iron Jugulis",
+    "set": "PAR",
+    "number": "216"
+  },
+  "sv04-187": {
+    "name": "Iron Moth",
+    "set": "PAR",
+    "number": "187"
+  },
+  "sv06-196": {
+    "name": "Iron Thorns ex",
+    "set": "TWM",
+    "number": "196"
+  },
+  "sv02-208": {
+    "name": "Frigibax",
+    "set": "PAL",
+    "number": "208"
+  },
+  "sv02-209": {
+    "name": "Arctibax",
+    "set": "PAL",
+    "number": "209"
+  },
+  "sv02-210": {
+    "name": "Baxcalibur",
+    "set": "PAL",
+    "number": "210"
+  },
+  "sv04-198": {
+    "name": "Gimmighoul",
+    "set": "PAR",
+    "number": "198"
+  },
+  "sv08.5-164": {
+    "name": "Gholdengo ex",
+    "set": "PRE",
+    "number": "164"
+  },
+  "sv02-257": {
+    "name": "Wo-Chien ex",
+    "set": "PAL",
+    "number": "257"
+  },
+  "sv02-261": {
+    "name": "Chien-Pao ex",
+    "set": "PAL",
+    "number": "261"
+  },
+  "sv02-263": {
+    "name": "Ting-Lu ex",
+    "set": "PAL",
+    "number": "263"
+  },
+  "sv02-259": {
+    "name": "Chi-Yu ex",
+    "set": "PAL",
+    "number": "259"
+  },
+  "sv08.5-162": {
+    "name": "Roaring Moon ex",
+    "set": "PRE",
+    "number": "162"
+  },
+  "sv08.5-157": {
+    "name": "Iron Valiant ex",
+    "set": "PRE",
+    "number": "157"
+  },
+  "sv01-247": {
+    "name": "Koraidon ex",
+    "set": "SVI",
+    "number": "247"
+  },
+  "sv01-244": {
+    "name": "Miraidon ex",
+    "set": "SVI",
+    "number": "244"
+  },
+  "sv05-205": {
+    "name": "Walking Wake ex",
+    "set": "TEF",
+    "number": "205"
+  },
+  "sv05-203": {
+    "name": "Iron Leaves ex",
+    "set": "TEF",
+    "number": "203"
+  },
+  "sv06-170": {
+    "name": "Dipplin",
+    "set": "TWM",
+    "number": "170"
+  },
+  "sv06-171": {
+    "name": "Poltchageist",
+    "set": "TWM",
+    "number": "171"
+  },
+  "sv06-210": {
+    "name": "Sinistcha ex",
+    "set": "TWM",
+    "number": "210"
+  },
+  "sv06.5-090": {
+    "name": "Okidogi ex",
+    "set": "SFA",
+    "number": "90"
+  },
+  "sv06.5-091": {
+    "name": "Munkidori ex",
+    "set": "SFA",
+    "number": "91"
+  },
+  "sv06.5-092": {
+    "name": "Fezandipiti ex",
+    "set": "SFA",
+    "number": "92"
+  },
+  "sv08-241": {
+    "name": "Archaludon ex",
+    "set": "SSP",
+    "number": "241"
+  },
+  "sv07-167": {
+    "name": "Hydrapple ex",
+    "set": "SCR",
+    "number": "167"
+  },
+  "sv05-204": {
+    "name": "Gouging Fire ex",
+    "set": "TEF",
+    "number": "204"
+  },
+  "sv08.5-166": {
+    "name": "Raging Bolt ex",
+    "set": "PRE",
+    "number": "166"
+  },
+  "sv05-207": {
+    "name": "Iron Boulder ex",
+    "set": "TEF",
+    "number": "207"
+  },
+  "sv08.5-158": {
+    "name": "Iron Crown ex",
+    "set": "PRE",
+    "number": "158"
+  },
+  "sv08.5-169": {
+    "name": "Terapagos ex",
+    "set": "PRE",
+    "number": "169"
+  },
+  "sv08.5-163": {
+    "name": "Pecharunt ex",
+    "set": "PRE",
+    "number": "163"
+  },
+  "me01-133": {
+    "name": "Bulbasaur",
+    "set": "MEG",
+    "number": "133"
+  },
+  "me01-134": {
+    "name": "Ivysaur",
+    "set": "MEG",
+    "number": "134"
+  },
+  "me01-150": {
+    "name": "Steelix",
+    "set": "MEG",
+    "number": "150"
+  },
+  "me02-106": {
+    "name": "Meowth",
+    "set": "PFL",
+    "number": "106"
+  },
+  "me02.5-226": {
+    "name": "Psyduck",
+    "set": "ASC",
+    "number": "226"
+  },
+  "me02.5-227": {
+    "name": "Snorunt",
+    "set": "ASC",
+    "number": "227"
+  },
+  "me02.5-229": {
+    "name": "Heliolisk",
+    "set": "ASC",
+    "number": "229"
+  },
+  "me02.5-232": {
+    "name": "Marill",
+    "set": "ASC",
+    "number": "232"
+  },
+  "me03-096": {
+    "name": "Probopass",
+    "set": "POR",
+    "number": "96"
+  },
+  "me04-097": {
+    "name": "Watchog",
+    "set": "CRI",
+    "number": "97"
+  },
+  "sv01-203": {
+    "name": "Armarouge",
+    "set": "SVI",
+    "number": "203"
+  },
+  "sv01-216": {
+    "name": "Sandile",
+    "set": "SVI",
+    "number": "216"
+  },
+  "sv02-205": {
+    "name": "Eiscue",
+    "set": "PAL",
+    "number": "205"
+  },
+  "sv02-213": {
+    "name": "Gothorita",
+    "set": "PAL",
+    "number": "213"
+  },
+  "sv02-226": {
+    "name": "Maushold",
+    "set": "PAL",
+    "number": "226"
+  },
+  "sv03-200": {
+    "name": "Palafin",
+    "set": "OBF",
+    "number": "200"
+  },
+  "sv03.5-166": {
+    "name": "Bulbasaur",
+    "set": "MEW",
+    "number": "166"
+  },
+  "sv03.5-170": {
+    "name": "Squirtle",
+    "set": "MEW",
+    "number": "170"
+  },
+  "sv03.5-173": {
+    "name": "Pikachu",
+    "set": "MEW",
+    "number": "173"
+  },
+  "sv04-183": {
+    "name": "Crustle",
+    "set": "PAR",
+    "number": "183"
+  },
+  "sv04-190": {
+    "name": "Vanillish",
+    "set": "PAR",
+    "number": "190"
+  },
+  "sv04-195": {
+    "name": "Blitzle",
+    "set": "PAR",
+    "number": "195"
+  },
+  "sv04-196": {
+    "name": "Joltik",
+    "set": "PAR",
+    "number": "196"
+  },
+  "sv04-200": {
+    "name": "Mienshao",
+    "set": "PAR",
+    "number": "200"
+  },
+  "sv06.5-073": {
+    "name": "Fezandipiti",
+    "set": "SFA",
+    "number": "73"
+  },
+  "sv06.5-074": {
+    "name": "Okidogi",
+    "set": "SFA",
+    "number": "74"
+  },
+  "sv06.5-075": {
+    "name": "Zorua",
+    "set": "SFA",
+    "number": "75"
+  },
+  "sv06.5-077": {
+    "name": "Fraxure",
+    "set": "SFA",
+    "number": "77"
+  },
+  "sv07-150": {
+    "name": "Joltik",
+    "set": "SCR",
+    "number": "150"
+  },
+  "sv07-155": {
+    "name": "Archaludon",
+    "set": "SCR",
+    "number": "155"
+  },
+  "sv08-196": {
+    "name": "Larvesta",
+    "set": "SSP",
+    "number": "196"
+  },
+  "sv08-197": {
+    "name": "Ceruledge",
+    "set": "SSP",
+    "number": "197"
+  },
+  "sv08-202": {
+    "name": "Stunfisk",
+    "set": "SSP",
+    "number": "202"
+  },
+  "sv08-214": {
+    "name": "Braviary",
+    "set": "SSP",
+    "number": "214"
+  },
+  "sv09-160": {
+    "name": "Maractus",
+    "set": "JTG",
+    "number": "160"
+  },
+  "sv10-186": {
+    "name": "Crustle",
+    "set": "DRI",
+    "number": "186"
+  },
+  "sv10-188": {
+    "name": "Hydrapple",
+    "set": "DRI",
+    "number": "188"
+  },
+  "sv10-197": {
+    "name": "Rotom",
+    "set": "DRI",
+    "number": "197"
+  },
+  "sv10.5b-153": {
+    "name": "Cinccino",
+    "set": "BLK",
+    "number": "153"
+  },
+  "sv10.5w-117": {
+    "name": "Galvantula",
+    "set": "WHT",
+    "number": "117"
+  },
+  "sv10.5w-150": {
+    "name": "Durant",
+    "set": "WHT",
+    "number": "150"
+  }
+}

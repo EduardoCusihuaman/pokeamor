@@ -1,8 +1,13 @@
-import json
+import json,subprocess
 from pathlib import Path
 p=Path(__file__).parent
-prefix='const HTML='+json.dumps((p/'page.html').read_text())+';\nconst JS='+json.dumps((p/'app.js').read_text())+';\nconst JOURNEY='+json.dumps((p/'journey.js').read_text())+';\nconst HOLO='+json.dumps((p/'holo.js').read_text())+';\nconst ASSET_JS='+json.dumps((p/'material-assets.js').read_text())+';\nconst MATERIAL_JS='+json.dumps((p/'material-renderer.js').read_text())+';\nconst MATERIALS='+(p/'materials.json').read_text()+';\nconst CATALOG='+ (p/'catalog.json').read_text()+';\n'
+subprocess.run(['python',str(p/'scripts/build-card-resources.py')],check=True)
+manifest=json.loads((p/'generated/card-resources/manifest.json').read_text())
+html=(p/'page.html').read_text().replace('<script src="/app.js"', '<script>window.POKE_CARD_RESOURCES='+json.dumps(manifest)+'</script><script src="/card-resources.js" defer></script><script src="/app.js"')
+prefix='const HTML='+json.dumps(html)+';\nconst JS='+json.dumps((p/'app.js').read_text())+';\nconst JOURNEY='+json.dumps((p/'journey.js').read_text())+';\nconst HOLO='+json.dumps((p/'holo.js').read_text())+';\nconst ASSET_JS='+json.dumps((p/'material-assets.js').read_text())+';\nconst MATERIAL_JS='+json.dumps((p/'material-renderer.js').read_text())+';\nconst MATERIALS='+(p/'materials.json').read_text()+';\nconst CATALOG='+ (p/'catalog.json').read_text()+';\n'
 prefix+='const RECOMMENDER='+json.dumps((p/'recommender.js').read_text())+';\n'
+prefix+='const CARD_RESOURCE_JS='+json.dumps((p/'card-resources.js').read_text())+';\n'
+prefix+='const CARD_RESOURCES='+json.dumps({'/data/'+f.name:f.read_text() for f in sorted((p/'generated/card-resources').glob('*.json')) if f.name not in ['manifest.json','report.json']})+';\n'
 worker=r'''
 const response=(body,status=200,extra={})=>new Response(body,{status,headers:{'Content-Type':'application/json','Cache-Control':'no-store',...extra}});
 export default {async fetch(request,env,ctx){
@@ -40,6 +45,12 @@ if(MATERIALS[u.pathname]){
 }
 
 const headers={'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'};
+if(u.pathname==='/card-resources.js')return new Response(CARD_RESOURCE_JS,{headers:{...headers,'Content-Type':'text/javascript','Cache-Control':'no-cache'}});
+if(/^\/data\/(alternatives|proxies)\.[a-f0-9]{16}\.json$/.test(u.pathname)){
+ const body=CARD_RESOURCES[u.pathname];
+ if(body){if(env.BUCKET&&ctx?.waitUntil)ctx.waitUntil(env.BUCKET.put('card-resources'+u.pathname,body).catch(()=>{}));return new Response(request.method==='HEAD'?null:body,{headers:{...headers,'Content-Type':'application/json; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}})}
+ const cached=env.BUCKET?await env.BUCKET.get('card-resources'+u.pathname):null;return cached?new Response(request.method==='HEAD'?null:cached.body,{headers:{...headers,'Content-Type':'application/json; charset=utf-8','Cache-Control':'public,max-age=31536000,immutable'}}):new Response('Resource unavailable',{status:404});
+}
 if(u.pathname==='/catalog.json')return new Response(JSON.stringify(CATALOG),{headers:{...headers,'Content-Type':'application/json','Cache-Control':'no-cache'}});
 if(u.pathname==='/material-assets.js')return new Response(ASSET_JS,{headers:{...headers,'Content-Type':'text/javascript','Cache-Control':'no-cache'}});
 if(u.pathname==='/material-renderer.js')return new Response(MATERIAL_JS,{headers:{...headers,'Content-Type':'text/javascript','Cache-Control':'no-cache'}});
