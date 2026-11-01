@@ -213,8 +213,8 @@ $('#detail-close').onclick=closeDetail;
 
 $('#collection-settings').onclick=()=>{if(debugCatalog){$('#debug-copy').click();return}showCollectionTab(false)};
 function toggleDebugSelection(p){if(debugSelected.has(p.id))debugSelected.delete(p.id);else debugSelected.add(p.id);$('#debug-selected-count').textContent=debugSelected.size+' seleccionadas';}
-function debugProxyText(){return [...debugSelected].map(id=>catalog.find(p=>p.id===id)).filter(Boolean).map(p=>'1 '+p.name+' '+p.card).join('\n')}
-$('#debug-copy').onclick=async()=>{try{await navigator.clipboard.writeText(debugProxyText());toast(debugSelected.size+' cartas copiadas para Limitless')}catch{toast('No se pudo copiar el listado')}};
+function debugProxyText(){const selected=[...debugSelected].map(id=>catalog.find(p=>p.id===id)).filter(Boolean).sort((a,b)=>a.id-b.id);const missing=selected.filter(p=>!p.proxy);if(missing.length)throw Error('Sin código de Limitless: '+missing.map(p=>p.name).join(', '));return selected.map(p=>'1 '+p.proxy.name+' '+p.proxy.set+' '+p.proxy.number).join('\n')}
+$('#debug-copy').onclick=async()=>{if(!debugSelected.size){toast('Seleccioná al menos una carta');return}let text;try{text=debugProxyText()}catch(error){toast(error.message);return}try{await navigator.clipboard.writeText(text);toast(debugSelected.size+' cartas copiadas para Limitless')}catch{toast('No se pudo copiar el listado')}};
 $('#debug-catalog').onclick=()=>{debugCatalog=true;$('#sheet').classList.add('open','debug-mode');showCollectionTab(false);$('#collection-options').style.display='none';$('#collection-settings').textContent='Copiar seleccionadas · Limitless';visibleCards=catalog.length;collection()};
 $('#close').addEventListener('click',()=>{if(!debugCatalog)return;debugCatalog=false;$('#sheet').classList.remove('debug-mode');$('#collection-options').style.display='';showCollectionTab(true)});
 

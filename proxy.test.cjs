@@ -1,0 +1,4 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
+const source=fs.readFileSync('app.js','utf8').match(/function debugProxyText\(\).*\n/)[0];
+test('exports exact print names, codes and collector numbers in Pokédex order',()=>{const ctx={catalog:[{id:136,name:'Flareon',proxy:{name:'Flareon ex',set:'PRE',number:'146'}},{id:149,name:'Dragonite',proxy:{name:'Dragonite V',set:'PGO',number:'76'}}],debugSelected:new Set([149,136])};vm.createContext(ctx);vm.runInContext(source,ctx);assert.equal(ctx.debugProxyText(),'1 Flareon ex PRE 146\n1 Dragonite V PGO 76')});
+test('never copies internal IDs for unsupported prints',()=>{const ctx={catalog:[{id:1,name:'Bulbasaur',card:'A1-1'}],debugSelected:new Set([1])};vm.createContext(ctx);vm.runInContext(source,ctx);assert.throws(()=>ctx.debugProxyText(),/Sin código de Limitless: Bulbasaur/)});
