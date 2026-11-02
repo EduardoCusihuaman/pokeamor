@@ -1,0 +1,412 @@
+[
+  {
+    "pokemonId": 11,
+    "printId": "lc-54",
+    "url": "https://assets.tcgdex.net/en/lc/lc/54/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 87628
+    }
+  },
+  {
+    "pokemonId": 12,
+    "printId": "swsh3-177",
+    "url": "https://assets.tcgdex.net/es/swsh/swsh3/177/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 66098
+    }
+  },
+  {
+    "pokemonId": 13,
+    "printId": "lc-99",
+    "url": "https://assets.tcgdex.net/en/lc/lc/99/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 89108
+    }
+  },
+  {
+    "pokemonId": 14,
+    "printId": "lc-50",
+    "url": "https://assets.tcgdex.net/en/lc/lc/50/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 81282
+    }
+  },
+  {
+    "pokemonId": 19,
+    "printId": "lc-89",
+    "url": "https://assets.tcgdex.net/en/lc/lc/89/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 57530
+    }
+  },
+  {
+    "pokemonId": 22,
+    "printId": "gym1-7",
+    "url": "https://assets.tcgdex.net/en/gym/gym1/7/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 72746
+    }
+  },
+  {
+    "pokemonId": 29,
+    "printId": "lc-82",
+    "url": "https://assets.tcgdex.net/en/lc/lc/82/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 89336
+    }
+  },
+  {
+    "pokemonId": 30,
+    "printId": "lc-55",
+    "url": "https://assets.tcgdex.net/en/lc/lc/55/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 82434
+    }
+  },
+  {
+    "pokemonId": 31,
+    "printId": "ecard3-H21",
+    "url": "https://images.pokemontcg.io/ecard3/H21_hires.png",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 1047057
+    }
+  },
+  {
+    "pokemonId": 32,
+    "printId": "lc-83",
+    "url": "https://assets.tcgdex.net/en/lc/lc/83/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 64768
+    }
+  },
+  {
+    "pokemonId": 33,
+    "printId": "lc-56",
+    "url": "https://assets.tcgdex.net/en/lc/lc/56/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 75930
+    }
+  },
+  {
+    "pokemonId": 39,
+    "printId": "ecard3-68",
+    "url": "https://assets.tcgdex.net/en/ecard/ecard3/68/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 76866
+    }
+  },
+  {
+    "pokemonId": 43,
+    "printId": "ecard2-97",
+    "url": "https://assets.tcgdex.net/en/ecard/ecard2/97/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 67392
+    }
+  },
+  {
+    "pokemonId": 45,
+    "printId": "sm12-211",
+    "url": "https://assets.tcgdex.net/es/sm/sm12/211/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 102668
+    }
+  },
+  {
+    "pokemonId": 46,
+    "printId": "swsh12.5gg-GG32",
+    "url": "https://images.pokemontcg.io/swsh12pt5gg/GG32_hires.png",
+    "validation": {
+      "width": 734,
+      "height": 1024,
+      "bytes": 603065
+    }
+  },
+  {
+    "pokemonId": 47,
+    "printId": "swsh11tg-TG01",
+    "url": "https://images.pokemontcg.io/swsh11tg/TG01_hires.png",
+    "validation": {
+      "width": 734,
+      "height": 1024,
+      "bytes": 642445
+    }
+  },
+  {
+    "pokemonId": 48,
+    "printId": "ecard3-112",
+    "url": "https://assets.tcgdex.net/en/ecard/ecard3/112/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 74150
+    }
+  },
+  {
+    "pokemonId": 49,
+    "printId": "sm10-193",
+    "url": "https://assets.tcgdex.net/es/sm/sm10/193/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 82748
+    }
+  },
+  {
+    "pokemonId": 56,
+    "printId": "lc-81",
+    "url": "https://assets.tcgdex.net/en/lc/lc/81/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 66250
+    }
+  },
+  {
+    "pokemonId": 57,
+    "printId": "lc-59",
+    "url": "https://assets.tcgdex.net/en/lc/lc/59/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 75116
+    }
+  },
+  {
+    "pokemonId": 60,
+    "printId": "ecard3-87",
+    "url": "https://assets.tcgdex.net/en/ecard/ecard3/87/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 70078
+    }
+  },
+  {
+    "pokemonId": 63,
+    "printId": "lc-67",
+    "url": "https://assets.tcgdex.net/en/lc/lc/67/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 71016
+    }
+  },
+  {
+    "pokemonId": 64,
+    "printId": "lc-49",
+    "url": "https://assets.tcgdex.net/en/lc/lc/49/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 97690
+    }
+  },
+  {
+    "pokemonId": 72,
+    "printId": "lc-96",
+    "url": "https://assets.tcgdex.net/en/lc/lc/96/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 102528
+    }
+  },
+  {
+    "pokemonId": 73,
+    "printId": "ecard2-H26",
+    "url": "https://images.pokemontcg.io/ecard2/H26_hires.png",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 1097813
+    }
+  },
+  {
+    "pokemonId": 83,
+    "printId": "ex9-107",
+    "url": "https://assets.tcgdex.net/en/ex/ex9/107/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 75990
+    }
+  },
+  {
+    "pokemonId": 84,
+    "printId": "lc-71",
+    "url": "https://assets.tcgdex.net/en/lc/lc/71/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 56850
+    }
+  },
+  {
+    "pokemonId": 85,
+    "printId": "lc-41",
+    "url": "https://assets.tcgdex.net/en/lc/lc/41/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 64838
+    }
+  },
+  {
+    "pokemonId": 86,
+    "printId": "lc-92",
+    "url": "https://assets.tcgdex.net/en/lc/lc/92/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 78112
+    }
+  },
+  {
+    "pokemonId": 91,
+    "printId": "ecard1-8",
+    "url": "https://assets.tcgdex.net/en/ecard/ecard1/8/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 93164
+    }
+  },
+  {
+    "pokemonId": 97,
+    "printId": "ecard2-H12",
+    "url": "https://images.pokemontcg.io/ecard2/H12_hires.png",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 1109179
+    }
+  },
+  {
+    "pokemonId": 98,
+    "printId": "ecard1-115",
+    "url": "https://assets.tcgdex.net/en/ecard/ecard1/115/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 66148
+    }
+  },
+  {
+    "pokemonId": 100,
+    "printId": "lc-97",
+    "url": "https://assets.tcgdex.net/en/lc/lc/97/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 60854
+    }
+  },
+  {
+    "pokemonId": 101,
+    "printId": "ex6-107",
+    "url": "https://assets.tcgdex.net/en/ex/ex6/107/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 92400
+    }
+  },
+  {
+    "pokemonId": 104,
+    "printId": "ex7-51",
+    "url": "https://assets.tcgdex.net/en/ex/ex7/51/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 80660
+    }
+  },
+  {
+    "pokemonId": 106,
+    "printId": "lc-13",
+    "url": "https://assets.tcgdex.net/en/lc/lc/13/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 63252
+    }
+  },
+  {
+    "pokemonId": 107,
+    "printId": "ex7-98",
+    "url": "https://assets.tcgdex.net/en/ex/ex7/98/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 94708
+    }
+  },
+  {
+    "pokemonId": 119,
+    "printId": "ecard2-59",
+    "url": "https://assets.tcgdex.net/en/ecard/ecard2/59/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 72586
+    }
+  },
+  {
+    "pokemonId": 120,
+    "printId": "ecard3-104",
+    "url": "https://assets.tcgdex.net/en/ecard/ecard3/104/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 82862
+    }
+  },
+  {
+    "pokemonId": 121,
+    "printId": "swsh10tg-TG13",
+    "url": "https://images.pokemontcg.io/swsh10tg/TG13_hires.png",
+    "validation": {
+      "width": 734,
+      "height": 1024,
+      "bytes": 504423
+    }
+  },
+  {
+    "pokemonId": 123,
+    "printId": "ex7-102",
+    "url": "https://assets.tcgdex.net/en/ex/ex7/102/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 93040
+    }
+  }
+]
