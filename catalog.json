@@ -2591,10 +2591,10 @@
     "id": 82,
     "name": "Magneton",
     "slug": "magneton",
-    "image": "https://assets.tcgdex.net/es/sm/sma/SV28/high.webp",
-    "card": "sma-SV28",
-    "rarity": "Shiny rare",
-    "artist": "Tomokazu Komiya",
+    "image": "https://assets.tcgdex.net/es/sv/svp/159/high.webp",
+    "card": "svp-159",
+    "rarity": "Promo",
+    "artist": "Shinji Kanda",
     "palette": {
       "h": 188,
       "s": 53,
@@ -2611,7 +2611,8 @@
     ],
     "previousCard": "xy8-53",
     "previousRarity": "Uncommon",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/svp/159/high.webp"
   },
   {
     "id": 83,
@@ -2931,19 +2932,15 @@
     "slug": "gengar",
     "image": "https://assets.tcgdex.net/es/me/30th/154/high.webp",
     "card": "30th-154",
-    "rarity": "Special illustration rare",
-    "artist": "",
+    "rarity": "Rara Ilustración Especial",
+    "artist": "CHORISO",
     "palette": {
       "h": 308,
       "s": 55,
       "v": 59
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:8",
       "type:4",
@@ -2951,7 +2948,8 @@
       "shape_id:6",
       "evolution_chain_id:40"
     ],
-    "communityVotes2020": 60214
+    "communityVotes2020": 60214,
+    "fallbackImage": "https://assets.tcgdex.net/es/me/30th/154/high.webp"
   },
   {
     "id": 95,
@@ -4118,16 +4116,16 @@
     "id": 132,
     "name": "Ditto",
     "slug": "ditto",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/201/high.webp",
-    "card": "sv04.5-201",
-    "rarity": "Shiny rare",
-    "artist": "KIYOTAKA OSHIYAMA",
+    "image": "https://assets.tcgdex.net/en/swsh/swsh12.5/GG22/high.webp",
+    "card": "swsh12.5gg-GG22",
+    "rarity": "Rare",
+    "artist": "Miki Tanaka",
     "palette": {
       "h": 248,
       "s": 38,
       "v": 69
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:1",
@@ -4138,7 +4136,8 @@
     "communityVotes2020": 13843,
     "previousCard": "swsh12.5-107",
     "previousRarity": "Holo Rare",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/en/swsh/swsh12.5/GG22/high.webp"
   },
   {
     "id": 133,
@@ -4225,18 +4224,18 @@
     "id": 136,
     "name": "Flareon",
     "slug": "flareon",
-    "image": "https://assets.tcgdex.net/es/xy/g1/RC28/high.webp",
+    "image": "https://assets.tcgdex.net/en/xy/g1/RC28/high.webp",
     "card": "g1-RC28",
     "rarity": "Ultra Rare",
-    "artist": "Nurikabe",
+    "artist": "kirisAki",
     "palette": {
       "h": 22,
       "s": 53,
       "v": 75
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
-    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv08.5/146/high.webp",
+    "fallbackImage": "https://assets.tcgdex.net/en/xy/g1/RC28/high.webp",
     "traits": [
       "type:10",
       "color_id:8",
@@ -4400,28 +4399,25 @@
     "id": 142,
     "name": "Aerodactyl",
     "slug": "aerodactyl",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh11/199/high.webp",
-    "card": "swsh11-199",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh11/180/high.webp",
+    "card": "swsh11-180",
+    "rarity": "Ultra Rara",
+    "artist": "Nurikabe",
     "palette": {
       "h": 68,
       "s": 36,
       "v": 86
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:6",
       "type:3",
       "color_id:7",
       "shape_id:9",
       "evolution_chain_id:71"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh11/180/high.webp"
   },
   {
     "id": 143,
@@ -5472,10 +5468,10 @@
     "id": 177,
     "name": "Natu",
     "slug": "natu",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/151/high.webp",
-    "card": "sv04.5-151",
-    "rarity": "Shiny rare",
-    "artist": "Kagemaru Himeno",
+    "image": "https://assets.tcgdex.net/es/sv/sv04.5/025/high.webp",
+    "card": "sv04.5-025",
+    "rarity": "Común",
+    "artist": "Teeziro",
     "palette": {
       "h": 38,
       "s": 48,
@@ -5493,16 +5489,17 @@
     "communityVotes2020": 15699,
     "previousCard": "xy6-28",
     "previousRarity": "Common",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv04.5/025/high.webp"
   },
   {
     "id": 178,
     "name": "Xatu",
     "slug": "xatu",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/152/high.webp",
-    "card": "sv04.5-152",
-    "rarity": "Shiny rare",
-    "artist": "Hajime Kusajima",
+    "image": "https://assets.tcgdex.net/es/sv/svp/059/high.webp",
+    "card": "svp-059",
+    "rarity": "Promo",
+    "artist": "GOSSAN",
     "palette": {
       "h": 292,
       "s": 30,
@@ -5519,7 +5516,8 @@
     ],
     "previousCard": "xy6-29",
     "previousRarity": "Rare",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/svp/059/high.webp"
   },
   {
     "id": 179,
@@ -5778,10 +5776,10 @@
     "id": 187,
     "name": "Hoppip",
     "slug": "hoppip",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/096/high.webp",
-    "card": "sv04.5-096",
-    "rarity": "Shiny rare",
-    "artist": "Mina Nakai",
+    "image": "https://assets.tcgdex.net/es/sv/sv02/001/high.webp",
+    "card": "sv02-001",
+    "rarity": "Común",
+    "artist": "Yukiko Baba",
     "palette": {
       "h": 82,
       "s": 62,
@@ -5798,16 +5796,17 @@
     ],
     "previousCard": "xy11-3",
     "previousRarity": "Common",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv02/001/high.webp"
   },
   {
     "id": 188,
     "name": "Skiploom",
     "slug": "skiploom",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/097/high.webp",
-    "card": "sv04.5-097",
-    "rarity": "Shiny rare",
-    "artist": "Eri Yamaki",
+    "image": "https://assets.tcgdex.net/es/sv/sv02/002/high.webp",
+    "card": "sv02-002",
+    "rarity": "Uncommon",
+    "artist": "Yoriyuki Ikegami",
     "palette": {
       "h": 68,
       "s": 62,
@@ -5824,16 +5823,17 @@
     ],
     "previousCard": "xy11-4",
     "previousRarity": "Uncommon",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv02/002/high.webp"
   },
   {
     "id": 189,
     "name": "Jumpluff",
     "slug": "jumpluff",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/098/high.webp",
-    "card": "sv04.5-098",
-    "rarity": "Shiny rare",
-    "artist": "Suwama Chiaki",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh7/4/high.webp",
+    "card": "swsh7-4",
+    "rarity": "Holo Rara",
+    "artist": "Tika Matsuno",
     "palette": {
       "h": 82,
       "s": 62,
@@ -5850,7 +5850,8 @@
     ],
     "previousCard": "xy11-5",
     "previousRarity": "Rare",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh7/4/high.webp"
   },
   {
     "id": 190,
@@ -6030,10 +6031,10 @@
     "id": 195,
     "name": "Quagsire",
     "slug": "quagsire",
-    "image": "https://assets.tcgdex.net/es/sm/sma/SV10/high.webp",
-    "card": "sma-SV10",
-    "rarity": "Shiny rare",
-    "artist": "otumami",
+    "image": "https://assets.tcgdex.net/es/sv/svp/156/high.webp",
+    "card": "svp-156",
+    "rarity": "Promo",
+    "artist": "Saboteri",
     "palette": {
       "h": 38,
       "s": 75,
@@ -6051,7 +6052,8 @@
     "communityVotes2020": 13308,
     "previousCard": "swsh4-84",
     "previousRarity": "Rare",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/svp/156/high.webp"
   },
   {
     "id": 196,
@@ -6137,36 +6139,18 @@
     "id": 199,
     "name": "Slowking",
     "slug": "slowking",
-    "image": "/materials/v0.1.9.13-c07b1460be90/sv02-238/front.png",
-    "card": "sv02-238",
-    "rarity": "Ultra Rare",
-    "artist": "5ban Graphics",
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/89312_in_1000x1000.jpg",
+    "card": "ecard2-H22",
+    "rarity": "Holo Rare",
+    "artist": "Aya Kusube",
     "palette": {
       "h": 248,
       "s": 37,
       "v": 62
     },
-    "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "material-matched",
-      "provider": "malie.io",
-      "language": "es-ES",
-      "cardId": "sv02-238",
-      "source": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/sv2.es-ES.json",
-      "sourceHash": "c07b1460be90c33594c74f0fdd34ff15",
-      "printingId": "Slowkingex_sv2_238_std_UltraRareC_SvUltra_Etched",
-      "effect": "asset-foil",
-      "type": "SV_ULTRA",
-      "maskType": "ETCHED",
-      "etched": true,
-      "assets": {
-        "front": "/materials/v0.1.9.13-c07b1460be90/sv02-238/front.png",
-        "foil": "/materials/v0.1.9.13-c07b1460be90/sv02-238/foil.png",
-        "etch": "/materials/v0.1.9.13-c07b1460be90/sv02-238/etch.png"
-      }
-    },
-    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv02/238/high.webp",
+    "language": "en",
+    "surface": null,
+    "fallbackImage": "https://tcgplayer-cdn.tcgplayer.com/product/89312_in_1000x1000.jpg",
     "traits": [
       "type:11",
       "type:14",
@@ -6220,27 +6204,24 @@
     "id": 201,
     "name": "Unown",
     "slug": "unown",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh12/199/high.webp",
-    "card": "swsh12-199",
-    "rarity": "Secret Rare",
-    "artist": "PLANETA Mochizuki",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh12/177/high.webp",
+    "card": "swsh12-177",
+    "rarity": "Ultra Rara",
+    "artist": "Toshinao Aoki",
     "palette": {
       "h": 52,
       "s": 44,
       "v": 80
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:14",
       "color_id:1",
       "shape_id:1",
       "evolution_chain_id:99"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh12/177/high.webp"
   },
   {
     "id": 202,
@@ -6299,10 +6280,10 @@
     "id": 204,
     "name": "Pineco",
     "slug": "pineco",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/099/high.webp",
-    "card": "sv04.5-099",
-    "rarity": "Shiny rare",
-    "artist": "Suwama Chiaki",
+    "image": "https://assets.tcgdex.net/es/sv/sv10/004/high.webp",
+    "card": "sv10-004",
+    "rarity": "Común",
+    "artist": "YASHIRO Nanaco",
     "palette": {
       "h": 82,
       "s": 58,
@@ -6318,16 +6299,17 @@
     ],
     "previousCard": "xy2-4",
     "previousRarity": "Common",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv10/004/high.webp"
   },
   {
     "id": 205,
     "name": "Forretress",
     "slug": "forretress",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/212/high.webp",
-    "card": "sv04.5-212",
-    "rarity": "Shiny Ultra Rare",
-    "artist": "Tomokazu Komiya",
+    "image": "https://assets.tcgdex.net/es/sv/sv01/139/high.webp",
+    "card": "sv01-139",
+    "rarity": "Uncommon",
+    "artist": "Lee HyunJung",
     "palette": {
       "h": 172,
       "s": 83,
@@ -6344,7 +6326,8 @@
     ],
     "previousCard": "xy2-60",
     "previousRarity": "Rare",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv01/139/high.webp"
   },
   {
     "id": 206,
@@ -7506,36 +7489,18 @@
     "id": 242,
     "name": "Blissey",
     "slug": "blissey",
-    "image": "/materials/v0.1.9.13-8708279e95da/sv06-201/front.png",
-    "card": "sv06-201",
-    "rarity": "Ultra Rare",
-    "artist": "PLANETA Tsuji",
+    "image": "https://assets.tcgdex.net/en/swsh/swsh12/TG22/high.webp",
+    "card": "swsh12tg-TG22",
+    "rarity": "Holo Rare V",
+    "artist": "You Iribi",
     "palette": {
       "h": 338,
       "s": 28,
       "v": 89
     },
-    "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "material-matched",
-      "provider": "malie.io",
-      "language": "es-ES",
-      "cardId": "sv06-201",
-      "source": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/sv6.es-ES.json",
-      "sourceHash": "8708279e95daeae5780fbf979ff05266",
-      "printingId": "Blisseyex_sv6_201_std_UltraRare_SunPillar_Etched",
-      "effect": "asset-foil",
-      "type": "SUN_PILLAR",
-      "maskType": "ETCHED",
-      "etched": true,
-      "assets": {
-        "front": "/materials/v0.1.9.13-8708279e95da/sv06-201/front.png",
-        "foil": "/materials/v0.1.9.13-8708279e95da/sv06-201/foil.png",
-        "etch": "/materials/v0.1.9.13-8708279e95da/sv06-201/etch.png"
-      }
-    },
-    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv06/201/high.webp",
+    "language": "en",
+    "surface": null,
+    "fallbackImage": "https://assets.tcgdex.net/en/swsh/swsh12/TG22/high.webp",
     "traits": [
       "type:1",
       "color_id:6",
@@ -7599,28 +7564,25 @@
     "id": 245,
     "name": "Suicune",
     "slug": "suicune",
-    "image": "https://assets.tcgdex.net/es/sm/sm8/220/high.webp",
-    "card": "sm8-220",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/en/swsh/swsh12.5/GG38/high.webp",
+    "card": "swsh12.5gg-GG38",
+    "rarity": "Ultra Rare",
+    "artist": "Atsushi Furusawa",
     "palette": {
       "h": 202,
       "s": 49,
       "v": 80
     },
-    "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "language": "en",
+    "surface": null,
     "traits": [
       "type:11",
       "color_id:2",
       "shape_id:8",
       "evolution_chain_id:125"
     ],
-    "communityVotes2020": 26277
+    "communityVotes2020": 26277,
+    "fallbackImage": "https://assets.tcgdex.net/en/swsh/swsh12.5/GG38/high.webp"
   },
   {
     "id": 246,
@@ -7874,28 +7836,25 @@
     "id": 254,
     "name": "Sceptile",
     "slug": "sceptile",
-    "image": "https://assets.tcgdex.net/es/sm/sm8/216/high.webp",
-    "card": "sm8-216",
-    "rarity": "Secret Rare",
-    "artist": "Yoshinobu Saito",
+    "image": "https://assets.tcgdex.net/es/sm/sm7/10/high.webp",
+    "card": "sm7-10",
+    "rarity": "Rara",
+    "artist": "Mitsuhiro Arita",
     "palette": {
       "h": 202,
       "s": 51,
       "v": 80
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:12",
       "color_id:5",
       "shape_id:6",
       "evolution_chain_id:130"
     ],
-    "communityVotes2020": 38724
+    "communityVotes2020": 38724,
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm7/10/high.webp"
   },
   {
     "id": 255,
@@ -9366,16 +9325,16 @@
     "id": 302,
     "name": "Sableye",
     "slug": "sableye",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh1/194/high.webp",
-    "card": "swsh1-194",
-    "rarity": "Ultra Rare",
-    "artist": "Hitoshi Ariga",
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/726533_in_1000x1000.jpg",
+    "card": "me06-060",
+    "rarity": "Common",
+    "artist": "Shinji Kanda",
     "palette": {
       "h": 262,
       "s": 49,
       "v": 43
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:17",
@@ -9387,7 +9346,8 @@
     "communityVotes2020": 9012,
     "previousCard": "xy7-44",
     "previousRarity": "Uncommon",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://tcgplayer-cdn.tcgplayer.com/product/726533_in_1000x1000.jpg"
   },
   {
     "id": 303,
@@ -11763,10 +11723,10 @@
     "id": 374,
     "name": "Beldum",
     "slug": "beldum",
-    "image": "https://assets.tcgdex.net/en/sm/sma/SV30/high.webp",
-    "card": "sma-SV30",
-    "rarity": "Shiny rare",
-    "artist": "Aya Kusube",
+    "image": "https://assets.tcgdex.net/en/sv/svp/207/high.webp",
+    "card": "svp-207",
+    "rarity": "Promo",
+    "artist": "hncl",
     "palette": {
       "h": 142,
       "s": 80,
@@ -11784,7 +11744,7 @@
     "previousCard": "swsh4-116",
     "previousRarity": "Common",
     "artSource": "TCGdex audit 2026-11",
-    "fallbackImage": "https://assets.tcgdex.net/en/sm/sma/SV30/high.webp"
+    "fallbackImage": "https://assets.tcgdex.net/en/sv/svp/207/high.webp"
   },
   {
     "id": 375,
@@ -13413,16 +13373,16 @@
     "id": 426,
     "name": "Drifblim",
     "slug": "drifblim",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/156/high.webp",
-    "card": "sv04.5-156",
-    "rarity": "Shiny rare",
-    "artist": "Miki Tanaka",
+    "image": "https://assets.tcgdex.net/en/me/mep/006/high.webp",
+    "card": "mep-006",
+    "rarity": "Promo",
+    "artist": "Shimaris Yukichi",
     "palette": {
       "h": 202,
       "s": 92,
       "v": 79
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:8",
@@ -13433,7 +13393,8 @@
     ],
     "previousCard": "xy11-47",
     "previousRarity": "Uncommon",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/en/me/mep/006/high.webp"
   },
   {
     "id": 427,
@@ -13533,28 +13494,25 @@
     "id": 430,
     "name": "Honchkrow",
     "slug": "honchkrow",
-    "image": "https://assets.tcgdex.net/es/sm/sm10/223/high.webp",
-    "card": "sm10-223",
-    "rarity": "Secret Rare",
-    "artist": "sadaji",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh9/162/high.webp",
+    "card": "swsh9-162",
+    "rarity": "Ultra Rara",
+    "artist": "zig",
     "palette": {
       "h": 68,
       "s": 26,
       "v": 90
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:17",
       "type:3",
       "color_id:1",
       "shape_id:9",
       "evolution_chain_id:97"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh9/162/high.webp"
   },
   {
     "id": 431,
@@ -13788,10 +13746,10 @@
     "id": 439,
     "name": "Mime Jr.",
     "slug": "mime-jr",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/157/high.webp",
-    "card": "sv04.5-157",
-    "rarity": "Shiny rare",
-    "artist": "",
+    "image": "https://assets.tcgdex.net/es/sv/sv04.5/031/high.webp",
+    "card": "sv04.5-031",
+    "rarity": "Común",
+    "artist": "HYOGONOSUKE",
     "language": "es",
     "palette": {
       "h": 218,
@@ -13808,7 +13766,8 @@
     ],
     "previousCard": "",
     "previousRarity": "",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv04.5/031/high.webp"
   },
   {
     "id": 440,
@@ -15265,28 +15224,25 @@
     "id": 484,
     "name": "Palkia",
     "slug": "palkia",
-    "image": "https://assets.tcgdex.net/es/sm/sm6/132/high.webp",
-    "card": "sm6-132",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh10/167/high.webp",
+    "card": "swsh10-167",
+    "rarity": "Ultra Rara",
+    "artist": "Oswaldo KATO",
     "palette": {
       "h": 202,
       "s": 46,
       "v": 82
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:11",
       "type:16",
       "color_id:7",
       "shape_id:6",
       "evolution_chain_id:245"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh10/167/high.webp"
   },
   {
     "id": 485,
@@ -15477,28 +15433,25 @@
     "id": 491,
     "name": "Darkrai",
     "slug": "darkrai",
-    "image": "https://assets.tcgdex.net/es/sm/sm3/158/high.webp",
-    "card": "sm3-158",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/en/swsh/swsh12.5/GG50/high.webp",
+    "card": "swsh12.5gg-GG50",
+    "rarity": "Ultra Rare",
+    "artist": "Pani Kobayashi",
     "palette": {
       "h": 202,
       "s": 45,
       "v": 82
     },
-    "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "language": "en",
+    "surface": null,
     "traits": [
       "type:17",
       "color_id:1",
       "shape_id:12",
       "evolution_chain_id:252"
     ],
-    "communityVotes2020": 30544
+    "communityVotes2020": 30544,
+    "fallbackImage": "https://assets.tcgdex.net/en/swsh/swsh12.5/GG50/high.webp"
   },
   {
     "id": 492,
@@ -19681,9 +19634,9 @@
     "id": 596,
     "name": "Galvantula",
     "slug": "galvantula",
-    "image": "https://assets.tcgdex.net/es/sv/sv07/168/high.webp",
-    "card": "sv07-168",
-    "rarity": "Special illustration rare",
+    "image": "https://assets.tcgdex.net/es/sv/sv10.5w/117/high.webp",
+    "card": "sv10.5w-117",
+    "rarity": "Rara Ilustración",
     "artist": "Akira Komayama",
     "palette": {
       "h": 52,
@@ -23682,16 +23635,16 @@
     "id": 706,
     "name": "Goodra",
     "slug": "goodra",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh11/202/high.webp",
-    "card": "swsh11-202",
-    "rarity": "Secret Rare",
-    "artist": "Nagomi Nijo",
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/694688_in_1000x1000.jpg",
+    "card": "mep-077",
+    "rarity": "Promo",
+    "artist": "okayamatakatoshi",
     "palette": {
       "h": 52,
       "s": 75,
       "v": 70
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:16",
@@ -23702,7 +23655,8 @@
     "communityVotes2020": 30209,
     "previousCard": "swsh8-197",
     "previousRarity": "Rare",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://tcgplayer-cdn.tcgplayer.com/product/694688_in_1000x1000.jpg"
   },
   {
     "id": 707,
@@ -23762,10 +23716,10 @@
     "id": 709,
     "name": "Trevenant",
     "slug": "trevenant",
-    "image": "https://assets.tcgdex.net/es/xy/xy9/66/high.webp",
-    "card": "xy9-66",
-    "rarity": "Ultra Rare",
-    "artist": "MUGENUP",
+    "image": "https://assets.tcgdex.net/es/me/me02.5/237/high.webp",
+    "card": "me02.5-237",
+    "rarity": "Rara Ilustración",
+    "artist": "Tomowaka",
     "palette": {
       "h": 23,
       "s": 31,
@@ -23783,7 +23737,8 @@
     "communityVotes2020": 9019,
     "previousCard": "me02.5-237",
     "previousRarity": "Illustration rare",
-    "artSource": "TCGdex identity audit 2026-11"
+    "artSource": "TCGdex identity audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/me/me02.5/237/high.webp"
   },
   {
     "id": 710,
@@ -24117,36 +24072,18 @@
     "id": 720,
     "name": "Hoopa",
     "slug": "hoopa",
-    "image": "/materials/v0.1.9.13-d02cda25d92a/sv04-226/front.png",
-    "card": "sv04-226",
+    "image": "https://assets.tcgdex.net/en/swsh/swsh12.5/GG53/high.webp",
+    "card": "swsh12.5gg-GG53",
     "rarity": "Ultra Rare",
-    "artist": "5ban Graphics",
+    "artist": "OKACHEKE",
     "palette": {
       "h": 22,
       "s": 45,
       "v": 73
     },
-    "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "material-matched",
-      "provider": "malie.io",
-      "language": "es-ES",
-      "cardId": "sv04-226",
-      "source": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/sv4.es-ES.json",
-      "sourceHash": "d02cda25d92a3ba3792808f8c1b953c4",
-      "printingId": "Hoopaex_sv4_226_std_UltraRareC_SvUltra_Etched",
-      "effect": "asset-foil",
-      "type": "SV_ULTRA",
-      "maskType": "ETCHED",
-      "etched": true,
-      "assets": {
-        "front": "/materials/v0.1.9.13-d02cda25d92a/sv04-226/front.png",
-        "foil": "/materials/v0.1.9.13-d02cda25d92a/sv04-226/foil.png",
-        "etch": "/materials/v0.1.9.13-d02cda25d92a/sv04-226/etch.png"
-      }
-    },
-    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv04/226/high.webp",
+    "language": "en",
+    "surface": null,
+    "fallbackImage": "https://assets.tcgdex.net/en/swsh/swsh12.5/GG53/high.webp",
     "traits": [
       "type:14",
       "type:8",
@@ -24271,9 +24208,9 @@
     "id": 724,
     "name": "Decidueye",
     "slug": "decidueye",
-    "image": "https://assets.tcgdex.net/es/sm/sm2/146/high.webp",
-    "card": "sm2-146",
-    "rarity": "Secret Rare",
+    "image": "https://assets.tcgdex.net/es/sm/sm1/12/high.webp",
+    "card": "sm1-12",
+    "rarity": "Ultra Rara",
     "artist": "5ban Graphics",
     "palette": {
       "h": 202,
@@ -24281,11 +24218,7 @@
       "v": 74
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:12",
       "type:8",
@@ -24293,7 +24226,8 @@
       "shape_id:9",
       "evolution_chain_id:374"
     ],
-    "communityVotes2020": 44011
+    "communityVotes2020": 44011,
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm1/12/high.webp"
   },
   {
     "id": 725,
@@ -24936,16 +24870,16 @@
     "id": 744,
     "name": "Rockruff",
     "slug": "rockruff",
-    "image": "https://assets.tcgdex.net/es/sm/sma/SV23/high.webp",
-    "card": "sma-SV23",
-    "rarity": "Shiny rare",
-    "artist": "Yuu Nishida",
+    "image": "https://assets.tcgdex.net/en/swsh/swsh12/TG07/high.webp",
+    "card": "swsh12tg-TG07",
+    "rarity": "Holo Rare",
+    "artist": "Hideki Ishikawa",
     "palette": {
       "h": 38,
       "s": 77,
       "v": 83
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:6",
@@ -24956,7 +24890,8 @@
     "communityVotes2020": 10986,
     "previousCard": "swsh6-86",
     "previousRarity": "Common",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/en/swsh/swsh12/TG07/high.webp"
   },
   {
     "id": 745,
@@ -25003,27 +24938,24 @@
     "id": 746,
     "name": "Wishiwashi",
     "slug": "wishiwashi",
-    "image": "https://assets.tcgdex.net/es/sm/sm2/151/high.webp",
-    "card": "sm2-151",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/es/sm/sm12/240/high.webp",
+    "card": "sm12-240",
+    "rarity": "Rara Secreta",
+    "artist": "Misaki Hashimoto",
     "palette": {
       "h": 202,
       "s": 43,
       "v": 79
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:11",
       "color_id:2",
       "shape_id:3",
       "evolution_chain_id:384"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm12/240/high.webp"
   },
   {
     "id": 747,
@@ -25056,9 +24988,9 @@
     "id": 748,
     "name": "Toxapex",
     "slug": "toxapex",
-    "image": "https://assets.tcgdex.net/es/sm/sm2/154/high.webp",
-    "card": "sm2-154",
-    "rarity": "Secret Rare",
+    "image": "https://assets.tcgdex.net/es/sm/sm2/57/high.webp",
+    "card": "sm2-57",
+    "rarity": "Ultra Rara",
     "artist": "5ban Graphics",
     "palette": {
       "h": 8,
@@ -25066,11 +24998,7 @@
       "v": 92
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:4",
       "type:11",
@@ -25078,7 +25006,8 @@
       "shape_id:10",
       "evolution_chain_id:385"
     ],
-    "communityVotes2020": 8221
+    "communityVotes2020": 8221,
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm2/57/high.webp"
   },
   {
     "id": 749,
@@ -25245,9 +25174,9 @@
     "id": 754,
     "name": "Lurantis",
     "slug": "lurantis",
-    "image": "https://assets.tcgdex.net/es/sm/sm1/150/high.webp",
-    "card": "sm1-150",
-    "rarity": "Secret Rare",
+    "image": "https://assets.tcgdex.net/es/sm/sm1/15/high.webp",
+    "card": "sm1-15",
+    "rarity": "Ultra Rara",
     "artist": "5ban Graphics",
     "palette": {
       "h": 202,
@@ -25255,18 +25184,15 @@
       "v": 79
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:12",
       "color_id:6",
       "shape_id:12",
       "evolution_chain_id:388"
     ],
-    "communityVotes2020": 8889
+    "communityVotes2020": 8889,
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm1/15/high.webp"
   },
   {
     "id": 755,
@@ -25612,16 +25538,16 @@
     "id": 765,
     "name": "Oranguru",
     "slug": "oranguru",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh4/199/high.webp",
-    "card": "swsh4-199",
-    "rarity": "Secret Rare",
-    "artist": "Sekio",
+    "image": "https://assets.tcgdex.net/en/swsh/swsh9/TG12/high.webp",
+    "card": "swsh9tg-TG12",
+    "rarity": "Rare",
+    "artist": "Akira Komayama",
     "palette": {
       "h": 38,
       "s": 45,
       "v": 89
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:1",
@@ -25632,7 +25558,8 @@
     ],
     "previousCard": "swsh12.5-119",
     "previousRarity": "Rare",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/en/swsh/swsh9/TG12/high.webp"
   },
   {
     "id": 766,
@@ -25789,9 +25716,9 @@
     "id": 770,
     "name": "Palossand",
     "slug": "palossand",
-    "image": "/materials/v0.1.9.13-f7b44eb8303a/sv08-221/front.png",
-    "card": "sv08-221",
-    "rarity": "Ultra Rare",
+    "image": "https://assets.tcgdex.net/es/sm/sm7/82/high.webp",
+    "card": "sm7-82",
+    "rarity": "Ultra Rara",
     "artist": "5ban Graphics",
     "palette": {
       "h": 22,
@@ -25799,26 +25726,8 @@
       "v": 83
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "material-matched",
-      "provider": "malie.io",
-      "language": "es-ES",
-      "cardId": "sv08-221",
-      "source": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/sv8.es-ES.json",
-      "sourceHash": "f7b44eb8303abeff77d794957f71d843",
-      "printingId": "Palossandex_sv8_221_std_UltraRareC_SvUltra_Etched",
-      "effect": "asset-foil",
-      "type": "SV_ULTRA",
-      "maskType": "ETCHED",
-      "etched": true,
-      "assets": {
-        "front": "/materials/v0.1.9.13-f7b44eb8303a/sv08-221/front.png",
-        "foil": "/materials/v0.1.9.13-f7b44eb8303a/sv08-221/foil.png",
-        "etch": "/materials/v0.1.9.13-f7b44eb8303a/sv08-221/etch.png"
-      }
-    },
-    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv08/221/high.webp",
+    "surface": null,
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm7/82/high.webp",
     "traits": [
       "type:8",
       "type:5",
@@ -26349,28 +26258,25 @@
     "id": 786,
     "name": "Tapu Lele",
     "slug": "tapu-lele",
-    "image": "https://assets.tcgdex.net/es/sm/sm2/155/high.webp",
-    "card": "sm2-155",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/en/sm/smp/SM152/high.webp",
+    "card": "smp-SM152",
+    "rarity": "Promo",
+    "artist": "HYOGONOSUKE",
     "palette": {
       "h": 202,
       "s": 43,
       "v": 76
     },
-    "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "language": "en",
+    "surface": null,
     "traits": [
       "type:14",
       "type:18",
       "color_id:6",
       "shape_id:4",
       "evolution_chain_id:410"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/en/sm/smp/SM152/high.webp"
   },
   {
     "id": 787,
@@ -26417,28 +26323,25 @@
     "id": 788,
     "name": "Tapu Fini",
     "slug": "tapu-fini",
-    "image": "https://assets.tcgdex.net/es/sm/sm3/152/high.webp",
-    "card": "sm3-152",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/en/sm/smp/SM203/high.webp",
+    "card": "smp-SM203",
+    "rarity": "Promo",
+    "artist": "Ryuta Fuse",
     "palette": {
       "h": 202,
       "s": 45,
       "v": 79
     },
-    "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "language": "en",
+    "surface": null,
     "traits": [
       "type:11",
       "type:18",
       "color_id:7",
       "shape_id:4",
       "evolution_chain_id:412"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/en/sm/smp/SM203/high.webp"
   },
   {
     "id": 789,
@@ -26553,48 +26456,41 @@
     "id": 793,
     "name": "Nihilego",
     "slug": "nihilego",
-    "image": "https://assets.tcgdex.net/es/sm/sm4/114/high.webp",
-    "card": "sm4-114",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/es/sm/sm8/106/high.webp",
+    "card": "sm8-106",
+    "rarity": "Rara",
+    "artist": "Megumi Mizutani",
     "palette": {
       "h": 68,
       "s": 31,
       "v": 90
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:6",
       "type:4",
       "color_id:9",
       "shape_id:10",
       "evolution_chain_id:414"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm8/106/high.webp"
   },
   {
     "id": 794,
     "name": "Buzzwole",
     "slug": "buzzwole",
-    "image": "https://assets.tcgdex.net/es/sm/sm4/115/high.webp",
-    "card": "sm4-115",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/es/sm/sm12/21/high.webp",
+    "card": "sm12-21",
+    "rarity": "Rara",
+    "artist": "Anesaki Dynamic",
     "palette": {
       "h": 202,
       "s": 38,
       "v": 87
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:7",
       "type:2",
@@ -26602,168 +26498,151 @@
       "shape_id:10",
       "evolution_chain_id:415"
     ],
-    "communityVotes2020": 14747
+    "communityVotes2020": 14747,
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm12/21/high.webp"
   },
   {
     "id": 795,
     "name": "Pheromosa",
     "slug": "pheromosa",
-    "image": "https://assets.tcgdex.net/es/sm/sm5/158/high.webp",
-    "card": "sm5-158",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/es/sm/sm6/11/high.webp",
+    "card": "sm6-11",
+    "rarity": "Rara",
+    "artist": "Hitoshi Ariga",
     "palette": {
       "h": 188,
       "s": 45,
       "v": 91
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:7",
       "type:2",
       "color_id:9",
       "shape_id:12",
       "evolution_chain_id:416"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm6/11/high.webp"
   },
   {
     "id": 796,
     "name": "Xurkitree",
     "slug": "xurkitree",
-    "image": "https://assets.tcgdex.net/es/sm/sm5/160/high.webp",
-    "card": "sm5-160",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/es/sm/sm11/70/high.webp",
+    "card": "sm11-70",
+    "rarity": "Rara",
+    "artist": "Satoshi Shirai",
     "palette": {
       "h": 188,
       "s": 54,
       "v": 89
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:13",
       "color_id:1",
       "shape_id:6",
       "evolution_chain_id:417"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm11/70/high.webp"
   },
   {
     "id": 797,
     "name": "Celesteela",
     "slug": "celesteela",
-    "image": "https://assets.tcgdex.net/es/sm/sm5/162/high.webp",
-    "card": "sm5-162",
-    "rarity": "Secret Rare",
+    "image": "https://assets.tcgdex.net/en/sm/smp/SM67/high.webp",
+    "card": "smp-SM67",
+    "rarity": "Promo",
     "artist": "5ban Graphics",
     "palette": {
       "h": 188,
       "s": 50,
       "v": 90
     },
-    "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "language": "en",
+    "surface": null,
     "traits": [
       "type:9",
       "type:3",
       "color_id:5",
       "shape_id:12",
       "evolution_chain_id:418"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/en/sm/smp/SM67/high.webp"
   },
   {
     "id": 798,
     "name": "Kartana",
     "slug": "kartana",
-    "image": "https://assets.tcgdex.net/es/sm/sm4/117/high.webp",
-    "card": "sm4-117",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/es/sm/sm7/101/high.webp",
+    "card": "sm7-101",
+    "rarity": "Rara",
+    "artist": "Hasuno",
     "palette": {
       "h": 68,
       "s": 26,
       "v": 88
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:12",
       "type:9",
       "color_id:9",
       "shape_id:12",
       "evolution_chain_id:419"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm7/101/high.webp"
   },
   {
     "id": 799,
     "name": "Guzzlord",
     "slug": "guzzlord",
-    "image": "https://assets.tcgdex.net/es/sm/sm4/116/high.webp",
-    "card": "sm4-116",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/es/sm/sm12/136/high.webp",
+    "card": "sm12-136",
+    "rarity": "Rara",
+    "artist": "Kouki Saitou",
     "palette": {
       "h": 202,
       "s": 40,
       "v": 84
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:17",
       "type:16",
       "color_id:1",
       "shape_id:6",
       "evolution_chain_id:420"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm12/136/high.webp"
   },
   {
     "id": 800,
     "name": "Necrozma",
     "slug": "necrozma",
-    "image": "https://assets.tcgdex.net/es/sm/sm3/153/high.webp",
-    "card": "sm3-153",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/es/sm/sm3/63/high.webp",
+    "card": "sm3-63",
+    "rarity": "Ultra Rara",
+    "artist": "PLANETA",
     "palette": {
       "h": 202,
       "s": 46,
       "v": 81
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:14",
       "color_id:1",
       "shape_id:4",
       "evolution_chain_id:421"
     ],
-    "communityVotes2020": 7739
+    "communityVotes2020": 7739,
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm3/63/high.webp"
   },
   {
     "id": 801,
@@ -26863,82 +26742,73 @@
     "id": 804,
     "name": "Naganadel",
     "slug": "naganadel",
-    "image": "https://assets.tcgdex.net/es/sm/sm11/249/high.webp",
-    "card": "sm11-249",
-    "rarity": "Secret Rare",
-    "artist": "ConceptLab",
+    "image": "https://assets.tcgdex.net/es/sm/sm8/108/high.webp",
+    "card": "sm8-108",
+    "rarity": "Rara",
+    "artist": "Shin Nagasawa",
     "palette": {
       "h": 8,
       "s": 51,
       "v": 78
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:4",
       "type:16",
       "color_id:7",
       "shape_id:9",
       "evolution_chain_id:424"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm8/108/high.webp"
   },
   {
     "id": 805,
     "name": "Stakataka",
     "slug": "stakataka",
-    "image": "https://assets.tcgdex.net/es/sm/sm7/176/high.webp",
-    "card": "sm7-176",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/es/sm/sm10/106/high.webp",
+    "card": "sm10-106",
+    "rarity": "Rara",
+    "artist": "nagimiso",
     "palette": {
       "h": 22,
       "s": 44,
       "v": 87
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:6",
       "type:9",
       "color_id:4",
       "shape_id:8",
       "evolution_chain_id:425"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm10/106/high.webp"
   },
   {
     "id": 806,
     "name": "Blacephalon",
     "slug": "blacephalon",
-    "image": "https://assets.tcgdex.net/es/sm/sm8/219/high.webp",
-    "card": "sm8-219",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/es/sm/sm12/104/high.webp",
+    "card": "sm12-104",
+    "rarity": "Rara",
+    "artist": "Hasuno",
     "palette": {
       "h": 68,
       "s": 32,
       "v": 90
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:10",
       "type:8",
       "color_id:9",
       "shape_id:12",
       "evolution_chain_id:426"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm12/104/high.webp"
   },
   {
     "id": 807,
@@ -27390,10 +27260,10 @@
     "id": 820,
     "name": "Greedent",
     "slug": "greedent",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh8/272/high.webp",
-    "card": "swsh8-272",
-    "rarity": "Secret Rare",
-    "artist": "Saya Tsuruta",
+    "image": "https://assets.tcgdex.net/es/sv/sv10/205/high.webp",
+    "card": "sv10-205",
+    "rarity": "Rara Ilustración",
+    "artist": "Natsumi Yoshida",
     "palette": {
       "h": 8,
       "s": 30,
@@ -27409,7 +27279,8 @@
     ],
     "previousCard": "sv10-205",
     "previousRarity": "Illustration rare",
-    "artSource": "TCGdex identity audit 2026-11"
+    "artSource": "TCGdex identity audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv10/205/high.webp"
   },
   {
     "id": 821,
@@ -27576,10 +27447,10 @@
     "id": 826,
     "name": "Orbeetle",
     "slug": "orbeetle",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh4/186/high.webp",
-    "card": "swsh4-186",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/es/sv/sv10/198/high.webp",
+    "card": "sv10-198",
+    "rarity": "Rara Ilustración",
+    "artist": "HYOGONOSUKE",
     "palette": {
       "h": 357,
       "s": 73,
@@ -27596,7 +27467,8 @@
     ],
     "previousCard": "sv10-198",
     "previousRarity": "Illustration rare",
-    "artSource": "TCGdex identity audit 2026-11"
+    "artSource": "TCGdex identity audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv10/198/high.webp"
   },
   {
     "id": 827,
@@ -27797,28 +27669,25 @@
     "id": 834,
     "name": "Drednaw",
     "slug": "drednaw",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh3.5/69/high.webp",
-    "card": "swsh3.5-69",
-    "rarity": "Ultra Rara",
-    "artist": "aky CG Works",
+    "image": "https://assets.tcgdex.net/es/sv/sv07/044/high.webp",
+    "card": "sv07-044",
+    "rarity": "Rara",
+    "artist": "Dsuke",
     "palette": {
       "h": 186,
       "s": 82,
       "v": 79
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:11",
       "type:6",
       "color_id:5",
       "shape_id:8",
       "evolution_chain_id:439"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv07/044/high.webp"
   },
   {
     "id": 835,
@@ -27944,28 +27813,25 @@
     "id": 839,
     "name": "Coalossal",
     "slug": "coalossal",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh4/173/high.webp",
-    "card": "swsh4-173",
-    "rarity": "Ultra Rara",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh5/80/high.webp",
+    "card": "swsh5-80",
+    "rarity": "Holo Rara",
+    "artist": "AKIRA EGAWA",
     "palette": {
       "h": 6,
       "s": 57,
       "v": 50
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:6",
       "type:10",
       "color_id:1",
       "shape_id:12",
       "evolution_chain_id:441"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh5/80/high.webp"
   },
   {
     "id": 840,
@@ -28241,10 +28107,10 @@
     "id": 848,
     "name": "Toxel",
     "slug": "toxel",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/140/high.webp",
-    "card": "sv04.5-140",
-    "rarity": "Shiny rare",
-    "artist": "kodama",
+    "image": "https://assets.tcgdex.net/es/sv/sv04/069/high.webp",
+    "card": "sv04-069",
+    "rarity": "Común",
+    "artist": "Yuka Morii",
     "palette": {
       "h": 52,
       "s": 77,
@@ -28261,7 +28127,8 @@
     ],
     "previousCard": "swsh8-106",
     "previousRarity": "Common",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv04/069/high.webp"
   },
   {
     "id": 849,
@@ -28832,16 +28699,16 @@
     "id": 869,
     "name": "Alcremie",
     "slug": "alcremie",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh4.5/73/high.webp",
-    "card": "swsh4.5-73",
-    "rarity": "Secret Rare",
-    "artist": "sowsow",
+    "image": "https://assets.tcgdex.net/en/swsh/swsh9/TG08/high.webp",
+    "card": "swsh9tg-TG08",
+    "rarity": "Rare",
+    "artist": "OKACHEKE",
     "palette": {
       "h": 308,
       "s": 30,
       "v": 68
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:18",
@@ -28852,7 +28719,8 @@
     "communityVotes2020": 30612,
     "previousCard": "swsh9-071",
     "previousRarity": "Rare",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/en/swsh/swsh9/TG08/high.webp"
   },
   {
     "id": 870,
@@ -29182,28 +29050,25 @@
     "id": 880,
     "name": "Dracozolt",
     "slug": "dracozolt",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh7/178/high.webp",
-    "card": "swsh7-178",
-    "rarity": "Ultra Rara",
-    "artist": "PLANETA Mochizuki",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh7/58/high.webp",
+    "card": "swsh7-58",
+    "rarity": "Holo Rara V",
+    "artist": "Ryota Murayama",
     "palette": {
       "h": 352,
       "s": 51,
       "v": 84
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:13",
       "type:16",
       "color_id:5",
       "shape_id:6",
       "evolution_chain_id:461"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh7/58/high.webp"
   },
   {
     "id": 881,
@@ -29264,9 +29129,9 @@
     "id": 883,
     "name": "Arctovish",
     "slug": "arctovish",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh7/176/high.webp",
-    "card": "swsh7-176",
-    "rarity": "Ultra Rare",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh7/48/high.webp",
+    "card": "swsh7-48",
+    "rarity": "Holo Rara V",
     "artist": "Eske Yoshinob",
     "palette": {
       "h": 202,
@@ -29284,7 +29149,8 @@
     ],
     "previousCard": "swsh7-48",
     "previousRarity": "Holo Rare V",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh7/48/high.webp"
   },
   {
     "id": 884,
@@ -29773,28 +29639,25 @@
     "id": 900,
     "name": "Kleavor",
     "slug": "kleavor",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh10/196/high.webp",
-    "card": "swsh10-196",
-    "rarity": "Secret Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/en/swsh/swsh10/TG08/high.webp",
+    "card": "swsh10tg-TG08",
+    "rarity": "Rare",
+    "artist": "Souichirou Gunjima",
     "palette": {
       "h": 202,
       "s": 46,
       "v": 86
     },
-    "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "language": "en",
+    "surface": null,
     "traits": [
       "type:7",
       "type:6",
       "color_id:3",
       "shape_id:13",
       "evolution_chain_id:58"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/en/swsh/swsh10/TG08/high.webp"
   },
   {
     "id": 901,
@@ -30551,9 +30414,9 @@
     "id": 922,
     "name": "Pawmo",
     "slug": "pawmo",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/143/high.webp",
-    "card": "sv04.5-143",
-    "rarity": "Shiny rare",
+    "image": "https://assets.tcgdex.net/es/sv/sv02/075/high.webp",
+    "card": "sv02-075",
+    "rarity": "Uncommon",
     "artist": "Hitoshi Ariga",
     "palette": {
       "h": 202,
@@ -30571,7 +30434,8 @@
     ],
     "previousCard": "sv02-075",
     "previousRarity": "Uncommon",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv02/075/high.webp"
   },
   {
     "id": 923,
@@ -30618,9 +30482,9 @@
     "id": 924,
     "name": "Tandemaus",
     "slug": "tandemaus",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/209/high.webp",
-    "card": "sv04.5-209",
-    "rarity": "Shiny rare",
+    "image": "https://assets.tcgdex.net/es/sv/sv08/157/high.webp",
+    "card": "sv08-157",
+    "rarity": "Común",
     "artist": "USGMEN",
     "palette": {
       "h": 112,
@@ -30637,7 +30501,8 @@
     ],
     "previousCard": "sv08-157",
     "previousRarity": "Common",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv08/157/high.webp"
   },
   {
     "id": 925,
@@ -30750,10 +30615,10 @@
     "id": 928,
     "name": "Smoliv",
     "slug": "smoliv",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/102/high.webp",
-    "card": "sv04.5-102",
-    "rarity": "Shiny rare",
-    "artist": "Misa Tsutsui",
+    "image": "https://assets.tcgdex.net/es/sv/sv10/021/high.webp",
+    "card": "sv10-021",
+    "rarity": "Común",
+    "artist": "Yuka Morii",
     "palette": {
       "h": 68,
       "s": 58,
@@ -30770,7 +30635,8 @@
     ],
     "previousCard": "svp-023",
     "previousRarity": "Promo",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv10/021/high.webp"
   },
   {
     "id": 929,
@@ -31228,10 +31094,10 @@
     "id": 941,
     "name": "Kilowattrel",
     "slug": "kilowattrel",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/146/high.webp",
-    "card": "sv04.5-146",
-    "rarity": "Shiny rare",
-    "artist": "PLANETA Yamashita",
+    "image": "https://assets.tcgdex.net/es/sv/sv09/163/high.webp",
+    "card": "sv09-163",
+    "rarity": "Rara Ilustración",
+    "artist": "Terada Tera",
     "palette": {
       "h": 38,
       "s": 46,
@@ -31239,7 +31105,7 @@
     },
     "language": "es",
     "surface": null,
-    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv08/068/high.webp",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv09/163/high.webp",
     "traits": [
       "type:13",
       "type:3",
@@ -31600,9 +31466,9 @@
     "id": 951,
     "name": "Capsakid",
     "slug": "capsakid",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/106/high.webp",
-    "card": "sv04.5-106",
-    "rarity": "Shiny rare",
+    "image": "https://assets.tcgdex.net/es/sv/sv08/012/high.webp",
+    "card": "sv08-012",
+    "rarity": "Común",
     "artist": "Julie Hang",
     "palette": {
       "h": 68,
@@ -31619,7 +31485,8 @@
     ],
     "previousCard": "sv08-012",
     "previousRarity": "Common",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv08/012/high.webp"
   },
   {
     "id": 952,
@@ -31666,9 +31533,9 @@
     "id": 953,
     "name": "Rellor",
     "slug": "rellor",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/108/high.webp",
-    "card": "sv04.5-108",
-    "rarity": "Shiny rare",
+    "image": "https://assets.tcgdex.net/es/sv/sv10/024/high.webp",
+    "card": "sv10-024",
+    "rarity": "Común",
     "artist": "Toshinao Aoki",
     "palette": {
       "h": 68,
@@ -31685,7 +31552,8 @@
     ],
     "previousCard": "sv10-024",
     "previousRarity": "Common",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv10/024/high.webp"
   },
   {
     "id": 954,
@@ -31732,9 +31600,9 @@
     "id": 955,
     "name": "Flittle",
     "slug": "flittle",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/164/high.webp",
-    "card": "sv04.5-164",
-    "rarity": "Shiny rare",
+    "image": "https://assets.tcgdex.net/es/sv/sv08/094/high.webp",
+    "card": "sv08-094",
+    "rarity": "Común",
     "artist": "buchi",
     "palette": {
       "h": 322,
@@ -31751,7 +31619,8 @@
     ],
     "previousCard": "sv08-094",
     "previousRarity": "Common",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv08/094/high.webp"
   },
   {
     "id": 956,
@@ -32258,9 +32127,9 @@
     "id": 969,
     "name": "Glimmet",
     "slug": "glimmet",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/179/high.webp",
-    "card": "sv04.5-179",
-    "rarity": "Shiny rare",
+    "image": "https://assets.tcgdex.net/es/sv/sv08/114/high.webp",
+    "card": "sv08-114",
+    "rarity": "Común",
     "artist": "Eri Kamei",
     "palette": {
       "h": 202,
@@ -32278,7 +32147,8 @@
     ],
     "previousCard": "sv08-114",
     "previousRarity": "Common",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv08/114/high.webp"
   },
   {
     "id": 970,

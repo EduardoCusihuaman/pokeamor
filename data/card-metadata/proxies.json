@@ -5318,5 +5318,320 @@
     "name": "Teal Mask Ogerpon",
     "set": "SVP",
     "number": "123"
+  },
+  "svp-159": {
+    "name": "Magneton",
+    "set": "SVP",
+    "number": "159"
+  },
+  "swsh12.5gg-GG22": {
+    "name": "Ditto",
+    "set": "CRZ",
+    "number": "GG22"
+  },
+  "swsh11-180": {
+    "name": "Aerodactyl V",
+    "set": "LOR",
+    "number": "180"
+  },
+  "sv04.5-025": {
+    "name": "Natu",
+    "set": "PAF",
+    "number": "25"
+  },
+  "svp-059": {
+    "name": "Xatu",
+    "set": "SVP",
+    "number": "59"
+  },
+  "sv02-001": {
+    "name": "Hoppip",
+    "set": "PAL",
+    "number": "1"
+  },
+  "sv02-002": {
+    "name": "Skiploom",
+    "set": "PAL",
+    "number": "2"
+  },
+  "swsh7-4": {
+    "name": "Jumpluff",
+    "set": "EVS",
+    "number": "4"
+  },
+  "svp-156": {
+    "name": "Quagsire",
+    "set": "SVP",
+    "number": "156"
+  },
+  "ecard2-H22": {
+    "name": "Slowking",
+    "set": "E2",
+    "number": "H22"
+  },
+  "swsh12-177": {
+    "name": "Unown V",
+    "set": "SIT",
+    "number": "177"
+  },
+  "sv10-004": {
+    "name": "Pineco",
+    "set": "DRI",
+    "number": "4"
+  },
+  "sv01-139": {
+    "name": "Forretress",
+    "set": "SVI",
+    "number": "139"
+  },
+  "swsh12tg-TG22": {
+    "name": "Blissey V",
+    "set": "SIT",
+    "number": "TG22"
+  },
+  "swsh12.5gg-GG38": {
+    "name": "Suicune V",
+    "set": "CRZ",
+    "number": "GG38"
+  },
+  "sm7-10": {
+    "name": "Sceptile",
+    "set": "CES",
+    "number": "10"
+  },
+  "me06-060": {
+    "name": "Sableye",
+    "set": "DLR",
+    "number": "60"
+  },
+  "svp-207": {
+    "name": "Steven's Beldum",
+    "set": "SVP",
+    "number": "207"
+  },
+  "mep-006": {
+    "name": "Drifblim",
+    "set": "MEP",
+    "number": "6"
+  },
+  "swsh9-162": {
+    "name": "Honchkrow V",
+    "set": "BRS",
+    "number": "162"
+  },
+  "sv04.5-031": {
+    "name": "Mime Jr.",
+    "set": "PAF",
+    "number": "31"
+  },
+  "swsh10-167": {
+    "name": "Origin Forme Palkia V",
+    "set": "ASR",
+    "number": "167"
+  },
+  "swsh12.5gg-GG50": {
+    "name": "Darkrai VSTAR",
+    "set": "CRZ",
+    "number": "GG50"
+  },
+  "mep-077": {
+    "name": "Goodra",
+    "set": "MEP",
+    "number": "77"
+  },
+  "me02.5-237": {
+    "name": "Hop's Trevenant",
+    "set": "ASC",
+    "number": "237"
+  },
+  "swsh12.5gg-GG53": {
+    "name": "Hoopa V",
+    "set": "CRZ",
+    "number": "GG53"
+  },
+  "sm1-12": {
+    "name": "Decidueye GX",
+    "set": "SUM",
+    "number": "12"
+  },
+  "swsh12tg-TG07": {
+    "name": "Rockruff",
+    "set": "SIT",
+    "number": "TG7"
+  },
+  "sm12-240": {
+    "name": "Wishiwashi",
+    "set": "CEC",
+    "number": "240"
+  },
+  "sm2-57": {
+    "name": "Toxapex GX",
+    "set": "GRI",
+    "number": "57"
+  },
+  "sm1-15": {
+    "name": "Lurantis GX",
+    "set": "SUM",
+    "number": "15"
+  },
+  "swsh9tg-TG12": {
+    "name": "Oranguru",
+    "set": "BRS",
+    "number": "TG12"
+  },
+  "sm7-82": {
+    "name": "Palossand GX",
+    "set": "CES",
+    "number": "82"
+  },
+  "smp-SM152": {
+    "name": "Tapu Lele",
+    "set": "SMP",
+    "number": "152"
+  },
+  "smp-SM203": {
+    "name": "Tapu Fini",
+    "set": "SMP",
+    "number": "203"
+  },
+  "sm8-106": {
+    "name": "Nihilego",
+    "set": "LOT",
+    "number": "106"
+  },
+  "sm12-21": {
+    "name": "Buzzwole",
+    "set": "CEC",
+    "number": "21"
+  },
+  "sm6-11": {
+    "name": "Pheromosa",
+    "set": "FLI",
+    "number": "11"
+  },
+  "sm11-70": {
+    "name": "Xurkitree",
+    "set": "UNM",
+    "number": "70"
+  },
+  "smp-SM67": {
+    "name": "Celesteela GX",
+    "set": "SMP",
+    "number": "67"
+  },
+  "sm7-101": {
+    "name": "Kartana",
+    "set": "CES",
+    "number": "101"
+  },
+  "sm12-136": {
+    "name": "Guzzlord",
+    "set": "CEC",
+    "number": "136"
+  },
+  "sm3-63": {
+    "name": "Necrozma GX",
+    "set": "BUS",
+    "number": "63"
+  },
+  "sm8-108": {
+    "name": "Naganadel",
+    "set": "LOT",
+    "number": "108"
+  },
+  "sm10-106": {
+    "name": "Stakataka",
+    "set": "UNB",
+    "number": "106"
+  },
+  "sm12-104": {
+    "name": "Blacephalon",
+    "set": "CEC",
+    "number": "104"
+  },
+  "sv10-205": {
+    "name": "Arven's Greedent",
+    "set": "DRI",
+    "number": "205"
+  },
+  "sv10-198": {
+    "name": "Team Rocket's Orbeetle",
+    "set": "DRI",
+    "number": "198"
+  },
+  "sv07-044": {
+    "name": "Drednaw",
+    "set": "SCR",
+    "number": "44"
+  },
+  "swsh5-80": {
+    "name": "Coalossal",
+    "set": "BST",
+    "number": "80"
+  },
+  "sv04-069": {
+    "name": "Toxel",
+    "set": "PAR",
+    "number": "69"
+  },
+  "swsh9tg-TG08": {
+    "name": "Alcremie",
+    "set": "BRS",
+    "number": "TG8"
+  },
+  "swsh7-58": {
+    "name": "Dracozolt V",
+    "set": "EVS",
+    "number": "58"
+  },
+  "swsh7-48": {
+    "name": "Arctovish V",
+    "set": "EVS",
+    "number": "48"
+  },
+  "swsh10tg-TG08": {
+    "name": "Kleavor",
+    "set": "ASR",
+    "number": "TG8"
+  },
+  "sv02-075": {
+    "name": "Pawmo",
+    "set": "PAL",
+    "number": "75"
+  },
+  "sv08-157": {
+    "name": "Tandemaus",
+    "set": "SSP",
+    "number": "157"
+  },
+  "sv10-021": {
+    "name": "Smoliv",
+    "set": "DRI",
+    "number": "21"
+  },
+  "sv09-163": {
+    "name": "Iono's Kilowattrel",
+    "set": "JTG",
+    "number": "163"
+  },
+  "sv08-012": {
+    "name": "Capsakid",
+    "set": "SSP",
+    "number": "12"
+  },
+  "sv10-024": {
+    "name": "Rellor",
+    "set": "DRI",
+    "number": "24"
+  },
+  "sv08-094": {
+    "name": "Flittle",
+    "set": "SSP",
+    "number": "94"
+  },
+  "sv08-114": {
+    "name": "Glimmet",
+    "set": "SSP",
+    "number": "114"
   }
 }
