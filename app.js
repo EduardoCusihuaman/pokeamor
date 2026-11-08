@@ -446,16 +446,20 @@ function paintRefinement(){
 }
 function exitRefinement(winner=2){
  if(reducedMotion.matches){eventLayer.classList.add('equal-exit');finishRefinement();return}
- const rect=eventLayer.getBoundingClientRect(),half=rect.height/2;
+ const rect=eventLayer.getBoundingClientRect(),half=rect.height/2,full=pairBox.children[0].querySelector('img').getBoundingClientRect?.().height||rect.width/.716,duration=winner===2?210:360;
  const cover=document.createElement('div');cover.setAttribute('aria-hidden','true');
  Object.assign(cover.style,{position:'fixed',left:rect.left+'px',top:rect.top+'px',width:rect.width+'px',height:rect.height+'px',overflow:'hidden',borderRadius:'17px',pointerEvents:'auto',touchAction:'none',zIndex:'9'});
- const panels=[...pairBox.children].map((button,i)=>{const panel=document.createElement('div'),art=button.querySelector('img').cloneNode();Object.assign(panel.style,{position:'absolute',left:'0',top:(i*half)+'px',width:'100%',height:half+'px',overflow:'hidden',borderRadius:'17px'});Object.assign(art.style,{display:'block',width:'100%',height:'auto',borderRadius:'17px'});panel.append(art);cover.append(panel);return panel});
+ const panels=[...pairBox.children].map((button,i)=>{const panel=document.createElement('div'),art=button.querySelector('img').cloneNode();Object.assign(panel.style,{position:'absolute',left:'0',top:(i*half)+'px',width:'100%',height:(winner===2?half:full)+'px',overflow:'hidden',borderRadius:'17px'});Object.assign(art.style,{display:'block',width:'100%',height:'auto',borderRadius:'17px'});panel.append(art);cover.append(panel);return panel});
  document.body.append(cover);
  // Mount the actual next pair underneath before moving either outgoing half.
  eventLayer.classList.add('equal-exit','continuous-handoff');finishRefinement();
- if(winner!==2)panels[winner].querySelector('img').animate([{transform:'scale(1)'},{transform:'scale(1.015)',offset:.25},{transform:'scale(1)'}],{duration:210,easing:'ease-out'});
- const animations=panels.map((panel,i)=>panel.animate([{transform:'translateY(0)'},{transform:'translateY('+((i?1:-1)*half)+'px)'}],{duration:210,easing:'cubic-bezier(.2,.75,.2,1)',fill:'forwards'}));
- let cleaned=false;const cleanup=()=>{if(cleaned)return;cleaned=true;cover.remove();eventLayer.classList.remove('continuous-handoff')};Promise.all(animations.map(a=>a.finished)).then(cleanup,cleanup);setTimeout(cleanup,260);
+ const animations=panels.map((panel,i)=>{
+ if(winner===2)return panel.animate([{transform:'translateY(0)'},{transform:'translateY('+((i?1:-1)*half)+'px)'}],{duration,easing:'cubic-bezier(.2,.75,.2,1)',fill:'forwards'});
+ const aligned=winner===0?(i===0?0:full-half):(i===0?half-full:0);
+ const travel=winner===0?rect.height+1:-(half+full+1);
+ return panel.animate([{transform:'translateY(0)',offset:0,easing:'cubic-bezier(.2,.75,.2,1)'},{transform:'translateY('+aligned+'px)',offset:.42,easing:'cubic-bezier(.4,0,.7,1)'},{transform:'translateY('+(aligned+travel)+'px)',offset:1}],{duration,easing:'linear',fill:'forwards'});
+ });
+ let cleaned=false;const cleanup=()=>{if(cleaned)return;cleaned=true;cover.remove();eventLayer.classList.remove('continuous-handoff')};Promise.all(animations.map(a=>a.finished)).then(cleanup,cleanup);setTimeout(cleanup,duration+60);
 }
 function chooseRefinement(winner){
  if(!inlinePair||inlineBusy)return;inlineBusy=true;equalPress(false);$('#both').disabled=true;
