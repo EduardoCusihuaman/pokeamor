@@ -8,7 +8,7 @@ test('thumb and preview follow the finger',()=>{const a=setup();a.control.onpoin
 
 test('only visible references are created and last card stays anchored right',()=>{const a=setup();a.control.onpointerdown(a.event(380,230));assert.equal(a.created.length,3);const last=a.cards.images[2];assert.equal(last.style.values['--slot'],'0');a.advance();assert.equal(a.created.length,5);assert.equal(a.cards.images[4],last);assert.equal(last.style.values['--slot'],'0');assert.deepEqual(a.cards.images.map(im=>im.style.values['--slot']),['4','3','2','1','0']);});
 
-test('release keeps preview through destination paint and new gesture cancels handoff',()=>{const a=setup();a.control.onpointerdown(a.event(380,230));a.control.onpointermove(a.event(380,420));a.flush();a.control.onpointerup(a.event(380,420));assert.equal(a.preview.hidden,false);a.flush();assert.equal(a.preview.hidden,false);a.control.onpointerdown(a.event(380,230));a.flush();assert.equal(a.preview.hidden,false);a.control.onpointercancel();assert.equal(a.preview.hidden,true)});
+test('release keeps preview through destination paint and new gesture cancels handoff',()=>{const a=setup();a.control.onpointerdown(a.event(380,230));a.control.onpointermove(a.event(380,420));a.flush();a.control.onpointerup(a.event(380,420));assert.equal(a.preview.hidden,false);a.control.onpointerdown(a.event(380,230));a.flush();assert.equal(a.preview.hidden,false);a.control.onpointercancel();assert.equal(a.preview.hidden,true)});
 
 test('preview flies to matching card rectangles and touch restores all targets',()=>{
 const a=setup(),animations=[];const rect={left:250,top:200,width:46,height:65};
@@ -16,6 +16,6 @@ a.control.onpointerdown(a.event(380,230));a.control.onpointermove(a.event(380,42
 const targets=Array.from({length:15},(_,i)=>({style:{visibility:''},getBoundingClientRect:()=>({left:i*20,top:100,width:80,height:112}),animate:()=>({cancel(){}})}));a.sections[2].querySelectorAll=()=>targets;
 a.cards.children=a.cards.images;for(const node of a.cards.children){node.getBoundingClientRect=()=>rect;node.cloneNode=()=>({style:{},setAttribute(){},remove(){this.removed=true},animate(frames,options){animations.push({frames,options});return{cancel(){}}}})}a.preview.animate=()=>({cancel(){}});
 a.control.onpointerup(a.event(380,420));a.control.onlostpointercapture();a.flush();a.flush();
-assert.equal(a.overlays.length,3);assert.equal(animations[0].options.duration,200);assert.equal(targets[0].style.visibility,'hidden');assert.equal(targets[7].style.visibility,'hidden');assert.equal(targets[14].style.visibility,'hidden');assert.equal(targets[1].style.visibility,'');
+assert.equal(a.overlays.length,3);assert.equal(animations[0].options.duration,170);assert.equal(targets[0].style.visibility,'hidden');assert.equal(targets[7].style.visibility,'hidden');assert.equal(targets[14].style.visibility,'hidden');assert.equal(targets[1].style.visibility,'');
 a.listeners.touchstart();assert.ok(a.overlays.every(node=>node.removed));assert.ok(targets.every(node=>node.style.visibility===''));
 });
