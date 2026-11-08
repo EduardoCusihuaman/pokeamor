@@ -422,8 +422,8 @@ function startRefinement(manual=false){
 }
 function bindRefinementChoice(button,index){
  let timer=null,peek=null,origin=null,consumed=false;
- const clear=()=>{clearTimeout(timer);timer=null;button.classList.remove('pressing');if(peek){peek.remove();peek=null}};
- button.onpointerdown=e=>{if(inlineBusy||e.button>0)return;clear();consumed=false;origin={x:e.clientX,y:e.clientY,id:e.pointerId};button.classList.add('pressing');button.setPointerCapture?.(e.pointerId);timer=setTimeout(()=>{if(!origin||inlineBusy)return;consumed=true;button.classList.remove('pressing');peek=document.createElement('div');peek.className='refinement-peek';peek.setAttribute('aria-hidden','true');const art=button.querySelector('img').cloneNode();art.draggable=false;peek.append(art);document.body.append(peek)},320)};
+ const clear=()=>{clearTimeout(timer);timer=null;button.classList.remove('pressing');if(peek){pairBox.classList.remove('holding-upper','holding-lower');peek=null}};
+ button.onpointerdown=e=>{if(inlineBusy||e.button>0)return;clear();consumed=false;origin={x:e.clientX,y:e.clientY,id:e.pointerId};button.classList.add('pressing');button.setPointerCapture?.(e.pointerId);timer=setTimeout(()=>{if(!origin||inlineBusy)return;consumed=true;button.classList.remove('pressing');peek=true;pairBox.classList.add(index===0?'holding-upper':'holding-lower')},320)};
  button.onpointermove=e=>{if(origin&&Math.hypot(e.clientX-origin.x,e.clientY-origin.y)>12&&!peek){consumed=true;clear()}};
  button.onpointerup=()=>{origin=null;clear()};
  button.onpointercancel=()=>{origin=null;consumed=true;clear()};
