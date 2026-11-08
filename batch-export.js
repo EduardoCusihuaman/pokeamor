@@ -47,7 +47,8 @@ const style=document.createElement('style');style.textContent=`
 #sheet .batch-export-one .export-symbol{transition:opacity 160ms ease}
 @media(prefers-reduced-motion:reduce){#album-index.scrubbing #album-scrubber:before,#sheet #album-heading,#sheet .batch-export-one .export-symbol{transition:none}}
 
-#sheet.album-viewing .memories-section{visibility:hidden}
+#sheet.album-viewing .memories-section>:not(#album-index):not(#album-index-preview){visibility:hidden}
+#sheet.album-viewing #album-index,#sheet.album-viewing #album-index-preview{visibility:visible}
 #album-index-preview.album-viewer:not([hidden]){display:flex!important;position:fixed;top:var(--viewer-top)!important;left:0;right:44px;width:auto;max-width:none;height:var(--viewer-height);max-height:none;box-sizing:border-box;padding:10px 20px 20px 28px;background:#faf7f6;border:0;border-radius:0;box-shadow:none;flex-direction:column;align-items:center;justify-content:flex-start;gap:12px;z-index:7;pointer-events:none}
 #album-index-preview.album-viewer #album-index-label{width:100%;max-width:600px;font-size:12px;color:#876c7e;margin:0;flex-shrink:0}
 #album-index-preview.album-viewer #album-index-cards{width:min(100%,600px,calc((var(--viewer-height) - 55px)*1.17));display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;align-self:center}
