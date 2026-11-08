@@ -65,6 +65,8 @@ const style=document.createElement('style');style.textContent=`
 #sheet.show-recovery .album-heading-wrap{visibility:hidden}
 #album-index.edge-running #album-scrubber:before{background:#79556f;width:7px}
 
+/* Direct scroll tracking: never ease toward an already stale position. */
+#album-scrubber{top:0!important;transform:translate3d(0,var(--index-offset,0px),0);transition:none!important;will-change:transform}
 #album-index.scrubbing{top:var(--drag-top)!important;height:var(--drag-height)!important;transition:none}
 #album-index.scrubbing #album-scrubber{transition:none!important}
 #album-index-preview.map-preview:not([hidden]){display:block!important;position:fixed;right:48px;width:min(234px,calc(100vw - 72px),48dvh);max-width:none;height:auto;padding:6px;border:1px solid #e8dfe5;border-radius:9px;background:#fcf9fc;box-shadow:0 4px 16px #76526c18;visibility:visible;z-index:7;pointer-events:none}
