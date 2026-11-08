@@ -111,6 +111,7 @@ function makeCard(p,under=false){
  c.pokemon=p;c.setAttribute('aria-label',p.name);const choice=document.createElement('div');choice.className='choice-light';c.append(choice);const stamp=document.createElement('div');stamp.className='stamp';stamp.setAttribute('aria-hidden','true');stamp.innerHTML='<svg class=heart viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.1-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.8a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z"/></svg><svg class=cross viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';c.append(stamp);
  let surface=null;let start=null,dx=0,dy=0,vx=0,lastX=0,lastTime=0,lastMove=0,releaseTimer,held=false,armed=0,raf=0,previous=0;
  const position={x:0,y:0,r:0,rx:0,ry:0,s:1},velocity={x:0,y:0,r:0,rx:0,ry:0,s:0},target={...position};
+ c.getFlightPose=()=>({...position});
  const paint=()=>{c.style.transform=`translate3d(${position.x}px,${position.y}px,0) rotate(${position.r}deg) rotateX(${position.rx}deg) rotateY(${position.ry}deg) scale(${position.s})`};
  function tick(now){const dt=Math.min((now-previous)/1000||.016,.025);previous=now;let moving=false;for(const key in position){velocity[key]+=((target[key]-position[key])*1100-velocity[key]*60)*dt;position[key]+=velocity[key]*dt;if(Math.abs(target[key]-position[key])>.001||Math.abs(velocity[key])>.01)moving=true}paint();if(moving)raf=requestAnimationFrame(tick);else{raf=0;previous=0}}
  function move(values){Object.assign(target,values);if(reducedMotion.matches){Object.assign(position,target);paint();return;}if(!raf)raf=requestAnimationFrame(tick)}
@@ -142,13 +143,13 @@ function render(){clearFeedback();const queue=pending(),p=queue[0],n=Object.keys
 // Keep the released artwork opaque and moving until its trailing edge clears the viewport.
 function launchCard(c,value,momentum={}){
  if(reducedMotion.matches){c.remove();return}
- const generation=decisionGeneration,start=getComputedStyle(c).transform,rect=c.getBoundingClientRect(),direction=value==='yes'?1:-1;
+ const generation=decisionGeneration,pose=c.getFlightPose?.()||{x:0,y:0,r:0,rx:0,ry:0,s:1},rect=c.getBoundingClientRect(),direction=value==='yes'?1:-1;
  const distance=Math.max(0,direction>0?innerWidth-rect.left:rect.right)+Math.max(rect.width,rect.height)*.3+24;
- const speed=Math.max(2.8,Math.min(6,Math.abs(momentum.vx||0)));
- const duration=Math.max(130,Math.min(300,distance/speed));
+ // Identical transform lists preserve tilt, scale and depth: only translation changes.
+ const transform=(x,y)=>`translate3d(${x}px,${y}px,0) rotate(${pose.r}deg) rotateX(${pose.rx}deg) rotateY(${pose.ry}deg) scale(${pose.s})`;
+ const duration=260,start=transform(pose.x,pose.y),end=transform(pose.x+direction*distance,pose.y);
  c.style.width=c.clientWidth+'px';c.style.height=c.clientHeight+'px';
  c.style.transition='none';c.style.opacity='1';
- const end=`translate3d(${direction*distance}px,${Math.max(-45,Math.min(45,(momentum.dy||0)*.12))}px,0) ${start==='none'?'':start} rotate(${direction*9}deg)`;
  const flight=c.animate([{transform:start,opacity:1},{transform:end,opacity:1}],{duration,easing:'linear',fill:'forwards'});
  let timer,done=false;const finish=(completed=false)=>{if(done)return;done=true;clearTimeout(timer);const visible=c.isConnected;c.remove();if(completed&&visible&&value==='yes'&&generation===decisionGeneration)pulseCollection()};
  flight.finished.then(()=>finish(true),()=>finish());
@@ -160,7 +161,7 @@ function vote(value,momentum={}){
  if(!p.reencounter&&value==='yes'&&Object.values(state.votes).filter(v=>v.value==='yes').length%15===0)state.refinementSchedule={...(state.refinementSchedule||{}),nextSeen:Math.max(Object.keys(state.votes).length+8,state.refinementSchedule?.nextSeen||0),time:Date.now()};
  if(c){const badge=c.querySelector('.stamp');if(badge){badge.classList.toggle('love',value==='yes');badge.classList.add('armed');badge.style.setProperty('--decision-color',value==='yes'?'#a52e5a':'#2e647c');badge.style.opacity='1';badge.style.transform='scale(1)';}c.style.setProperty(value==='yes'?'--love':'--pass','1');c.stopMotion?.();c.classList.add('exiting');c.classList.remove('lifted','dealt','returned','active');c.setAttribute('aria-hidden','true');c.style.pointerEvents='none'}
  if(c)launchCard(c,value,momentum);
- render();const next=$('.card:not(.under):not(.exiting)');if(next)next.classList.add('dealt');window.PokeJourney?.celebrate();
+ render();window.PokeJourney?.celebrate();
 
  busy=false;scheduleEvents();
 }
