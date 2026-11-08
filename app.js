@@ -407,7 +407,7 @@ function eventSeen(){return Object.keys(state.votes).length}
 function finishRefinement(skipped=false){
  if(!inlinePair)return;
  state.refinementSchedule={lastSeen:eventSeen(),nextSeen:eventSeen()+(skipped?40:26+(state.duels%10)),started:true,time:Date.now()};
- for(const b of pairBox.children)b.cancelRefinementPress?.();for(const c of $('#stage').querySelectorAll('.card'))c.hidden=false;inlineBusy=true;queuedPair=null;eventLayer.classList.add('event-leaving');setTimeout(()=>{inlinePair=null;inlineBusy=false;eventLayer.classList.remove('event-leaving');save();render()},reducedMotion.matches?0:170);
+ for(const b of pairBox.children)b.cancelRefinementPress?.();for(const c of $('#stage').querySelectorAll('.card'))c.hidden=false;inlineBusy=true;queuedPair=null;eventLayer.classList.add('event-leaving');setTimeout(()=>{inlinePair=null;inlineBusy=false;eventLayer.classList.remove('event-leaving');save();render()},reducedMotion.matches||eventLayer.classList.contains('equal-exit')?0:170);
 }
 function startRefinement(manual=false){
  if(inlinePair||busy)return false;
@@ -512,7 +512,7 @@ window.PokeOpenBatch=function(ids){
 
 // Optional short refinement session; automatic encounters remain single choices.
 let manualSession=null;
-const manualIcon='<svg viewBox="0 0 24 32" aria-hidden="true"><g><path d="M8 2h8v3c2 1 3 3 3 5v1c0 2-2 3-4 3h-4c-2 0-3-1-3-3V9H7a2 2 0 0 1-2-2c0-1 1-2 3-2Z"/><path d="M8 5h8M8 9l2 1"/></g><g transform="translate(0 32) scale(1 -1)"><path d="M8 2h8v3c2 1 3 3 3 5v1c0 2-2 3-4 3h-4c-2 0-3-1-3-3V9H7a2 2 0 0 1-2-2c0-1 1-2 3-2Z"/><path d="M8 5h8M8 9l2 1"/></g></svg>';
+const manualIcon='<svg viewBox="0 0 24 30" aria-hidden="true"><g><path d="M8 2h8v3c2.2.8 3.5 2.8 3.5 5v.5A3.5 3.5 0 0 1 16 14h-4.5A3.5 3.5 0 0 1 8 10.5V9L6.5 7.5A1.5 1.5 0 0 0 4 8.6V10a3 3 0 0 0 4 2.8"/><path d="M8 5h8"/></g><g transform="translate(0 30) scale(1 -1)"><path d="M8 2h8v3c2.2.8 3.5 2.8 3.5 5v.5A3.5 3.5 0 0 1 16 14h-4.5A3.5 3.5 0 0 1 8 10.5V9L6.5 7.5A1.5 1.5 0 0 0 4 8.6V10a3 3 0 0 0 4 2.8"/><path d="M8 5h8"/></g></svg>';
 const oldPaintRefinement=paintRefinement;
 paintRefinement=function(){oldPaintRefinement();const b=$('#front-refine');if(manualSession){b.innerHTML='<span class="refine-dots" aria-hidden="true">'+Array.from({length:manualSession.target},(_,i)=>'<i class="'+(i<manualSession.done?'filled':'')+'"></i>').join('')+'</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>';b.setAttribute('aria-label','Salir del afinador, '+manualSession.done+' de '+manualSession.target)}else if(!inlinePair)b.innerHTML=manualIcon};
 function beginManualRefinement(){const count=catalog.filter(p=>state.votes[p.id]?.value==='yes').length;if(count<2){toast('Elegí al menos dos favoritos.');return}manualSession={done:0,target:Math.min(3,count*(count-1)/2),used:new Set()};startRefinement(true)}

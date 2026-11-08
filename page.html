@@ -438,7 +438,8 @@ body input,body textarea,body [contenteditable="true"],body [contenteditable="tr
 #app>.refinement-equal-tools{bottom:var(--battle-footer-bottom)}
 #refinement-event.equal-press #pair>button:first-child{transform:translateY(-4px)}
 #refinement-event.equal-press #pair>button:nth-child(2){transform:translateY(4px)}
-#refinement-event.equal-exit #pair>button:first-child.chosen{transform:translateY(-105%)}
+#refinement-event.equal-exit #pair>button.chosen{clip-path:inset(0 0 max(0px,calc(100% - var(--duel-half,50%))) 0 round 17px);transition:transform 210ms cubic-bezier(.2,.75,.2,1);opacity:1}
+#refinement-event.equal-exit #pair>button:first-child.chosen{transform:translateY(calc(-1 * var(--duel-half,0px)))}
 #refinement-event.equal-exit #pair>button:nth-child(2).chosen{transform:translateY(var(--duel-half,0px))}
 #refinement-event.equal-exit.event-leaving{animation:none;transform:none}
 #app.refining:has(#refinement-event.equal-exit) #stage>.card{display:block!important;pointer-events:none}
