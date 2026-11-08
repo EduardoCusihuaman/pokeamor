@@ -325,7 +325,7 @@ let deleteStage=0,deleteTimer;
 async function resetCollection(){
  clearTimeout(deleteTimer);clearTimeout(syncTimer);clearTimeout(diskTimer);syncing=false;
  const revision=(state.revision||0)+1;
- manualSession=null;inlinePair=null;inlineBusy=false;queuedPair=null;alternateGeneration++;alternateBusy=false;preparedEncounter=null;activeEncounter=null;alternativeRetry=false;alternativeResourceAttempts=0;alternativeRetryAt=0;alternateFailures.clear();clearTimeout(alternateTimer);alternateTimer=null;
+ window.PokeCollectionCue?.clear();manualSession=null;inlinePair=null;inlineBusy=false;queuedPair=null;alternateGeneration++;alternateBusy=false;preparedEncounter=null;activeEncounter=null;alternativeRetry=false;alternativeResourceAttempts=0;alternativeRetryAt=0;alternateFailures.clear();clearTimeout(alternateTimer);alternateTimer=null;
  state={votes:{},ratings:{},duels:0,history:[],comparisons:[],comparisonDeleted:{},encounters:{},voteTimes:{},ratingTimes:{},refinementSchedule:null,revision,resetAt:Date.now()};
  observedVotes={};observedRatings={};dirty=true;etag=null;
  localStorage.removeItem(key);localStorage.removeItem(key+'-pending');localStorage.removeItem(key+'-journey');localStorage.removeItem(key+'-alternates');
@@ -595,3 +595,18 @@ function updateCompletedNavigation(){
  button.setAttribute('aria-label',complete?'Afinar mis favoritos':'Volver a las cartas');
  button.disabled=complete&&catalog.filter(p=>state.votes[p.id]?.value==='yes').length<2;
 }
+
+
+/* Two contextual heart invitations per new batch; no perpetual animation. */
+(()=>{
+ const button=$('#open'),sheet=$('#sheet');let pending=null,firstTimer,reminderTimer,stopTimer;
+ const stop=()=>{clearTimeout(stopTimer);button.classList.remove('collection-breath')};
+ const read=()=>{pending=null;clearTimeout(firstTimer);clearTimeout(reminderTimer);stop()};
+ const pulse=()=>{if(!pending||document.hidden||reducedMotion.matches||busy||inlinePair||document.querySelector('.sheet.open,dialog[open],.card.lifted'))return;stop();button.classList.add('collection-breath');stopTimer=setTimeout(stop,950)};
+ window.PokeCollectionCue={complete(ids){read();if(sheet.classList.contains('open'))return;pending=ids;firstTimer=setTimeout(pulse,700);reminderTimer=setTimeout(pulse,30000)},clear:read};
+ button.addEventListener('click',()=>{const ids=pending;read();if(ids)requestAnimationFrame(()=>{const tile=document.querySelector('.memory-card[data-pokemon="'+ids[0]+'"]'),section=tile?.closest('.batch-group');if(!section)return;sheet.scrollTo({top:sheet.scrollTop+section.getBoundingClientRect().top-sheet.getBoundingClientRect().top-(sheet.querySelector('header')?.getBoundingClientRect().height||50)-12,behavior:'instant'})})});
+ new MutationObserver(()=>{if(sheet.classList.contains('open'))read()}).observe(sheet,{attributes:true,attributeFilter:['class']});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)stop()});
+ document.addEventListener('pointerdown',stop,{passive:true});
+ reducedMotion.addEventListener?.('change',stop);
+})();
