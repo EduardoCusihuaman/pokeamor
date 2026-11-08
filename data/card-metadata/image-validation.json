@@ -507,5 +507,93 @@
       "bytes": 97570,
       "sha256": "3446550fc7b653c64af753c045fa4fd174a67f45fe7a1ba893bdaddcfca7569f"
     }
+  },
+  {
+    "pokemonId": 353,
+    "printId": "sma-SV16",
+    "url": "https://assets.tcgdex.net/en/sm/sma/SV16/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 46634,
+      "sha256": "1dde39a63beef65e7a69e8e4a22b17410a1e1993ada69a343e75863b8245259f"
+    }
+  },
+  {
+    "pokemonId": 374,
+    "printId": "sma-SV30",
+    "url": "https://assets.tcgdex.net/en/sm/sma/SV30/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 81978,
+      "sha256": "4db9f870542ec2302fb5f49ce07923a41373301a4b51a042a672a25cc5bf78b5"
+    }
+  },
+  {
+    "pokemonId": 443,
+    "printId": "sma-SV38",
+    "url": "https://assets.tcgdex.net/en/sm/sma/SV38/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 73722,
+      "sha256": "52ec8328f0738514b8520fae1958911792d7ae713b33fc80a20324fb5ebdf72f"
+    }
+  },
+  {
+    "pokemonId": 444,
+    "printId": "sma-SV39",
+    "url": "https://assets.tcgdex.net/en/sm/sma/SV39/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 86034,
+      "sha256": "129dcac65026ba914b709f381198efbcef4a4977b9d31097ffa5f0ed346b05fd"
+    }
+  },
+  {
+    "pokemonId": 686,
+    "printId": "sma-SV17",
+    "url": "https://assets.tcgdex.net/en/sm/sma/SV17/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 51736,
+      "sha256": "68542b2e1b2cf1badc4bf86db43c9ae39177a297ab57a6f5a20a92ec97c6cf46"
+    }
+  },
+  {
+    "pokemonId": 723,
+    "printId": "sma-SV3",
+    "url": "https://assets.tcgdex.net/en/sm/sma/SV3/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 71824,
+      "sha256": "9289fa720461e9c5b473042899c5f65a2b9386ae400aedfad0cca120b5d22e15"
+    }
+  },
+  {
+    "pokemonId": 772,
+    "printId": "sma-SV45",
+    "url": "https://assets.tcgdex.net/en/sm/sma/SV45/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 74370,
+      "sha256": "97cc217b7e6e44831e8df25c4263a978201c8cf811a42d5638a21853e8084433"
+    }
+  },
+  {
+    "pokemonId": 803,
+    "printId": "sma-SV19",
+    "url": "https://assets.tcgdex.net/en/sm/sma/SV19/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 57312,
+      "sha256": "9674372ebad791b6beac90f8d3bb46d3252332182c0eca4d20081730dc4ade74"
+    }
   }
 ]

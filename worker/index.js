@@ -11060,7 +11060,7 @@ const CATALOG=[
     "id": 353,
     "name": "Shuppet",
     "slug": "shuppet",
-    "image": "https://assets.tcgdex.net/es/sm/sma/SV16/high.webp",
+    "image": "https://assets.tcgdex.net/en/sm/sma/SV16/high.webp",
     "card": "sma-SV16",
     "rarity": "Shiny rare",
     "artist": "OKACHEKE",
@@ -11069,7 +11069,7 @@ const CATALOG=[
       "s": 31,
       "v": 71
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:8",
@@ -11079,7 +11079,8 @@ const CATALOG=[
     ],
     "previousCard": "swsh6-62",
     "previousRarity": "Common",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/en/sm/sma/SV16/high.webp"
   },
   {
     "id": 354,
@@ -11769,7 +11770,7 @@ const CATALOG=[
     "id": 374,
     "name": "Beldum",
     "slug": "beldum",
-    "image": "https://assets.tcgdex.net/es/sm/sma/SV30/high.webp",
+    "image": "https://assets.tcgdex.net/en/sm/sma/SV30/high.webp",
     "card": "sma-SV30",
     "rarity": "Shiny rare",
     "artist": "Aya Kusube",
@@ -11778,7 +11779,7 @@ const CATALOG=[
       "s": 80,
       "v": 54
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:9",
@@ -11789,7 +11790,8 @@ const CATALOG=[
     ],
     "previousCard": "swsh4-116",
     "previousRarity": "Common",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/en/sm/sma/SV30/high.webp"
   },
   {
     "id": 375,
@@ -13927,7 +13929,7 @@ const CATALOG=[
     "id": 443,
     "name": "Gible",
     "slug": "gible",
-    "image": "https://assets.tcgdex.net/es/sm/sma/SV38/high.webp",
+    "image": "https://assets.tcgdex.net/en/sm/sma/SV38/high.webp",
     "card": "sma-SV38",
     "rarity": "Shiny rare",
     "artist": "Uninori",
@@ -13936,7 +13938,7 @@ const CATALOG=[
       "s": 35,
       "v": 69
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:16",
@@ -13947,13 +13949,14 @@ const CATALOG=[
     ],
     "previousCard": "P-A-046",
     "previousRarity": "None",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/en/sm/sma/SV38/high.webp"
   },
   {
     "id": 444,
     "name": "Gabite",
     "slug": "gabite",
-    "image": "https://assets.tcgdex.net/es/sm/sma/SV39/high.webp",
+    "image": "https://assets.tcgdex.net/en/sm/sma/SV39/high.webp",
     "card": "sma-SV39",
     "rarity": "Shiny rare",
     "artist": "Midori Harada",
@@ -13962,7 +13965,7 @@ const CATALOG=[
       "s": 59,
       "v": 78
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:16",
@@ -13973,7 +13976,8 @@ const CATALOG=[
     ],
     "previousCard": "xy9-69",
     "previousRarity": "Uncommon",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/en/sm/sma/SV39/high.webp"
   },
   {
     "id": 445,
@@ -23015,7 +23019,7 @@ const CATALOG=[
     "id": 686,
     "name": "Inkay",
     "slug": "inkay",
-    "image": "https://assets.tcgdex.net/es/sm/sma/SV17/high.webp",
+    "image": "https://assets.tcgdex.net/en/sm/sma/SV17/high.webp",
     "card": "sma-SV17",
     "rarity": "Shiny rare",
     "artist": "Sanosuke Sakuma",
@@ -23024,7 +23028,7 @@ const CATALOG=[
       "s": 31,
       "v": 71
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:17",
@@ -23035,7 +23039,8 @@ const CATALOG=[
     ],
     "previousCard": "swsh6-69",
     "previousRarity": "Common",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/en/sm/sma/SV17/high.webp"
   },
   {
     "id": 687,
@@ -24246,7 +24251,7 @@ const CATALOG=[
     "id": 723,
     "name": "Dartrix",
     "slug": "dartrix",
-    "image": "https://assets.tcgdex.net/es/sm/sma/SV3/high.webp",
+    "image": "https://assets.tcgdex.net/en/sm/sma/SV3/high.webp",
     "card": "sma-SV3",
     "rarity": "Shiny rare",
     "artist": "Mitsuhiro Arita",
@@ -24255,7 +24260,7 @@ const CATALOG=[
       "s": 44,
       "v": 55
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:12",
@@ -24266,7 +24271,8 @@ const CATALOG=[
     ],
     "previousCard": "swsh3-12",
     "previousRarity": "Uncommon",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/en/sm/sma/SV3/high.webp"
   },
   {
     "id": 724,
@@ -25859,7 +25865,7 @@ const CATALOG=[
     "id": 772,
     "name": "Código Cero",
     "slug": "type-null",
-    "image": "https://assets.tcgdex.net/es/sm/sma/SV45/high.webp",
+    "image": "https://assets.tcgdex.net/en/sm/sma/SV45/high.webp",
     "card": "sma-SV45",
     "rarity": "Shiny rare",
     "artist": "match",
@@ -25868,7 +25874,7 @@ const CATALOG=[
       "s": 71,
       "v": 50
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:1",
@@ -25878,7 +25884,8 @@ const CATALOG=[
     ],
     "previousCard": "sm5-115",
     "previousRarity": "Rare",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/en/sm/sma/SV45/high.webp"
   },
   {
     "id": 773,
@@ -26837,7 +26844,7 @@ const CATALOG=[
     "id": 803,
     "name": "Poipole",
     "slug": "poipole",
-    "image": "https://assets.tcgdex.net/es/sm/sma/SV19/high.webp",
+    "image": "https://assets.tcgdex.net/en/sm/sma/SV19/high.webp",
     "card": "sma-SV19",
     "rarity": "Shiny rare",
     "artist": "Hitoshi Ariga",
@@ -26846,7 +26853,7 @@ const CATALOG=[
       "s": 32,
       "v": 68
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:4",
@@ -26856,7 +26863,8 @@ const CATALOG=[
     ],
     "previousCard": "sm8-107",
     "previousRarity": "Common",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/en/sm/sma/SV19/high.webp"
   },
   {
     "id": 804,
