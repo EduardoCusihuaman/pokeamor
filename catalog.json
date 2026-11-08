@@ -8575,10 +8575,10 @@
     "id": 278,
     "name": "Wingull",
     "slug": "wingull",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/203/high.webp",
-    "card": "sv04.5-203",
-    "rarity": "Shiny rare",
-    "artist": "MAHOU",
+    "image": "https://assets.tcgdex.net/es/sv/sv09/038/high.webp",
+    "card": "sv09-038",
+    "rarity": "Común",
+    "artist": "Mékayu",
     "palette": {
       "h": 202,
       "s": 68,
@@ -8595,16 +8595,17 @@
     ],
     "previousCard": "xy6-18",
     "previousRarity": "Common",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv09/038/high.webp"
   },
   {
     "id": 279,
     "name": "Pelipper",
     "slug": "pelipper",
-    "image": "https://assets.tcgdex.net/es/sv/sv04.5/204/high.webp",
-    "card": "sv04.5-204",
-    "rarity": "Shiny rare",
-    "artist": "Midori Harada",
+    "image": "https://assets.tcgdex.net/es/sv/sv09/039/high.webp",
+    "card": "sv09-039",
+    "rarity": "Uncommon",
+    "artist": "Nelnal",
     "palette": {
       "h": 202,
       "s": 54,
@@ -8621,7 +8622,8 @@
     ],
     "previousCard": "xy6-19",
     "previousRarity": "Uncommon",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv09/039/high.webp"
   },
   {
     "id": 280,
@@ -11013,16 +11015,16 @@
     "id": 353,
     "name": "Shuppet",
     "slug": "shuppet",
-    "image": "https://assets.tcgdex.net/en/sm/sma/SV16/high.webp",
-    "card": "sma-SV16",
-    "rarity": "Shiny rare",
-    "artist": "OKACHEKE",
+    "image": "https://assets.tcgdex.net/es/me/me05/033/high.webp",
+    "card": "me05-033",
+    "rarity": "Común",
+    "artist": "Bun Toujo",
     "palette": {
       "h": 308,
       "s": 31,
       "v": 71
     },
-    "language": "en",
+    "language": "es",
     "surface": null,
     "traits": [
       "type:8",
@@ -11033,7 +11035,7 @@
     "previousCard": "swsh6-62",
     "previousRarity": "Common",
     "artSource": "TCGdex audit 2026-11",
-    "fallbackImage": "https://assets.tcgdex.net/en/sm/sma/SV16/high.webp"
+    "fallbackImage": "https://assets.tcgdex.net/es/me/me05/033/high.webp"
   },
   {
     "id": 354,
@@ -11241,36 +11243,18 @@
     "id": 359,
     "name": "Absol",
     "slug": "absol",
-    "image": "/materials/v0.1.9.13-4fb40e0c3683/sv03-214/front.png",
-    "card": "sv03-214",
-    "rarity": "Ultra Rare",
-    "artist": "PLANETA Mochizuki",
+    "image": "https://assets.tcgdex.net/en/swsh/swsh12.5/GG16/high.webp",
+    "card": "swsh12.5gg-GG16",
+    "rarity": "Rare",
+    "artist": "Uta",
     "palette": {
       "h": 202,
       "s": 67,
       "v": 66
     },
-    "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "material-matched",
-      "provider": "malie.io",
-      "language": "es-ES",
-      "cardId": "sv03-214",
-      "source": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/sv3.es-ES.json",
-      "sourceHash": "4fb40e0c3683f7ae6f3d59ad659fedf9",
-      "printingId": "Absolex_sv3_214_std_UltraRare_SunPillar_Etched",
-      "effect": "asset-foil",
-      "type": "SUN_PILLAR",
-      "maskType": "ETCHED",
-      "etched": true,
-      "assets": {
-        "front": "/materials/v0.1.9.13-4fb40e0c3683/sv03-214/front.png",
-        "foil": "/materials/v0.1.9.13-4fb40e0c3683/sv03-214/foil.png",
-        "etch": "/materials/v0.1.9.13-4fb40e0c3683/sv03-214/etch.png"
-      }
-    },
-    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv03/214/high.webp",
+    "language": "en",
+    "surface": null,
+    "fallbackImage": "https://assets.tcgdex.net/en/swsh/swsh12.5/GG16/high.webp",
     "traits": [
       "type:17",
       "color_id:9",
@@ -12637,16 +12621,16 @@
     "id": 402,
     "name": "Kricketune",
     "slug": "kricketune",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh5/142/high.webp",
-    "card": "swsh5-142",
-    "rarity": "Ultra Rare",
-    "artist": "Satoshi Shirai",
+    "image": "https://assets.tcgdex.net/en/swsh/swsh12/TG12/high.webp",
+    "card": "swsh12tg-TG12",
+    "rarity": "Holo Rare V",
+    "artist": "HYOGONOSUKE",
     "palette": {
       "h": 8,
       "s": 51,
       "v": 69
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:7",
@@ -12656,7 +12640,8 @@
     ],
     "previousCard": "swsh5-6",
     "previousRarity": "Holo Rare V",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/en/swsh/swsh12/TG12/high.webp"
   },
   {
     "id": 403,
@@ -12850,36 +12835,18 @@
     "id": 409,
     "name": "Rampardos",
     "slug": "rampardos",
-    "image": "/materials/v0.1.9.13-045ddd225f42/me05-100/front.png",
-    "card": "me05-100",
-    "rarity": "Ultra Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/es/me/me05/045/high.webp",
+    "card": "me05-045",
+    "rarity": "Rara Doble",
+    "artist": "hncl",
     "palette": {
       "h": 22,
       "s": 81,
       "v": 90
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "material-matched",
-      "provider": "malie.io",
-      "language": "es-ES",
-      "cardId": "me05-100",
-      "source": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/me5.es-ES.json",
-      "sourceHash": "045ddd225f42b317fdfde28465bfc04c",
-      "printingId": "Rampardosex_me5_100_std_UltraRare_SunPillar_Etched",
-      "effect": "asset-foil",
-      "type": "SUN_PILLAR",
-      "maskType": "ETCHED",
-      "etched": true,
-      "assets": {
-        "front": "/materials/v0.1.9.13-045ddd225f42/me05-100/front.png",
-        "foil": "/materials/v0.1.9.13-045ddd225f42/me05-100/foil.png",
-        "etch": "/materials/v0.1.9.13-045ddd225f42/me05-100/etch.png"
-      }
-    },
-    "fallbackImage": "https://assets.tcgdex.net/es/me/me05/100/high.webp",
+    "surface": null,
+    "fallbackImage": "https://assets.tcgdex.net/es/me/me05/045/high.webp",
     "traits": [
       "type:6",
       "color_id:2",
@@ -13066,36 +13033,18 @@
     "id": 416,
     "name": "Vespiquen",
     "slug": "vespiquen",
-    "image": "/materials/v0.1.9.13-4fb40e0c3683/sv03-212/front.png",
-    "card": "sv03-212",
-    "rarity": "Ultra Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh10/012/high.webp",
+    "card": "swsh10-012",
+    "rarity": "Rara",
+    "artist": "Yuya Oka",
     "palette": {
       "h": 248,
       "s": 32,
       "v": 61
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "material-matched",
-      "provider": "malie.io",
-      "language": "es-ES",
-      "cardId": "sv03-212",
-      "source": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/sv3.es-ES.json",
-      "sourceHash": "4fb40e0c3683f7ae6f3d59ad659fedf9",
-      "printingId": "Vespiquenex_sv3_212_std_UltraRareC_SvUltra_Etched",
-      "effect": "asset-foil",
-      "type": "SV_ULTRA",
-      "maskType": "ETCHED",
-      "etched": true,
-      "assets": {
-        "front": "/materials/v0.1.9.13-4fb40e0c3683/sv03-212/front.png",
-        "foil": "/materials/v0.1.9.13-4fb40e0c3683/sv03-212/foil.png",
-        "etch": "/materials/v0.1.9.13-4fb40e0c3683/sv03-212/etch.png"
-      }
-    },
-    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv03/212/high.webp",
+    "surface": null,
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh10/012/high.webp",
     "traits": [
       "type:7",
       "type:3",
@@ -13687,16 +13636,16 @@
     "id": 437,
     "name": "Bronzong",
     "slug": "bronzong",
-    "image": "https://assets.tcgdex.net/es/xy/xy10/62/high.webp",
-    "card": "xy10-62",
-    "rarity": "Ultra Rare",
-    "artist": "Tomokazu Komiya",
+    "image": "https://assets.tcgdex.net/en/swsh/swsh10/TG11/high.webp",
+    "card": "swsh10tg-TG11",
+    "rarity": "Rare",
+    "artist": "Hataya",
     "palette": {
       "h": 8,
       "s": 67,
       "v": 78
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:9",
@@ -13707,7 +13656,8 @@
     ],
     "previousCard": "xy8-96",
     "previousRarity": "Rare",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/en/swsh/swsh10/TG11/high.webp"
   },
   {
     "id": 438,
@@ -13935,36 +13885,18 @@
     "id": 445,
     "name": "Garchomp",
     "slug": "garchomp",
-    "image": "/materials/v0.1.9.13-d02cda25d92a/sv04-245/front.png",
-    "card": "sv04-245",
-    "rarity": "Special illustration rare",
-    "artist": "",
+    "image": "https://assets.tcgdex.net/es/sv/sv10/232/high.webp",
+    "card": "sv10-232",
+    "rarity": "Rara Ilustración Especial",
+    "artist": "HICO KIM",
     "palette": {
       "h": 202,
       "s": 58,
       "v": 86
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "material-matched",
-      "provider": "malie.io",
-      "language": "es-ES",
-      "cardId": "sv04-245",
-      "source": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/sv4.es-ES.json",
-      "sourceHash": "d02cda25d92a3ba3792808f8c1b953c4",
-      "printingId": "Garchompex_sv4_245_std_SpecialIllustrationRare_SvUltra_Etched",
-      "effect": "asset-foil",
-      "type": "SV_ULTRA",
-      "maskType": "ETCHED",
-      "etched": true,
-      "assets": {
-        "front": "/materials/v0.1.9.13-d02cda25d92a/sv04-245/front.png",
-        "foil": "/materials/v0.1.9.13-d02cda25d92a/sv04-245/foil.png",
-        "etch": "/materials/v0.1.9.13-d02cda25d92a/sv04-245/etch.png"
-      }
-    },
-    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv04/245/high.webp",
+    "surface": null,
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv10/232/high.webp",
     "traits": [
       "type:16",
       "type:5",
@@ -14489,36 +14421,18 @@
     "id": 462,
     "name": "Magnezone",
     "slug": "magnezone",
-    "image": "/materials/v0.1.9.13-2cacf1af32b7/sv01-226/front.png",
-    "card": "sv01-226",
-    "rarity": "Ultra Rare",
-    "artist": "PLANETA Tsuji",
+    "image": "https://assets.tcgdex.net/en/swsh/swsh12.5/GG18/high.webp",
+    "card": "swsh12.5gg-GG18",
+    "rarity": "Rare",
+    "artist": "Shinya Komatsu",
     "palette": {
       "h": 188,
       "s": 74,
       "v": 69
     },
-    "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "material-matched",
-      "provider": "malie.io",
-      "language": "es-ES",
-      "cardId": "sv01-226",
-      "source": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/sv1.es-ES.json",
-      "sourceHash": "2cacf1af32b75c21ff40414a8abff095",
-      "printingId": "Magnezoneex_sv1_226_std_UltraRare_SunPillar_Etched",
-      "effect": "asset-foil",
-      "type": "SUN_PILLAR",
-      "maskType": "ETCHED",
-      "etched": true,
-      "assets": {
-        "front": "/materials/v0.1.9.13-2cacf1af32b7/sv01-226/front.png",
-        "foil": "/materials/v0.1.9.13-2cacf1af32b7/sv01-226/foil.png",
-        "etch": "/materials/v0.1.9.13-2cacf1af32b7/sv01-226/etch.png"
-      }
-    },
-    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv01/226/high.webp",
+    "language": "en",
+    "surface": null,
+    "fallbackImage": "https://assets.tcgdex.net/en/swsh/swsh12.5/GG18/high.webp",
     "traits": [
       "type:13",
       "type:9",
@@ -14557,10 +14471,10 @@
     "id": 464,
     "name": "Rhyperior",
     "slug": "rhyperior",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh3/181/high.webp",
-    "card": "swsh3-181",
-    "rarity": "Ultra Rare",
-    "artist": "Taiga Kayama",
+    "image": "https://assets.tcgdex.net/es/sv/sv07/076/high.webp",
+    "card": "sv07-076",
+    "rarity": "Rara",
+    "artist": "Mitsuhiro Arita",
     "palette": {
       "h": 22,
       "s": 51,
@@ -14577,7 +14491,8 @@
     ],
     "previousCard": "A2-169",
     "previousRarity": "One Star",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv07/076/high.webp"
   },
   {
     "id": 465,
@@ -14842,36 +14757,18 @@
     "id": 473,
     "name": "Mamoswine",
     "slug": "mamoswine",
-    "image": "/materials/v0.1.9.13-aefe5ac99d26/sv09-174/front.png",
-    "card": "sv09-174",
-    "rarity": "Ultra Rare",
-    "artist": "N-DESIGN Inc.",
+    "image": "https://assets.tcgdex.net/es/me/me02/025/high.webp",
+    "card": "me02-025",
+    "rarity": "Uncommon",
+    "artist": "Takumi Wada",
     "palette": {
       "h": 22,
       "s": 63,
       "v": 67
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "material-matched",
-      "provider": "malie.io",
-      "language": "es-ES",
-      "cardId": "sv09-174",
-      "source": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/sv9.es-ES.json",
-      "sourceHash": "aefe5ac99d269596ce8f239990629a31",
-      "printingId": "Mamoswineex_sv9_174_std_UltraRare_SunPillar_Etched",
-      "effect": "asset-foil",
-      "type": "SUN_PILLAR",
-      "maskType": "ETCHED",
-      "etched": true,
-      "assets": {
-        "front": "/materials/v0.1.9.13-aefe5ac99d26/sv09-174/front.png",
-        "foil": "/materials/v0.1.9.13-aefe5ac99d26/sv09-174/foil.png",
-        "etch": "/materials/v0.1.9.13-aefe5ac99d26/sv09-174/etch.png"
-      }
-    },
-    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv09/174/high.webp",
+    "surface": null,
+    "fallbackImage": "https://assets.tcgdex.net/es/me/me02/025/high.webp",
     "traits": [
       "type:15",
       "type:5",
@@ -15196,21 +15093,17 @@
     "id": 483,
     "name": "Dialga",
     "slug": "dialga",
-    "image": "https://assets.tcgdex.net/es/sm/sm5/146/high.webp",
-    "card": "sm5-146",
-    "rarity": "Ultra Rara",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/en/xy/xyp/XY77/high.webp",
+    "card": "xyp-XY77",
+    "rarity": "Promo",
+    "artist": "TOKIYA",
     "palette": {
       "h": 202,
       "s": 61,
       "v": 77
     },
-    "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "language": "en",
+    "surface": null,
     "traits": [
       "type:9",
       "type:16",
@@ -15218,7 +15111,8 @@
       "shape_id:8",
       "evolution_chain_id:244"
     ],
-    "communityVotes2020": 14292
+    "communityVotes2020": 14292,
+    "fallbackImage": "https://assets.tcgdex.net/en/xy/xyp/XY77/high.webp"
   },
   {
     "id": 484,
@@ -16248,9 +16142,9 @@
     "id": 512,
     "name": "Simisage",
     "slug": "simisage",
-    "image": "/materials/v0.1.9.13-ec32d27ed349/sv10.5b-090/front.png",
+    "image": "https://assets.tcgdex.net/es/sv/sv10.5b/090/high.webp",
     "card": "sv10.5b-090",
-    "rarity": "Illustration rare",
+    "rarity": "Rara Ilustración",
     "artist": "Yuka Tanaka",
     "palette": {
       "h": 22,
@@ -16258,24 +16152,7 @@
       "v": 87
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "material-matched",
-      "provider": "malie.io",
-      "language": "es-ES",
-      "cardId": "sv10.5b-090",
-      "source": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/zsv10-5.es-ES.json",
-      "sourceHash": "ec32d27ed349d45c2bbfe9a4344596cd",
-      "printingId": "Simisage_zsv10-5_90_std_IllustrationRare_SunPillar_Holo",
-      "effect": "asset-foil",
-      "type": "SUN_PILLAR",
-      "maskType": "HOLO",
-      "etched": false,
-      "assets": {
-        "front": "/materials/v0.1.9.13-ec32d27ed349/sv10.5b-090/front.png",
-        "foil": "/materials/v0.1.9.13-ec32d27ed349/sv10.5b-090/foil.png"
-      }
-    },
+    "surface": null,
     "fallbackImage": "https://assets.tcgdex.net/es/sv/sv10.5b/090/high.webp",
     "traits": [
       "type:12",
@@ -21864,28 +21741,25 @@
     "id": 652,
     "name": "Chesnaught",
     "slug": "chesnaught",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh12/171/high.webp",
-    "card": "swsh12-171",
-    "rarity": "Ultra Rare",
-    "artist": "N-DESIGN Inc.",
+    "image": "https://assets.tcgdex.net/es/me/me04/007/high.webp",
+    "card": "me04-007",
+    "rarity": "Rara",
+    "artist": "Uta",
     "palette": {
       "h": 8,
       "s": 75,
       "v": 63
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:12",
       "type:2",
       "color_id:5",
       "shape_id:6",
       "evolution_chain_id:337"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/me/me04/007/high.webp"
   },
   {
     "id": 653,
@@ -21945,16 +21819,16 @@
     "id": 655,
     "name": "Delphox",
     "slug": "delphox",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh11/173/high.webp",
-    "card": "swsh11-173",
-    "rarity": "Ultra Rare",
-    "artist": "Uta",
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/694679_in_1000x1000.jpg",
+    "card": "mep-074",
+    "rarity": "Promo",
+    "artist": "Souichirou Gunjima",
     "palette": {
       "h": 8,
       "s": 63,
       "v": 78
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:10",
@@ -21966,7 +21840,8 @@
     "communityVotes2020": 10889,
     "previousCard": "xy10-14",
     "previousRarity": "Ultra Rare",
-    "artSource": "TCGdex visual-safety audit 2026-11"
+    "artSource": "TCGdex visual-safety audit 2026-11",
+    "fallbackImage": "https://tcgplayer-cdn.tcgplayer.com/product/694679_in_1000x1000.jpg"
   },
   {
     "id": 656,
@@ -22053,36 +21928,18 @@
     "id": 658,
     "name": "Greninja",
     "slug": "greninja",
-    "image": "/materials/v0.1.9.13-8708279e95da/sv06-214/front.png",
-    "card": "sv06-214",
-    "rarity": "Special illustration rare",
-    "artist": "akagi",
+    "image": "https://assets.tcgdex.net/es/me/30th/148/high.webp",
+    "card": "30th-148",
+    "rarity": "Rara Ilustración Especial",
+    "artist": "GIDORA",
     "palette": {
       "h": 22,
       "s": 56,
       "v": 81
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "material-matched",
-      "provider": "malie.io",
-      "language": "es-ES",
-      "cardId": "sv06-214",
-      "source": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/sv6.es-ES.json",
-      "sourceHash": "8708279e95daeae5780fbf979ff05266",
-      "printingId": "Greninjaex_sv6_214_std_SpecialIllustrationRare_SvUltra_Etched",
-      "effect": "asset-foil",
-      "type": "SV_ULTRA",
-      "maskType": "ETCHED",
-      "etched": true,
-      "assets": {
-        "front": "/materials/v0.1.9.13-8708279e95da/sv06-214/front.png",
-        "foil": "/materials/v0.1.9.13-8708279e95da/sv06-214/foil.png",
-        "etch": "/materials/v0.1.9.13-8708279e95da/sv06-214/etch.png"
-      }
-    },
-    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv06/214/high.webp",
+    "surface": null,
+    "fallbackImage": "https://assets.tcgdex.net/es/me/30th/148/high.webp",
     "traits": [
       "type:11",
       "type:17",
@@ -25470,36 +25327,18 @@
     "id": 763,
     "name": "Tsareena",
     "slug": "tsareena",
-    "image": "/materials/v0.1.9.13-d02cda25d92a/sv04-220/front.png",
-    "card": "sv04-220",
-    "rarity": "Ultra Rare",
+    "image": "https://assets.tcgdex.net/en/sm/smp/SM56/high.webp",
+    "card": "smp-SM56",
+    "rarity": "Promo",
     "artist": "5ban Graphics",
     "palette": {
       "h": 188,
       "s": 48,
       "v": 81
     },
-    "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "material-matched",
-      "provider": "malie.io",
-      "language": "es-ES",
-      "cardId": "sv04-220",
-      "source": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/sv4.es-ES.json",
-      "sourceHash": "d02cda25d92a3ba3792808f8c1b953c4",
-      "printingId": "Tsareenaex_sv4_220_std_UltraRareC_SvUltra_Etched",
-      "effect": "asset-foil",
-      "type": "SV_ULTRA",
-      "maskType": "ETCHED",
-      "etched": true,
-      "assets": {
-        "front": "/materials/v0.1.9.13-d02cda25d92a/sv04-220/front.png",
-        "foil": "/materials/v0.1.9.13-d02cda25d92a/sv04-220/foil.png",
-        "etch": "/materials/v0.1.9.13-d02cda25d92a/sv04-220/etch.png"
-      }
-    },
-    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv04/220/high.webp",
+    "language": "en",
+    "surface": null,
+    "fallbackImage": "https://assets.tcgdex.net/en/sm/smp/SM56/high.webp",
     "traits": [
       "type:12",
       "color_id:7",
@@ -25984,16 +25823,16 @@
     "id": 778,
     "name": "Mimikyu",
     "slug": "mimikyu",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh5/148/high.webp",
-    "card": "swsh5-148",
+    "image": "https://assets.tcgdex.net/en/swsh/swsh9/TG16/high.webp",
+    "card": "swsh9tg-TG16",
     "rarity": "Ultra Rare",
-    "artist": "Studio Bora Inc.",
+    "artist": "saino misaki",
     "palette": {
       "h": 52,
       "s": 46,
       "v": 76
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:8",
@@ -26005,7 +25844,8 @@
     "communityVotes2020": 99077,
     "previousCard": "me02.5-238",
     "previousRarity": "Illustration rare",
-    "artSource": "TCGdex identity audit 2026-11"
+    "artSource": "TCGdex identity audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/en/swsh/swsh9/TG16/high.webp"
   },
   {
     "id": 779,
@@ -26400,21 +26240,17 @@
     "id": 791,
     "name": "Solgaleo",
     "slug": "solgaleo",
-    "image": "https://assets.tcgdex.net/es/sm/sm1/143/high.webp",
-    "card": "sm1-143",
-    "rarity": "Ultra Rara",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/en/sm/smp/SM104/high.webp",
+    "card": "smp-SM104",
+    "rarity": "Promo",
+    "artist": "PLANETA",
     "palette": {
       "h": 190,
       "s": 49,
       "v": 69
     },
-    "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "language": "en",
+    "surface": null,
     "traits": [
       "type:14",
       "type:9",
@@ -26422,27 +26258,24 @@
       "shape_id:8",
       "evolution_chain_id:413"
     ],
-    "communityVotes2020": 16274
+    "communityVotes2020": 16274,
+    "fallbackImage": "https://assets.tcgdex.net/en/sm/smp/SM104/high.webp"
   },
   {
     "id": 792,
     "name": "Lunala",
     "slug": "lunala",
-    "image": "https://assets.tcgdex.net/es/sm/sm1/141/high.webp",
-    "card": "sm1-141",
-    "rarity": "Ultra Rara",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/en/sm/smp/SM103/high.webp",
+    "card": "smp-SM103",
+    "rarity": "Promo",
+    "artist": "PLANETA",
     "palette": {
       "h": 202,
       "s": 61,
       "v": 70
     },
-    "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "language": "en",
+    "surface": null,
     "traits": [
       "type:14",
       "type:8",
@@ -26450,7 +26283,8 @@
       "shape_id:9",
       "evolution_chain_id:413"
     ],
-    "communityVotes2020": 9887
+    "communityVotes2020": 9887,
+    "fallbackImage": "https://assets.tcgdex.net/en/sm/smp/SM103/high.webp"
   },
   {
     "id": 793,
@@ -26716,16 +26550,16 @@
     "id": 803,
     "name": "Poipole",
     "slug": "poipole",
-    "image": "https://assets.tcgdex.net/en/sm/sma/SV19/high.webp",
-    "card": "sma-SV19",
-    "rarity": "Shiny rare",
+    "image": "https://assets.tcgdex.net/es/sm/sm8/107/high.webp",
+    "card": "sm8-107",
+    "rarity": "Común",
     "artist": "Hitoshi Ariga",
     "palette": {
       "h": 308,
       "s": 32,
       "v": 68
     },
-    "language": "en",
+    "language": "es",
     "surface": null,
     "traits": [
       "type:4",
@@ -26736,7 +26570,7 @@
     "previousCard": "sm8-107",
     "previousRarity": "Common",
     "artSource": "TCGdex audit 2026-11",
-    "fallbackImage": "https://assets.tcgdex.net/en/sm/sma/SV19/high.webp"
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm8/107/high.webp"
   },
   {
     "id": 804,
@@ -27084,36 +26918,18 @@
     "id": 815,
     "name": "Cinderace",
     "slug": "cinderace",
-    "image": "/materials/v0.1.9.13-2f7282d44acf/sv07-157/front.png",
-    "card": "sv07-157",
-    "rarity": "Ultra Rare",
-    "artist": "5ban Graphics",
+    "image": "https://assets.tcgdex.net/es/me/me01/028/high.webp",
+    "card": "me01-028",
+    "rarity": "Rara",
+    "artist": "REND",
     "palette": {
       "h": 8,
       "s": 54,
       "v": 79
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "material-matched",
-      "provider": "malie.io",
-      "language": "es-ES",
-      "cardId": "sv07-157",
-      "source": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/sv7.es-ES.json",
-      "sourceHash": "2f7282d44acfac9507323fccebe4e2e1",
-      "printingId": "Cinderaceex_sv7_157_std_UltraRareC_SvUltra_Etched",
-      "effect": "asset-foil",
-      "type": "SV_ULTRA",
-      "maskType": "ETCHED",
-      "etched": true,
-      "assets": {
-        "front": "/materials/v0.1.9.13-2f7282d44acf/sv07-157/front.png",
-        "foil": "/materials/v0.1.9.13-2f7282d44acf/sv07-157/foil.png",
-        "etch": "/materials/v0.1.9.13-2f7282d44acf/sv07-157/etch.png"
-      }
-    },
-    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv07/157/high.webp",
+    "surface": null,
+    "fallbackImage": "https://assets.tcgdex.net/es/me/me01/028/high.webp",
     "traits": [
       "type:10",
       "color_id:9",
@@ -27618,9 +27434,9 @@
     "id": 832,
     "name": "Dubwool",
     "slug": "dubwool",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh2/188/high.webp",
-    "card": "swsh2-188",
-    "rarity": "Ultra Rare",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh2/153/high.webp",
+    "card": "swsh2-153",
+    "rarity": "Holo Rara V",
     "artist": "5ban Graphics",
     "palette": {
       "h": 202,
@@ -27637,7 +27453,8 @@
     ],
     "previousCard": "swshp-SWSH049",
     "previousRarity": "Promo",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh2/153/high.webp"
   },
   {
     "id": 833,
@@ -27734,27 +27551,24 @@
     "id": 836,
     "name": "Boltund",
     "slug": "boltund",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh8/249/high.webp",
-    "card": "swsh8-249",
-    "rarity": "Ultra Rara",
-    "artist": "Eske Yoshinob",
+    "image": "https://assets.tcgdex.net/en/swsh/swsh9/TG13/high.webp",
+    "card": "swsh9tg-TG13",
+    "rarity": "Ultra Rare",
+    "artist": "GIDORA",
     "palette": {
       "h": 190,
       "s": 72,
       "v": 88
     },
-    "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "language": "en",
+    "surface": null,
     "traits": [
       "type:13",
       "color_id:10",
       "shape_id:8",
       "evolution_chain_id:440"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/en/swsh/swsh9/TG13/high.webp"
   },
   {
     "id": 837,
@@ -29265,36 +29079,18 @@
     "id": 887,
     "name": "Dragapult",
     "slug": "dragapult",
-    "image": "/materials/v0.1.9.13-09e95aa6c7ba/sv08.5-165/front.png",
-    "card": "sv08.5-165",
-    "rarity": "Special illustration rare",
-    "artist": "Jerky",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh8/130/high.webp",
+    "card": "swsh8-130",
+    "rarity": "Holo Rara",
+    "artist": "Souichirou Gunjima",
     "palette": {
       "h": 188,
       "s": 63,
       "v": 73
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "material-matched",
-      "provider": "malie.io",
-      "language": "es-ES",
-      "cardId": "sv08.5-165",
-      "source": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/sv8-5.es-ES.json",
-      "sourceHash": "09e95aa6c7badacadc72ff8059073efc",
-      "printingId": "Dragapultex_sv8-5_165_std_SpecialIllustrationRare_SvUltra_Etched",
-      "effect": "asset-foil",
-      "type": "SV_ULTRA",
-      "maskType": "ETCHED",
-      "etched": true,
-      "assets": {
-        "front": "/materials/v0.1.9.13-09e95aa6c7ba/sv08.5-165/front.png",
-        "foil": "/materials/v0.1.9.13-09e95aa6c7ba/sv08.5-165/foil.png",
-        "etch": "/materials/v0.1.9.13-09e95aa6c7ba/sv08.5-165/etch.png"
-      }
-    },
-    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv08.5/165/high.webp",
+    "surface": null,
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh8/130/high.webp",
     "traits": [
       "type:16",
       "type:8",
@@ -29456,16 +29252,16 @@
     "id": 893,
     "name": "Zarude",
     "slug": "zarude",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh4/167/high.webp",
-    "card": "swsh4-167",
-    "rarity": "Ultra Rare",
-    "artist": "5ban Graphics",
+    "image": "https://tcgplayer-cdn.tcgplayer.com/product/706193_in_1000x1000.jpg",
+    "card": "mep-088",
+    "rarity": "Promo",
+    "artist": "IKEDA Saki",
     "palette": {
       "h": 202,
       "s": 40,
       "v": 66
     },
-    "language": "es",
+    "language": "en",
     "surface": null,
     "traits": [
       "type:17",
@@ -29476,7 +29272,8 @@
     ],
     "previousCard": "swsh9-016",
     "previousRarity": "Holo Rare V",
-    "artSource": "TCGdex audit 2026-11"
+    "artSource": "TCGdex audit 2026-11",
+    "fallbackImage": "https://tcgplayer-cdn.tcgplayer.com/product/706193_in_1000x1000.jpg"
   },
   {
     "id": 894,
@@ -29492,43 +29289,37 @@
       "v": 87
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:13",
       "color_id:10",
       "shape_id:12",
       "evolution_chain_id:472"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh12/175/high.webp"
   },
   {
     "id": 895,
     "name": "Regidrago",
     "slug": "regidrago",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh12/201/high.webp",
-    "card": "swsh12-201",
-    "rarity": "Secret Rare",
-    "artist": "PLANETA Yamashita",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh12/184/high.webp",
+    "card": "swsh12-184",
+    "rarity": "Ultra Rara",
+    "artist": "Hataya",
     "palette": {
       "h": 8,
       "s": 62,
       "v": 92
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:16",
       "color_id:5",
       "shape_id:12",
       "evolution_chain_id:473"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh12/184/high.webp"
   },
   {
     "id": 896,
@@ -29612,28 +29403,25 @@
     "id": 899,
     "name": "Wyrdeer",
     "slug": "wyrdeer",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh10/180/high.webp",
-    "card": "swsh10-180",
-    "rarity": "Ultra Rara",
-    "artist": "aky CG Works",
-    "language": "es",
+    "image": "https://assets.tcgdex.net/en/swsh/swsh10/TG06/high.webp",
+    "card": "swsh10tg-TG06",
+    "rarity": "Rare",
+    "artist": "kirisAki",
+    "language": "en",
     "palette": {
       "h": 202,
       "s": 74,
       "v": 82
     },
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:1",
       "type:14",
       "color_id:4",
       "shape_id:8",
       "evolution_chain_id:120"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/en/swsh/swsh10/TG06/high.webp"
   },
   {
     "id": 900,

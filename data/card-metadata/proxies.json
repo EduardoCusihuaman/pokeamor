@@ -5633,5 +5633,145 @@
     "name": "Glimmet",
     "set": "SSP",
     "number": "114"
+  },
+  "sv09-038": {
+    "name": "Wingull",
+    "set": "JTG",
+    "number": "38"
+  },
+  "sv09-039": {
+    "name": "Pelipper",
+    "set": "JTG",
+    "number": "39"
+  },
+  "me05-033": {
+    "name": "Shuppet",
+    "set": "PBL",
+    "number": "33"
+  },
+  "swsh12.5gg-GG16": {
+    "name": "Absol",
+    "set": "CRZ",
+    "number": "GG16"
+  },
+  "swsh12tg-TG12": {
+    "name": "Kricketune V",
+    "set": "SIT",
+    "number": "TG12"
+  },
+  "me05-045": {
+    "name": "Rampardos ex",
+    "set": "PBL",
+    "number": "45"
+  },
+  "swsh10-012": {
+    "name": "Vespiquen",
+    "set": "ASR",
+    "number": "12"
+  },
+  "swsh10tg-TG11": {
+    "name": "Bronzong",
+    "set": "ASR",
+    "number": "TG11"
+  },
+  "sv10-232": {
+    "name": "Cynthia's Garchomp ex",
+    "set": "DRI",
+    "number": "232"
+  },
+  "swsh12.5gg-GG18": {
+    "name": "Magnezone",
+    "set": "CRZ",
+    "number": "GG18"
+  },
+  "sv07-076": {
+    "name": "Rhyperior",
+    "set": "SCR",
+    "number": "76"
+  },
+  "me02-025": {
+    "name": "Mamoswine",
+    "set": "PFL",
+    "number": "25"
+  },
+  "xyp-XY77": {
+    "name": "Dialga",
+    "set": "XYP",
+    "number": "77"
+  },
+  "me04-007": {
+    "name": "Chesnaught",
+    "set": "CRI",
+    "number": "7"
+  },
+  "mep-074": {
+    "name": "Delphox",
+    "set": "MEP",
+    "number": "74"
+  },
+  "30th-148": {
+    "name": "Greninja ex",
+    "set": "30C",
+    "number": "148"
+  },
+  "smp-SM56": {
+    "name": "Tsareena GX",
+    "set": "SMP",
+    "number": "56"
+  },
+  "swsh9tg-TG16": {
+    "name": "Mimikyu V",
+    "set": "BRS",
+    "number": "TG16"
+  },
+  "smp-SM104": {
+    "name": "Solgaleo GX",
+    "set": "SMP",
+    "number": "104"
+  },
+  "smp-SM103": {
+    "name": "Lunala GX",
+    "set": "SMP",
+    "number": "103"
+  },
+  "sm8-107": {
+    "name": "Poipole",
+    "set": "LOT",
+    "number": "107"
+  },
+  "me01-028": {
+    "name": "Cinderace",
+    "set": "MEG",
+    "number": "28"
+  },
+  "swsh2-153": {
+    "name": "Dubwool V",
+    "set": "RCL",
+    "number": "153"
+  },
+  "swsh9tg-TG13": {
+    "name": "Boltund V",
+    "set": "BRS",
+    "number": "TG13"
+  },
+  "swsh8-130": {
+    "name": "Dragapult",
+    "set": "FST",
+    "number": "130"
+  },
+  "mep-088": {
+    "name": "Zarude",
+    "set": "MEP",
+    "number": "88"
+  },
+  "swsh12-184": {
+    "name": "Regidrago V",
+    "set": "SIT",
+    "number": "184"
+  },
+  "swsh10tg-TG06": {
+    "name": "Wyrdeer",
+    "set": "ASR",
+    "number": "TG6"
   }
 }
