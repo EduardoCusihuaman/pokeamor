@@ -72,20 +72,18 @@ const style=document.createElement('style');style.textContent=`
 #album-index-preview.map-preview #album-index-cards{width:100%;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px}
 #album-index-preview.map-preview img{width:100%;height:auto;aspect-ratio:.716;object-fit:contain;border-radius:2px}
 
-/* Stable center: the middle reference never shifts when two cards join. */
-#album-index-preview.map-preview:not([hidden]){left:auto;right:48px;transform:none;width:min(252px,calc(100vw - 64px));height:94px;padding:6px;border:0;background:transparent;box-shadow:none;transition:none;overflow:visible;isolation:isolate}
-#album-index-preview.map-preview::before{content:'';position:absolute;inset:0 48px;border:1px solid #e8dfe5;border-radius:10px;background:#fcf9fc;box-shadow:0 3px 12px #76526c14;z-index:-1;transition:inset 100ms ease-out}
+/* The rightmost card and destination number are a fixed visual anchor. */
+#album-index-preview.map-preview:not([hidden]){left:auto;right:32px;transform:none;width:min(252px,calc(100vw - 48px));height:77px;padding:6px;border:0;background:transparent;box-shadow:none;transition:none;overflow:visible;isolation:isolate}
+#album-index-preview.map-preview::before{content:'';position:absolute;inset:0 0 0 40%;border:1px solid #e8dfe5;border-radius:10px 4px 4px 10px;background:#fcf9fc;box-shadow:0 3px 12px #76526c14;z-index:-1;transition:inset 100ms ease-out}
 #album-index-preview.map-preview.expanded::before{inset:0}
-#album-index-preview.map-preview::after{content:'';position:absolute;right:-8px;top:15px;width:56px;height:1px;background:#c5a8bb80;transition:width 100ms ease-out}
-#album-index-preview.map-preview.expanded::after{width:8px}
-#album-index-preview.map-preview #album-index-label{text-align:center;margin:0 0 5px;font-variant-numeric:tabular-nums}
+#album-index-preview.map-preview::after{content:none}
+#album-index-preview.map-preview #album-index-label{display:none}
 #album-index-preview.map-preview #album-index-cards{position:relative;display:block;height:65px;width:100%}
-#album-index-preview.map-preview #album-index-cards img,#album-index-preview.map-preview.expanded #album-index-cards img{position:absolute;top:0;left:calc(50% + var(--slot)*20%);transform:translateX(-50%);width:calc(20% - 3px);max-width:46px;height:65px;object-fit:contain;transition:left 100ms ease-out}
+#album-index-preview.map-preview #album-index-cards img,#album-index-preview.map-preview.expanded #album-index-cards img{position:absolute;top:0;left:auto;right:calc(var(--slot)*20%);transform:none;width:calc(20% - 3px);max-width:46px;height:65px;object-fit:contain;transition:right 100ms ease-out}
 #album-index.scrubbing::after{content:'';position:absolute;right:6px;top:calc(var(--origin-position)* (100% - 60px) + 28px);width:8px;height:4px;border-radius:4px;background:#b493a955;pointer-events:none}
-@media(prefers-reduced-motion:reduce){#album-index-preview.map-preview::before,#album-index-preview.map-preview::after,#album-index-preview.map-preview #album-index-cards img{transition:none}}
+@media(prefers-reduced-motion:reduce){#album-index-preview.map-preview::before,#album-index-preview.map-preview #album-index-cards img{transition:none}}
 /* Offscreen paint skipping caused blank frames and estimated offsets on jumps. */
 #sheet.rounds-mode .batch-group{content-visibility:visible;contain-intrinsic-size:none}
-#album-index-preview.map-preview::after{top:50%}
 `;document.head.append(style);
 const bar=document.createElement('div');bar.className='batch-export-bar';const heading=document.createElement('div');heading.className='batch-export-heading';const title=document.createElement('strong'),total=document.createElement('small');title.textContent='Tus tandas';heading.append(title,total);bar.append(heading);root.before(bar);
 function button(label,one=false){const b=document.createElement('button');b.type='button';b.className='batch-export'+(one?' batch-export-one':'');b.innerHTML='<i class="export-symbol">'+icon+'</i>'+(one?'':'<span>'+label+'</span>');b.setAttribute('aria-label',label);return b}
