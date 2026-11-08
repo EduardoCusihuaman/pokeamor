@@ -464,6 +464,8 @@ function bindRefinementChoice(button,index){
  button.onclick=e=>{if(consumed){e.preventDefault();return}chooseRefinement(index)};
  button.cancelRefinementPress=()=>{origin=null;consumed=true;clear()};
 }
+function battleFeedback(){const layer=document.createElement('span');layer.className='battle-feedback';layer.setAttribute('aria-hidden','true');layer.innerHTML='<span class="battle-heart"><svg viewBox="0 0 24 24"><path d="M20.8 8.8c0 5.1-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.8a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z"/></svg></span>';return layer}
+function markBattleChoice(winner){[...pairBox.children].forEach((button,i)=>button.classList.toggle('battle-picked',winner===2||winner===i))}
 function paintRefinement(){
  if(manualSession&&!validRefinementSession(manualSession)){manualSession=null;inlinePair=null;inlineBusy=false}
  const n=eventSeen(),likes=Object.values(state.votes).filter(v=>v.value==='yes').length;
@@ -475,14 +477,14 @@ function paintRefinement(){
  if(!inlinePair)return;
  for(const c of stage.querySelectorAll('.card')){if(c.activated)c.setUnder?.();c.hidden=true}
  pairBox.style.setProperty('--duel-half',(pairBox.clientHeight*.5)+'px');
- const pairSignature=inlinePair.map(p=>p.id+':'+p.card).join('|');if(pairBox.dataset.signature===pairSignature)return;eventLayer.classList.remove('equal-exit');pairBox.dataset.signature=pairSignature;pairBox.replaceChildren();inlinePair.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Prefiero '+p.name);if(eventLayer.classList.contains('continuous-handoff'))b.style.animation='none';b.append(img(p,true));bindRefinementChoice(b,i);pairBox.append(b)});
+ const pairSignature=inlinePair.map(p=>p.id+':'+p.card).join('|');if(pairBox.dataset.signature===pairSignature)return;eventLayer.classList.remove('equal-exit');pairBox.dataset.signature=pairSignature;pairBox.replaceChildren();inlinePair.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Prefiero '+p.name);if(eventLayer.classList.contains('continuous-handoff'))b.style.animation='none';b.append(img(p,true),battleFeedback());bindRefinementChoice(b,i);pairBox.append(b)});
 }
 function exitRefinement(winner=2){
  if(reducedMotion.matches){eventLayer.classList.add('equal-exit');finishRefinement();return}
  const rect=eventLayer.getBoundingClientRect(),half=rect.height/2,full=pairBox.children[0].querySelector('img').getBoundingClientRect?.().height||rect.width/.716,duration=winner===2?210:360;
  const cover=document.createElement('div');cover.setAttribute('aria-hidden','true');
  Object.assign(cover.style,{position:'fixed',left:rect.left+'px',top:rect.top+'px',width:rect.width+'px',height:rect.height+'px',overflow:'hidden',borderRadius:'17px',pointerEvents:'auto',touchAction:'none',zIndex:'9'});
- const panels=[...pairBox.children].map((button,i)=>{const panel=document.createElement('div'),art=button.querySelector('img').cloneNode();Object.assign(panel.style,{position:'absolute',left:'0',top:(i*half)+'px',width:'100%',height:(winner===2?half:full)+'px',overflow:'hidden',borderRadius:'17px'});Object.assign(art.style,{display:'block',width:'100%',height:'auto',borderRadius:'17px'});panel.append(art);cover.append(panel);return panel});
+ const panels=[...pairBox.children].map((button,i)=>{const panel=document.createElement('div'),art=button.querySelector('img').cloneNode();Object.assign(panel.style,{position:'absolute',left:'0',top:(i*half)+'px',width:'100%',height:(winner===2?half:full)+'px',overflow:'hidden',borderRadius:'17px'});Object.assign(art.style,{display:'block',width:'100%',height:'auto',borderRadius:'17px'});panel.append(art);const feedback=button.querySelector('.battle-feedback');if(winner===2||winner===i){if(feedback){const overlay=feedback.cloneNode(true);overlay.style.height=half+'px';overlay.style.opacity='1';panel.append(overlay)}}cover.append(panel);return panel});
  document.body.append(cover);
  // Mount the actual next pair underneath before moving either outgoing half.
  eventLayer.classList.add('equal-exit','continuous-handoff');finishRefinement();
@@ -495,7 +497,7 @@ function exitRefinement(winner=2){
  let cleaned=false;const cleanup=()=>{if(cleaned)return;cleaned=true;cover.remove();eventLayer.classList.remove('continuous-handoff')};Promise.all(animations.map(a=>a.finished)).then(cleanup,cleanup);setTimeout(cleanup,duration+60);
 }
 function chooseRefinement(winner){
- if(!inlinePair||inlineBusy)return;if(manualSession&&!validRefinementSession(manualSession)){manualSession=null;inlinePair=null;render();return}inlineBusy=true;equalPress(false);$('#both').disabled=true;
+ if(!inlinePair||inlineBusy)return;if(manualSession&&!validRefinementSession(manualSession)){manualSession=null;inlinePair=null;render();return}inlineBusy=true;markBattleChoice(winner);equalPress(false);$('#both').disabled=true;
  const ids=inlinePair.map(p=>p.id),before=clone(state.ratings),previousSchedule=clone(state.refinementSchedule||{});
  const [a,b]=inlinePair,ra=score(a),rb=score(b),expected=1/(1+10**((rb-ra)/400)),actual=winner===2?.5:winner===0?1:0;
  for(const [p,v] of [[a,ra+28*(actual-expected)],[b,rb-28*(actual-expected)]])state.ratings[p.id]={score:v,played:(state.ratings[p.id]?.played||0)+1};
