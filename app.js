@@ -117,7 +117,7 @@ function paintSwipeSeal(seal,direction,strength){
  const amount=Math.max(0,Math.min(1,strength));
  seal.classList.toggle('is-yes',direction>0);
  seal.style.opacity=String(Math.max(0,Math.min(1,(amount-.12)/.48)));
- seal.style.transform=`scale(${.9+amount*.1})`;
+ seal.style.transform=`scale(${.94+amount*.06})`;
  seal.style.setProperty('--seal-fill',String(Math.max(0,Math.min(1,(amount-.6)/.4))));
 }
 function makeCard(p,under=false){
