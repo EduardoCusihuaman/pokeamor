@@ -113,10 +113,22 @@ function cancelDecisionFeedback(){decisionGeneration++;$('#open').classList.remo
 function fitCard(){const stage=$('#stage'),front=stage.querySelector('.card:not(.under):not(.exiting)'),ratio=front?.artRatio||.716;stage.style.setProperty('--card-width',Math.max(0,Math.min(stage.clientWidth-2,(stage.clientHeight-6)*ratio))+'px');window.PokeHolo?.refresh()}
 new ResizeObserver(fitCard).observe($('#stage'));
 function clearFeedback(){cancelAnimationFrame(frame);$('#yes').classList.remove('ready');$('#no').classList.remove('ready');document.documentElement.style.setProperty('--yes-intent','0');document.documentElement.style.setProperty('--no-intent','0')}
+function paintSwipeSeal(seal,direction,strength){
+ const amount=Math.max(0,Math.min(1,strength));
+ seal.classList.toggle('is-yes',direction>0);
+ seal.style.opacity=String(Math.max(0,Math.min(1,(amount-.12)/.48)));
+ seal.style.transform=`scale(${.9+amount*.1})`;
+ seal.style.setProperty('--seal-fill',String(Math.max(0,Math.min(1,(amount-.6)/.4))));
+}
 function makeCard(p,under=false){
  const c=document.createElement('div');c.pokemon=p;c.className='card'+(under?' under':'')+(!p.image?' official':'');const source=warmArt.get(p.surface?.assets?.front||p.image||fallback(p));const artwork=source?.complete&&source.naturalWidth?source:img(p,true);warmArt.delete(p.surface?.assets?.front||p.image||fallback(p));artwork.decoding='async';const fitArt=()=>{c.materialFrontReady=!!(artwork.materialSource&&!c.classList.contains('art-fallback')&&artwork.naturalWidth>0);if(c.classList.contains('official')||!artwork.naturalWidth||!artwork.naturalHeight)return;c.artRatio=artwork.naturalWidth/artwork.naturalHeight;c.style.aspectRatio=String(c.artRatio);if(!under){fitCard();window.PokeMaterial?.refresh()}};artwork.onload=fitArt;c.append(artwork);if(artwork.complete)queueMicrotask(fitArt);
  c.activate=()=>{if(c.activated)return;c.activated=true;under=false;c.classList.remove('under');c.style.transform='';c.style.filter='';c.removeAttribute('aria-hidden');
  c.pokemon=p;c.setAttribute('aria-label',p.name);const choice=document.createElement('div');choice.className='choice-light';c.append(choice);
+ const seal=document.createElement('div');seal.className='swipe-seal';seal.setAttribute('aria-hidden','true');
+ const heart='<path d="M20.8 8.8c0 5.1-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.8a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z"/>',cross='<path d="m6 6 12 12M18 6 6 18"/>';
+ seal.innerHTML='<span class="seal-fill"></span>'+['seal-heart','seal-cross'].map((name,i)=>'<svg class="'+name+' seal-outline" viewBox="0 0 24 24">'+(i?cross:heart)+'</svg><svg class="'+name+' seal-solid" viewBox="0 0 24 24">'+(i?cross:heart)+'</svg>').join('');c.append(seal);
+ c.commitDecision=direction=>{if(!(Number(seal.style.opacity)>0))paintSwipeSeal(seal,direction,1)};
+
  let surface=null;let start=null,dx=0,dy=0,vx=0,lastX=0,lastTime=0,lastMove=0,releaseTimer,held=false,armed=0,raf=0,previous=0;
  const position={x:0,y:0,r:0,rx:0,ry:0,s:1},velocity={x:0,y:0,r:0,rx:0,ry:0,s:0},target={...position};
  c.getFlightPose=()=>({...position});
@@ -125,13 +137,13 @@ function makeCard(p,under=false){
  function move(values){Object.assign(target,values);if(reducedMotion.matches){Object.assign(position,target);paint();return;}if(!raf)raf=requestAnimationFrame(tick)}
  const undercard=()=>$('#stage').querySelector('.under');
  const light=(x,y)=>{const bounds=$('#stage').getBoundingClientRect(),width=c.clientWidth,height=c.clientHeight;const px=Math.max(0,Math.min(100,(x-(bounds.left+(bounds.width-width)/2))/width*100));const py=Math.max(0,Math.min(100,(y-(bounds.top+(bounds.height-height)/2))/height*100));c.style.setProperty('--x',px+'%');c.style.setProperty('--y',py+'%');c.style.setProperty('--angle',(100+px*.4)+'deg');surface?.pointer(px/100,py/100);return{px,py}};
- const reset=()=>{held=false;armed=0;clearFeedback();move({x:0,y:0,r:0,rx:0,ry:0,s:1});c.style.setProperty('--love','0');c.style.setProperty('--pass','0');c.classList.remove('active','lifted');surface?.release();const u=undercard();if(u){u.style.transform='';u.style.filter=''}};
- c.setUnder=()=>{c.stopMotion();under=true;c.activated=false;c.classList.add('under');c.setAttribute('aria-hidden','true');for(const n of c.querySelectorAll('.choice-light,.stamp'))n.remove()};
+ const reset=()=>{held=false;armed=0;paintSwipeSeal(seal,1,0);clearFeedback();move({x:0,y:0,r:0,rx:0,ry:0,s:1});c.style.setProperty('--love','0');c.style.setProperty('--pass','0');c.classList.remove('active','lifted');surface?.release();const u=undercard();if(u){u.style.transform='';u.style.filter=''}};
+ c.setUnder=()=>{c.stopMotion();under=true;c.activated=false;c.classList.add('under');c.setAttribute('aria-hidden','true');for(const n of c.querySelectorAll('.choice-light,.stamp,.swipe-seal'))n.remove()};
  c.stopMotion=(preserveSurface=false)=>{cancelAnimationFrame(raf);clearTimeout(releaseTimer);start=null;if(!preserveSurface)surface?.dispose()};
  c.onpointerdown=e=>{if(busy||!e.isPrimary||e.button>0)return;clearTimeout(releaseTimer);start={x:e.clientX,y:e.clientY};lastX=e.clientX;lastTime=lastMove=performance.now();dx=dy=vx=0;armed=0;held=true;c.setPointerCapture(e.pointerId);c.style.transition='none';c.classList.remove('dealt','returned');c.classList.add('active','lifted');const {px,py}=light(e.clientX,e.clientY);move({s:1.012,rx:(50-py)*.065,ry:(px-50)*.065});sound('lift')};
  c.onpointermove=e=>{if(!start)return;const now=performance.now();vx=vx*.25+((e.clientX-lastX)/Math.max(1,now-lastTime))*.75;lastX=e.clientX;lastTime=lastMove=now;dx=e.clientX-start.x;dy=e.clientY-start.y;const {px,py}=light(e.clientX,e.clientY);const threshold=Math.min(78,c.clientWidth*.21),strength=Math.min(Math.abs(dx)/threshold,1),direction=dx>0?1:-1;
  const dragX=Math.sign(dx)*(Math.min(Math.abs(dx),c.clientWidth*.7)+Math.max(0,Math.abs(dx)-c.clientWidth*.7)*.45);const arc=swipeArc(dragX,c.clientWidth);const drag={x:dragX,y:dy*.14+arc.y,r:arc.r,rx:(50-py)*.04,ry:(px-50)*.045,s:1.008};Object.assign(target,drag);Object.assign(position,drag);for(const k in velocity)velocity[k]=0;paint();
- const newArmed=Math.abs(dx)>=threshold?direction:(Math.abs(dx)<threshold*.72||direction!==armed)?0:armed;if(newArmed&&newArmed!==armed)tactile('edge');armed=newArmed;
+ const newArmed=Math.abs(dx)>=threshold?direction:(Math.abs(dx)<threshold*.72||direction!==armed)?0:armed;armed=newArmed;paintSwipeSeal(seal,direction,strength);
 
  $('#yes').classList.toggle('ready',armed===1);$('#no').classList.toggle('ready',armed===-1);document.documentElement.style.setProperty('--yes-intent',String(dx>0?strength*.8:0));document.documentElement.style.setProperty('--no-intent',String(dx<0?strength*.75:0));c.style.setProperty('--love',String(dx>0?strength:0));c.style.setProperty('--pass',String(dx<0?strength:0));
  const u=undercard();if(u&&!reducedMotion.matches){u.style.transform=`translateY(${4*(1-strength)}px) scale(${.98+strength*.02})`;u.style.filter='none'}
@@ -169,7 +181,7 @@ function vote(value,momentum={}){
  if(busy)return;const swipeStarted=performance.now();const c=$('.card:not(.under):not(.exiting)'),p=c?.pokemon||current();if(!p)return;busy=true;clearFeedback();tactile(value==='yes'?'like':'choose');sound(value==='yes'?'like':'choose');
  if(p.reencounter){state.refinementSchedule={...(state.refinementSchedule||{}),nextSeen:Object.keys(state.votes).length+28,time:Date.now()};const event={id:p.id,card:p.card,value,time:Date.now(),checkpoint:p.checkpoint};state.encounters=state.encounters||{};state.encounters[event.card+':'+event.checkpoint]=event;state.history.push({id:p.id,direction:value,encounterKey:event.card+':'+event.checkpoint});activeEncounter=null}else{state.history.push({id:p.id,previous:state.votes[p.id]||null,direction:value});state.votes[p.id]={value,card:p.card,time:Date.now()}}save({votes:p.reencounter?[]:[p.id]});
  if(!p.reencounter&&value==='yes'&&Object.values(state.votes).filter(v=>v.value==='yes').length%15===0)state.refinementSchedule={...(state.refinementSchedule||{}),nextSeen:Math.max(Object.keys(state.votes).length+8,state.refinementSchedule?.nextSeen||0),time:Date.now()};
- if(c){c.style.setProperty(value==='yes'?'--love':'--pass','1');c.stopMotion?.(true);c.classList.add('exiting');c.classList.remove('lifted','dealt','returned','active');c.setAttribute('aria-hidden','true');c.style.pointerEvents='none'}
+ if(c){c.commitDecision?.(value==='yes'?1:-1);c.style.setProperty(value==='yes'?'--love':'--pass','1');c.stopMotion?.(true);c.classList.add('exiting');c.classList.remove('lifted','dealt','returned','active');c.setAttribute('aria-hidden','true');c.style.pointerEvents='none'}
  if(c)launchCard(c,value,momentum);
  render();window.PokeJourney?.celebrate();
 
