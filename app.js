@@ -1,11 +1,18 @@
 const $=s=>document.querySelector(s);let catalog=[],order=[],filter='yes',busy=false,pair=[],lastPair='',syncTimer,toastTimer,debugCatalog=false;const debugSelected=new Set(),debugPrints=new Map();let debugAlternatives=false,debugSelectionMode=false;
+// Secondary work is coalesced behind the current gesture/flight. Durable work has a deadline.
+const swipeTasks=new Map();
+const swipeBlocked=()=>!!document.querySelector('#stage .card.lifted,#stage .card.exiting');
+function flushSwipeTasks(){for(const [key,task] of [...swipeTasks]){if(swipeBlocked()&&performance.now()<task.deadline)continue;swipeTasks.delete(key);clearTimeout(task.timer);task.run()}}
+function afterSwipe(key,run,maxWait=Infinity){const old=swipeTasks.get(key);if(old)clearTimeout(old.timer);const deadline=old?.deadline??performance.now()+maxWait;const task={run,deadline,timer:null};swipeTasks.set(key,task);if(Number.isFinite(deadline))task.timer=setTimeout(flushSwipeTasks,Math.max(0,deadline-performance.now()));if(!swipeBlocked())flushSwipeTasks()}
+document.addEventListener('pointerup',()=>setTimeout(flushSwipeTasks,0),{passive:true});
+document.addEventListener('pointercancel',()=>setTimeout(flushSwipeTasks,0),{passive:true});
 const q=new URLSearchParams(location.hash.slice(1)),token=q.get('s')||localStorage.getItem('pokeamor-token')||crypto.randomUUID().replaceAll('-','')+crypto.randomUUID().replaceAll('-','');localStorage.setItem('pokeamor-token',token);history.replaceState(null,'','#s='+token);const key='pokeamor-'+token;
 let state;try{state=JSON.parse(localStorage.getItem(key))}catch{}state=state||{votes:{},ratings:{},duels:0,history:[],revision:0};state.voteTimes=state.voteTimes||{};state.ratingTimes=state.ratingTimes||{};
 let etag=null,cloudReady=false,dirty=localStorage.getItem(key+'-pending')==='1',syncing=false,restoring=null,retryDelay=1200,refreshTimer;
 const clone=v=>JSON.parse(JSON.stringify(v));let observedVotes=clone(state.votes),observedRatings=clone(state.ratings);
 function toast(s){$('#toast').textContent=s;$('#toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),2600)}
 function fallbackPersist(){try{localStorage.setItem(key,JSON.stringify(state));localStorage.setItem(key+'-pending',dirty?'1':'0');return true}catch{$('#save').textContent='No se pudo guardar';return false}}
-function persist(){clearTimeout(diskTimer);diskTimer=setTimeout(()=>{if(!profileDB){fallbackPersist();return}try{const tx=profileDB.transaction('profiles','readwrite');tx.objectStore('profiles').put({state,dirty},key);tx.oncomplete=()=>{$('#save').textContent='Guardado en este iPhone'};tx.onerror=()=>fallbackPersist()}catch{fallbackPersist()}},100);return true}
+function persist(){clearTimeout(diskTimer);diskTimer=setTimeout(()=>afterSwipe('persist',()=>{if(!profileDB){fallbackPersist();return}try{const tx=profileDB.transaction('profiles','readwrite');tx.objectStore('profiles').put({state,dirty},key);tx.oncomplete=()=>{$('#save').textContent='Guardado en este iPhone'};tx.onerror=()=>fallbackPersist()}catch{fallbackPersist()}},500),100);return true}
 
 function trackChanges(){for(const [field,observed,times] of [['votes',observedVotes,state.voteTimes],['ratings',observedRatings,state.ratingTimes]])for(const id of new Set([...Object.keys(observed),...Object.keys(state[field])]))if(JSON.stringify(observed[id])!==JSON.stringify(state[field][id]))times[id]=Math.max(Date.now(),(times[id]||0)+1);observedVotes=clone(state.votes);observedRatings=clone(state.ratings)}
 function save(change){scheduleEngine();if(change?.votes){for(const id of change.votes){state.voteTimes[id]=Math.max(Date.now(),(state.voteTimes[id]||0)+1);if(state.votes[id])observedVotes[id]=clone(state.votes[id]);else delete observedVotes[id]}}else trackChanges();state.revision++;dirty=true;if(persist())$('#save').textContent='Guardando…';else toast('Exportá tu colección para conservarla.');clearTimeout(syncTimer);syncTimer=setTimeout(sync,700)}
@@ -45,7 +52,8 @@ const fallback=p=>'https://raw.githubusercontent.com/PokeAPI/sprites/master/spri
 function img(p,exact=false){
  const im=document.createElement('img'),material=p.surface?.effect==='asset-foil',cached=exact&&material?window.PokeAssets?.peekFront(p):null;im.materialSource=!!cached||!!(exact&&material&&!p.fallbackImage);im.src=cached||(material?p.fallbackImage||p.image:p.image)||fallback(p);im.alt=p.name;im.draggable=false;let usedFallback=material&&!!p.fallbackImage&&!cached;
  im.onerror=()=>{im.materialSource=false;im.parentElement?.classList.add('art-fallback');if(!usedFallback&&p.fallbackImage){usedFallback=true;im.src=p.fallbackImage}else if(im.src!==fallback(p)){im.src=fallback(p);im.parentElement?.classList.add('official')}else{im.onerror=null;im.alt=p.name+' · imagen no disponible'}};
- if(exact&&material&&p.fallbackImage&&!cached){const source=window.PokeAssets?window.PokeAssets.front(p):Promise.resolve(p.image);source.then(url=>{if(!im.isConnected)return;const front=new Image();front.decoding='async';front.onload=()=>{if(im.isConnected){im.parentElement?.classList.remove('art-fallback','official');im.materialSource=true;im.src=url}};front.src=url}).catch(()=>{})}
+ if(exact&&material&&p.fallbackImage&&!cached){const source=window.PokeAssets?window.PokeAssets.front(p):Promise.resolve(p.image);source.then(url=>{const front=new Image();front.decoding='async';front.onload=async()=>{try{await front.decode?.();if(!front.naturalWidth||!front.naturalHeight)return;afterSwipe(im,()=>{if(im.parentElement?.classList.contains('exiting'))return;im.parentElement?.classList.remove('art-fallback','official');im.materialSource=true;im.src=url})}catch{}};front.src=url}).catch(()=>{})}
+
  return im
 }
 function pending(){return adaptiveQueue()}function current(){return pending()[0]}
@@ -119,7 +127,7 @@ function makeCard(p,under=false){
  const light=(x,y)=>{const bounds=$('#stage').getBoundingClientRect(),width=c.clientWidth,height=c.clientHeight;const px=Math.max(0,Math.min(100,(x-(bounds.left+(bounds.width-width)/2))/width*100));const py=Math.max(0,Math.min(100,(y-(bounds.top+(bounds.height-height)/2))/height*100));c.style.setProperty('--x',px+'%');c.style.setProperty('--y',py+'%');c.style.setProperty('--angle',(100+px*.4)+'deg');surface?.pointer(px/100,py/100);return{px,py}};
  const reset=()=>{held=false;armed=0;clearFeedback();move({x:0,y:0,r:0,rx:0,ry:0,s:1});c.style.setProperty('--love','0');c.style.setProperty('--pass','0');c.classList.remove('active','lifted');surface?.release();const u=undercard();if(u){u.style.transform='';u.style.filter=''}};
  c.setUnder=()=>{c.stopMotion();under=true;c.activated=false;c.classList.add('under');c.setAttribute('aria-hidden','true');for(const n of c.querySelectorAll('.choice-light,.stamp'))n.remove()};
- c.stopMotion=()=>{cancelAnimationFrame(raf);clearTimeout(releaseTimer);start=null;surface?.dispose()};
+ c.stopMotion=(preserveSurface=false)=>{cancelAnimationFrame(raf);clearTimeout(releaseTimer);start=null;if(!preserveSurface)surface?.dispose()};
  c.onpointerdown=e=>{if(busy||!e.isPrimary||e.button>0)return;clearTimeout(releaseTimer);start={x:e.clientX,y:e.clientY};lastX=e.clientX;lastTime=lastMove=performance.now();dx=dy=vx=0;armed=0;held=true;c.setPointerCapture(e.pointerId);c.style.transition='none';c.classList.remove('dealt','returned');c.classList.add('active','lifted');const {px,py}=light(e.clientX,e.clientY);move({s:1.012,rx:(50-py)*.065,ry:(px-50)*.065});sound('lift')};
  c.onpointermove=e=>{if(!start)return;const now=performance.now();vx=vx*.25+((e.clientX-lastX)/Math.max(1,now-lastTime))*.75;lastX=e.clientX;lastTime=lastMove=now;dx=e.clientX-start.x;dy=e.clientY-start.y;const {px,py}=light(e.clientX,e.clientY);const threshold=Math.min(78,c.clientWidth*.21),strength=Math.min(Math.abs(dx)/threshold,1),direction=dx>0?1:-1;
  const dragX=Math.sign(dx)*(Math.min(Math.abs(dx),c.clientWidth*.7)+Math.max(0,Math.abs(dx)-c.clientWidth*.7)*.45);const arc=swipeArc(dragX,c.clientWidth);const drag={x:dragX,y:dy*.14+arc.y,r:arc.r,rx:(50-py)*.04,ry:(px-50)*.045,s:1.008};Object.assign(target,drag);Object.assign(position,drag);for(const k in velocity)velocity[k]=0;paint();
@@ -128,8 +136,8 @@ function makeCard(p,under=false){
  $('#yes').classList.toggle('ready',armed===1);$('#no').classList.toggle('ready',armed===-1);document.documentElement.style.setProperty('--yes-intent',String(dx>0?strength*.8:0));document.documentElement.style.setProperty('--no-intent',String(dx<0?strength*.75:0));c.style.setProperty('--love',String(dx>0?strength:0));c.style.setProperty('--pass',String(dx<0?strength:0));
  const u=undercard();if(u&&!reducedMotion.matches){u.style.transform=`translateY(${4*(1-strength)}px) scale(${.98+strength*.02})`;u.style.filter='none'}
  };
- c.onpointerup=()=>{if(!start)return;start=null;const flick=performance.now()-lastMove<90&&Math.abs(vx)>.5&&Math.abs(dx)>28&&Math.abs(dx)>Math.abs(dy)*.65&&Math.sign(vx)===Math.sign(dx);if((armed!==0&&Math.sign(dx)===armed)||flick){c.stopMotion();clearFeedback();vote(dx>0?'yes':'no',{vx,dy})}else if(Math.abs(dx)<9&&Math.abs(dy)<9){move({s:1.018,rx:0,ry:0});releaseTimer=setTimeout(reset,160)}else reset()};
- c.onpointercancel=()=>{start=null;reset()};c.onlostpointercapture=()=>{if(start){start=null;reset()}};surface=window.PokeHolo?.attach(c,p,{onTilt:(rx,ry)=>{if(!held&&!start)move({rx,ry})}});};if(under)c.setAttribute('aria-hidden','true');else c.activate();return c
+ c.onpointerup=()=>{if(!start)return;start=null;const flick=performance.now()-lastMove<90&&Math.abs(vx)>.5&&Math.abs(dx)>28&&Math.abs(dx)>Math.abs(dy)*.65&&Math.sign(vx)===Math.sign(dx);if((armed!==0&&Math.sign(dx)===armed)||flick){clearFeedback();vote(dx>0?'yes':'no',{vx,dy})}else if(Math.abs(dx)<9&&Math.abs(dy)<9){move({s:1.018,rx:0,ry:0});releaseTimer=setTimeout(reset,160)}else reset()};
+ c.onpointercancel=()=>{start=null;reset()};c.onlostpointercapture=()=>{if(start){start=null;reset()}};queueMicrotask(()=>afterSwipe('discovery-surface',()=>{if(c.isConnected&&c.activated&&!c.classList.contains('exiting'))surface=window.PokeHolo?.attach(c,p,{onTilt:(rx,ry)=>{if(!held&&!start)move({rx,ry})}})}))};if(under)c.setAttribute('aria-hidden','true');else c.activate();return c
 }
 const warmArt=new Map();
 function warmArtwork(p){const url=p.surface?.assets?.front||p.image||fallback(p);if(warmArt.has(url))return;const art=img(p,true);warmArt.set(url,art);art.addEventListener?.('load',()=>{if(typeof scheduleEvents==='function')scheduleEvents()},{once:true});art.decode?.().catch(()=>{});if(warmArt.size>24)warmArt.delete(warmArt.keys().next().value)}
@@ -143,7 +151,7 @@ function render(){clearFeedback();const queue=pending(),p=queue[0],n=Object.keys
 // Keep the released artwork opaque and moving until its trailing edge clears the viewport.
 function swipeArc(x,width){const angle=Math.atan(x/Math.max(1,width*2));return{y:width*.4*(1-Math.cos(angle)),r:angle*180/Math.PI*.65}}
 function launchCard(c,value,momentum={}){
- if(reducedMotion.matches){c.remove();return}
+ if(reducedMotion.matches){c.stopMotion?.();c.remove();flushSwipeTasks();return}
  const pose=c.getFlightPose?.()||{x:0,y:0,r:0,rx:0,ry:0,s:1},rect=c.getBoundingClientRect(),direction=value==='yes'?1:-1;
  const distance=Math.max(0,direction>0?innerWidth-rect.left:rect.right)+Math.max(rect.width,rect.height)*.3+24;
  // Continue the same curve used under the finger, retaining its vertical offset and tilt.
@@ -153,19 +161,19 @@ function launchCard(c,value,momentum={}){
  c.style.transition='none';c.style.opacity='1';
  const resumeMaterial=window.PokeMaterial?.beginFlight();
  const flight=c.animate(frames,{duration,easing:'linear',fill:'forwards'});
- let timer,done=false;const finish=(completed=false)=>{if(done)return;done=true;clearTimeout(timer);c.remove();resumeMaterial?.()};
+ let timer,done=false;const finish=(completed=false)=>{if(done)return;done=true;clearTimeout(timer);c.stopMotion?.();c.remove();resumeMaterial?.();flushSwipeTasks()};
  flight.finished.then(()=>finish(true),()=>finish());
  timer=setTimeout(()=>finish(),duration+250);
 }
 function vote(value,momentum={}){
- if(busy||!current())return;busy=true;clearFeedback();const c=$('.card:not(.under):not(.exiting)'),p=c?.pokemon||current();tactile(value==='yes'?'like':'choose');sound(value==='yes'?'like':'choose');
+ if(busy)return;const swipeStarted=performance.now();const c=$('.card:not(.under):not(.exiting)'),p=c?.pokemon||current();if(!p)return;busy=true;clearFeedback();tactile(value==='yes'?'like':'choose');sound(value==='yes'?'like':'choose');
  if(p.reencounter){state.refinementSchedule={...(state.refinementSchedule||{}),nextSeen:Object.keys(state.votes).length+28,time:Date.now()};const event={id:p.id,card:p.card,value,time:Date.now(),checkpoint:p.checkpoint};state.encounters=state.encounters||{};state.encounters[event.card+':'+event.checkpoint]=event;state.history.push({id:p.id,direction:value,encounterKey:event.card+':'+event.checkpoint});activeEncounter=null}else{state.history.push({id:p.id,previous:state.votes[p.id]||null,direction:value});state.votes[p.id]={value,card:p.card,time:Date.now()}}save({votes:p.reencounter?[]:[p.id]});
  if(!p.reencounter&&value==='yes'&&Object.values(state.votes).filter(v=>v.value==='yes').length%15===0)state.refinementSchedule={...(state.refinementSchedule||{}),nextSeen:Math.max(Object.keys(state.votes).length+8,state.refinementSchedule?.nextSeen||0),time:Date.now()};
- if(c){c.style.setProperty(value==='yes'?'--love':'--pass','1');c.stopMotion?.();c.classList.add('exiting');c.classList.remove('lifted','dealt','returned','active');c.setAttribute('aria-hidden','true');c.style.pointerEvents='none'}
+ if(c){c.style.setProperty(value==='yes'?'--love':'--pass','1');c.stopMotion?.(true);c.classList.add('exiting');c.classList.remove('lifted','dealt','returned','active');c.setAttribute('aria-hidden','true');c.style.pointerEvents='none'}
  if(c)launchCard(c,value,momentum);
  render();window.PokeJourney?.celebrate();
 
- busy=false;scheduleEvents();
+ window.PokeSwipeStats={lastCommitMs:performance.now()-swipeStarted,pendingTasks:swipeTasks.size};busy=false;scheduleEvents();
 }
 
 $('#yes').onclick=()=>vote('yes');$('#no').onclick=()=>vote('no');$('#undo').onclick=()=>{
@@ -579,7 +587,7 @@ $('#refine-favorites').onclick=beginManualRefinement;$('#duel').onclick=beginMan
 let engineWorker=null,engineResult=null,engineTimer,engineRevision=0,engineSent=null;
 function startEngine(){try{engineWorker=new Worker('/recommender.js');engineWorker.onmessage=({data})=>{if(data.error){engineWorker.terminate();engineWorker=null;return}if(data.revision!==engineRevision)return;engineResult=data;window.PokeEngineStats={computeMs:data.ms,observations:data.observations,model:'online-logistic-v1'};};engineWorker.onerror=()=>{engineWorker?.terminate();engineWorker=null};engineWorker.postMessage({type:'init',catalog:catalog.map(({id,traits,communityVotes2020})=>({id,traits,communityVotes2020})),state:(engineSent=clone(engineState())),revision:++engineRevision})}catch{engineWorker=null}}
 function engineState(){return {votes:state.votes,encounters:state.encounters,comparisons:state.comparisons}}
-function scheduleEngine(){clearTimeout(engineTimer);engineTimer=setTimeout(()=>{if(!engineWorker)return;const next=clone(engineState()),votes={};for(const id of new Set([...Object.keys(engineSent?.votes||{}),...Object.keys(next.votes)]))if(JSON.stringify(engineSent?.votes?.[id])!==JSON.stringify(next.votes[id]))votes[id]=next.votes[id]||null;engineWorker.postMessage({type:'delta',votes,encounters:next.encounters,comparisons:next.comparisons,revision:++engineRevision});engineSent=next},160)}
+function scheduleEngine(){clearTimeout(engineTimer);engineTimer=setTimeout(()=>afterSwipe('engine',()=>{if(!engineWorker)return;const next=clone(engineState()),votes={};for(const id of new Set([...Object.keys(engineSent?.votes||{}),...Object.keys(next.votes)]))if(JSON.stringify(engineSent?.votes?.[id])!==JSON.stringify(next.votes[id]))votes[id]=next.votes[id]||null;engineWorker.postMessage({type:'delta',votes,encounters:next.encounters,comparisons:next.comparisons,revision:++engineRevision});engineSent=next},500),160)}
 
 let profileDB=null,diskTimer;
 async function restoreLocalProfile(){return new Promise(resolve=>{let done=false;const finish=()=>{if(!done){done=true;resolve()}};setTimeout(finish,900);try{const req=indexedDB.open('pokeamor-profiles',1);req.onupgradeneeded=()=>req.result.createObjectStore('profiles');req.onerror=finish;req.onsuccess=()=>{profileDB=req.result;if(done)return;const read=profileDB.transaction('profiles').objectStore('profiles').get(key);read.onsuccess=()=>{const record=read.result;if(record?.state&&(record.state.revision||0)>=(state.revision||0)){state=record.state;dirty=record.dirty;observedVotes=clone(state.votes);observedRatings=clone(state.ratings)}finish()};read.onerror=finish}}catch{finish()}})}
