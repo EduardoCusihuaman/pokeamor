@@ -459,10 +459,10 @@ body input,body textarea,body [contenteditable="true"],body [contenteditable="tr
 .material-canvas{animation:foil-arrive 140ms ease-out both}
 @keyframes foil-arrive{from{opacity:0}to{opacity:.92}}
 /* A small card-bound decision seal. The parent card supplies the entire exit motion. */
-.swipe-seal{position:absolute;top:50%;left:50%;margin:-28px 0 0 -28px;width:56px;height:56px;border-radius:50%;background:#fffdf9;color:#216b97;border:1.5px solid currentColor;box-shadow:0 0 0 3px #fffdf9d9,0 3px 12px #36273230;opacity:0;transform:scale(.94);pointer-events:none;z-index:4;overflow:hidden}
+.swipe-seal{position:absolute;top:50%;left:50%;margin:-34px 0 0 -34px;width:68px;height:68px;border-radius:50%;background:linear-gradient(145deg,#fff,#fff8f2);color:#216b97;border:1.5px solid currentColor;box-shadow:0 0 0 3px #fffdf9e6,0 2px 4px #36273218,0 8px 20px #36273230;opacity:0;transform:scale(.94);pointer-events:none;z-index:4;overflow:hidden}
 .swipe-seal.is-yes{color:#c13270}
-.swipe-seal .seal-fill{position:absolute;inset:0;background:currentColor;opacity:var(--seal-fill,0)}
-.swipe-seal svg{position:absolute;inset:11.5px;width:30px;height:30px;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.swipe-seal .seal-fill{position:absolute;inset:0;background:linear-gradient(145deg,#ffffff24,transparent 65%),currentColor;opacity:var(--seal-fill,0)}
+.swipe-seal svg{position:absolute;inset:14.5px;width:36px;height:36px;stroke:currentColor;stroke-width:1.85;stroke-linecap:round;stroke-linejoin:round;fill:none}
 .swipe-seal .seal-solid{color:#fff;opacity:var(--seal-fill,0)}
 .swipe-seal .seal-solid.seal-heart{fill:currentColor}
 .swipe-seal .seal-heart{display:none}.swipe-seal.is-yes .seal-heart{display:block}.swipe-seal.is-yes .seal-cross{display:none}
