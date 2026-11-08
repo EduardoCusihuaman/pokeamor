@@ -203,6 +203,9 @@ $('#detail-art').onpointercancel=()=>{detailStart=null;viewerHolo?.release()};
 function showCollectionTab(rounds){$('#sheet').classList.toggle('rounds-mode',rounds);$('#show-rounds').classList.toggle('selected',rounds);$('#show-liked').classList.toggle('selected',!rounds)}
 $('#show-rounds').onclick=()=>{showCollectionTab(true);window.PokeJourney?.compose()};$('#show-liked').onclick=()=>showCollectionTab(false);
 
+// Dialog autofocus must not look like a persistent touch selection.
+document.addEventListener('pointerdown',()=>$('#card-detail').classList.remove('keyboard-navigation'),{capture:true,passive:true});
+document.addEventListener('keydown',e=>{if(['Tab','ArrowLeft','ArrowRight','Enter',' '].includes(e.key))$('#card-detail').classList.add('keyboard-navigation')},{capture:true});
 let detailOrigin=null,detailReturnCleanup=null;
 function clearDetailReturn(){detailReturnCleanup?.();detailReturnCleanup=null}
 window.PokeInspect=(p,group,tile)=>{clearDetailReturn();collectionCards=group||[p];detailOrigin=tile;inspectCard(p);detailOrigin=tile;animateCardOrigin(false)};
