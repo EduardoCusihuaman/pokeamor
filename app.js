@@ -325,7 +325,7 @@ let deleteStage=0,deleteTimer;
 async function resetCollection(){
  clearTimeout(deleteTimer);clearTimeout(syncTimer);clearTimeout(diskTimer);syncing=false;
  const revision=(state.revision||0)+1;
- alternateGeneration++;alternateBusy=false;preparedEncounter=null;activeEncounter=null;alternativeRetry=false;alternativeResourceAttempts=0;alternativeRetryAt=0;alternateFailures.clear();clearTimeout(alternateTimer);alternateTimer=null;
+ manualSession=null;inlinePair=null;inlineBusy=false;queuedPair=null;alternateGeneration++;alternateBusy=false;preparedEncounter=null;activeEncounter=null;alternativeRetry=false;alternativeResourceAttempts=0;alternativeRetryAt=0;alternateFailures.clear();clearTimeout(alternateTimer);alternateTimer=null;
  state={votes:{},ratings:{},duels:0,history:[],comparisons:[],comparisonDeleted:{},encounters:{},voteTimes:{},ratingTimes:{},refinementSchedule:null,revision,resetAt:Date.now()};
  observedVotes={};observedRatings={};dirty=true;etag=null;
  localStorage.removeItem(key);localStorage.removeItem(key+'-pending');localStorage.removeItem(key+'-journey');localStorage.removeItem(key+'-alternates');
@@ -414,10 +414,10 @@ function startRefinement(manual=false){
  const likes=catalog.filter(p=>state.votes[p.id]?.value==='yes');
  if(likes.length<2){if(manual)toast('Elegí al menos dos favoritos.');return false}
  const log=state.comparisons||[];
- const selected=window.PokePreference.pair(catalog,state);if(!selected)return false;const [a,b]=selected;
+ const selected=manual&&manualSession?manualSession.pairs[manualSession.done]:window.PokePreference.pair(catalog,state);if(!selected)return false;const [a,b]=selected;
  // Automatic events never interrupt to download an image.
  if(!manual&&![a,b].every(p=>{const im=warmArt.get(p.surface?.assets?.front||p.image||fallback(p));return im?.complete&&im.naturalWidth>0})){for(const p of [a,b]){warmArtwork(p);const im=warmArt.get(p.surface?.assets?.front||p.image||fallback(p));im?.addEventListener('load',scheduleEvents,{once:true})}return false}
- const prepared=Math.random()<.5?[a,b]:[b,a];if(!manual){queuedPair=prepared;return true}queuedPair=null;inlinePair=prepared;
+ const prepared=manual&&manualSession?[a,b]:Math.random()<.5?[a,b]:[b,a];if(!manual){queuedPair=prepared;return true}queuedPair=null;inlinePair=prepared;
  $('#sheet').classList.remove('open');$('#duelsheet').classList.remove('open');render();return true;
 }
 function bindRefinementChoice(button,index){
@@ -433,6 +433,7 @@ function bindRefinementChoice(button,index){
  button.cancelRefinementPress=()=>{origin=null;consumed=true;clear()};
 }
 function paintRefinement(){
+ if(manualSession&&!validRefinementSession(manualSession)){manualSession=null;inlinePair=null;inlineBusy=false}
  const n=eventSeen(),likes=Object.values(state.votes).filter(v=>v.value==='yes').length;
  scheduleEvents();
  const stage=$('#stage');stage.append(eventLayer);eventLayer.hidden=!inlinePair;equalTools.hidden=!inlinePair;$('#both').disabled=inlineBusy;if(!inlinePair)equalPress(false);
@@ -462,7 +463,7 @@ function exitRefinement(winner=2){
  let cleaned=false;const cleanup=()=>{if(cleaned)return;cleaned=true;cover.remove();eventLayer.classList.remove('continuous-handoff')};Promise.all(animations.map(a=>a.finished)).then(cleanup,cleanup);setTimeout(cleanup,duration+60);
 }
 function chooseRefinement(winner){
- if(!inlinePair||inlineBusy)return;inlineBusy=true;equalPress(false);$('#both').disabled=true;
+ if(!inlinePair||inlineBusy)return;if(manualSession&&!validRefinementSession(manualSession)){manualSession=null;inlinePair=null;render();return}inlineBusy=true;equalPress(false);$('#both').disabled=true;
  const ids=inlinePair.map(p=>p.id),before=clone(state.ratings),previousSchedule=clone(state.refinementSchedule||{});
  const [a,b]=inlinePair,ra=score(a),rb=score(b),expected=1/(1+10**((rb-ra)/400)),actual=winner===2?.5:winner===0?1:0;
  for(const [p,v] of [[a,ra+28*(actual-expected)],[b,rb-28*(actual-expected)]])state.ratings[p.id]={score:v,played:(state.ratings[p.id]?.played||0)+1};
@@ -470,8 +471,11 @@ function chooseRefinement(winner){
  state.comparisons=state.comparisons||[];state.comparisons.push(event);state.duels++;
  state.history.push({refinement:true,eventId:event.id,ratings:before,previousSchedule,ids});
  adaptiveBlock='';sound('like');tactile('like');
+ save();
  for(const b of pairBox.children)b.cancelRefinementPress?.();
- exitRefinement(winner);
+ const session=manualSession;
+ const proceed=()=>{if(!(state.comparisons||[]).some(e=>e.id===event.id)||manualSession!==session)return;if(session&&!validRefinementSession(session)){manualSession=null;inlinePair=null;inlineBusy=false;render();return}exitRefinement(winner)};
+ if(session&&session.done+1<session.target)prepareRefinementPair(session,session.done+1).then(ok=>{if(!ok&&manualSession===session)session.target=session.done+1;proceed()});else proceed();
 }
 const renderDiscovery=render;render=function(){if(eventBoundary&&queuedPair&&!activeEncounter&&eventSeen()>=(state.refinementSchedule?.nextSeen||20)){inlinePair=queuedPair;queuedPair=null}renderDiscovery();paintRefinement()};
 const voteDiscovery=vote;vote=function(...args){if(!inlinePair)voteDiscovery(...args)};
@@ -530,11 +534,33 @@ let manualSession=null;
 const manualIcon='<svg viewBox="0 0 24 30" aria-hidden="true"><g><path d="M8 2h8v3c2.2.8 3.5 2.8 3.5 5v.5A3.5 3.5 0 0 1 16 14h-4.5A3.5 3.5 0 0 1 8 10.5V9L6.5 7.5A1.5 1.5 0 0 0 4 8.6V10a3 3 0 0 0 4 2.8"/><path d="M8 5h8"/></g><g transform="translate(0 30) scale(1 -1)"><path d="M8 2h8v3c2.2.8 3.5 2.8 3.5 5v.5A3.5 3.5 0 0 1 16 14h-4.5A3.5 3.5 0 0 1 8 10.5V9L6.5 7.5A1.5 1.5 0 0 0 4 8.6V10a3 3 0 0 0 4 2.8"/><path d="M8 5h8"/></g></svg>';
 const oldPaintRefinement=paintRefinement;
 paintRefinement=function(){oldPaintRefinement();const b=$('#front-refine');if(manualSession){b.innerHTML='<span class="refine-dots" aria-hidden="true">'+Array.from({length:manualSession.target},(_,i)=>'<i class="'+(i<manualSession.done?'filled':'')+'"></i>').join('')+'</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>';b.setAttribute('aria-label','Salir del afinador, '+manualSession.done+' de '+manualSession.target)}else if(!inlinePair)b.innerHTML=manualIcon};
-function beginManualRefinement(){const count=catalog.filter(p=>state.votes[p.id]?.value==='yes').length;if(count<2){toast('Elegí al menos dos favoritos.');return}manualSession={done:0,target:Math.min(3,count*(count-1)/2),used:new Set()};startRefinement(true)}
+function refinementFavorites(){return catalog.filter(p=>state.votes[p.id]?.value==='yes').map(p=>p.id+':'+p.card).join('|')}
+function validRefinementSession(session){return session.favorites===refinementFavorites()&&session.resetAt===(state.resetAt||0)}
+function prepareRefinementPair(session,index){
+ if(session.ready.has(index))return session.ready.get(index);
+ const pair=session.pairs[index];if(!pair)return Promise.resolve(false);
+ const ready=Promise.all(pair.map(p=>new Promise(resolve=>{
+  warmArtwork(p);const art=warmArt.get(p.surface?.assets?.front||p.image||fallback(p));if(!art){resolve(false);return}
+  let done=false;const finish=ok=>{if(done)return;done=true;clearTimeout(timer);art.removeEventListener('load',loaded);art.removeEventListener('error',failed);resolve(ok)};
+  const loaded=()=>{if(!art.naturalWidth){finish(false);return}if(art.decode)art.decode().then(()=>finish(true),()=>finish(false));else finish(true)};
+  const failed=()=>finish(false),timer=setTimeout(failed,8000);art.addEventListener('load',loaded,{once:true});art.addEventListener('error',failed,{once:true});if(art.complete)loaded();
+ }))).then(results=>results.every(Boolean)).catch(()=>false);
+ session.ready.set(index,ready);return ready;
+}
+function beginManualRefinement(){
+ if(inlineBusy||inlinePair||busy)return;
+ const started=performance.now(),pairs=window.PokePreference.plan(catalog,state);window.PokeBattleStats={planMs:performance.now()-started,pairs:pairs.length};
+ if(!pairs.length){toast('Elegí al menos dos favoritos.');return}
+ const session=manualSession={done:0,target:pairs.length,pairs,ready:new Map(),favorites:refinementFavorites(),resetAt:state.resetAt||0};inlineBusy=true;
+ prepareRefinementPair(session,0).then(ok=>{if(manualSession!==session)return;inlineBusy=false;if(!ok||!validRefinementSession(session)){manualSession=null;if(!ok)toast('No se pudieron cargar las cartas. Intentá de nuevo.');return}startRefinement(true)});
+}
 const singleFinishRefinement=finishRefinement;
-finishRefinement=function(skipped=false){if(manualSession&&!skipped){manualSession.used.add(inlinePair.map(p=>p.id).sort((a,b)=>a-b).join(':'));manualSession.done++;if(manualSession.done<manualSession.target){inlinePair=null;inlineBusy=false;startRefinement(true);return}sound('round')}manualSession=null;singleFinishRefinement(skipped)};
+finishRefinement=function(skipped=false){
+ if(manualSession&&!skipped){manualSession.done++;if(manualSession.done<manualSession.target&&validRefinementSession(manualSession)){inlinePair=null;inlineBusy=false;startRefinement(true);return}sound('round')}
+ manualSession=null;singleFinishRefinement(skipped);
+};
 const singleStartRefinement=startRefinement;
-startRefinement=function(manual=false){const ok=singleStartRefinement(manual);if(ok&&manualSession&&inlinePair){const likes=catalog.filter(p=>state.votes[p.id]?.value==='yes');if(manualSession.used.has(inlinePair.map(p=>p.id).sort((a,b)=>a-b).join(':'))){let replacement=null;for(let i=0;i<likes.length&&!replacement;i++)for(let j=i+1;j<likes.length;j++)if(!manualSession.used.has([likes[i].id,likes[j].id].sort((a,b)=>a-b).join(':'))){replacement=[likes[i],likes[j]];break}if(replacement){inlinePair=replacement;render()}else{manualSession=null;singleFinishRefinement()}}for(const p of inlinePair||[])warmArtwork(p)}return ok};
+startRefinement=function(manual=false){const ok=singleStartRefinement(manual);if(ok&&manualSession&&inlinePair&&manualSession.done+1<manualSession.target)prepareRefinementPair(manualSession,manualSession.done+1);return ok};
 $('#front-refine').onclick=()=>{if(inlineBusy)return;if(inlinePair)finishRefinement(true);else beginManualRefinement()};
 $('#refine-favorites').onclick=beginManualRefinement;$('#duel').onclick=beginManualRefinement;
 

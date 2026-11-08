@@ -15,11 +15,33 @@ window.PokePreference=(()=>{
   signature=key;cached={events:events.length,played,score:id=>values[index.get(Number(id))]||0};return cached;
  }
  function ranked(cards,state){const m=model(state);return cards.filter(p=>state.votes[p.id]?.value==='yes'&&m.played[p.id]).sort((a,b)=>m.score(b.id)-m.score(a.id)||a.id-b.id)}
- function pair(cards,state){const m=model(state),likes=cards.filter(p=>state.votes[p.id]?.value==='yes'),rank=ranked(cards,state),edge=rank[Math.min(7,rank.length-1)],recent=new Set((state.comparisons||[]).slice(-6).map(e=>[...e.ids].sort((a,b)=>a-b).join(':')));
- const candidates=[...likes].sort((a,b)=>{const priority=p=>Math.abs(m.score(p.id)-(edge?m.score(edge.id):0))+.3*Math.log1p(m.played[p.id]||0);return priority(a)-priority(b)||a.id-b.id});
- const a=candidates[0];if(!a)return null;const b=likes.filter(p=>p.id!==a.id).sort((x,y)=>{const cost=p=>Number(recent.has([a.id,p.id].sort((a,b)=>a-b).join(':')))*100+Math.abs(m.score(a.id)-m.score(p.id))+.15*Math.log1p(m.played[p.id]||0);return cost(x)-cost(y)||x.id-y.id})[0];return b?[a,b]:null;
+ function plan(cards,state,{limit=3,seed=(state.comparisons||[]).length}={}){
+  const m=model(state),likes=cards.filter(p=>state.votes[p.id]?.value==='yes'),events=state.comparisons||[],target=Math.min(limit,Math.floor(likes.length/2));
+  if(!target)return [];
+  const key=(a,b)=>a<b?a+':'+b:b+':'+a,hash=id=>{let x=(Number(id)^Math.imul(seed+1,2654435761))>>>0;x=Math.imul(x^(x>>>16),2246822507);return (x^(x>>>13))>>>0};
+  const last=new Map(),pairLast=new Map();events.forEach((e,i)=>{for(const id of e.ids||[])last.set(id,i);if(e.ids?.length===2)pairLast.set(key(...e.ids),i)});
+  const tie=(a,b)=>hash(a.id)-hash(b.id)||a.id-b.id,played=p=>m.played[p.id]||0;
+  const ranked=[...likes].sort((a,b)=>m.score(b.id)-m.score(a.id)||tie(a,b)),top=new Set(ranked.slice(0,8).map(p=>p.id)),edge=m.score(ranked[Math.min(7,ranked.length-1)].id);
+  const lanes=[ [...likes].sort((a,b)=>played(a)-played(b)||tie(a,b)),ranked,[...likes].sort((a,b)=>(last.get(a.id)??-1)-(last.get(b.id)??-1)||tie(a,b)),[...likes].sort((a,b)=>Math.abs(m.score(a.id)-edge)-Math.abs(m.score(b.id)-edge)||tie(a,b)) ];
+  const pool=[],ids=new Set();for(let i=0;pool.length<Math.min(32,likes.length);i++)for(const lane of lanes){const p=lane[i];if(p&&!ids.has(p.id)){ids.add(p.id);pool.push(p);if(pool.length===Math.min(32,likes.length))break}}
+  const used=new Set(),out=[],previous=new Set(events.at(-1)?.ids||[]);
+  for(let slot=0;slot<target;slot++){
+   const pairs=[];for(let i=0;i<pool.length;i++)for(let j=i+1;j<pool.length;j++){
+    const a=pool[i],b=pool[j];if(used.has(a.id)||used.has(b.id))continue;
+    const prior=pairLast.get(key(a.id,b.id))??-1,recent=prior>=Math.max(0,events.length-6),rest=slot===0&&(previous.has(a.id)||previous.has(b.id));
+    const prob=1/(1+Math.exp(m.score(b.id)-m.score(a.id))),balance=4*prob*(1-prob),exposure=(1/Math.sqrt(1+played(a))+1/Math.sqrt(1+played(b)))/2;
+    const anchored=Number((played(a)>0)!==(played(b)>0)),relevance=(Number(top.has(a.id))+Number(top.has(b.id)))/2;
+    const age=((events.length-(last.get(a.id)??-1))+(events.length-(last.get(b.id)??-1)))/(2*(events.length+1));
+    const value=balance+(slot===0?.8:.25)*exposure+(slot===1?.6:.2)*relevance+.2*age+.15*anchored;
+    pairs.push({a,b,rest:Number(rest),recent:Number(recent),prior,value,tie:hash(a.id)^hash(b.id)});
+   }
+   pairs.sort((x,y)=>x.rest-y.rest||x.recent-y.recent||(x.recent?x.prior-y.prior:0)||y.value-x.value||x.tie-y.tie||x.a.id-y.a.id||x.b.id-y.b.id);
+   const best=pairs[0];if(!best)break;used.add(best.a.id);used.add(best.b.id);out.push((hash(best.a.id)&1)?[best.a,best.b]:[best.b,best.a]);
+  }
+  return out;
  }
- return {model,ranked,pair};
+ function pair(cards,state){return plan(cards,state,{limit:1})[0]||null}
+ return {model,ranked,pair,plan};
 })();
 /* Quiet progress and a personal, evolving composition of real card artwork. */
 (()=>{'use strict';
