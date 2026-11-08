@@ -397,7 +397,11 @@ const eventLayer=document.createElement('div');eventLayer.id='refinement-event';
 eventLayer.setAttribute('role','group');eventLayer.setAttribute('aria-label','¿Cuál te gusta más?');
 const pairBox=$('#pair'),equalTools=$('#both').parentElement;
 $('#both').textContent='';$('#both').setAttribute('aria-label','Me gustan por igual');
-eventLayer.append(pairBox,equalTools);$('#stage').append(eventLayer);
+eventLayer.append(pairBox);equalTools.classList.add('refinement-equal-tools');equalTools.hidden=true;$('#app').append(equalTools);$('#stage').append(eventLayer);
+const equalPress=active=>eventLayer.classList.toggle('equal-press',active&&!inlineBusy);
+$('#both').addEventListener('pointerdown',()=>equalPress(true));
+for(const type of ['pointerup','pointercancel','pointerleave','blur'])$('#both').addEventListener(type,()=>equalPress(false));
+new ResizeObserver(()=>{pairBox.style.setProperty('--duel-half',(pairBox.clientHeight*.5)+'px')}).observe(pairBox);
 const refineIcon=$('#front-refine').innerHTML;
 function eventSeen(){return Object.keys(state.votes).length}
 function finishRefinement(skipped=false){
@@ -431,16 +435,17 @@ function bindRefinementChoice(button,index){
 function paintRefinement(){
  const n=eventSeen(),likes=Object.values(state.votes).filter(v=>v.value==='yes').length;
  scheduleEvents();
- const stage=$('#stage');stage.append(eventLayer);eventLayer.hidden=!inlinePair;
+ const stage=$('#stage');stage.append(eventLayer);eventLayer.hidden=!inlinePair;equalTools.hidden=!inlinePair;$('#both').disabled=inlineBusy;if(!inlinePair)equalPress(false);
  $('#app').classList.toggle('refining',!!inlinePair);
  $('#front-refine').innerHTML=inlinePair?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6 6 6-6 6m10-12v12"/></svg>':refineIcon;
  $('#front-refine').setAttribute('aria-label',inlinePair?'Saltar comparación':'Afinar mis favoritos');
  if(!inlinePair)return;
  for(const c of stage.querySelectorAll('.card')){if(c.activated)c.setUnder?.();c.hidden=true}
+ pairBox.style.setProperty('--duel-half',(pairBox.clientHeight*.5)+'px');
  const pairSignature=inlinePair.map(p=>p.id+':'+p.card).join('|');if(pairBox.dataset.signature===pairSignature)return;pairBox.dataset.signature=pairSignature;pairBox.replaceChildren();inlinePair.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Prefiero '+p.name);b.append(img(p,true));bindRefinementChoice(b,i);pairBox.append(b)});
 }
 function chooseRefinement(winner){
- if(!inlinePair||inlineBusy)return;inlineBusy=true;
+ if(!inlinePair||inlineBusy)return;inlineBusy=true;equalPress(false);$('#both').disabled=true;
  const ids=inlinePair.map(p=>p.id),before=clone(state.ratings),previousSchedule=clone(state.refinementSchedule||{});
  const [a,b]=inlinePair,ra=score(a),rb=score(b),expected=1/(1+10**((rb-ra)/400)),actual=winner===2?.5:winner===0?1:0;
  for(const [p,v] of [[a,ra+28*(actual-expected)],[b,rb-28*(actual-expected)]])state.ratings[p.id]={score:v,played:(state.ratings[p.id]?.played||0)+1};
