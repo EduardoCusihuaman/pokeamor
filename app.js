@@ -442,7 +442,7 @@ function paintRefinement(){
  if(!inlinePair)return;
  for(const c of stage.querySelectorAll('.card')){if(c.activated)c.setUnder?.();c.hidden=true}
  pairBox.style.setProperty('--duel-half',(pairBox.clientHeight*.5)+'px');
- const pairSignature=inlinePair.map(p=>p.id+':'+p.card).join('|');if(pairBox.dataset.signature===pairSignature)return;pairBox.dataset.signature=pairSignature;pairBox.replaceChildren();inlinePair.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Prefiero '+p.name);b.append(img(p,true));bindRefinementChoice(b,i);pairBox.append(b)});
+ const pairSignature=inlinePair.map(p=>p.id+':'+p.card).join('|');if(pairBox.dataset.signature===pairSignature)return;eventLayer.classList.remove('equal-exit');pairBox.dataset.signature=pairSignature;pairBox.replaceChildren();inlinePair.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Prefiero '+p.name);b.append(img(p,true));bindRefinementChoice(b,i);pairBox.append(b)});
 }
 function chooseRefinement(winner){
  if(!inlinePair||inlineBusy)return;inlineBusy=true;equalPress(false);$('#both').disabled=true;
@@ -453,6 +453,7 @@ function chooseRefinement(winner){
  state.comparisons=state.comparisons||[];state.comparisons.push(event);state.duels++;
  state.history.push({refinement:true,eventId:event.id,ratings:before,previousSchedule,ids});
  adaptiveBlock='';sound('like');tactile('like');
+ if(winner===2){for(const c of $('#stage').querySelectorAll('.card'))c.hidden=false;eventLayer.classList.add('equal-exit')}
  pairBox.style.setProperty('--choice-rise',(-pairBox.clientHeight*.5)+'px');
  [...pairBox.children].forEach((b,i)=>{b.cancelRefinementPress?.();b.classList.toggle('chosen',winner===2||winner===i);b.classList.toggle('unchosen',winner!==2&&winner!==i)});
  setTimeout(()=>finishRefinement(),reducedMotion.matches?0:210);
@@ -511,7 +512,7 @@ window.PokeOpenBatch=function(ids){
 
 // Optional short refinement session; automatic encounters remain single choices.
 let manualSession=null;
-const manualIcon='<svg viewBox="0 0 24 28" aria-hidden="true"><g><path d="M8 2h8a1 1 0 0 1 1 1v5l1 1v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9l1-1V3a1 1 0 0 1 1-1Z"/><path d="M7 6h10M10 10v3m4-3v3"/></g><g transform="translate(0 28) scale(1 -1)"><path d="M8 2h8a1 1 0 0 1 1 1v5l1 1v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9l1-1V3a1 1 0 0 1 1-1Z"/><path d="M7 6h10M10 10v3m4-3v3"/></g></svg>';
+const manualIcon='<svg viewBox="0 0 24 32" aria-hidden="true"><g><path d="M8 2h8v3c2 1 3 3 3 5v1c0 2-2 3-4 3h-4c-2 0-3-1-3-3V9H7a2 2 0 0 1-2-2c0-1 1-2 3-2Z"/><path d="M8 5h8M8 9l2 1"/></g><g transform="translate(0 32) scale(1 -1)"><path d="M8 2h8v3c2 1 3 3 3 5v1c0 2-2 3-4 3h-4c-2 0-3-1-3-3V9H7a2 2 0 0 1-2-2c0-1 1-2 3-2Z"/><path d="M8 5h8M8 9l2 1"/></g></svg>';
 const oldPaintRefinement=paintRefinement;
 paintRefinement=function(){oldPaintRefinement();const b=$('#front-refine');if(manualSession){b.innerHTML='<span class="refine-dots" aria-hidden="true">'+Array.from({length:manualSession.target},(_,i)=>'<i class="'+(i<manualSession.done?'filled':'')+'"></i>').join('')+'</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>';b.setAttribute('aria-label','Salir del afinador, '+manualSession.done+' de '+manualSession.target)}else if(!inlinePair)b.innerHTML=manualIcon};
 function beginManualRefinement(){const count=catalog.filter(p=>state.votes[p.id]?.value==='yes').length;if(count<2){toast('Elegí al menos dos favoritos.');return}manualSession={done:0,target:Math.min(3,count*(count-1)/2),used:new Set()};startRefinement(true)}
