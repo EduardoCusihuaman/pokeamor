@@ -249,26 +249,32 @@ try{if(localStorage.getItem('pokeamor-album-detail')==='true')setAlbumDensity(tr
 (()=>{
 const sheet=$('#sheet'),rail=$('#album-index'),control=$('#album-scrubber');
 $('#album-index-preview').hidden=true;
-let sections=[],offsets=[],dragging=false,pointer=null,lastY=0,gain=1,maximum=0,travel=1,frame=0,pendingY=null,pauseTimer,focusSection,quietUntil=0;
+let sections=[],offsets=[],dragging=false,pointer=null,lastY=0,gain=1,maximum=0,travel=1,frame=0,pendingY=null,pauseTimer,focusSection,quietUntil=0,headingBefore=null;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function inset(){return (sheet.querySelector('.collection-header')?.offsetHeight||44)+(sheet.querySelector('.collection-switch')?.offsetHeight||0)+16}
 function visible(){return sheet.classList.contains('open')&&sheet.classList.contains('rounds-mode')&&!sheet.classList.contains('debug-mode')}
 function measure(){sections=[...$('#round-memories').querySelectorAll('.batch-group')];maximum=Math.max(0,sheet.scrollHeight-sheet.clientHeight);const top=sheet.getBoundingClientRect().top;offsets=sections.map(s=>s.getBoundingClientRect().top-top+sheet.scrollTop-inset());travel=Math.max(1,rail.getBoundingClientRect().height-60);rail.hidden=!visible()||maximum<8||!sections.length;rail.classList.toggle('short-album',maximum<sheet.clientHeight*2);update()}
 function current(){let i=0;while(i+1<offsets.length&&offsets[i+1]<=sheet.scrollTop+4)i++;return i}
 function update(){if(!sections.length)return;const i=current(),n=Number(sections[i].dataset.batch)+1;rail.style.setProperty('--index-position',String(maximum?clamp(sheet.scrollTop/maximum,0,1):0));control.dataset.position=String(n);control.setAttribute('aria-valuemin','0');control.setAttribute('aria-valuemax',String(Math.round(maximum)));control.setAttribute('aria-valuenow',String(Math.round(sheet.scrollTop)));control.setAttribute('aria-valuetext','Tanda '+n);control.setAttribute('aria-orientation','vertical')}
-function clearFocus(){clearTimeout(pauseTimer);focusSection?.classList.remove('navigation-focus');focusSection=null}
-function pause(){clearFocus();pauseTimer=setTimeout(()=>{if(dragging){focusSection=sections[current()];focusSection?.classList.add('navigation-focus')}},220)}
-function move(e){const inward=Math.max(0,rail.getBoundingClientRect().right-e.clientX-44),nextGain=inward>44?.15:inward>20?.4:1;const dy=e.clientY-lastY;lastY=e.clientY;/* Rebase at each gain change: sideways motion never changes scroll position. */
-if(nextGain===gain){pendingY=clamp((pendingY??sheet.scrollTop)+dy/travel*maximum*gain,0,maximum)}gain=nextGain;rail.classList.toggle('precision',gain<1);if(gain===1){const r=rail.getBoundingClientRect();if(e.clientY<=r.top+30)pendingY=0;else if(e.clientY>=r.bottom-30)pendingY=maximum}if(!frame)frame=requestAnimationFrame(()=>{frame=0;if(dragging&&pendingY!==null){sheet.scrollTo({top:pendingY,behavior:'instant'});pendingY=null;update()}});pause()}
+function clearFocus(){clearTimeout(pauseTimer);focusSection?.classList.remove('navigation-focus');focusSection=null;const heading=$('#album-heading');if(headingBefore!==null){heading.textContent=headingBefore;headingBefore=null}sheet.classList.remove('album-paused')}
+function pause(){clearFocus();pauseTimer=setTimeout(()=>{if(dragging){focusSection=sections[current()];focusSection?.classList.add('navigation-focus');const heading=$('#album-heading');headingBefore=heading.textContent;heading.textContent='Tanda '+(Number(focusSection?.dataset.batch)+1);sheet.classList.add('album-paused')}},280)}
+function sensitivity(x){const inward=Math.max(0,rail.getBoundingClientRect().right-x-44);return .12+.88*Math.exp(-inward/52)}
+function move(e){const nextGain=sensitivity(e.clientX),dy=e.clientY-lastY;lastY=e.clientY;
+// Integrate every sample; horizontal movement only adjusts sensitivity.
+pendingY=clamp((pendingY??sheet.scrollTop)+dy/travel*maximum*(gain+nextGain)/2,0,maximum);gain=nextGain;
+rail.classList.toggle('precision',gain<.85);rail.style.setProperty('--precision',String((1-gain)/.88));
+if(gain>.98&&dy!==0){const r=rail.getBoundingClientRect();if(e.clientY<=r.top+30)pendingY=0;else if(e.clientY>=r.bottom-30)pendingY=maximum}
+if(!frame)frame=requestAnimationFrame(()=>{frame=0;if(dragging&&pendingY!==null){sheet.scrollTo({top:pendingY,behavior:'instant'});pendingY=null;update()}});if(Math.abs(dy)>.5)pause()}
+
 function finish(){if(!dragging)return;if(pendingY!==null){sheet.scrollTo({top:pendingY,behavior:'instant'});pendingY=null}dragging=false;quietUntil=performance.now()+180;clearFocus();rail.classList.remove('scrubbing','precision');sheet.classList.remove('album-scrubbing');const id=pointer;pointer=null;if(control.hasPointerCapture?.(id))control.releasePointerCapture(id);update()}
-control.onpointerdown=e=>{if(rail.hidden||e.button>0)return;e.preventDefault();measure();dragging=true;pointer=e.pointerId;lastY=e.clientY;gain=1;pendingY=null;rail.classList.add('scrubbing');sheet.classList.add('album-scrubbing');control.setPointerCapture(e.pointerId);pause()};
-control.onpointermove=e=>{if(dragging&&e.pointerId===pointer){e.preventDefault();move(e)}};
+control.onpointerdown=e=>{if(rail.hidden||e.button>0)return;e.preventDefault();measure();dragging=true;pointer=e.pointerId;lastY=e.clientY;gain=sensitivity(e.clientX);pendingY=null;rail.classList.add('scrubbing');sheet.classList.add('album-scrubbing');control.setPointerCapture(e.pointerId);pause()};
+control.onpointermove=e=>{if(dragging&&e.pointerId===pointer){e.preventDefault();const samples=e.getCoalescedEvents?.();for(const sample of samples?.length?samples:[e])move(sample)}};
 control.onpointerup=e=>{if(e.pointerId===pointer)finish()};control.onpointercancel=control.onlostpointercapture=finish;
 sheet.addEventListener('click',e=>{if(dragging||performance.now()<quietUntil){e.preventDefault();e.stopImmediatePropagation()}},true);
 control.onkeydown=e=>{if(!['ArrowDown','ArrowUp','PageDown','PageUp','Home','End'].includes(e.key))return;e.preventDefault();measure();const delta=e.key.startsWith('Page')?sheet.clientHeight*.8:80;sheet.scrollTo({top:e.key==='Home'?0:e.key==='End'?maximum:clamp(sheet.scrollTop+(['ArrowDown','PageDown'].includes(e.key)?delta:-delta),0,maximum),behavior:'instant'});update()};
 sheet.addEventListener('scroll',()=>{if(!dragging)update()},{passive:true});
 window.PokeAlbumIndex={refresh(){if(dragging)finish();measure()}};
-const resize=new ResizeObserver(()=>{if(dragging)finish();measure()});resize.observe(sheet);resize.observe($('#round-memories'));
+const resize=new ResizeObserver(()=>{measure()});resize.observe(sheet);resize.observe($('#round-memories'));
 new MutationObserver(()=>{if(!visible())finish();requestAnimationFrame(measure)}).observe(sheet,{attributes:true,attributeFilter:['class']});
 const originalTab=showCollectionTab;showCollectionTab=function(rounds){finish();originalTab(rounds);$('#album-heading').textContent=rounds?'Tu colección':'Ajustes y respaldo';requestAnimationFrame(measure)};
 measure();

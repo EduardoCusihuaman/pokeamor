@@ -40,6 +40,12 @@ const style=document.createElement('style');style.textContent=`
 #sheet .navigation-focus .batch-title{color:#74566c;text-shadow:0 0 12px #b493a933}
 #sheet.album-scrubbing .batch-export-one{pointer-events:none}
 #sheet.album-scrubbing .memory-card:active{transform:none}
+
+#album-index.scrubbing #album-scrubber:before{width:calc(5px + var(--precision,0)*4px);transition:width 100ms ease,background 100ms ease}
+#sheet #album-heading{transition:color 140ms ease}
+#sheet.album-paused #album-heading{color:#79556f}
+#sheet .batch-export-one .export-symbol{transition:opacity 160ms ease}
+@media(prefers-reduced-motion:reduce){#album-index.scrubbing #album-scrubber:before,#sheet #album-heading,#sheet .batch-export-one .export-symbol{transition:none}}
 `;document.head.append(style);
 const bar=document.createElement('div');bar.className='batch-export-bar';const heading=document.createElement('div');heading.className='batch-export-heading';const title=document.createElement('strong'),total=document.createElement('small');title.textContent='Tus tandas';heading.append(title,total);bar.append(heading);root.before(bar);
 function button(label,one=false){const b=document.createElement('button');b.type='button';b.className='batch-export'+(one?' batch-export-one':'');b.innerHTML='<i class="export-symbol">'+icon+'</i>'+(one?'':'<span>'+label+'</span>');b.setAttribute('aria-label',label);return b}
