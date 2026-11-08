@@ -396,13 +396,14 @@ let inlinePair=null,inlineBusy=false,queuedPair=null,eventBoundary=false;
 const eventLayer=document.createElement('div');eventLayer.id='refinement-event';eventLayer.hidden=true;
 eventLayer.setAttribute('role','group');eventLayer.setAttribute('aria-label','¿Cuál te gusta más?');
 const pairBox=$('#pair'),equalTools=$('#both').parentElement;
+$('#both').textContent='';$('#both').setAttribute('aria-label','Me gustan por igual');
 eventLayer.append(pairBox,equalTools);$('#stage').append(eventLayer);
 const refineIcon=$('#front-refine').innerHTML;
 function eventSeen(){return Object.keys(state.votes).length}
 function finishRefinement(skipped=false){
  if(!inlinePair)return;
  state.refinementSchedule={lastSeen:eventSeen(),nextSeen:eventSeen()+(skipped?40:26+(state.duels%10)),started:true,time:Date.now()};
- inlineBusy=true;queuedPair=null;eventLayer.classList.add('event-leaving');setTimeout(()=>{inlinePair=null;inlineBusy=false;eventLayer.classList.remove('event-leaving');save();render()},reducedMotion.matches?0:170);
+ for(const b of pairBox.children)b.cancelRefinementPress?.();inlineBusy=true;queuedPair=null;eventLayer.classList.add('event-leaving');setTimeout(()=>{inlinePair=null;inlineBusy=false;eventLayer.classList.remove('event-leaving');save();render()},reducedMotion.matches?0:170);
 }
 function startRefinement(manual=false){
  if(inlinePair||busy)return false;
@@ -415,6 +416,18 @@ function startRefinement(manual=false){
  const prepared=Math.random()<.5?[a,b]:[b,a];if(!manual){queuedPair=prepared;return true}queuedPair=null;inlinePair=prepared;
  $('#sheet').classList.remove('open');$('#duelsheet').classList.remove('open');render();return true;
 }
+function bindRefinementChoice(button,index){
+ let timer=null,peek=null,origin=null,consumed=false;
+ const clear=()=>{clearTimeout(timer);timer=null;button.classList.remove('pressing');if(peek){peek.remove();peek=null}};
+ button.onpointerdown=e=>{if(inlineBusy||e.button>0)return;clear();consumed=false;origin={x:e.clientX,y:e.clientY,id:e.pointerId};button.classList.add('pressing');button.setPointerCapture?.(e.pointerId);timer=setTimeout(()=>{if(!origin||inlineBusy)return;consumed=true;button.classList.remove('pressing');peek=document.createElement('div');peek.className='refinement-peek';peek.setAttribute('aria-hidden','true');const art=button.querySelector('img').cloneNode();art.draggable=false;peek.append(art);document.body.append(peek)},320)};
+ button.onpointermove=e=>{if(origin&&Math.hypot(e.clientX-origin.x,e.clientY-origin.y)>12&&!peek){consumed=true;clear()}};
+ button.onpointerup=()=>{origin=null;clear()};
+ button.onpointercancel=()=>{origin=null;consumed=true;clear()};
+ button.onlostpointercapture=()=>{if(origin){origin=null;consumed=true;clear()}};
+ button.oncontextmenu=e=>e.preventDefault();
+ button.onclick=e=>{if(consumed){e.preventDefault();return}chooseRefinement(index)};
+ button.cancelRefinementPress=()=>{origin=null;consumed=true;clear()};
+}
 function paintRefinement(){
  const n=eventSeen(),likes=Object.values(state.votes).filter(v=>v.value==='yes').length;
  scheduleEvents();
@@ -424,7 +437,7 @@ function paintRefinement(){
  $('#front-refine').setAttribute('aria-label',inlinePair?'Saltar comparación':'Afinar mis favoritos');
  if(!inlinePair)return;
  for(const c of stage.querySelectorAll('.card')){if(c.activated)c.setUnder?.();c.hidden=true}
- const pairSignature=inlinePair.map(p=>p.id+':'+p.card).join('|');if(pairBox.dataset.signature===pairSignature)return;pairBox.dataset.signature=pairSignature;pairBox.replaceChildren();inlinePair.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Prefiero '+p.name);b.append(img(p,true));b.onclick=()=>chooseRefinement(i);pairBox.append(b)});
+ const pairSignature=inlinePair.map(p=>p.id+':'+p.card).join('|');if(pairBox.dataset.signature===pairSignature)return;pairBox.dataset.signature=pairSignature;pairBox.replaceChildren();inlinePair.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Prefiero '+p.name);b.append(img(p,true));bindRefinementChoice(b,i);pairBox.append(b)});
 }
 function chooseRefinement(winner){
  if(!inlinePair||inlineBusy)return;inlineBusy=true;
