@@ -203,10 +203,25 @@ $('#detail-art').onpointercancel=()=>{detailStart=null;viewerHolo?.release()};
 function showCollectionTab(rounds){$('#sheet').classList.toggle('rounds-mode',rounds);$('#show-rounds').classList.toggle('selected',rounds);$('#show-liked').classList.toggle('selected',!rounds)}
 $('#show-rounds').onclick=()=>{showCollectionTab(true);window.PokeJourney?.compose()};$('#show-liked').onclick=()=>showCollectionTab(false);
 
-let detailOrigin=null;
-window.PokeInspect=(p,group,tile)=>{collectionCards=group||[p];detailOrigin=tile;inspectCard(p);animateCardOrigin(false)};
+let detailOrigin=null,detailReturnCleanup=null;
+function clearDetailReturn(){detailReturnCleanup?.();detailReturnCleanup=null}
+window.PokeInspect=(p,group,tile)=>{clearDetailReturn();collectionCards=group||[p];detailOrigin=tile;inspectCard(p);detailOrigin=tile;animateCardOrigin(false)};
 function animateCardOrigin(reverse){const image=$('#viewer-surface img'),origin=detailOrigin?.querySelector?.('img');if(!image||!origin||!image.animate||matchMedia('(prefers-reduced-motion: reduce)').matches)return;const a=origin.getBoundingClientRect(),b=image.getBoundingClientRect();if(!a.width||!b.width)return;const transform=`translate(${a.left-b.left}px,${a.top-b.top}px) scale(${a.width/b.width},${a.height/b.height})`;return image.animate(reverse?[{transform:'none'},{transform,opacity:.4}]:[{transform,opacity:.4},{transform:'none',opacity:1}],{duration:200,easing:'cubic-bezier(.2,.7,.2,1)',fill:'none'}).finished.catch(()=>{})}
-function closeDetail(){const dialog=$('#card-detail');if(!dialog.open)return;viewerEpoch++;viewerSettling=false;detailStart=null;clearTimeout(viewerScrollTimer);viewerHolo?.dispose();viewerHolo=null;viewerPreview?.remove();viewerPreview=null;dialog.close();if(detailOrigin?.classList){detailOrigin.classList.add('return-highlight');setTimeout(()=>detailOrigin?.classList.remove('return-highlight'),650)}setTimeout(()=>{if(!dialog.open)render()},0)}
+function closeDetail(){const dialog=$('#card-detail');if(!dialog.open)return;clearDetailReturn();
+const image=$('#viewer-surface img'),from=image?.getBoundingClientRect();
+const target=detailOrigin?.isConnected!==false?detailOrigin:null,thumb=target?.querySelector?.('img'),sheet=$('#sheet');
+if(thumb&&sheet.classList.contains('open')){const bounds=sheet.getBoundingClientRect(),r=thumb.getBoundingClientRect(),header=sheet.querySelector('.collection-header')?.offsetHeight||44;const top=bounds.top+header+12,bottom=bounds.bottom-12;if(r.top<top||r.bottom>bottom)sheet.scrollTop+=r.top<top?r.top-top:r.bottom-bottom}
+const to=thumb?.getBoundingClientRect(),canAnimate=image?.animate&&from?.width&&to?.width&&!matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clone=canAnimate?image.cloneNode(true):null;
+viewerEpoch++;viewerSettling=false;detailStart=null;clearTimeout(viewerScrollTimer);viewerHolo?.dispose();viewerHolo=null;viewerPreview?.remove();viewerPreview=null;
+dialog.close();target?.classList?.remove('return-highlight');
+if(clone){const old=thumb.style.visibility;thumb.style.visibility='hidden';clone.setAttribute('aria-hidden','true');Object.assign(clone.style,{position:'fixed',left:to.left+'px',top:to.top+'px',width:to.width+'px',height:to.height+'px',maxWidth:'none',maxHeight:'none',margin:'0',objectFit:'contain',transformOrigin:'0 0',pointerEvents:'none',zIndex:'10000',borderRadius:'5px'});document.body.append(clone);
+const animation=clone.animate([{transform:`translate(${from.left-to.left}px,${from.top-to.top}px) scale(${from.width/to.width},${from.height/to.height})`},{transform:'translate(0,0) scale(1,1)'}],{duration:180,easing:'cubic-bezier(.16,1,.3,1)',fill:'both'});
+let timer,done=false;const cleanup=()=>{if(done)return;done=true;clearTimeout(timer);thumb.style.visibility=old;clone.remove();animation.cancel();if(detailReturnCleanup===cleanup)detailReturnCleanup=null};detailReturnCleanup=cleanup;timer=setTimeout(cleanup,190);animation.finished.then(cleanup,cleanup);
+}
+setTimeout(()=>{if(!dialog.open)render()},0)}
+$('#sheet').addEventListener('touchstart',clearDetailReturn,{passive:true});$('#sheet').addEventListener('wheel',clearDetailReturn,{passive:true});
+
 
 $('#detail-close').onclick=closeDetail;
 
