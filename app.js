@@ -511,7 +511,7 @@ window.PokeOpenBatch=function(ids){
 
 // Optional short refinement session; automatic encounters remain single choices.
 let manualSession=null;
-const manualIcon='<svg viewBox="0 0 28 24" aria-hidden="true"><g><path d="M2 10h2l2-3h4a1 1 0 0 1 1 1v2a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H6l-2-2H2Z"/><path d="M7 7v4m4-1H8a1 1 0 0 0-1 1v2h4"/></g><g transform="translate(28 0) scale(-1 1)"><path d="M2 10h2l2-3h4a1 1 0 0 1 1 1v2a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H6l-2-2H2Z"/><path d="M7 7v4m4-1H8a1 1 0 0 0-1 1v2h4"/></g></svg>';
+const manualIcon='<svg viewBox="0 0 24 28" aria-hidden="true"><g><path d="M8 2h8a1 1 0 0 1 1 1v5l1 1v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9l1-1V3a1 1 0 0 1 1-1Z"/><path d="M7 6h10M10 10v3m4-3v3"/></g><g transform="translate(0 28) scale(1 -1)"><path d="M8 2h8a1 1 0 0 1 1 1v5l1 1v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9l1-1V3a1 1 0 0 1 1-1Z"/><path d="M7 6h10M10 10v3m4-3v3"/></g></svg>';
 const oldPaintRefinement=paintRefinement;
 paintRefinement=function(){oldPaintRefinement();const b=$('#front-refine');if(manualSession){b.innerHTML='<span class="refine-dots" aria-hidden="true">'+Array.from({length:manualSession.target},(_,i)=>'<i class="'+(i<manualSession.done?'filled':'')+'"></i>').join('')+'</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>';b.setAttribute('aria-label','Salir del afinador, '+manualSession.done+' de '+manualSession.target)}else if(!inlinePair)b.innerHTML=manualIcon};
 function beginManualRefinement(){const count=catalog.filter(p=>state.votes[p.id]?.value==='yes').length;if(count<2){toast('Elegí al menos dos favoritos.');return}manualSession={done:0,target:Math.min(3,count*(count-1)/2),used:new Set()};startRefinement(true)}
