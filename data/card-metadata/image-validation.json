@@ -1651,5 +1651,148 @@
       "bytes": 107948,
       "sha256": "c63de25dfa9559dd8271302d937d19ee171a4e46cc77553e58a4430f6117dee1"
     }
+  },
+  {
+    "pokemonId": 215,
+    "printId": "mep-020",
+    "url": "https://tcgplayer-cdn.tcgplayer.com/product/664055_in_1000x1000.jpg",
+    "validation": {
+      "width": 716,
+      "height": 1000,
+      "bytes": 183417,
+      "sha256": "87320798408a613090b793bcb4ec166396fde8fc669c9e2067dcef4b5f3f2bc0"
+    }
+  },
+  {
+    "pokemonId": 336,
+    "printId": "me02-062",
+    "url": "https://assets.tcgdex.net/es/me/me02/062/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 106240,
+      "sha256": "f7827484d36a2ca7184cc306ca679b538ee55be961753dfd8fe484ada8cd9bbb"
+    }
+  },
+  {
+    "pokemonId": 723,
+    "printId": "sv06.5-004",
+    "url": "https://assets.tcgdex.net/es/sv/sv06.5/004/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 77376,
+      "sha256": "b78d226aef471a0fd94e22ee7f198934818c7466dca6ef1c22f01cd6bc62b828"
+    }
+  },
+  {
+    "pokemonId": 727,
+    "printId": "swsh12-032",
+    "url": "https://assets.tcgdex.net/es/swsh/swsh12/032/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 73968,
+      "sha256": "c585bd9bfabba59ec1ab66a3ed2ca6c0da6054970c16b6d9ff610644b1e5e09e"
+    }
+  },
+  {
+    "pokemonId": 741,
+    "printId": "swsh12.5gg-GG04",
+    "url": "https://tcgplayer-cdn.tcgplayer.com/product/478021_in_1000x1000.jpg",
+    "validation": {
+      "width": 719,
+      "height": 1000,
+      "bytes": 203298,
+      "sha256": "30bcb0a1a455922148a819eadcd1e9662065b125abfa15dcf0c44c05c7f94d2c"
+    }
+  },
+  {
+    "pokemonId": 772,
+    "printId": "me05-069",
+    "url": "https://assets.tcgdex.net/es/me/me05/069/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 58126,
+      "sha256": "40611cacf94c63c33a9a8af28b9c629532c48a9ede2b100508d0926694c763c5"
+    }
+  },
+  {
+    "pokemonId": 916,
+    "printId": "sv09-140",
+    "url": "https://assets.tcgdex.net/es/sv/sv09/140/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 84292,
+      "sha256": "4ebcfa75daddf579ae095b483cf3d12053eeaa9dbe70debdbaf4cf806c08472f"
+    }
+  },
+  {
+    "pokemonId": 933,
+    "printId": "me01-083",
+    "url": "https://assets.tcgdex.net/es/me/me01/083/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 75288,
+      "sha256": "6ebe1a3ff5a20ac0e1ddfb8d9b2ecc9a790b73596e6d80dc1120664713ecedea"
+    }
+  },
+  {
+    "pokemonId": 935,
+    "printId": "mep-022",
+    "url": "https://tcgplayer-cdn.tcgplayer.com/product/666538_in_1000x1000.jpg",
+    "validation": {
+      "width": 718,
+      "height": 1000,
+      "bytes": 150624,
+      "sha256": "d70f96f8158aae712a841da9d4b960ea825d8156cfd3898e8b637561cc57d6ae"
+    }
+  },
+  {
+    "pokemonId": 963,
+    "printId": "sv06-059",
+    "url": "https://assets.tcgdex.net/es/sv/sv06/059/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 81280,
+      "sha256": "0cedc0a2b653064d0b14c02f8b9e6b59bb4c34fd34918f64438af75b3eb31ac2"
+    }
+  },
+  {
+    "pokemonId": 970,
+    "printId": "sv06-109",
+    "url": "https://assets.tcgdex.net/es/sv/sv06/109/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 89504,
+      "sha256": "eca5e57992c27c2239280111aca1a83d7351980d5639b22c0266af6dca286b17"
+    }
+  },
+  {
+    "pokemonId": 979,
+    "printId": "sv10-092",
+    "url": "https://assets.tcgdex.net/es/sv/sv10/092/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 106176,
+      "sha256": "045541bc6b4217ad972d754d99ac5615272d115dd19aa8c964ced00b55420df9"
+    }
+  },
+  {
+    "pokemonId": 980,
+    "printId": "sv03-128",
+    "url": "https://assets.tcgdex.net/es/sv/sv03/128/high.webp",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 75248,
+      "sha256": "4000297954c0b6ab9e139340bdb0117d3148e460bf25082bdacc85b438cbcd7a"
+    }
   }
 ]

@@ -5773,5 +5773,70 @@
     "name": "Wyrdeer",
     "set": "ASR",
     "number": "TG6"
+  },
+  "mep-020": {
+    "name": "Sneasel",
+    "set": "MEP",
+    "number": "20"
+  },
+  "me02-062": {
+    "name": "Seviper",
+    "set": "PFL",
+    "number": "62"
+  },
+  "sv06.5-004": {
+    "name": "Dartrix",
+    "set": "SFA",
+    "number": "4"
+  },
+  "swsh12-032": {
+    "name": "Incineroar",
+    "set": "SIT",
+    "number": "32"
+  },
+  "swsh12.5gg-GG04": {
+    "name": "Oricorio",
+    "set": "CRZ",
+    "number": "GG4"
+  },
+  "me05-069": {
+    "name": "Type: Null",
+    "set": "PBL",
+    "number": "69"
+  },
+  "sv09-140": {
+    "name": "Oinkologne",
+    "set": "JTG",
+    "number": "140"
+  },
+  "me01-083": {
+    "name": "Naclstack",
+    "set": "MEG",
+    "number": "83"
+  },
+  "mep-022": {
+    "name": "Charcadet",
+    "set": "MEP",
+    "number": "22"
+  },
+  "sv06-059": {
+    "name": "Finizen",
+    "set": "TWM",
+    "number": "59"
+  },
+  "sv06-109": {
+    "name": "Glimmora",
+    "set": "TWM",
+    "number": "109"
+  },
+  "sv10-092": {
+    "name": "Annihilape",
+    "set": "DRI",
+    "number": "92"
+  },
+  "sv03-128": {
+    "name": "Paldean Clodsire",
+    "set": "OBF",
+    "number": "128"
   }
 }
