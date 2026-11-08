@@ -3,6 +3,8 @@
 'use strict';
 const kinds={FLAT_SILVER:0,SV_HOLO:1,SUN_PILLAR:2,SV_ULTRA:3};
 const reduce=matchMedia('(prefers-reduced-motion: reduce)');let engine=null,current=null;
+const flights=new Set(),flightWaiters=[];let deferredScene=null,deferredCards=null;
+const afterFlights=()=>flights.size?new Promise(resolve=>flightWaiters.push(resolve)):Promise.resolve();
 function isSupported(s,id){return !!(s&&s.status==='material-matched'&&s.effect==='asset-foil'&&s.provider==='malie.io'&&s.language==='es-ES'&&s.cardId===id&&Object.hasOwn(kinds,s.type)&&s.assets?.foil?.startsWith('/materials/')&&s.assets?.front?.startsWith('/materials/')&&(!s.etched||s.assets?.etch?.startsWith('/materials/')))}
 const visible=()=>document.visibilityState!=='hidden'&&!document.querySelector('.sheet.open')&&!document.querySelector('dialog[open]');
 const vertex=`attribute vec2 a_position;varying vec2 v_uv;void main(){v_uv=a_position*.5+.5;gl_Position=vec4(a_position,0.,1.);}`;
@@ -59,7 +61,7 @@ function createEngine(){
  if(!init())return null;
  function pause(){cancelAnimationFrame(frame);frame=0}
  function cleanup(){controller?.abort();controller=null;serial++;ready=false;pause();if(pair&&available){gl.deleteTexture(pair.mask);if(pair.etch!==flat)gl.deleteTexture(pair.etch)}pair=null;canvas.parentElement?.classList.remove('has-material');canvas.remove()}
- function draw(){frame=0;if(!ready||!pair||!current||!current.card.materialFrontReady||reduce.matches||!visible()||!available)return;
+ function draw(){frame=0;if(flights.size||!ready||!pair||!current||!current.card.materialFrontReady||reduce.matches||!visible()||!available)return;
   const card=current.card,w=Math.max(1,Math.min(640,Math.round(card.clientWidth*Math.min(window.devicePixelRatio||1,1.5)))),h=Math.max(1,Math.round(w/(card.artRatio||.716)));
   if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h}gl.viewport(0,0,w,h);let settling=false;
   for(const k of ['x','y','energy']){smooth[k]+=(target[k]-smooth[k])*.25;if(Math.abs(smooth[k]-target[k])>.002)settling=true}
@@ -68,14 +70,15 @@ function createEngine(){
   gl.uniform2f(loc.texel,1/pair.width,1/pair.height);gl.uniform2f(loc.light,smooth.x,smooth.y);gl.uniform1f(loc.energy,smooth.energy);gl.uniform1f(loc.kind,kinds[current.surface.type]);gl.uniform1f(loc.etched,current.surface.etched?1:0);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
   if(settling)frame=requestAnimationFrame(draw);
  }
- const api={attach(scene){cleanup();if(!available||reduce.matches)return;const generation=serial;controller=new AbortController();const signal=controller.signal;const names=['foil',...(scene.surface.etched?['etch']:[])];Promise.allSettled(names.map(n=>decode(scene.surface.assets[n],signal))).then(results=>{
+ const api={attach(scene){cleanup();if(!available||reduce.matches)return;const generation=serial;controller=new AbortController();const signal=controller.signal;const names=['foil',...(scene.surface.etched?['etch']:[])];Promise.allSettled(names.map(n=>decode(scene.surface.assets[n],signal))).then(async results=>{
+  await afterFlights();
   const loaded=results.filter(r=>r.status==='fulfilled').map(r=>r.value);if(generation!==serial||current!==scene||results.some(r=>r.status==='rejected')||!available){loaded.forEach(i=>i.close?.());return}
   try{pair={mask:texture(loaded[0]),etch:loaded[1]?texture(loaded[1]):flat,width:loaded[1]?.width||loaded[0].width,height:loaded[1]?.height||loaded[0].height};ready=true;scene.card.append(canvas);scene.card.classList.add('has-material');api.set(scene.light)}catch{cleanup()}finally{loaded.forEach(i=>i.close?.())}
- })},set(input){target={...input};if(!frame&&visible())frame=requestAnimationFrame(draw)},pause,detach:cleanup,refresh(){if(current)api.set(current.light)}};
+ })},set(input){target={...input};if(!flights.size&&!frame&&visible())frame=requestAnimationFrame(draw)},pause,detach:cleanup,refresh(){if(current)api.set(current.light)}};
  canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();cleanup();available=false;current?.card.classList.remove('has-material')});canvas.addEventListener('webglcontextrestored',()=>{if(init()&&current)api.attach(current)});
  return api;
 }
 function acquire(){if(engine===null)engine=createEngine()||false;return engine||null}
-window.PokeMaterial={isSupported,prepare(cards){const matched=cards.slice(0,4).filter(p=>isSupported(p.surface,p.card));if(window.PokeAssets)window.PokeAssets.prepare(matched,!reduce.matches&&!!(matched.length&&acquire()))},attach(card,p){if(!isSupported(p.surface,p.card)||reduce.matches)return{supported:false,set(){},dispose(){}};if(current)current.dispose();const scene={card,surface:p.surface,light:{x:0,y:0,energy:.22},supported:true,set(x,y,energy){scene.light={x,y,energy};if(current===scene)engine&&engine.set(scene.light)},dispose(){if(current===scene){engine&&engine.detach();current=null}card.classList.remove('has-material')}};current=scene;acquire()?.attach(scene);return scene},refresh(){engine&&engine.refresh()},pause(){engine&&engine.pause()}};
+window.PokeMaterial={isSupported,beginFlight(){const token={};flights.add(token);engine&&engine.pause();return()=>{if(!flights.delete(token)||flights.size)return;for(const resolve of flightWaiters.splice(0))resolve();const scene=deferredScene,cards=deferredCards;deferredScene=deferredCards=null;if(scene&&current===scene&&!reduce.matches)acquire()?.attach(scene);else engine&&engine.refresh();if(cards)window.PokeMaterial.prepare(cards)}},prepare(cards){if(flights.size){deferredCards=cards;return}const matched=cards.slice(0,4).filter(p=>isSupported(p.surface,p.card));if(window.PokeAssets)window.PokeAssets.prepare(matched,!reduce.matches&&!!(matched.length&&acquire()))},attach(card,p){if(!isSupported(p.surface,p.card)||reduce.matches)return{supported:false,set(){},dispose(){}};if(current)current.dispose();const scene={card,surface:p.surface,light:{x:0,y:0,energy:.22},supported:true,set(x,y,energy){scene.light={x,y,energy};if(current===scene)engine&&engine.set(scene.light)},dispose(){if(current===scene){engine&&engine.detach();current=null}card.classList.remove('has-material')}};current=scene;if(flights.size)deferredScene=scene;else acquire()?.attach(scene);return scene},refresh(){engine&&engine.refresh()},pause(){engine&&engine.pause()}};
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')engine&&engine.pause();else engine&&engine.refresh()});window.addEventListener('pagehide',()=>engine&&engine.pause());window.addEventListener('pageshow',()=>engine&&engine.refresh());reduce.addEventListener?.('change',()=>{if(reduce.matches){engine&&engine.detach();current?.card.classList.remove('has-material')}else if(current)acquire()?.attach(current)});
 })();

@@ -150,8 +150,9 @@ function launchCard(c,value,momentum={}){
  const duration=260,start=transform(pose.x,pose.y),end=transform(pose.x+direction*distance,pose.y);
  c.style.width=c.clientWidth+'px';c.style.height=c.clientHeight+'px';
  c.style.transition='none';c.style.opacity='1';
+ const resumeMaterial=window.PokeMaterial?.beginFlight();
  const flight=c.animate([{transform:start,opacity:1},{transform:end,opacity:1}],{duration,easing:'linear',fill:'forwards'});
- let timer,done=false;const finish=(completed=false)=>{if(done)return;done=true;clearTimeout(timer);const visible=c.isConnected;c.remove();if(completed&&visible&&value==='yes'&&generation===decisionGeneration)pulseCollection()};
+ let timer,done=false;const finish=(completed=false)=>{if(done)return;done=true;clearTimeout(timer);const visible=c.isConnected;c.remove();resumeMaterial?.();if(completed&&visible&&value==='yes'&&generation===decisionGeneration)pulseCollection()};
  flight.finished.then(()=>finish(true),()=>finish());
  timer=setTimeout(()=>finish(),duration+250);
 }
