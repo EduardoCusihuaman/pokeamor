@@ -83,6 +83,9 @@ const style=document.createElement('style');style.textContent=`
 #album-index-preview.map-preview #album-index-cards img,#album-index-preview.map-preview.expanded #album-index-cards img{position:absolute;top:0;left:calc(50% + var(--slot)*20%);transform:translateX(-50%);width:calc(20% - 3px);max-width:46px;height:65px;object-fit:contain;transition:left 100ms ease-out}
 #album-index.scrubbing::after{content:'';position:absolute;right:6px;top:calc(var(--origin-position)* (100% - 60px) + 28px);width:8px;height:4px;border-radius:4px;background:#b493a955;pointer-events:none}
 @media(prefers-reduced-motion:reduce){#album-index-preview.map-preview::before,#album-index-preview.map-preview::after,#album-index-preview.map-preview #album-index-cards img{transition:none}}
+/* Offscreen paint skipping caused blank frames and estimated offsets on jumps. */
+#sheet.rounds-mode .batch-group{content-visibility:visible;contain-intrinsic-size:none}
+#album-index-preview.map-preview::after{top:50%}
 `;document.head.append(style);
 const bar=document.createElement('div');bar.className='batch-export-bar';const heading=document.createElement('div');heading.className='batch-export-heading';const title=document.createElement('strong'),total=document.createElement('small');title.textContent='Tus tandas';heading.append(title,total);bar.append(heading);root.before(bar);
 function button(label,one=false){const b=document.createElement('button');b.type='button';b.className='batch-export'+(one?' batch-export-one':'');b.innerHTML='<i class="export-symbol">'+icon+'</i>'+(one?'':'<span>'+label+'</span>');b.setAttribute('aria-label',label);return b}
