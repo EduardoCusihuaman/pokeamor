@@ -77,7 +77,10 @@ const style=document.createElement('style');style.textContent=`
 #album-index-preview.map-preview::before{content:'';position:absolute;inset:0 0 0 40%;border:1px solid #e8dfe5;border-radius:10px 4px 4px 10px;background:#fcf9fc;box-shadow:0 3px 12px #76526c14;z-index:-1;transition:inset 100ms ease-out}
 #album-index-preview.map-preview.expanded::before{inset:0}
 #album-index-preview.map-preview::after{content:none}
-#album-index-preview.map-preview #album-index-label{display:none}
+#album-index-preview.map-preview #album-index-label{display:flex;position:absolute;left:auto;right:-28px;top:calc(50% - 14px);width:32px;height:28px;align-items:center;justify-content:center;margin:0;border-radius:0 9px 9px 0;background:#966981;color:white;font-size:11px;font-weight:500;line-height:1;font-variant-numeric:tabular-nums}
+#album-index.scrubbing #album-scrubber::after{opacity:0!important}
+#album-scrubber::before{transition:width 80ms ease-out,background 80ms ease-out}
+#album-index.scrubbing #album-scrubber::before{width:12px;right:5px;top:17px;bottom:17px;border-radius:9px;background:#966981}
 #album-index-preview.map-preview #album-index-cards{position:relative;display:block;height:65px;width:100%}
 #album-index-preview.map-preview #album-index-cards img,#album-index-preview.map-preview.expanded #album-index-cards img{position:absolute;top:0;left:auto;right:calc(var(--slot)*20%);transform:none;width:calc(20% - 3px);max-width:46px;height:65px;object-fit:contain;transition:right 100ms ease-out}
 #album-index.scrubbing::after{content:'';position:absolute;right:6px;top:calc(var(--origin-position)* (100% - 60px) + 28px);width:8px;height:4px;border-radius:4px;background:#b493a955;pointer-events:none}
