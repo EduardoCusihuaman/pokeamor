@@ -403,7 +403,7 @@ function eventSeen(){return Object.keys(state.votes).length}
 function finishRefinement(skipped=false){
  if(!inlinePair)return;
  state.refinementSchedule={lastSeen:eventSeen(),nextSeen:eventSeen()+(skipped?40:26+(state.duels%10)),started:true,time:Date.now()};
- for(const b of pairBox.children)b.cancelRefinementPress?.();inlineBusy=true;queuedPair=null;eventLayer.classList.add('event-leaving');setTimeout(()=>{inlinePair=null;inlineBusy=false;eventLayer.classList.remove('event-leaving');save();render()},reducedMotion.matches?0:170);
+ for(const b of pairBox.children)b.cancelRefinementPress?.();for(const c of $('#stage').querySelectorAll('.card'))c.hidden=false;inlineBusy=true;queuedPair=null;eventLayer.classList.add('event-leaving');setTimeout(()=>{inlinePair=null;inlineBusy=false;eventLayer.classList.remove('event-leaving');save();render()},reducedMotion.matches?0:170);
 }
 function startRefinement(manual=false){
  if(inlinePair||busy)return false;
@@ -448,8 +448,9 @@ function chooseRefinement(winner){
  state.comparisons=state.comparisons||[];state.comparisons.push(event);state.duels++;
  state.history.push({refinement:true,eventId:event.id,ratings:before,previousSchedule,ids});
  adaptiveBlock='';sound('like');tactile('like');
- [...pairBox.children].forEach((b,i)=>{b.classList.toggle('chosen',winner===2||winner===i);b.classList.toggle('unchosen',winner!==2&&winner!==i)});
- setTimeout(()=>finishRefinement(),reducedMotion.matches?0:150);
+ pairBox.style.setProperty('--choice-rise',(-pairBox.clientHeight*.5)+'px');
+ [...pairBox.children].forEach((b,i)=>{b.cancelRefinementPress?.();b.classList.toggle('chosen',winner===2||winner===i);b.classList.toggle('unchosen',winner!==2&&winner!==i)});
+ setTimeout(()=>finishRefinement(),reducedMotion.matches?0:210);
 }
 const renderDiscovery=render;render=function(){if(eventBoundary&&queuedPair&&!activeEncounter&&eventSeen()>=(state.refinementSchedule?.nextSeen||20)){inlinePair=queuedPair;queuedPair=null}renderDiscovery();paintRefinement()};
 const voteDiscovery=vote;vote=function(...args){if(!inlinePair)voteDiscovery(...args)};
