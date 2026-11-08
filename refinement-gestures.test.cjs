@@ -10,8 +10,9 @@ test('both holds move existing cards and release or cancellation restores the pa
 
 test('equality mounts next scene before both outgoing halves travel the same distance',()=>{
  const sequence=[],moves=[],nodes=[];
- const node=()=>({style:{},setAttribute(){},append(){},remove(){},animate(frames,options){sequence.push('animate');moves.push({frames,options});return{finished:Promise.resolve()}}});
- const ctx={reducedMotion:{matches:false},eventLayer:{getBoundingClientRect:()=>({left:10,top:20,width:300,height:600}),classList:{add(){}}},pairBox:{children:[0,1].map(()=>({querySelector:()=>({cloneNode:node})}))},document:{createElement(){const n=node();nodes.push(n);return n},body:{append(){sequence.push('cover')}}},finishRefinement(){sequence.push('next')},setTimeout(){}};
- vm.createContext(ctx);vm.runInContext(app.slice(app.indexOf('function exitEqualRefinement(){'),app.indexOf('function chooseRefinement(winner){')),ctx);ctx.exitEqualRefinement();
+ const node=()=>({style:{},querySelector:()=>node(),setAttribute(){},append(){},remove(){},animate(frames,options){sequence.push('animate');moves.push({frames,options});return{finished:Promise.resolve()}}});
+ const ctx={reducedMotion:{matches:false},eventLayer:{getBoundingClientRect:()=>({left:10,top:20,width:300,height:600}),classList:{add(){},remove(){}}},pairBox:{children:[0,1].map(()=>({querySelector:()=>({cloneNode:node})}))},document:{createElement(){const n=node();nodes.push(n);return n},body:{append(){sequence.push('cover')}}},finishRefinement(){sequence.push('next')},setTimeout(){}};
+ vm.createContext(ctx);vm.runInContext(app.slice(app.indexOf('function exitRefinement(winner=2){'),app.indexOf('function chooseRefinement(winner){')),ctx);ctx.exitRefinement();
  assert.deepEqual(sequence,['cover','next','animate','animate']);assert.equal(moves[0].frames[1].transform,'translateY(-300px)');assert.equal(moves[1].frames[1].transform,'translateY(300px)');assert.deepEqual(moves[0].options,moves[1].options);assert.equal(nodes[1].style.height,nodes[2].style.height);
+ for(const winner of [0,1]){sequence.length=0;moves.length=0;ctx.exitRefinement(winner);assert.deepEqual(sequence,['cover','next','animate','animate','animate']);assert.equal(moves[1].frames[1].transform,'translateY(-300px)');assert.equal(moves[2].frames[1].transform,'translateY(300px)');assert.ok(moves.every(m=>m.frames.every(f=>!('opacity' in f))))}
 });

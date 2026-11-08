@@ -442,9 +442,9 @@ function paintRefinement(){
  if(!inlinePair)return;
  for(const c of stage.querySelectorAll('.card')){if(c.activated)c.setUnder?.();c.hidden=true}
  pairBox.style.setProperty('--duel-half',(pairBox.clientHeight*.5)+'px');
- const pairSignature=inlinePair.map(p=>p.id+':'+p.card).join('|');if(pairBox.dataset.signature===pairSignature)return;eventLayer.classList.remove('equal-exit');pairBox.dataset.signature=pairSignature;pairBox.replaceChildren();inlinePair.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Prefiero '+p.name);b.append(img(p,true));bindRefinementChoice(b,i);pairBox.append(b)});
+ const pairSignature=inlinePair.map(p=>p.id+':'+p.card).join('|');if(pairBox.dataset.signature===pairSignature)return;eventLayer.classList.remove('equal-exit');pairBox.dataset.signature=pairSignature;pairBox.replaceChildren();inlinePair.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Prefiero '+p.name);if(eventLayer.classList.contains('continuous-handoff'))b.style.animation='none';b.append(img(p,true));bindRefinementChoice(b,i);pairBox.append(b)});
 }
-function exitEqualRefinement(){
+function exitRefinement(winner=2){
  if(reducedMotion.matches){eventLayer.classList.add('equal-exit');finishRefinement();return}
  const rect=eventLayer.getBoundingClientRect(),half=rect.height/2;
  const cover=document.createElement('div');cover.setAttribute('aria-hidden','true');
@@ -452,9 +452,10 @@ function exitEqualRefinement(){
  const panels=[...pairBox.children].map((button,i)=>{const panel=document.createElement('div'),art=button.querySelector('img').cloneNode();Object.assign(panel.style,{position:'absolute',left:'0',top:(i*half)+'px',width:'100%',height:half+'px',overflow:'hidden',borderRadius:'17px'});Object.assign(art.style,{display:'block',width:'100%',height:'auto',borderRadius:'17px'});panel.append(art);cover.append(panel);return panel});
  document.body.append(cover);
  // Mount the actual next pair underneath before moving either outgoing half.
- eventLayer.classList.add('equal-exit');finishRefinement();
+ eventLayer.classList.add('equal-exit','continuous-handoff');finishRefinement();
+ if(winner!==2)panels[winner].querySelector('img').animate([{transform:'scale(1)'},{transform:'scale(1.015)',offset:.25},{transform:'scale(1)'}],{duration:210,easing:'ease-out'});
  const animations=panels.map((panel,i)=>panel.animate([{transform:'translateY(0)'},{transform:'translateY('+((i?1:-1)*half)+'px)'}],{duration:210,easing:'cubic-bezier(.2,.75,.2,1)',fill:'forwards'}));
- const cleanup=()=>cover.remove();Promise.all(animations.map(a=>a.finished)).then(cleanup,cleanup);setTimeout(cleanup,260);
+ let cleaned=false;const cleanup=()=>{if(cleaned)return;cleaned=true;cover.remove();eventLayer.classList.remove('continuous-handoff')};Promise.all(animations.map(a=>a.finished)).then(cleanup,cleanup);setTimeout(cleanup,260);
 }
 function chooseRefinement(winner){
  if(!inlinePair||inlineBusy)return;inlineBusy=true;equalPress(false);$('#both').disabled=true;
@@ -465,10 +466,8 @@ function chooseRefinement(winner){
  state.comparisons=state.comparisons||[];state.comparisons.push(event);state.duels++;
  state.history.push({refinement:true,eventId:event.id,ratings:before,previousSchedule,ids});
  adaptiveBlock='';sound('like');tactile('like');
- if(winner===2){for(const b of pairBox.children)b.cancelRefinementPress?.();exitEqualRefinement();return}
- pairBox.style.setProperty('--choice-rise',(-pairBox.clientHeight*.5)+'px');
- [...pairBox.children].forEach((b,i)=>{b.cancelRefinementPress?.();b.classList.toggle('chosen',winner===2||winner===i);b.classList.toggle('unchosen',winner!==2&&winner!==i)});
- setTimeout(()=>finishRefinement(),reducedMotion.matches?0:210);
+ for(const b of pairBox.children)b.cancelRefinementPress?.();
+ exitRefinement(winner);
 }
 const renderDiscovery=render;render=function(){if(eventBoundary&&queuedPair&&!activeEncounter&&eventSeen()>=(state.refinementSchedule?.nextSeen||20)){inlinePair=queuedPair;queuedPair=null}renderDiscovery();paintRefinement()};
 const voteDiscovery=vote;vote=function(...args){if(!inlinePair)voteDiscovery(...args)};
