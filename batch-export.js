@@ -73,16 +73,16 @@ const style=document.createElement('style');style.textContent=`
 #album-index-preview.map-preview img{width:100%;height:auto;aspect-ratio:.716;object-fit:contain;border-radius:2px}
 
 /* The rightmost card and destination number are a fixed visual anchor. */
-#album-index-preview.map-preview:not([hidden]){left:auto;right:8px;transform:none;width:min(282px,calc(100vw - 24px));height:77px;padding:6px;border:0;background:transparent;box-shadow:none;transition:none;overflow:visible;isolation:isolate}
-#album-index-preview.map-preview::before{content:'';position:absolute;inset:0 0 0 96px;border:1px solid #e8dfe5;border-radius:11px;background:#fcf9fc;box-shadow:0 3px 12px #76526c14;z-index:-1;transition:inset 100ms ease-out}
+#album-index-preview.map-preview:not([hidden]){left:auto;right:8px;transform:none;width:min(282px,calc(100vw - 24px));height:96px;padding:4px;border:0;background:transparent;box-shadow:none;transition:none;overflow:visible;isolation:isolate}
+#album-index-preview.map-preview::before{content:'';position:absolute;inset:0 0 0 40%;border:1px solid #e8dfe5;border-radius:11px;background:#fcf9fc;box-shadow:0 3px 12px #76526c14;z-index:-1;transition:inset 100ms ease-out}
 #album-index-preview.map-preview.expanded::before{inset:0}
 #album-index-preview.map-preview::after{content:none}
-#album-index-preview.map-preview #album-index-label{display:flex;position:absolute;left:auto;right:5px;top:calc(50% - 14px);width:28px;height:28px;align-items:center;justify-content:center;margin:0;border-radius:0;background:transparent;color:#87617b;font-size:12px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
+#album-index-preview.map-preview #album-index-label{display:flex;position:absolute;left:auto;right:7px;top:3px;width:22px;height:12px;align-items:center;justify-content:flex-end;margin:0;border-radius:0;background:transparent;color:#a28c9b;font-size:9px;font-weight:500;line-height:1;font-variant-numeric:tabular-nums}
 #album-scrubber::after{content:none!important}
 #album-scrubber::before{width:4px;right:9px;top:18px;bottom:18px;border-radius:4px;background:#b493a9;transition:width 80ms ease-out,right 80ms ease-out,background 80ms ease-out}
 #album-index.scrubbing #album-scrubber::before{width:6px;right:8px;top:16px;bottom:16px;border-radius:4px;background:#8d637d}
-#album-index-preview.map-preview #album-index-cards{position:relative;display:block;height:65px;width:calc(100% - 30px)}
-#album-index-preview.map-preview #album-index-cards img,#album-index-preview.map-preview.expanded #album-index-cards img{position:absolute;top:0;left:auto;right:calc(var(--slot)*20%);transform:none;width:calc(20% - 3px);max-width:46px;height:65px;object-fit:contain;transition:right 100ms ease-out}
+#album-index-preview.map-preview #album-index-cards{position:relative;top:13px;display:block;height:75px;width:100%}
+#album-index-preview.map-preview #album-index-cards img,#album-index-preview.map-preview.expanded #album-index-cards img{position:absolute;top:0;left:auto;right:calc(var(--slot)*20%);transform:none;width:calc(20% - 3px);max-width:53px;height:75px;object-fit:contain;transition:right 100ms ease-out}
 #album-index::after{content:none!important}
 @media(prefers-reduced-motion:reduce){#album-index-preview.map-preview::before,#album-index-preview.map-preview #album-index-cards img,#album-scrubber::before{transition:none}}
 /* Offscreen paint skipping caused blank frames and estimated offsets on jumps. */
