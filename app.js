@@ -146,13 +146,29 @@ function render(){clearFeedback();const queue=pending(),p=queue[0],n=Object.keys
  setScene(p);window.PokeMaterial?.prepare(queue.slice(0,4));
  reconcileDeck(stage,queue,flights);fitCard();for(const next of queue.slice(1,4))warmArtwork(next)
 }
+// Keep the released artwork opaque and moving until its trailing edge clears the viewport.
+function launchCard(c,value,momentum={}){
+ if(reducedMotion.matches){c.remove();return}
+ const start=getComputedStyle(c).transform,rect=c.getBoundingClientRect(),direction=value==='yes'?1:-1;
+ const distance=Math.max(0,direction>0?innerWidth-rect.left:rect.right)+Math.max(rect.width,rect.height)*.3+24;
+ const speed=Math.max(2.8,Math.min(6,Math.abs(momentum.vx||0)));
+ const duration=Math.max(130,Math.min(300,distance/speed));
+ c.style.width=c.clientWidth+'px';c.style.height=c.clientHeight+'px';
+ c.style.transition='none';c.style.opacity='1';
+ const end=`translate3d(${direction*distance}px,${Math.max(-45,Math.min(45,(momentum.dy||0)*.12))}px,0) ${start==='none'?'':start} rotate(${direction*9}deg)`;
+ const flight=c.animate([{transform:start,opacity:1},{transform:end,opacity:1}],{duration,easing:'linear',fill:'forwards'});
+ let timer;const finish=()=>{clearTimeout(timer);c.remove()};
+ flight.finished.then(finish,finish);
+ timer=setTimeout(finish,duration+250);
+}
 function vote(value,momentum={}){
  if(busy||!current())return;busy=true;clearFeedback();const c=$('.card:not(.under):not(.exiting)'),p=c?.pokemon||current();tactile(value==='yes'?'like':'choose');sound(value==='yes'?'like':'choose');
  if(p.reencounter){state.refinementSchedule={...(state.refinementSchedule||{}),nextSeen:Object.keys(state.votes).length+28,time:Date.now()};const event={id:p.id,card:p.card,value,time:Date.now(),checkpoint:p.checkpoint};state.encounters=state.encounters||{};state.encounters[event.card+':'+event.checkpoint]=event;state.history.push({id:p.id,direction:value,encounterKey:event.card+':'+event.checkpoint});activeEncounter=null}else{state.history.push({id:p.id,previous:state.votes[p.id]||null,direction:value});state.votes[p.id]={value,card:p.card,time:Date.now()}}save({votes:p.reencounter?[]:[p.id]});
  if(!p.reencounter&&value==='yes'&&Object.values(state.votes).filter(v=>v.value==='yes').length%15===0)state.refinementSchedule={...(state.refinementSchedule||{}),nextSeen:Math.max(Object.keys(state.votes).length+8,state.refinementSchedule?.nextSeen||0),time:Date.now()};
  if(c){const badge=c.querySelector('.stamp');if(badge){badge.classList.toggle('love',value==='yes');badge.classList.add('armed');badge.style.setProperty('--decision-color',value==='yes'?'#a52e5a':'#2e647c');badge.style.opacity='1';badge.style.transform='scale(1)';}c.style.setProperty(value==='yes'?'--love':'--pass','1');c.stopMotion?.();c.classList.add('exiting');c.classList.remove('lifted','dealt','returned','active');c.setAttribute('aria-hidden','true');c.style.pointerEvents='none'}
+ if(c)launchCard(c,value,momentum);
  render();const next=$('.card:not(.under):not(.exiting)');if(next)next.classList.add('dealt');signalDecision(value);window.PokeJourney?.celebrate();
- if(c){void c.offsetWidth;const duration=reducedMotion.matches?0:Math.max(125,175-Math.abs(momentum.vx||0)*22);c.style.transition=`transform ${duration}ms cubic-bezier(.22,.55,.45,1),opacity ${duration}ms ease`;c.style.transform=`translate3d(${value==='yes'?innerWidth+100:-innerWidth-100}px,${Math.max(-80,Math.min(80,(momentum.dy||0)*.4))-20}px,0) rotate(${value==='yes'?22:-22}deg) scale(1.015)`;c.style.opacity=0;setTimeout(()=>c.remove(),duration+20)}
+
  busy=false;scheduleEvents();
 }
 
