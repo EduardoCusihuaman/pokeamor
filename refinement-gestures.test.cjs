@@ -7,3 +7,11 @@ test('hold preview is removed on release and synthetic click never votes',()=>{c
 test('movement and cancellation cannot choose a card',()=>{for(const cancel of [b=>b.onpointermove({...e,clientY:50}),b=>b.onpointercancel()]){const a=setup();a.b.onpointerdown(e);cancel(a.b);a.b.onpointerup(e);a.b.onclick(e);assert.deepEqual(a.chosen,[])}});
 
 test('both holds move existing cards and release or cancellation restores the pair',()=>{for(const index of [0,1])for(const end of ['onpointerup','onpointercancel','onlostpointercapture']){const a=setup(index);a.b.onpointerdown(e);a.hold();assert.ok(a.holding.has(index===0?'holding-upper':'holding-lower'));a.b[end](e);assert.equal(a.holding.size,0);a.b.onclick(e);assert.deepEqual(a.chosen,[])}});
+
+test('equality mounts next scene before both outgoing halves travel the same distance',()=>{
+ const sequence=[],moves=[],nodes=[];
+ const node=()=>({style:{},setAttribute(){},append(){},remove(){},animate(frames,options){sequence.push('animate');moves.push({frames,options});return{finished:Promise.resolve()}}});
+ const ctx={reducedMotion:{matches:false},eventLayer:{getBoundingClientRect:()=>({left:10,top:20,width:300,height:600}),classList:{add(){}}},pairBox:{children:[0,1].map(()=>({querySelector:()=>({cloneNode:node})}))},document:{createElement(){const n=node();nodes.push(n);return n},body:{append(){sequence.push('cover')}}},finishRefinement(){sequence.push('next')},setTimeout(){}};
+ vm.createContext(ctx);vm.runInContext(app.slice(app.indexOf('function exitEqualRefinement(){'),app.indexOf('function chooseRefinement(winner){')),ctx);ctx.exitEqualRefinement();
+ assert.deepEqual(sequence,['cover','next','animate','animate']);assert.equal(moves[0].frames[1].transform,'translateY(-300px)');assert.equal(moves[1].frames[1].transform,'translateY(300px)');assert.deepEqual(moves[0].options,moves[1].options);assert.equal(nodes[1].style.height,nodes[2].style.height);
+});
