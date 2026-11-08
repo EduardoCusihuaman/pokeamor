@@ -87,6 +87,11 @@ const style=document.createElement('style');style.textContent=`
 #album-index-preview.map-preview #album-index-cards img,#album-index-preview.map-preview.expanded #album-index-cards img{position:absolute;top:0;left:auto;right:calc(var(--slot)*20%);transform:none;width:calc(20% - 3px);max-width:53px;height:75px;object-fit:contain;box-shadow:0 2px 6px #5b3e5520;transition:right 100ms ease-out}
 #album-index::after{content:none!important}
 @media(prefers-reduced-motion:reduce){#album-index-preview.map-preview::before,#album-index-preview.map-preview #album-index-cards img,#album-scrubber::before{transition:none}}
+/* The album ends after its oldest batch, without the old dock clearance. */
+#sheet.rounds-mode:not(.debug-mode){padding-bottom:max(16px,env(safe-area-inset-bottom))}
+#sheet.rounds-mode:not(.debug-mode) .inner{padding-bottom:0}
+#sheet.rounds-mode:not(.debug-mode) #round-memories{margin-bottom:0}
+#sheet.rounds-mode:not(.debug-mode) .batch-group:last-child{padding-bottom:0;margin-bottom:0}
 /* Offscreen paint skipping caused blank frames and estimated offsets on jumps. */
 #sheet.rounds-mode .batch-group{content-visibility:visible;contain-intrinsic-size:none}
 html,body{overscroll-behavior-y:none}
