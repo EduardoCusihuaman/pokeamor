@@ -78,13 +78,13 @@ const style=document.createElement('style');style.textContent=`
 #album-index-preview.map-preview.expanded::before{inset:0}
 #album-index-preview.map-preview::after{content:none}
 #album-index-preview.map-preview #album-index-label{display:flex;position:absolute;left:auto;right:5px;top:calc(50% - 14px);width:28px;height:28px;align-items:center;justify-content:center;margin:0;border-radius:0;background:transparent;color:#87617b;font-size:12px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums}
-#album-index.scrubbing #album-scrubber::after{opacity:0!important}
-#album-scrubber::before{transition:width 80ms ease-out,background 80ms ease-out}
-#album-index.scrubbing #album-scrubber::before{width:12px;right:5px;top:17px;bottom:17px;border-radius:9px;background:#966981}
+#album-scrubber::after{content:none!important}
+#album-scrubber::before{width:4px;right:9px;top:18px;bottom:18px;border-radius:4px;background:#b493a9;transition:width 80ms ease-out,right 80ms ease-out,background 80ms ease-out}
+#album-index.scrubbing #album-scrubber::before{width:6px;right:8px;top:16px;bottom:16px;border-radius:4px;background:#8d637d}
 #album-index-preview.map-preview #album-index-cards{position:relative;display:block;height:65px;width:calc(100% - 30px)}
 #album-index-preview.map-preview #album-index-cards img,#album-index-preview.map-preview.expanded #album-index-cards img{position:absolute;top:0;left:auto;right:calc(var(--slot)*20%);transform:none;width:calc(20% - 3px);max-width:46px;height:65px;object-fit:contain;transition:right 100ms ease-out}
-#album-index.scrubbing::after{content:'';position:absolute;right:6px;top:calc(var(--origin-position)* (100% - 60px) + 28px);width:8px;height:4px;border-radius:4px;background:#b493a955;pointer-events:none}
-@media(prefers-reduced-motion:reduce){#album-index-preview.map-preview::before,#album-index-preview.map-preview #album-index-cards img{transition:none}}
+#album-index::after{content:none!important}
+@media(prefers-reduced-motion:reduce){#album-index-preview.map-preview::before,#album-index-preview.map-preview #album-index-cards img,#album-scrubber::before{transition:none}}
 /* Offscreen paint skipping caused blank frames and estimated offsets on jumps. */
 #sheet.rounds-mode .batch-group{content-visibility:visible;contain-intrinsic-size:none}
 html,body{overscroll-behavior-y:none}
