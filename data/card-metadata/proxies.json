@@ -5273,5 +5273,50 @@
     "name": "Starmie V",
     "set": "ASR",
     "number": "TG13"
+  },
+  "ecard1-22": {
+    "name": "Pichu",
+    "set": "E1",
+    "number": "22"
+  },
+  "sv10-085": {
+    "name": "Team Rocket's Chingling",
+    "set": "DRI",
+    "number": "85"
+  },
+  "g1-RC17": {
+    "name": "Flabébé",
+    "set": "GEN",
+    "number": "RC17"
+  },
+  "swsh11-184": {
+    "name": "Galarian Perrserker V",
+    "set": "LOR",
+    "number": "184"
+  },
+  "swsh6-83": {
+    "name": "Galarian Runerigus",
+    "set": "CRE",
+    "number": "83"
+  },
+  "swsh11-045": {
+    "name": "Hisuian Basculegion",
+    "set": "LOR",
+    "number": "45"
+  },
+  "swsh10-175": {
+    "name": "Hisuian Sneasler V",
+    "set": "ASR",
+    "number": "175"
+  },
+  "swsh10-090": {
+    "name": "Hisuian Overqwil",
+    "set": "ASR",
+    "number": "90"
+  },
+  "svp-123": {
+    "name": "Teal Mask Ogerpon",
+    "set": "SVP",
+    "number": "123"
   }
 }
