@@ -54,6 +54,16 @@ const style=document.createElement('style');style.textContent=`
 #album-index-preview.album-viewer #album-index-cards{width:min(100%,600px,calc((var(--viewer-height) - 55px)*1.17));display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;align-self:center}
 #album-index-preview.album-viewer img{display:block;width:100%;height:auto;aspect-ratio:.716;object-fit:contain;border-radius:4px}
 #album-index.scrubbing{z-index:8}
+
+#album-index-preview{display:none!important}
+#sheet .collection-header{position:sticky}
+#album-recovery{position:absolute;inset:0 55px;display:flex;align-items:center;justify-content:center;gap:10px;background:#faf7f6;z-index:3}
+#album-recovery[hidden]{display:none}
+#album-recovery button{display:flex;align-items:center;gap:2px;background:transparent;min-height:44px;padding:3px;border-radius:6px;color:#876c7e}
+#album-recovery img{height:32px;width:23px;object-fit:contain;border-radius:2px}
+#album-recovery small{font-size:10px;margin-left:3px}
+#sheet.show-recovery .album-heading-wrap{visibility:hidden}
+#album-index.edge-running #album-scrubber:before{background:#79556f;width:7px}
 `;document.head.append(style);
 const bar=document.createElement('div');bar.className='batch-export-bar';const heading=document.createElement('div');heading.className='batch-export-heading';const title=document.createElement('strong'),total=document.createElement('small');title.textContent='Tus tandas';heading.append(title,total);bar.append(heading);root.before(bar);
 function button(label,one=false){const b=document.createElement('button');b.type='button';b.className='batch-export'+(one?' batch-export-one':'');b.innerHTML='<i class="export-symbol">'+icon+'</i>'+(one?'':'<span>'+label+'</span>');b.setAttribute('aria-label',label);return b}
