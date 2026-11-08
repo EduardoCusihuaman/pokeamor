@@ -31,7 +31,8 @@ void main(){
  float coverage=lum(plate.rgb)*plate.a;
  if(coverage<.006){gl_FragColor=vec4(0.);return;}
  // Derivatives come from this printing's actual etched image, not procedural grain.
- vec2 gradient=vec2(heightAt(uv+vec2(u_texel.x,0.))-heightAt(uv-vec2(u_texel.x,0.)),heightAt(uv+vec2(0.,u_texel.y))-heightAt(uv-vec2(0.,u_texel.y)));
+ vec2 gradient=vec2(0.);
+ if(u_etched>.5)gradient=vec2(heightAt(uv+vec2(u_texel.x,0.))-heightAt(uv-vec2(u_texel.x,0.)),heightAt(uv+vec2(0.,u_texel.y))-heightAt(uv-vec2(0.,u_texel.y)));
  vec3 normal=normalize(vec3(gradient*8.*u_etched,1.));
  vec3 light=normalize(vec3(u_light*.9,1.35));
  vec3 halfVector=normalize(light+vec3(0.,0.,1.));
@@ -49,20 +50,21 @@ void main(){
  float alpha=clamp(coverage*u_energy*(.12+band*.31+facet*.3),0.,.48);
  gl_FragColor=vec4(color*alpha,alpha);
 }`;
-async function decode(path,signal){let b;if(window.PokeAssets)b=await window.PokeAssets.getBlob(path,0);else{const r=await fetch(path,{signal,cache:'force-cache'});if(!r.ok)throw Error('material unavailable');b=await r.blob()}if(signal.aborted)throw Error('cancelled');if(b.size>8388608||!b.type.startsWith('image/'))throw Error('invalid material');if(typeof createImageBitmap==='function'){const image=await createImageBitmap(b);if(signal.aborted){image.close();throw Error('cancelled')}return image}return new Promise((resolve,reject)=>{const image=new Image(),url=URL.createObjectURL(b);const abort=()=>{image.src='';URL.revokeObjectURL(url);reject(Error('cancelled'))};signal.addEventListener('abort',abort,{once:true});image.onload=()=>{signal.removeEventListener('abort',abort);URL.revokeObjectURL(url);resolve(image)};image.onerror=()=>{signal.removeEventListener('abort',abort);URL.revokeObjectURL(url);reject(Error('decode failed'))};image.src=url})}
+async function decode(path,signal){let b;if(window.PokeAssets)b=await window.PokeAssets.getBlob(path,0);else{const r=await fetch(path,{signal,cache:'force-cache'});if(!r.ok)throw Error('material unavailable');b=await r.blob()}if(signal.aborted)throw Error('cancelled');if(b.size>8388608||!b.type.startsWith('image/'))throw Error('invalid material');if(typeof createImageBitmap==='function'){let image=await createImageBitmap(b);const scale=Math.min(1,1024/Math.max(image.width,image.height));if(scale<1){const original=image;try{image=await createImageBitmap(original,{resizeWidth:Math.max(1,Math.round(original.width*scale)),resizeHeight:Math.max(1,Math.round(original.height*scale)),resizeQuality:'medium'})}finally{original.close()}}if(signal.aborted){image.close();throw Error('cancelled')}return image}return new Promise((resolve,reject)=>{const image=new Image(),url=URL.createObjectURL(b);const abort=()=>{image.src='';URL.revokeObjectURL(url);reject(Error('cancelled'))};signal.addEventListener('abort',abort,{once:true});image.onload=()=>{signal.removeEventListener('abort',abort);URL.revokeObjectURL(url);resolve(image)};image.onerror=()=>{signal.removeEventListener('abort',abort);URL.revokeObjectURL(url);reject(Error('decode failed'))};image.src=url})}
 function createEngine(){
  const canvas=document.createElement('canvas');canvas.className='material-canvas';canvas.setAttribute('aria-hidden','true');let gl;
  try{gl=canvas.getContext('webgl',{alpha:true,premultipliedAlpha:true,antialias:false,depth:false,stencil:false,powerPreference:'low-power'})}catch{return null}if(!gl)return null;
  let program,buffer,loc,flat,ready=false,pair=null,controller=null,serial=0,frame=0,available=false;
+ const textures=new Map();
  let target={x:0,y:0,energy:.22},smooth={...target};
  function compile(type,src){const shader=gl.createShader(type);gl.shaderSource(shader,src);gl.compileShader(shader);if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS)){gl.deleteShader(shader);throw Error('compile failed')}return shader}
  function texture(image){const t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);if(image)gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,image);else gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([128,128,128,255]));return t}
  function init(){try{const vs=compile(gl.VERTEX_SHADER,vertex),fs=compile(gl.FRAGMENT_SHADER,fragment);program=gl.createProgram();gl.attachShader(program,vs);gl.attachShader(program,fs);gl.linkProgram(program);gl.deleteShader(vs);gl.deleteShader(fs);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('link failed');buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);loc={position:gl.getAttribLocation(program,'a_position')};for(const n of ['mask','etch','texel','light','energy','kind','etched'])loc[n]=gl.getUniformLocation(program,'u_'+n);flat=texture(null);available=true;return true}catch{available=false;return false}}
  if(!init())return null;
  function pause(){cancelAnimationFrame(frame);frame=0}
- function cleanup(){controller?.abort();controller=null;serial++;ready=false;pause();if(pair&&available){gl.deleteTexture(pair.mask);if(pair.etch!==flat)gl.deleteTexture(pair.etch)}pair=null;canvas.parentElement?.classList.remove('has-material');canvas.remove()}
+ function cleanup(){controller?.abort();controller=null;serial++;ready=false;pause();pair=null;canvas.parentElement?.classList.remove('has-material');canvas.remove()}
  function draw(){frame=0;if(flights.size||!ready||!pair||!current||!current.card.materialFrontReady||reduce.matches||!visible()||!available)return;
-  const card=current.card,w=Math.max(1,Math.min(640,Math.round(card.clientWidth*Math.min(window.devicePixelRatio||1,1.5)))),h=Math.max(1,Math.round(w/(card.artRatio||.716)));
+  const card=current.card,w=Math.max(1,Math.min(480,Math.round(card.clientWidth))),h=Math.max(1,Math.round(w/(card.artRatio||.716)));
   if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h}gl.viewport(0,0,w,h);let settling=false;
   for(const k of ['x','y','energy']){smooth[k]+=(target[k]-smooth[k])*.25;if(Math.abs(smooth[k]-target[k])>.002)settling=true}
   gl.useProgram(program);gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.enableVertexAttribArray(loc.position);gl.vertexAttribPointer(loc.position,2,gl.FLOAT,false,0,0);
@@ -70,12 +72,12 @@ function createEngine(){
   gl.uniform2f(loc.texel,1/pair.width,1/pair.height);gl.uniform2f(loc.light,smooth.x,smooth.y);gl.uniform1f(loc.energy,smooth.energy);gl.uniform1f(loc.kind,kinds[current.surface.type]);gl.uniform1f(loc.etched,current.surface.etched?1:0);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
   if(settling)frame=requestAnimationFrame(draw);
  }
- const api={attach(scene){cleanup();if(!available||reduce.matches)return;const generation=serial;controller=new AbortController();const signal=controller.signal;const names=['foil',...(scene.surface.etched?['etch']:[])];Promise.allSettled(names.map(n=>decode(scene.surface.assets[n],signal))).then(async results=>{
+ const api={attach(scene){cleanup();if(!available||reduce.matches)return;const cacheKey=JSON.stringify(scene.surface.assets),cached=textures.get(cacheKey);if(cached){textures.delete(cacheKey);textures.set(cacheKey,cached);pair=cached;ready=true;scene.card.append(canvas);scene.card.classList.add('has-material');api.set(scene.light);return}const generation=serial;controller=new AbortController();const signal=controller.signal;const names=['foil',...(scene.surface.etched?['etch']:[])];Promise.allSettled(names.map(n=>decode(scene.surface.assets[n],signal))).then(async results=>{
   await afterFlights();
   const loaded=results.filter(r=>r.status==='fulfilled').map(r=>r.value);if(generation!==serial||current!==scene||results.some(r=>r.status==='rejected')||!available){loaded.forEach(i=>i.close?.());return}
-  try{pair={mask:texture(loaded[0]),etch:loaded[1]?texture(loaded[1]):flat,width:loaded[1]?.width||loaded[0].width,height:loaded[1]?.height||loaded[0].height};ready=true;scene.card.append(canvas);scene.card.classList.add('has-material');api.set(scene.light)}catch{cleanup()}finally{loaded.forEach(i=>i.close?.())}
+  try{pair={mask:texture(loaded[0]),etch:loaded[1]?texture(loaded[1]):flat,width:loaded[1]?.width||loaded[0].width,height:loaded[1]?.height||loaded[0].height};textures.set(cacheKey,pair);while(textures.size>3){const key=textures.keys().next().value,old=textures.get(key);gl.deleteTexture(old.mask);if(old.etch!==flat)gl.deleteTexture(old.etch);textures.delete(key)}ready=true;scene.card.append(canvas);scene.card.classList.add('has-material');api.set(scene.light)}catch{cleanup()}finally{loaded.forEach(i=>i.close?.())}
  })},set(input){target={...input};if(!flights.size&&!frame&&visible())frame=requestAnimationFrame(draw)},pause,detach:cleanup,refresh(){if(current)api.set(current.light)}};
- canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();cleanup();available=false;current?.card.classList.remove('has-material')});canvas.addEventListener('webglcontextrestored',()=>{if(init()&&current)api.attach(current)});
+ canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();cleanup();textures.clear();available=false;current?.card.classList.remove('has-material')});canvas.addEventListener('webglcontextrestored',()=>{if(init()&&current)api.attach(current)});
  return api;
 }
 function acquire(){if(engine===null)engine=createEngine()||false;return engine||null}
