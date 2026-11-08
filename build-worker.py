@@ -4,7 +4,7 @@ p=Path(__file__).parent
 subprocess.run(['python',str(p/'scripts/build-card-resources.py')],check=True)
 manifest=json.loads((p/'generated/card-resources/manifest.json').read_text())
 html=(p/'page.html').read_text().replace('<script src="/app.js"', '<script>window.POKE_CARD_RESOURCES='+json.dumps(manifest)+'</script><script src="/card-resources.js" defer></script><script src="/app.js"')
-prefix='const HTML='+json.dumps(html)+';\nconst JS='+json.dumps((p/'app.js').read_text())+';\nconst JOURNEY='+json.dumps((p/'journey.js').read_text())+';\nconst HOLO='+json.dumps((p/'holo.js').read_text())+';\nconst ASSET_JS='+json.dumps((p/'material-assets.js').read_text())+';\nconst MATERIAL_JS='+json.dumps((p/'material-renderer.js').read_text())+';\nconst MATERIALS='+(p/'materials.json').read_text()+';\nconst CATALOG='+ (p/'catalog.json').read_text()+';\n'
+prefix='const HTML='+json.dumps(html)+';\nconst JS='+json.dumps((p/'app.js').read_text())+';\nconst JOURNEY='+json.dumps((p/'journey.js').read_text()+'\n'+(p/'batch-export.js').read_text())+';\nconst HOLO='+json.dumps((p/'holo.js').read_text())+';\nconst ASSET_JS='+json.dumps((p/'material-assets.js').read_text())+';\nconst MATERIAL_JS='+json.dumps((p/'material-renderer.js').read_text())+';\nconst MATERIALS='+(p/'materials.json').read_text()+';\nconst CATALOG='+ (p/'catalog.json').read_text()+';\n'
 prefix+='const RECOMMENDER='+json.dumps((p/'recommender.js').read_text())+';\n'
 prefix+='const CARD_RESOURCE_JS='+json.dumps((p/'card-resources.js').read_text())+';\n'
 prefix+='const CARD_RESOURCES='+json.dumps({'/data/'+f.name:f.read_text() for f in sorted((p/'generated/card-resources').glob('*.json')) if f.name not in ['manifest.json','report.json']})+';\n'

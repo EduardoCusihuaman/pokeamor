@@ -72,5 +72,5 @@ $('#round-progress').onclick=()=>$('#open').click();$('#round-reward').onclick=(
 $('#save-playmat').onclick=()=>{$('#playmat').toBlob(async blob=>{if(!blob)return;const file=new File([blob],'mi-universo-pokemon.png',{type:'image/png'});try{if(navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:'Mi universo Pokémon'});return}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=file.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),5000)}catch(error){if(error.name!=='AbortError')$('#playmat-status').textContent='No pudimos guardar la imagen. Intentá otra vez.'}},'image/png')};
 $('#preview-playmat').onclick=()=>{$('#playmat-large').append($('#playmat'));$('#playmat-dialog').showModal();compose()};$('#close-playmat').onclick=()=>$('#playmat-dialog').close();$('#playmat-dialog').addEventListener('close',()=>$('#preview-playmat').prepend($('#playmat')));
 
-window.PokeJourney={remember,update,celebrate,compose,team:()=>favorites().slice(0,6).map(p=>p.id),batches:()=>batches().map(g=>g.map(p=>p.id))};
+window.PokeJourney={remember,update,celebrate,compose,team:()=>favorites().slice(0,6).map(p=>p.id),exportGroups:()=>batches().map(g=>g.slice()),batches:()=>batches().map(g=>g.map(p=>p.id))};
 })();
