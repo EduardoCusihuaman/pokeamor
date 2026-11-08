@@ -108,7 +108,7 @@ function clearFeedback(){cancelAnimationFrame(frame);$('#yes').classList.remove(
 function makeCard(p,under=false){
  const c=document.createElement('div');c.pokemon=p;c.className='card'+(under?' under':'')+(!p.image?' official':'');const source=warmArt.get(p.surface?.assets?.front||p.image||fallback(p));const artwork=source?.complete&&source.naturalWidth?source:img(p,true);warmArt.delete(p.surface?.assets?.front||p.image||fallback(p));artwork.decoding='async';const fitArt=()=>{c.materialFrontReady=!!(artwork.materialSource&&!c.classList.contains('art-fallback')&&artwork.naturalWidth>0);if(c.classList.contains('official')||!artwork.naturalWidth||!artwork.naturalHeight)return;c.artRatio=artwork.naturalWidth/artwork.naturalHeight;c.style.aspectRatio=String(c.artRatio);if(!under){fitCard();window.PokeMaterial?.refresh()}};artwork.onload=fitArt;c.append(artwork);if(artwork.complete)queueMicrotask(fitArt);
  c.activate=()=>{if(c.activated)return;c.activated=true;under=false;c.classList.remove('under');c.style.transform='';c.style.filter='';c.removeAttribute('aria-hidden');
- c.pokemon=p;c.setAttribute('aria-label',p.name);const choice=document.createElement('div');choice.className='choice-light';c.append(choice);const stamp=document.createElement('div');stamp.className='stamp';stamp.setAttribute('aria-hidden','true');stamp.innerHTML='<svg class=heart viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.1-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.8a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z"/></svg><svg class=cross viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';c.append(stamp);
+ c.pokemon=p;c.setAttribute('aria-label',p.name);const choice=document.createElement('div');choice.className='choice-light';c.append(choice);
  let surface=null;let start=null,dx=0,dy=0,vx=0,lastX=0,lastTime=0,lastMove=0,releaseTimer,held=false,armed=0,raf=0,previous=0;
  const position={x:0,y:0,r:0,rx:0,ry:0,s:1},velocity={x:0,y:0,r:0,rx:0,ry:0,s:0},target={...position};
  c.getFlightPose=()=>({...position});
@@ -117,14 +117,14 @@ function makeCard(p,under=false){
  function move(values){Object.assign(target,values);if(reducedMotion.matches){Object.assign(position,target);paint();return;}if(!raf)raf=requestAnimationFrame(tick)}
  const undercard=()=>$('#stage').querySelector('.under');
  const light=(x,y)=>{const bounds=$('#stage').getBoundingClientRect(),width=c.clientWidth,height=c.clientHeight;const px=Math.max(0,Math.min(100,(x-(bounds.left+(bounds.width-width)/2))/width*100));const py=Math.max(0,Math.min(100,(y-(bounds.top+(bounds.height-height)/2))/height*100));c.style.setProperty('--x',px+'%');c.style.setProperty('--y',py+'%');c.style.setProperty('--angle',(100+px*.4)+'deg');surface?.pointer(px/100,py/100);return{px,py}};
- const reset=()=>{held=false;armed=0;clearFeedback();move({x:0,y:0,r:0,rx:0,ry:0,s:1});stamp.style.opacity=0;stamp.classList.remove('armed');c.style.setProperty('--love','0');c.style.setProperty('--pass','0');c.classList.remove('active','lifted');surface?.release();const u=undercard();if(u){u.style.transform='';u.style.filter=''}};
+ const reset=()=>{held=false;armed=0;clearFeedback();move({x:0,y:0,r:0,rx:0,ry:0,s:1});c.style.setProperty('--love','0');c.style.setProperty('--pass','0');c.classList.remove('active','lifted');surface?.release();const u=undercard();if(u){u.style.transform='';u.style.filter=''}};
  c.setUnder=()=>{c.stopMotion();under=true;c.activated=false;c.classList.add('under');c.setAttribute('aria-hidden','true');for(const n of c.querySelectorAll('.choice-light,.stamp'))n.remove()};
  c.stopMotion=()=>{cancelAnimationFrame(raf);clearTimeout(releaseTimer);start=null;surface?.dispose()};
  c.onpointerdown=e=>{if(busy||!e.isPrimary||e.button>0)return;clearTimeout(releaseTimer);start={x:e.clientX,y:e.clientY};lastX=e.clientX;lastTime=lastMove=performance.now();dx=dy=vx=0;armed=0;held=true;c.setPointerCapture(e.pointerId);c.style.transition='none';c.classList.remove('dealt','returned');c.classList.add('active','lifted');const {px,py}=light(e.clientX,e.clientY);move({s:1.012,rx:(50-py)*.065,ry:(px-50)*.065});sound('lift')};
  c.onpointermove=e=>{if(!start)return;const now=performance.now();vx=vx*.25+((e.clientX-lastX)/Math.max(1,now-lastTime))*.75;lastX=e.clientX;lastTime=lastMove=now;dx=e.clientX-start.x;dy=e.clientY-start.y;const {px,py}=light(e.clientX,e.clientY);const threshold=Math.min(78,c.clientWidth*.21),strength=Math.min(Math.abs(dx)/threshold,1),direction=dx>0?1:-1;
- const dragX=Math.sign(dx)*(Math.min(Math.abs(dx),c.clientWidth*.7)+Math.max(0,Math.abs(dx)-c.clientWidth*.7)*.45);const drag={x:dragX,y:dy*.14-Math.min(Math.abs(dx)*.025,4),r:Math.max(-11,Math.min(11,dx/32)),rx:(50-py)*.04,ry:(px-50)*.045,s:1.008};Object.assign(target,drag);Object.assign(position,drag);for(const k in velocity)velocity[k]=0;paint();
+ const dragX=Math.sign(dx)*(Math.min(Math.abs(dx),c.clientWidth*.7)+Math.max(0,Math.abs(dx)-c.clientWidth*.7)*.45);const arc=swipeArc(dragX,c.clientWidth);const drag={x:dragX,y:dy*.14+arc.y,r:arc.r,rx:(50-py)*.04,ry:(px-50)*.045,s:1.008};Object.assign(target,drag);Object.assign(position,drag);for(const k in velocity)velocity[k]=0;paint();
  const newArmed=Math.abs(dx)>=threshold?direction:(Math.abs(dx)<threshold*.72||direction!==armed)?0:armed;if(newArmed&&newArmed!==armed)tactile('edge');armed=newArmed;
- stamp.classList.toggle('love',dx>0);stamp.classList.toggle('armed',armed!==0);stamp.style.setProperty('--decision-color',dx>0?'#a52e5a':'#2e647c');stamp.style.opacity=Math.abs(dx)<8?0:Math.min(1,(Math.abs(dx)-8)/(threshold*.45));stamp.style.transform=`scale(${.82+strength*.18}) rotate(${direction*-7}deg)`;
+
  $('#yes').classList.toggle('ready',armed===1);$('#no').classList.toggle('ready',armed===-1);document.documentElement.style.setProperty('--yes-intent',String(dx>0?strength*.8:0));document.documentElement.style.setProperty('--no-intent',String(dx<0?strength*.75:0));c.style.setProperty('--love',String(dx>0?strength:0));c.style.setProperty('--pass',String(dx<0?strength:0));
  const u=undercard();if(u&&!reducedMotion.matches){u.style.transform=`translateY(${4*(1-strength)}px) scale(${.98+strength*.02})`;u.style.filter='none'}
  };
@@ -141,18 +141,19 @@ function render(){clearFeedback();const queue=pending(),p=queue[0],n=Object.keys
  reconcileDeck(stage,queue,flights);fitCard();for(const next of queue.slice(1,4))warmArtwork(next)
 }
 // Keep the released artwork opaque and moving until its trailing edge clears the viewport.
+function swipeArc(x,width){const angle=Math.atan(x/Math.max(1,width*2));return{y:width*.4*(1-Math.cos(angle)),r:angle*180/Math.PI*.65}}
 function launchCard(c,value,momentum={}){
  if(reducedMotion.matches){c.remove();return}
- const generation=decisionGeneration,pose=c.getFlightPose?.()||{x:0,y:0,r:0,rx:0,ry:0,s:1},rect=c.getBoundingClientRect(),direction=value==='yes'?1:-1;
+ const pose=c.getFlightPose?.()||{x:0,y:0,r:0,rx:0,ry:0,s:1},rect=c.getBoundingClientRect(),direction=value==='yes'?1:-1;
  const distance=Math.max(0,direction>0?innerWidth-rect.left:rect.right)+Math.max(rect.width,rect.height)*.3+24;
- // Identical transform lists preserve tilt, scale and depth: only translation changes.
- const transform=(x,y)=>`translate3d(${x}px,${y}px,0) rotate(${pose.r}deg) rotateX(${pose.rx}deg) rotateY(${pose.ry}deg) scale(${pose.s})`;
- const duration=260,start=transform(pose.x,pose.y),end=transform(pose.x+direction*distance,pose.y);
+ // Continue the same curve used under the finger, retaining its vertical offset and tilt.
+ const origin=swipeArc(pose.x,c.clientWidth),duration=Math.max(180,Math.min(260,distance/Math.max(2,Math.abs(momentum.vx||0))));
+ const frames=Array.from({length:17},(_,i)=>{const t=i/16,x=pose.x+direction*distance*t,arc=swipeArc(x,c.clientWidth);return{offset:t,opacity:1,transform:`translate3d(${x}px,${pose.y+(arc.y-origin.y)}px,0) rotate(${pose.r+(arc.r-origin.r)}deg) rotateX(${pose.rx}deg) rotateY(${pose.ry}deg) scale(${pose.s})`}});
  c.style.width=c.clientWidth+'px';c.style.height=c.clientHeight+'px';
  c.style.transition='none';c.style.opacity='1';
  const resumeMaterial=window.PokeMaterial?.beginFlight();
- const flight=c.animate([{transform:start,opacity:1},{transform:end,opacity:1}],{duration,easing:'linear',fill:'forwards'});
- let timer,done=false;const finish=(completed=false)=>{if(done)return;done=true;clearTimeout(timer);const visible=c.isConnected;c.remove();resumeMaterial?.();if(completed&&visible&&value==='yes'&&generation===decisionGeneration)pulseCollection()};
+ const flight=c.animate(frames,{duration,easing:'linear',fill:'forwards'});
+ let timer,done=false;const finish=(completed=false)=>{if(done)return;done=true;clearTimeout(timer);c.remove();resumeMaterial?.()};
  flight.finished.then(()=>finish(true),()=>finish());
  timer=setTimeout(()=>finish(),duration+250);
 }
@@ -160,7 +161,7 @@ function vote(value,momentum={}){
  if(busy||!current())return;busy=true;clearFeedback();const c=$('.card:not(.under):not(.exiting)'),p=c?.pokemon||current();tactile(value==='yes'?'like':'choose');sound(value==='yes'?'like':'choose');
  if(p.reencounter){state.refinementSchedule={...(state.refinementSchedule||{}),nextSeen:Object.keys(state.votes).length+28,time:Date.now()};const event={id:p.id,card:p.card,value,time:Date.now(),checkpoint:p.checkpoint};state.encounters=state.encounters||{};state.encounters[event.card+':'+event.checkpoint]=event;state.history.push({id:p.id,direction:value,encounterKey:event.card+':'+event.checkpoint});activeEncounter=null}else{state.history.push({id:p.id,previous:state.votes[p.id]||null,direction:value});state.votes[p.id]={value,card:p.card,time:Date.now()}}save({votes:p.reencounter?[]:[p.id]});
  if(!p.reencounter&&value==='yes'&&Object.values(state.votes).filter(v=>v.value==='yes').length%15===0)state.refinementSchedule={...(state.refinementSchedule||{}),nextSeen:Math.max(Object.keys(state.votes).length+8,state.refinementSchedule?.nextSeen||0),time:Date.now()};
- if(c){const badge=c.querySelector('.stamp');if(badge){badge.classList.toggle('love',value==='yes');badge.classList.add('armed');badge.style.setProperty('--decision-color',value==='yes'?'#a52e5a':'#2e647c');badge.style.opacity='1';if(!badge.style.transform)badge.style.transform='scale(1)';}c.style.setProperty(value==='yes'?'--love':'--pass','1');c.stopMotion?.();c.classList.add('exiting');c.classList.remove('lifted','dealt','returned','active');c.setAttribute('aria-hidden','true');c.style.pointerEvents='none'}
+ if(c){c.style.setProperty(value==='yes'?'--love':'--pass','1');c.stopMotion?.();c.classList.add('exiting');c.classList.remove('lifted','dealt','returned','active');c.setAttribute('aria-hidden','true');c.style.pointerEvents='none'}
  if(c)launchCard(c,value,momentum);
  render();window.PokeJourney?.celebrate();
 
