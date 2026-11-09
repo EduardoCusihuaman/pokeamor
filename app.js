@@ -89,6 +89,8 @@ function sound(kind='choose'){
   };
   if(kind==='like'){
    tone(784,t,.09,.032,'sine');tone(1175,t+.038,.12,.026,'triangle');tone(1568,t+.086,.15,.022,'sine');tone(2352,t+.105,.09,.006,'sine');
+  }else if(kind==='battle'){
+   tone(180,t,.07,.025,'triangle');tone(720,t+.012,.075,.012,'sine');
   }else if(kind==='round'){
    tone(659,t,.16,.022,'sine');tone(988,t+.07,.19,.017,'triangle');tone(1318,t+.15,.23,.012,'sine');
   }else if(kind==='lift'){
@@ -456,7 +458,7 @@ new ResizeObserver(updateBattleLayout).observe(pairBox);window.addEventListener(
 const refineIcon=$('#front-refine').innerHTML;
 function eventSeen(){return Object.keys(state.votes).length}
 function finishRefinement(skipped=false){
- if(!inlinePair)return;window.PokeResources?.release('battle');
+ if(!inlinePair)return;battleEntranceCleanup?.();window.PokeResources?.release('battle');
  state.refinementSchedule={lastSeen:eventSeen(),nextSeen:eventSeen()+(skipped?40:26+(state.duels%10)),started:true,time:Date.now()};
  for(const b of pairBox.children)b.cancelRefinementPress?.();for(const c of $('#stage').querySelectorAll('.card'))c.hidden=false;inlineBusy=true;queuedPair=null;eventLayer.classList.add('event-leaving');setTimeout(()=>{inlinePair=null;inlineBusy=false;eventLayer.classList.remove('event-leaving');save();render()},reducedMotion.matches||eventLayer.classList.contains('equal-exit')?0:170);
 }
@@ -470,6 +472,21 @@ function startRefinement(manual=false){
  if(!manual&&![a,b].every(p=>{const im=warmArt.get(p.surface?.assets?.front||p.image||fallback(p));return im?.complete&&im.naturalWidth>0})){for(const p of [a,b]){warmArtwork(p);const im=warmArt.get(p.surface?.assets?.front||p.image||fallback(p));im?.addEventListener('load',scheduleEvents,{once:true})}return false}
  const prepared=manual&&manualSession?[a,b]:Math.random()<.5?[a,b]:[b,a];if(!manual){queuedPair=prepared;return true}queuedPair=null;inlinePair=prepared;
  $('#sheet').classList.remove('open');$('#duelsheet').classList.remove('open');render();return true;
+}
+let battleEntranceCleanup=null;
+function cueBattleEntrance(){
+ battleEntranceCleanup?.();
+ if(reducedMotion.matches)return;
+ const buttons=[...pairBox.children],wide=$('#app').classList.contains('battle-wide'),animations=[];
+ let idleTimer,impactTimer,disposed=false;
+ const bolt=document.createElement('span');bolt.className='battle-clash';bolt.setAttribute('aria-hidden','true');bolt.innerHTML='<svg viewBox="0 0 40 52"><path d="M23 3 7 28h12l-3 21 18-29H22Z"/></svg>';eventLayer.append(bolt);
+ const stop=()=>{if(disposed)return;disposed=true;clearTimeout(idleTimer);clearTimeout(impactTimer);animations.forEach(a=>a.cancel());bolt.remove();eventLayer.classList.remove('battle-entering');for(const type of ['pointerdown','keydown'])eventLayer.removeEventListener(type,stop,true);equalTools.removeEventListener('pointerdown',stop,true)};
+ battleEntranceCleanup=stop;eventLayer.classList.add('battle-entering');
+ buttons.forEach((b,i)=>{const sign=i===0?-1:1,axis=wide?'X':'Y';b.style.animation='none';animations.push(b.animate([{transform:`translate${axis}(${sign*22}px)`},{transform:`translate${axis}(${-sign*3}px)`,offset:.55},{transform:'translate(0,0)'}],{duration:280,easing:'cubic-bezier(.2,.75,.25,1)'}))});
+ animations.push(bolt.animate([{opacity:0,transform:'scale(.55)'},{opacity:1,transform:'scale(1.12)',offset:.42},{opacity:0,transform:'scale(.92)'}],{duration:260}));
+ impactTimer=setTimeout(()=>{if(disposed)return;sound('battle');eventLayer.classList.remove('battle-entering')},140);
+ idleTimer=setTimeout(()=>{if(disposed||!inlinePair||inlineBusy||eventLayer.hidden)return;buttons.forEach((b,i)=>{animations.push(b.animate([{transform:'translateY(0)'},{transform:'translateY(-4px)',offset:.45},{transform:'translateY(0)'}],{duration:400,delay:i*440,easing:'ease-in-out'}))});bolt.remove()},1150);
+ for(const type of ['pointerdown','keydown'])eventLayer.addEventListener(type,stop,true);equalTools.addEventListener('pointerdown',stop,true);
 }
 function bindRefinementChoice(button,index){
  let timer=null,peek=null,origin=null,consumed=false;
@@ -496,9 +513,10 @@ function paintRefinement(){
  if(!inlinePair)return;updateBattleLayout();
  for(const c of stage.querySelectorAll('.card')){if(c.activated)c.setUnder?.();c.hidden=true}
  pairBox.style.setProperty('--duel-half',(pairBox.clientHeight*.5)+'px');
- const pairSignature=inlinePair.map(p=>p.id+':'+p.card).join('|');if(pairBox.dataset.signature===pairSignature)return;eventLayer.classList.remove('equal-exit');pairBox.dataset.signature=pairSignature;pairBox.replaceChildren();inlinePair.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Prefiero '+p.name);if(eventLayer.classList.contains('continuous-handoff'))b.style.animation='none';b.append(manualSession?.art?.get(p.id+':'+p.card)||img(p,true),battleFeedback());bindRefinementChoice(b,i);pairBox.append(b)});
+ const pairSignature=inlinePair.map(p=>p.id+':'+p.card).join('|');if(pairBox.dataset.signature===pairSignature)return;eventLayer.classList.remove('equal-exit');pairBox.dataset.signature=pairSignature;pairBox.replaceChildren();inlinePair.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Prefiero '+p.name);if(eventLayer.classList.contains('continuous-handoff'))b.style.animation='none';b.append(manualSession?.art?.get(p.id+':'+p.card)||img(p,true),battleFeedback());bindRefinementChoice(b,i);pairBox.append(b)});cueBattleEntrance();
 }
 function exitRefinement(winner=2){
+ battleEntranceCleanup?.();
  if(reducedMotion.matches){eventLayer.classList.add('equal-exit');finishRefinement();return}
  const wide=$('#app').classList.contains('battle-wide');
  const rect=eventLayer.getBoundingClientRect(),half=rect.height/2,full=pairBox.children[0].querySelector('img').getBoundingClientRect?.().height||rect.width/.716,duration=winner===2?210:360;
@@ -518,6 +536,7 @@ function exitRefinement(winner=2){
  let cleaned=false;const cleanup=()=>{if(cleaned)return;cleaned=true;cover.remove();eventLayer.classList.remove('continuous-handoff')};Promise.all(animations.map(a=>a.finished)).then(cleanup,cleanup);setTimeout(cleanup,duration+60);
 }
 function chooseRefinement(winner){
+ battleEntranceCleanup?.();
  if(!inlinePair||inlineBusy)return;if(manualSession&&!validRefinementSession(manualSession)){manualSession=null;inlinePair=null;render();return}inlineBusy=true;markBattleChoice(winner);equalPress(false);$('#both').disabled=true;
  const ids=inlinePair.map(p=>p.id),before=clone(state.ratings),previousSchedule=clone(state.refinementSchedule||{});
  const [a,b]=inlinePair,ra=score(a),rb=score(b),expected=1/(1+10**((rb-ra)/400)),actual=winner===2?.5:winner===0?1:0;
