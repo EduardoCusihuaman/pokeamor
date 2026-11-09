@@ -90,7 +90,10 @@ function sound(kind='choose'){
   if(kind==='like'){
    tone(784,t,.09,.032,'sine');tone(1175,t+.038,.12,.026,'triangle');tone(1568,t+.086,.15,.022,'sine');tone(2352,t+.105,.09,.006,'sine');
   }else if(kind==='battle'){
-   tone(180,t,.07,.025,'triangle');tone(720,t+.012,.075,.012,'sine');
+   // A short filtered crackle: cached noise, soft envelope, no audio download.
+   if(!audio.battleNoise){const buffer=audio.createBuffer(1,Math.ceil(audio.sampleRate*.16),audio.sampleRate),samples=buffer.getChannelData(0);for(let i=0;i<samples.length;i++)samples[i]=Math.random()*2-1;audio.battleNoise=buffer}
+   const crackle=audio.createBufferSource(),band=audio.createBiquadFilter(),envelope=audio.createGain();crackle.buffer=audio.battleNoise;band.type='bandpass';band.Q.value=.8;band.frequency.setValueAtTime(2600,t);band.frequency.exponentialRampToValueAtTime(850,t+.15);envelope.gain.setValueAtTime(.0001,t);envelope.gain.exponentialRampToValueAtTime(.025,t+.012);envelope.gain.exponentialRampToValueAtTime(.0001,t+.16);crackle.connect(band).connect(envelope).connect(audio.destination);crackle.start(t);crackle.onended=()=>{crackle.disconnect();band.disconnect();envelope.disconnect()};
+   tone(440,t,.08,.006,'sine');
   }else if(kind==='round'){
    tone(659,t,.16,.022,'sine');tone(988,t+.07,.19,.017,'triangle');tone(1318,t+.15,.23,.012,'sine');
   }else if(kind==='lift'){
@@ -484,7 +487,7 @@ function cueBattleEntrance(){
  const stop=()=>{if(disposed)return;disposed=true;clearTimeout(idleTimer);clearTimeout(impactTimer);animations.forEach(a=>a.cancel());bolt.remove();eventLayer.classList.remove('battle-entering');for(const type of ['pointerdown','keydown'])eventLayer.removeEventListener(type,stop,true);equalTools.removeEventListener('pointerdown',stop,true)};
  battleEntranceCleanup=stop;eventLayer.classList.add('battle-entering');
  buttons.forEach((b,i)=>{const sign=i===0?-1:1,axis=wide?'X':'Y';b.style.animation='none';animations.push(b.animate([{transform:`translate${axis}(${sign*22}px)`},{transform:`translate${axis}(${-sign*3}px)`,offset:.55},{transform:'translate(0,0)'}],{duration:280,easing:'cubic-bezier(.2,.75,.25,1)'}))});
- animations.push(bolt.animate([{opacity:0,transform:'scale(.9)'},{opacity:1,transform:'scale(1)',offset:.36},{opacity:1,transform:'scale(1)',offset:.68},{opacity:0,transform:'scale(1.025)'}],{duration:380}));
+ animations.push(bolt.animate([{opacity:0,transform:'scale(.9)'},{opacity:1,transform:'scale(1)',offset:.25},{opacity:1,transform:'scale(1)',offset:.72},{opacity:0,transform:'scale(1.025)'}],{duration:560}));
  impactTimer=setTimeout(()=>{if(disposed)return;sound('battle');eventLayer.classList.remove('battle-entering')},140);
  idleTimer=setTimeout(()=>{if(disposed||!inlinePair||inlineBusy||eventLayer.hidden)return;buttons.forEach((b,i)=>{animations.push(b.animate([{transform:'translateY(0)'},{transform:'translateY(-4px)',offset:.45},{transform:'translateY(0)'}],{duration:400,delay:i*440,easing:'ease-in-out'}))});bolt.remove()},1150);
  for(const type of ['pointerdown','keydown'])eventLayer.addEventListener(type,stop,true);equalTools.addEventListener('pointerdown',stop,true);
