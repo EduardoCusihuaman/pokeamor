@@ -437,7 +437,8 @@ eventLayer.append(pairBox);equalTools.classList.add('refinement-equal-tools');eq
 const equalPress=active=>eventLayer.classList.toggle('equal-press',active&&!inlineBusy);
 $('#both').addEventListener('pointerdown',()=>equalPress(true));
 for(const type of ['pointerup','pointercancel','pointerleave','blur'])$('#both').addEventListener(type,()=>equalPress(false));
-new ResizeObserver(()=>{pairBox.style.setProperty('--duel-half',(pairBox.clientHeight*.5)+'px')}).observe(pairBox);
+function updateBattleLayout(){const wide=innerWidth>=760;$('#app').classList.toggle('battle-wide',wide);pairBox.style.setProperty('--duel-half',(pairBox.clientHeight*.5)+'px');pairBox.style.setProperty('--battle-card-width',Math.max(0,Math.min((pairBox.clientWidth-12)/2,(pairBox.clientHeight-8)*.716))+'px')}
+new ResizeObserver(updateBattleLayout).observe(pairBox);window.addEventListener('resize',updateBattleLayout,{passive:true});updateBattleLayout();
 const refineIcon=$('#front-refine').innerHTML;
 function eventSeen(){return Object.keys(state.votes).length}
 function finishRefinement(skipped=false){
@@ -478,21 +479,23 @@ function paintRefinement(){
  $('#app').classList.toggle('refining',!!inlinePair);
  $('#front-refine').innerHTML=inlinePair?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6 6 6-6 6m10-12v12"/></svg>':refineIcon;
  $('#front-refine').setAttribute('aria-label',inlinePair?'Saltar comparación':'Afinar mis favoritos');
- if(!inlinePair)return;
+ if(!inlinePair)return;updateBattleLayout();
  for(const c of stage.querySelectorAll('.card')){if(c.activated)c.setUnder?.();c.hidden=true}
  pairBox.style.setProperty('--duel-half',(pairBox.clientHeight*.5)+'px');
  const pairSignature=inlinePair.map(p=>p.id+':'+p.card).join('|');if(pairBox.dataset.signature===pairSignature)return;eventLayer.classList.remove('equal-exit');pairBox.dataset.signature=pairSignature;pairBox.replaceChildren();inlinePair.forEach((p,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Prefiero '+p.name);if(eventLayer.classList.contains('continuous-handoff'))b.style.animation='none';b.append(img(p,true),battleFeedback());bindRefinementChoice(b,i);pairBox.append(b)});
 }
 function exitRefinement(winner=2){
  if(reducedMotion.matches){eventLayer.classList.add('equal-exit');finishRefinement();return}
+ const wide=$('#app').classList.contains('battle-wide');
  const rect=eventLayer.getBoundingClientRect(),half=rect.height/2,full=pairBox.children[0].querySelector('img').getBoundingClientRect?.().height||rect.width/.716,duration=winner===2?210:360;
  const cover=document.createElement('div');cover.setAttribute('aria-hidden','true');
  Object.assign(cover.style,{position:'fixed',left:rect.left+'px',top:rect.top+'px',width:rect.width+'px',height:rect.height+'px',overflow:'hidden',borderRadius:'17px',pointerEvents:'auto',touchAction:'none',zIndex:'9'});
- const panels=[...pairBox.children].map((button,i)=>{const panel=document.createElement('div'),art=button.querySelector('img').cloneNode();Object.assign(panel.style,{position:'absolute',left:'0',top:(i*half)+'px',width:'100%',height:(winner===2?half:full)+'px',overflow:'hidden',borderRadius:'17px'});Object.assign(art.style,{display:'block',width:'100%',height:'auto',borderRadius:'17px'});panel.append(art);const feedback=button.querySelector('.battle-feedback');if(winner===2||winner===i){if(feedback){const overlay=feedback.cloneNode(true);overlay.style.height=half+'px';overlay.style.opacity='1';panel.append(overlay)}}cover.append(panel);return panel});
+ const panels=[...pairBox.children].map((button,i)=>{const panel=document.createElement('div'),art=button.querySelector('img').cloneNode();Object.assign(panel.style,{position:'absolute',left:'0',top:(i*half)+'px',width:'100%',height:(winner===2?half:full)+'px',overflow:'hidden',borderRadius:'17px'});Object.assign(art.style,{display:'block',width:'100%',height:'auto',borderRadius:'17px'});if(wide){const r=button.getBoundingClientRect();Object.assign(panel.style,{left:(r.left-rect.left)+'px',top:(r.top-rect.top)+'px',width:r.width+'px',height:r.height+'px'})}panel.append(art);const feedback=button.querySelector('.battle-feedback');if(winner===2||winner===i){if(feedback){const overlay=feedback.cloneNode(true);overlay.style.height=wide?'100%':half+'px';overlay.style.opacity='1';panel.append(overlay)}}cover.append(panel);return panel});
  document.body.append(cover);
  // Mount the actual next pair underneath before moving either outgoing half.
  eventLayer.classList.add('equal-exit','continuous-handoff');finishRefinement();
  const animations=panels.map((panel,i)=>{
+ if(wide){const direction=winner===2?(i?1:-1):winner===0?-1:1;const travel=direction*(rect.width+1);return panel.animate([{transform:'translateX(0)'},{transform:'translateX('+travel+'px)'}],{duration:winner===2?210:280,easing:'cubic-bezier(.35,0,.7,1)',fill:'forwards'})}
  if(winner===2)return panel.animate([{transform:'translateY(0)'},{transform:'translateY('+((i?1:-1)*half)+'px)'}],{duration,easing:'cubic-bezier(.2,.75,.2,1)',fill:'forwards'});
  const aligned=winner===0?(i===0?0:full-half):(i===0?half-full:0);
  const travel=winner===0?rect.height+1:-(half+full+1);
