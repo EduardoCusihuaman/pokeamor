@@ -805,8 +805,8 @@
     "id": 23,
     "name": "Ekans",
     "slug": "ekans",
-    "image": "https://assets.tcgdex.net/es/tcgp/P-A/056/high.webp",
-    "card": "P-A-056",
+    "image": "https://assets.tcgdex.net/es/sv/sv10/112/high.webp",
+    "card": "sv10-112",
     "rarity": "None",
     "artist": "Krgc",
     "palette": {
@@ -815,17 +815,14 @@
       "v": 28
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:4",
       "color_id:7",
       "shape_id:2",
       "evolution_chain_id:9"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv10/112/high.webp"
   },
   {
     "id": 24,
@@ -1379,8 +1376,8 @@
     "id": 42,
     "name": "Golbat",
     "slug": "golbat",
-    "image": "https://assets.tcgdex.net/es/tcgp/A1/242/high.webp",
-    "card": "A1-242",
+    "image": "https://assets.tcgdex.net/es/sv/sv10/121/high.webp",
+    "card": "sv10-121",
     "rarity": "One Star",
     "artist": "Tomokazu Komiya",
     "palette": {
@@ -1389,18 +1386,15 @@
       "v": 78
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:4",
       "type:3",
       "color_id:7",
       "shape_id:9",
       "evolution_chain_id:17"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv10/121/high.webp"
   },
   {
     "id": 43,
@@ -1597,8 +1591,8 @@
     "id": 50,
     "name": "Diglett",
     "slug": "diglett",
-    "image": "https://assets.tcgdex.net/es/tcgp/A1/238/high.webp",
-    "card": "A1-238",
+    "image": "https://assets.tcgdex.net/es/me/me02.5/100/high.webp",
+    "card": "me02.5-100",
     "rarity": "One Star",
     "artist": "Shinya Komatsu",
     "palette": {
@@ -1607,17 +1601,14 @@
       "v": 70
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:5",
       "color_id:3",
       "shape_id:5",
       "evolution_chain_id:21"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/me/me02.5/100/high.webp"
   },
   {
     "id": 51,
@@ -3246,8 +3237,8 @@
     "id": 105,
     "name": "Marowak",
     "slug": "marowak",
-    "image": "https://assets.tcgdex.net/es/tcgp/A1/264/high.webp",
-    "card": "A1-264",
+    "image": "https://assets.tcgdex.net/es/sv/sv03.5/105/high.webp",
+    "card": "sv03.5-105",
     "rarity": "Dos Estrellas",
     "artist": "PLANETA Mochizuki",
     "palette": {
@@ -3256,17 +3247,14 @@
       "v": 70
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "not-applicable",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:5",
       "color_id:3",
       "shape_id:6",
       "evolution_chain_id:46"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv03.5/105/high.webp"
   },
   {
     "id": 106,
@@ -3384,8 +3372,8 @@
     "id": 110,
     "name": "Weezing",
     "slug": "weezing",
-    "image": "https://assets.tcgdex.net/es/tcgp/A1/243/high.webp",
-    "card": "A1-243",
+    "image": "https://assets.tcgdex.net/es/sv/sv10/199/high.webp",
+    "card": "sv10-199",
     "rarity": "One Star",
     "artist": "KEIICHIRO ITO",
     "palette": {
@@ -3394,17 +3382,14 @@
       "v": 48
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:4",
       "color_id:7",
       "shape_id:11",
       "evolution_chain_id:49"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv10/199/high.webp"
   },
   {
     "id": 111,
@@ -4250,8 +4235,8 @@
     "id": 137,
     "name": "Porygon",
     "slug": "porygon",
-    "image": "https://assets.tcgdex.net/es/tcgp/A1/249/high.webp",
-    "card": "A1-249",
+    "image": "https://assets.tcgdex.net/es/sv/sv10/153/high.webp",
+    "card": "sv10-153",
     "rarity": "One Star",
     "artist": "Akira Komayama",
     "palette": {
@@ -4260,18 +4245,15 @@
       "v": 61
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:1",
       "color_id:6",
       "shape_id:7",
       "evolution_chain_id:68"
     ],
-    "communityVotes2020": 11311
+    "communityVotes2020": 11311,
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv10/153/high.webp"
   },
   {
     "id": 138,
@@ -5088,18 +5070,15 @@
       "v": 57
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:1",
       "type:3",
       "color_id:3",
       "shape_id:9",
       "evolution_chain_id:83"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swshp/SWSH027/high.webp"
   },
   {
     "id": 165,
@@ -5414,8 +5393,8 @@
     "id": 175,
     "name": "Togepi",
     "slug": "togepi",
-    "image": "https://assets.tcgdex.net/es/tcgp/P-A/041/high.webp",
-    "card": "P-A-041",
+    "image": "https://assets.tcgdex.net/es/sv/sv08/070/high.webp",
+    "card": "sv08-070",
     "rarity": "None",
     "artist": "Naoyo Kimura",
     "palette": {
@@ -5424,18 +5403,15 @@
       "v": 73
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:18",
       "color_id:9",
       "shape_id:12",
       "evolution_chain_id:87"
     ],
-    "communityVotes2020": 14288
+    "communityVotes2020": 14288,
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv08/070/high.webp"
   },
   {
     "id": 176,
@@ -6962,18 +6938,15 @@
       "v": 79
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:11",
       "type:3",
       "color_id:7",
       "shape_id:9",
       "evolution_chain_id:116"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swshp/SWSH026/high.webp"
   },
   {
     "id": 227,
@@ -9250,8 +9223,8 @@
     "id": 299,
     "name": "Nosepass",
     "slug": "nosepass",
-    "image": "https://assets.tcgdex.net/es/tcgp/P-A/045/high.webp",
-    "card": "P-A-045",
+    "image": "https://assets.tcgdex.net/es/sv/sv06/101/high.webp",
+    "card": "sv06-101",
     "rarity": "None",
     "artist": "Tomokazu Komiya",
     "palette": {
@@ -9260,17 +9233,14 @@
       "v": 81
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:6",
       "color_id:4",
       "shape_id:12",
       "evolution_chain_id:147"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv06/101/high.webp"
   },
   {
     "id": 300,
@@ -12132,8 +12102,8 @@
     "id": 387,
     "name": "Turtwig",
     "slug": "turtwig",
-    "image": "https://assets.tcgdex.net/es/tcgp/P-A/035/high.webp",
-    "card": "P-A-035",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh12.5/GG31/high.webp",
+    "card": "swsh12.5gg-GG31",
     "rarity": "None",
     "artist": "Atsuko Nishida",
     "palette": {
@@ -12142,18 +12112,15 @@
       "v": 80
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:12",
       "color_id:5",
       "shape_id:8",
       "evolution_chain_id:203"
     ],
-    "communityVotes2020": 10865
+    "communityVotes2020": 10865,
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh12.5/GG31/high.webp"
   },
   {
     "id": 388,
@@ -12515,8 +12482,8 @@
     "id": 398,
     "name": "Staraptor",
     "slug": "staraptor",
-    "image": "https://assets.tcgdex.net/es/tcgp/P-A/047/high.webp",
-    "card": "P-A-047",
+    "image": "https://assets.tcgdex.net/es/me/me02.5/249/high.webp",
+    "card": "me02.5-249",
     "rarity": "None",
     "artist": "Hasuno",
     "palette": {
@@ -12525,11 +12492,7 @@
       "v": 55
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:1",
       "type:3",
@@ -12537,14 +12500,15 @@
       "shape_id:9",
       "evolution_chain_id:206"
     ],
-    "communityVotes2020": 14054
+    "communityVotes2020": 14054,
+    "fallbackImage": "https://assets.tcgdex.net/es/me/me02.5/249/high.webp"
   },
   {
     "id": 399,
     "name": "Bidoof",
     "slug": "bidoof",
-    "image": "https://assets.tcgdex.net/es/tcgp/P-A/057/high.webp",
-    "card": "P-A-057",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh12.5/GG29/high.webp",
+    "card": "swsh12.5gg-GG29",
     "rarity": "None",
     "artist": "Kouki Saitou",
     "palette": {
@@ -12553,18 +12517,15 @@
       "v": 63
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:1",
       "color_id:3",
       "shape_id:8",
       "evolution_chain_id:207"
     ],
-    "communityVotes2020": 10924
+    "communityVotes2020": 10924,
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh12.5/GG29/high.webp"
   },
   {
     "id": 400,
@@ -13008,8 +12969,8 @@
     "id": 415,
     "name": "Combee",
     "slug": "combee",
-    "image": "https://assets.tcgdex.net/es/tcgp/A2/157/high.webp",
-    "card": "A2-157",
+    "image": "https://assets.tcgdex.net/es/sv/sv03/008/high.webp",
+    "card": "sv03-008",
     "rarity": "One Star",
     "artist": "Shibuzoh.",
     "palette": {
@@ -13018,18 +12979,15 @@
       "v": 87
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:7",
       "type:3",
       "color_id:10",
       "shape_id:11",
       "evolution_chain_id:214"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv03/008/high.webp"
   },
   {
     "id": 416,
@@ -13126,8 +13084,8 @@
     "id": 419,
     "name": "Floatzel",
     "slug": "floatzel",
-    "image": "https://assets.tcgdex.net/es/tcgp/P-A/053/high.webp",
-    "card": "P-A-053",
+    "image": "https://assets.tcgdex.net/es/sv/sv10/058/high.webp",
+    "card": "sv10-058",
     "rarity": "None",
     "artist": "Shin Nagasawa",
     "palette": {
@@ -13136,17 +13094,14 @@
       "v": 86
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:11",
       "color_id:3",
       "shape_id:8",
       "evolution_chain_id:216"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv10/058/high.webp"
   },
   {
     "id": 420,
@@ -13178,8 +13133,8 @@
     "id": 421,
     "name": "Cherrim",
     "slug": "cherrim",
-    "image": "https://assets.tcgdex.net/es/tcgp/P-A/043/high.webp",
-    "card": "P-A-043",
+    "image": "https://assets.tcgdex.net/es/swsh/swshp/SWSH088/high.webp",
+    "card": "swshp-SWSH088",
     "rarity": "None",
     "artist": "MAHOU",
     "palette": {
@@ -13188,17 +13143,14 @@
       "v": 79
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:12",
       "color_id:7",
       "shape_id:7",
       "evolution_chain_id:217"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swshp/SWSH088/high.webp"
   },
   {
     "id": 422,
@@ -13230,8 +13182,8 @@
     "id": 423,
     "name": "Gastrodon",
     "slug": "gastrodon",
-    "image": "https://assets.tcgdex.net/es/tcgp/A2/161/high.webp",
-    "card": "A2-161",
+    "image": "https://assets.tcgdex.net/es/sv/sv08/107/high.webp",
+    "card": "sv08-107",
     "rarity": "One Star",
     "artist": "takashi shiraishi",
     "palette": {
@@ -13240,18 +13192,15 @@
       "v": 66
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:11",
       "type:5",
       "color_id:7",
       "shape_id:2",
       "evolution_chain_id:218"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv08/107/high.webp"
   },
   {
     "id": 424,
@@ -13469,8 +13418,8 @@
     "id": 431,
     "name": "Glameow",
     "slug": "glameow",
-    "image": "https://assets.tcgdex.net/es/tcgp/A2/178/high.webp",
-    "card": "A2-178",
+    "image": "https://assets.tcgdex.net/es/sv/sv07/116/high.webp",
+    "card": "sv07-116",
     "rarity": "One Star",
     "artist": "matazo",
     "palette": {
@@ -13479,17 +13428,14 @@
       "v": 50
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:1",
       "color_id:4",
       "shape_id:8",
       "evolution_chain_id:221"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv07/116/high.webp"
   },
   {
     "id": 432,
@@ -14007,8 +13953,8 @@
     "id": 449,
     "name": "Hippopotas",
     "slug": "hippopotas",
-    "image": "https://assets.tcgdex.net/es/tcgp/A2/171/high.webp",
-    "card": "A2-171",
+    "image": "https://assets.tcgdex.net/es/sv/sv10/105/high.webp",
+    "card": "sv10-105",
     "rarity": "One Star",
     "artist": "Teeziro",
     "palette": {
@@ -14017,17 +13963,14 @@
       "v": 71
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:5",
       "color_id:3",
       "shape_id:8",
       "evolution_chain_id:233"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv10/105/high.webp"
   },
   {
     "id": 450,
@@ -14127,8 +14070,8 @@
     "id": 453,
     "name": "Croagunk",
     "slug": "croagunk",
-    "image": "https://assets.tcgdex.net/es/tcgp/A2/173/high.webp",
-    "card": "A2-173",
+    "image": "https://assets.tcgdex.net/es/me/me01/078/high.webp",
+    "card": "me01-078",
     "rarity": "One Star",
     "artist": "GOSSAN",
     "palette": {
@@ -14137,18 +14080,15 @@
       "v": 70
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:4",
       "type:2",
       "color_id:2",
       "shape_id:12",
       "evolution_chain_id:235"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/me/me01/078/high.webp"
   },
   {
     "id": 454,
@@ -14196,8 +14136,8 @@
     "id": 455,
     "name": "Carnivine",
     "slug": "carnivine",
-    "image": "https://assets.tcgdex.net/es/tcgp/A2/158/high.webp",
-    "card": "A2-158",
+    "image": "https://assets.tcgdex.net/es/sv/sv07/007/high.webp",
+    "card": "sv07-007",
     "rarity": "One Star",
     "artist": "Yoriyuki Ikegami",
     "palette": {
@@ -14206,17 +14146,14 @@
       "v": 59
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:12",
       "color_id:5",
       "shape_id:10",
       "evolution_chain_id:236"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv07/007/high.webp"
   },
   {
     "id": 456,
@@ -14500,8 +14437,8 @@
     "id": 465,
     "name": "Tangrowth",
     "slug": "tangrowth",
-    "image": "https://assets.tcgdex.net/es/tcgp/A2/156/high.webp",
-    "card": "A2-156",
+    "image": "https://assets.tcgdex.net/es/me/me01/007/high.webp",
+    "card": "me01-007",
     "rarity": "One Star",
     "artist": "Saboteri",
     "palette": {
@@ -14510,17 +14447,14 @@
       "v": 57
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:12",
       "color_id:2",
       "shape_id:12",
       "evolution_chain_id:52"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/me/me01/007/high.webp"
   },
   {
     "id": 466,
@@ -21965,17 +21899,14 @@
       "v": 66
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:1",
       "color_id:3",
       "shape_id:6",
       "evolution_chain_id:340"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swshp/SWSH082/high.webp"
   },
   {
     "id": 660,
@@ -24279,8 +24210,8 @@
     "id": 731,
     "name": "Pikipek",
     "slug": "pikipek",
-    "image": "https://assets.tcgdex.net/es/tcgp/A3/177/high.webp",
-    "card": "A3-177",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh4/143/high.webp",
+    "card": "swsh4-143",
     "rarity": "One Star",
     "artist": "Narumi Sato",
     "palette": {
@@ -24289,18 +24220,15 @@
       "v": 76
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:1",
       "type:3",
       "color_id:1",
       "shape_id:9",
       "evolution_chain_id:377"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh4/143/high.webp"
   },
   {
     "id": 732,
@@ -24549,8 +24477,8 @@
     "id": 739,
     "name": "Crabrawler",
     "slug": "crabrawler",
-    "image": "https://assets.tcgdex.net/es/tcgp/P-A/071/high.webp",
-    "card": "P-A-071",
+    "image": "https://assets.tcgdex.net/es/sv/sv07/087/high.webp",
+    "card": "sv07-087",
     "rarity": "One Diamond",
     "artist": "Miki Tanaka",
     "palette": {
@@ -24559,17 +24487,14 @@
       "v": 85
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:2",
       "color_id:7",
       "shape_id:14",
       "evolution_chain_id:380"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv07/087/high.webp"
   },
   {
     "id": 740,
@@ -25040,8 +24965,8 @@
     "id": 755,
     "name": "Morelull",
     "slug": "morelull",
-    "image": "https://assets.tcgdex.net/es/tcgp/A3/157/high.webp",
-    "card": "A3-157",
+    "image": "https://assets.tcgdex.net/es/sv/sv08/008/high.webp",
+    "card": "sv08-008",
     "rarity": "One Star",
     "artist": "kamonabe",
     "palette": {
@@ -25050,18 +24975,15 @@
       "v": 54
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:12",
       "type:18",
       "color_id:7",
       "shape_id:5",
       "evolution_chain_id:389"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv08/008/high.webp"
   },
   {
     "id": 756,
@@ -25108,8 +25030,8 @@
     "id": 757,
     "name": "Salandit",
     "slug": "salandit",
-    "image": "https://assets.tcgdex.net/es/tcgp/A1a/071/high.webp",
-    "card": "A1a-071",
+    "image": "https://assets.tcgdex.net/es/sv/sv07/023/high.webp",
+    "card": "sv07-023",
     "rarity": "One Star",
     "artist": "Nurikabe",
     "palette": {
@@ -25118,18 +25040,15 @@
       "v": 75
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:4",
       "type:10",
       "color_id:1",
       "shape_id:8",
       "evolution_chain_id:390"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv07/023/high.webp"
   },
   {
     "id": 758,
@@ -25336,8 +25255,8 @@
     "id": 764,
     "name": "Comfey",
     "slug": "comfey",
-    "image": "https://assets.tcgdex.net/es/tcgp/A3/168/high.webp",
-    "card": "A3-168",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh12.5/GG14/high.webp",
+    "card": "swsh12.5gg-GG14",
     "rarity": "One Star",
     "artist": "mashu",
     "palette": {
@@ -25346,17 +25265,14 @@
       "v": 66
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:18",
       "color_id:5",
       "shape_id:1",
       "evolution_chain_id:393"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh12.5/GG14/high.webp"
   },
   {
     "id": 765,
@@ -25699,8 +25615,8 @@
     "id": 775,
     "name": "Komala",
     "slug": "komala",
-    "image": "https://assets.tcgdex.net/es/tcgp/A3/179/high.webp",
-    "card": "A3-179",
+    "image": "https://assets.tcgdex.net/es/sv/sv09/129/high.webp",
+    "card": "sv09-129",
     "rarity": "One Star",
     "artist": "GOTO minori",
     "palette": {
@@ -25709,17 +25625,14 @@
       "v": 49
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:1",
       "color_id:2",
       "shape_id:12",
       "evolution_chain_id:401"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv09/129/high.webp"
   },
   {
     "id": 776,
@@ -26172,8 +26085,8 @@
     "id": 789,
     "name": "Cosmog",
     "slug": "cosmog",
-    "image": "https://assets.tcgdex.net/es/tcgp/P-A/067/high.webp",
-    "card": "P-A-067",
+    "image": "https://assets.tcgdex.net/es/sm/sm12/99/high.webp",
+    "card": "sm12-99",
     "rarity": "Three Diamond",
     "artist": "Mizue",
     "palette": {
@@ -26182,18 +26095,15 @@
       "v": 72
     },
     "language": "es",
-    "surface": {
-      "scope": "digital",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:14",
       "color_id:2",
       "shape_id:1",
       "evolution_chain_id:413"
     ],
-    "communityVotes2020": 7515
+    "communityVotes2020": 7515,
+    "fallbackImage": "https://assets.tcgdex.net/es/sm/sm12/99/high.webp"
   },
   {
     "id": 790,
@@ -27351,17 +27261,14 @@
       "v": 78
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:12",
       "color_id:5",
       "shape_id:5",
       "evolution_chain_id:437"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swshp/SWSH010/high.webp"
   },
   {
     "id": 830,
@@ -27392,8 +27299,8 @@
     "id": 831,
     "name": "Wooloo",
     "slug": "wooloo",
-    "image": "https://assets.tcgdex.net/es/swsh/swshp/SWSH011/high.webp",
-    "card": "swshp-SWSH011",
+    "image": "https://assets.tcgdex.net/es/sv/sv09/170/high.webp",
+    "card": "sv09-170",
     "rarity": "Promo",
     "artist": "Hitoshi Ariga",
     "palette": {
@@ -27402,18 +27309,15 @@
       "v": 57
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:1",
       "color_id:9",
       "shape_id:8",
       "evolution_chain_id:438"
     ],
-    "communityVotes2020": 21266
+    "communityVotes2020": 21266,
+    "fallbackImage": "https://assets.tcgdex.net/es/sv/sv09/170/high.webp"
   },
   {
     "id": 832,
@@ -27864,17 +27768,14 @@
       "v": 87
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:11",
       "color_id:3",
       "shape_id:3",
       "evolution_chain_id:445"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swshp/SWSH093/high.webp"
   },
   {
     "id": 847,
@@ -28131,17 +28032,14 @@
       "v": 67
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:8",
       "color_id:7",
       "shape_id:1",
       "evolution_chain_id:449"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swshp/SWSH081/high.webp"
   },
   {
     "id": 856,
@@ -28157,17 +28055,14 @@
       "v": 69
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:14",
       "color_id:6",
       "shape_id:7",
       "evolution_chain_id:450"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swshp/SWSH040/high.webp"
   },
   {
     "id": 857,
@@ -28280,8 +28175,8 @@
     "id": 861,
     "name": "Grimmsnarl",
     "slug": "grimmsnarl",
-    "image": "https://assets.tcgdex.net/es/swsh/swshp/SWSH057/high.webp",
-    "card": "swshp-SWSH057",
+    "image": "https://assets.tcgdex.net/es/me/me02.5/287/high.webp",
+    "card": "me02.5-287",
     "rarity": "Promo",
     "artist": "5ban Graphics",
     "palette": {
@@ -28290,11 +28185,7 @@
       "v": 42
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:17",
       "type:18",
@@ -28302,7 +28193,8 @@
       "shape_id:12",
       "evolution_chain_id:451"
     ],
-    "communityVotes2020": 12923
+    "communityVotes2020": 12923,
+    "fallbackImage": "https://assets.tcgdex.net/es/me/me02.5/287/high.webp"
   },
   {
     "id": 862,
@@ -28883,18 +28775,15 @@
       "v": 80
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:13",
       "type:15",
       "color_id:2",
       "shape_id:6",
       "evolution_chain_id:462"
-    ]
+    ],
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swshp/SWSH036/high.webp"
   },
   {
     "id": 882,
@@ -29157,8 +29046,8 @@
     "id": 890,
     "name": "Eternatus",
     "slug": "eternatus",
-    "image": "https://assets.tcgdex.net/es/swsh/swshp/SWSH044/high.webp",
-    "card": "swshp-SWSH044",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh11tg/TG21/high.webp",
+    "card": "swsh11tg-TG21",
     "rarity": "Promo",
     "artist": "5ban Graphics",
     "palette": {
@@ -29167,11 +29056,7 @@
       "v": 66
     },
     "language": "es",
-    "surface": {
-      "scope": "physical",
-      "status": "unverified",
-      "effect": "none"
-    },
+    "surface": null,
     "traits": [
       "type:4",
       "type:16",
@@ -29179,7 +29064,8 @@
       "shape_id:9",
       "evolution_chain_id:469"
     ],
-    "communityVotes2020": 15699
+    "communityVotes2020": 15699,
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh11tg/TG21/high.webp"
   },
   {
     "id": 891,

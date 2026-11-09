@@ -5838,5 +5838,195 @@
     "name": "Paldean Clodsire",
     "set": "OBF",
     "number": "128"
+  },
+  "sv10-112": {
+    "name": "Team Rocket's Ekans",
+    "set": "DRI",
+    "number": "112"
+  },
+  "sv10-121": {
+    "name": "Team Rocket's Golbat",
+    "set": "DRI",
+    "number": "121"
+  },
+  "me02.5-100": {
+    "name": "Team Rocket's Diglett",
+    "set": "ASC",
+    "number": "100"
+  },
+  "sv03.5-105": {
+    "name": "Marowak",
+    "set": "MEW",
+    "number": "105"
+  },
+  "sv10-199": {
+    "name": "Team Rocket's Weezing",
+    "set": "DRI",
+    "number": "199"
+  },
+  "sv10-153": {
+    "name": "Team Rocket's Porygon",
+    "set": "DRI",
+    "number": "153"
+  },
+  "sv08-070": {
+    "name": "Togepi",
+    "set": "SSP",
+    "number": "70"
+  },
+  "sv06-101": {
+    "name": "Nosepass",
+    "set": "TWM",
+    "number": "101"
+  },
+  "swsh12.5gg-GG31": {
+    "name": "Turtwig",
+    "set": "CRZ",
+    "number": "GG31"
+  },
+  "me02.5-249": {
+    "name": "Larry's Staraptor",
+    "set": "ASC",
+    "number": "249"
+  },
+  "swsh12.5gg-GG29": {
+    "name": "Bidoof",
+    "set": "CRZ",
+    "number": "GG29"
+  },
+  "sv03-008": {
+    "name": "Combee",
+    "set": "OBF",
+    "number": "8"
+  },
+  "sv10-058": {
+    "name": "Floatzel",
+    "set": "DRI",
+    "number": "58"
+  },
+  "swshp-SWSH088": {
+    "name": "Cherrim",
+    "set": "SP",
+    "number": "88"
+  },
+  "sv08-107": {
+    "name": "Gastrodon",
+    "set": "SSP",
+    "number": "107"
+  },
+  "sv07-116": {
+    "name": "Glameow",
+    "set": "SCR",
+    "number": "116"
+  },
+  "sv10-105": {
+    "name": "Hippopotas",
+    "set": "DRI",
+    "number": "105"
+  },
+  "me01-078": {
+    "name": "Croagunk",
+    "set": "MEG",
+    "number": "78"
+  },
+  "sv07-007": {
+    "name": "Carnivine",
+    "set": "SCR",
+    "number": "7"
+  },
+  "me01-007": {
+    "name": "Tangrowth",
+    "set": "MEG",
+    "number": "7"
+  },
+  "swsh4-143": {
+    "name": "Pikipek",
+    "set": "VIV",
+    "number": "143"
+  },
+  "sv07-087": {
+    "name": "Crabrawler",
+    "set": "SCR",
+    "number": "87"
+  },
+  "sv08-008": {
+    "name": "Morelull",
+    "set": "SSP",
+    "number": "8"
+  },
+  "sv07-023": {
+    "name": "Salandit",
+    "set": "SCR",
+    "number": "23"
+  },
+  "swsh12.5gg-GG14": {
+    "name": "Comfey",
+    "set": "CRZ",
+    "number": "GG14"
+  },
+  "sv09-129": {
+    "name": "Komala",
+    "set": "JTG",
+    "number": "129"
+  },
+  "sm12-99": {
+    "name": "Cosmog",
+    "set": "CEC",
+    "number": "99"
+  },
+  "swshp-SWSH027": {
+    "name": "Noctowl",
+    "set": "SP",
+    "number": "27"
+  },
+  "swshp-SWSH026": {
+    "name": "Mantine",
+    "set": "SP",
+    "number": "26"
+  },
+  "swshp-SWSH082": {
+    "name": "Bunnelby",
+    "set": "SP",
+    "number": "82"
+  },
+  "swshp-SWSH010": {
+    "name": "Gossifleur",
+    "set": "SP",
+    "number": "10"
+  },
+  "sv09-170": {
+    "name": "Hop's Wooloo",
+    "set": "JTG",
+    "number": "170"
+  },
+  "swshp-SWSH093": {
+    "name": "Arrokuda",
+    "set": "SP",
+    "number": "93"
+  },
+  "swshp-SWSH081": {
+    "name": "Polteageist",
+    "set": "SP",
+    "number": "81"
+  },
+  "swshp-SWSH040": {
+    "name": "Hatenna",
+    "set": "SP",
+    "number": "40"
+  },
+  "me02.5-287": {
+    "name": "Marnie's Grimmsnarl ex",
+    "set": "ASC",
+    "number": "287"
+  },
+  "swshp-SWSH036": {
+    "name": "Arctozolt",
+    "set": "SP",
+    "number": "36"
+  },
+  "swsh11tg-TG21": {
+    "name": "Eternatus V",
+    "set": "LOR",
+    "number": "TG21"
   }
 }
