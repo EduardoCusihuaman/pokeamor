@@ -479,11 +479,12 @@ function cueBattleEntrance(){
  if(reducedMotion.matches)return;
  const buttons=[...pairBox.children],wide=$('#app').classList.contains('battle-wide'),animations=[];
  let idleTimer,impactTimer,disposed=false;
- const bolt=document.createElement('span');bolt.className='battle-clash';bolt.setAttribute('aria-hidden','true');bolt.innerHTML='<svg viewBox="0 0 40 52"><path d="M23 3 7 28h12l-3 21 18-29H22Z"/></svg>';eventLayer.append(bolt);
+ const bolt=document.createElement('span');bolt.className='battle-clash';bolt.setAttribute('aria-hidden','true');const spine='M4 32 39 29 57 38 78 21 106 35 130 27 149 36 164 17 182 34 206 26 230 38 254 24 278 34 316 30',branches='M78 21 86 8 103 5 M149 36 137 51 119 57 M182 34 196 49 218 54 M254 24 265 10 283 7';
+ bolt.innerHTML=`<svg viewBox="0 0 ${wide?'64 320':'320 64'}" preserveAspectRatio="none"><g ${wide?'transform="matrix(0 1 1 0 0 0)"':''}><path class="clash-aura" d="${spine}"/><path class="clash-branches" d="${branches}"/><path class="clash-edge" d="${spine}"/><path class="clash-core" d="${spine}"/></g></svg>`;eventLayer.append(bolt);
  const stop=()=>{if(disposed)return;disposed=true;clearTimeout(idleTimer);clearTimeout(impactTimer);animations.forEach(a=>a.cancel());bolt.remove();eventLayer.classList.remove('battle-entering');for(const type of ['pointerdown','keydown'])eventLayer.removeEventListener(type,stop,true);equalTools.removeEventListener('pointerdown',stop,true)};
  battleEntranceCleanup=stop;eventLayer.classList.add('battle-entering');
  buttons.forEach((b,i)=>{const sign=i===0?-1:1,axis=wide?'X':'Y';b.style.animation='none';animations.push(b.animate([{transform:`translate${axis}(${sign*22}px)`},{transform:`translate${axis}(${-sign*3}px)`,offset:.55},{transform:'translate(0,0)'}],{duration:280,easing:'cubic-bezier(.2,.75,.25,1)'}))});
- animations.push(bolt.animate([{opacity:0,transform:'scale(.55)'},{opacity:1,transform:'scale(1.12)',offset:.42},{opacity:0,transform:'scale(.92)'}],{duration:260}));
+ animations.push(bolt.animate([{opacity:0,transform:'scale(.9)'},{opacity:1,transform:'scale(1)',offset:.36},{opacity:1,transform:'scale(1)',offset:.68},{opacity:0,transform:'scale(1.025)'}],{duration:380}));
  impactTimer=setTimeout(()=>{if(disposed)return;sound('battle');eventLayer.classList.remove('battle-entering')},140);
  idleTimer=setTimeout(()=>{if(disposed||!inlinePair||inlineBusy||eventLayer.hidden)return;buttons.forEach((b,i)=>{animations.push(b.animate([{transform:'translateY(0)'},{transform:'translateY(-4px)',offset:.45},{transform:'translateY(0)'}],{duration:400,delay:i*440,easing:'ease-in-out'}))});bolt.remove()},1150);
  for(const type of ['pointerdown','keydown'])eventLayer.addEventListener(type,stop,true);equalTools.addEventListener('pointerdown',stop,true);
