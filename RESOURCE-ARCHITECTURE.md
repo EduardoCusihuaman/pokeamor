@@ -23,3 +23,13 @@ Compressed memory: 20 MiB / 64 entries, soft under active ownership. Persistent 
 ## Verification
 
 Identity, shared transfers, independent preparation, rebind cancellation, decode failure eviction, atomic bundle rejection, Worker bundle response, carousel bounds, battle readiness, material routes and final battle progress are covered by automated suites. User votes, history and recommendation semantics retain their existing schema. Normalized registries are derived from the authoring catalog rather than duplicating editable assignments in a second file.
+
+## Discovery presentation buffer (swipe continuity)
+
+`discovery-buffer.js` retains one presentation per upcoming print. `makeCard` takes that presentation instead of allocating another warmed image. Buffer-to-back-to-front-to-flight transfers preserve the same DOM image and resource lease. A pending front stays opaque and noninteractive; terminal errors expose retry without recording a vote. Readiness remains distinct from mounting.
+
+Outgoing cards own their resources until their own animation cleanup; render no longer truncates to two outgoing nodes. Undo uses the same cleanup, and final discovery waits for the last flight before opening completion. The animation curve and normal duration remain unchanged.
+
+The buffer reserves a minimum prefix and limits speculative decoded images to five with a 16 MiB estimated pixel budget for additional entries. The minimum three positions can exceed that soft budget. This preserves the recommender's existing three-position lock. Background battle/alternative preparation yields when discovery has fewer than two ready positions; explicit battle entry remains urgent. Network size statistics now distinguish frontals, thumbnails and materials.
+
+Persistence and Journey state updates retain their current semantics; broad deferral of batch/reward updates was deliberately not introduced without event-snapshot tests. Repeated like-icon markup is avoided. Further UI coalescing, strict total decoded memory accounting, global observer replacement and device performance tuning remain follow-up work, not measured improvements of this change.
