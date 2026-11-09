@@ -442,7 +442,7 @@ new ResizeObserver(updateBattleLayout).observe(pairBox);window.addEventListener(
 const refineIcon=$('#front-refine').innerHTML;
 function eventSeen(){return Object.keys(state.votes).length}
 function finishRefinement(skipped=false){
- if(!inlinePair)return;
+ if(!inlinePair)return;window.PokeResources?.release('battle');
  state.refinementSchedule={lastSeen:eventSeen(),nextSeen:eventSeen()+(skipped?40:26+(state.duels%10)),started:true,time:Date.now()};
  for(const b of pairBox.children)b.cancelRefinementPress?.();for(const c of $('#stage').querySelectorAll('.card'))c.hidden=false;inlineBusy=true;queuedPair=null;eventLayer.classList.add('event-leaving');setTimeout(()=>{inlinePair=null;inlineBusy=false;eventLayer.classList.remove('event-leaving');save();render()},reducedMotion.matches||eventLayer.classList.contains('equal-exit')?0:170);
 }
@@ -580,12 +580,14 @@ function validRefinementSession(session){return session.favorites===refinementFa
 function prepareRefinementPair(session,index){
  if(session.ready.has(index))return session.ready.get(index);
  const pair=session.pairs[index];if(!pair)return Promise.resolve(false);
+ window.PokeResources?.plan('battle',pair);
  const ready=Promise.all(pair.map(p=>new Promise(resolve=>{
   warmArtwork(p);const art=warmArt.get(p.surface?.assets?.front||p.image||fallback(p));if(!art){resolve(false);return}
-  let done=false;const finish=ok=>{if(done)return;done=true;clearTimeout(timer);art.removeEventListener('load',loaded);art.removeEventListener('error',failed);resolve(ok)};
-  const loaded=()=>{if(!art.naturalWidth){finish(false);return}if(art.decode)art.decode().then(()=>finish(true),()=>finish(false));else finish(true)};
-  const failed=()=>finish(false),timer=setTimeout(failed,8000);art.addEventListener('load',loaded,{once:true});art.addEventListener('error',failed,{once:true});if(art.complete)loaded();
- }))).then(results=>results.every(Boolean)).catch(()=>false);
+  let done=false;const finish=ok=>{if(done)return;done=true;clearTimeout(timer);resolve(!!ok)};
+  const timer=setTimeout(()=>finish(false),22000);
+  // An img without src is complete=true too. Only the exact decoded image is ready.
+  Promise.resolve(art.artReady).then(ok=>finish(ok&&art.cardReady&&art.naturalWidth>0),()=>finish(false));
+ }))).then(results=>{const ok=results.every(Boolean);if(!ok)session.ready.delete(index);return ok}).catch(()=>{session.ready.delete(index);return false});
  session.ready.set(index,ready);return ready;
 }
 function beginManualRefinement(){
@@ -593,7 +595,7 @@ function beginManualRefinement(){
  const started=performance.now(),pairs=window.PokePreference.plan(catalog,state);window.PokeBattleStats={planMs:performance.now()-started,pairs:pairs.length};
  if(!pairs.length){toast('Elegí al menos dos favoritos.');return}
  const session=manualSession={done:0,target:pairs.length,pairs,ready:new Map(),favorites:refinementFavorites(),resetAt:state.resetAt||0};inlineBusy=true;
- prepareRefinementPair(session,0).then(ok=>{if(manualSession!==session)return;inlineBusy=false;if(!ok||!validRefinementSession(session)){manualSession=null;if(!ok)toast('No se pudieron cargar las cartas. Intentá de nuevo.');return}startRefinement(true)});
+ prepareRefinementPair(session,0).then(ok=>{if(manualSession!==session)return;inlineBusy=false;if(!ok||!validRefinementSession(session)){manualSession=null;window.PokeResources?.release('battle');if(!ok)toast('No se pudieron cargar las cartas. Intentá de nuevo.');return}startRefinement(true)});
 }
 const singleFinishRefinement=finishRefinement;
 finishRefinement=function(skipped=false){
