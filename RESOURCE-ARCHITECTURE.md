@@ -1,13 +1,25 @@
-# Resource architecture
+# Card resource architecture
 
-The catalog remains the compatible authoring format. PokeCards resolves it into immutable presentation references; no secondary copy of the full catalog is created. A reference identifies print, declared language, revision, exact front, thumbnail and compatible material. URLs are explicit, never inferred from a set code. Existing incomplete language coverage remains visible in source data rather than silently selecting a different print.
+## Identity and data publication
 
-PokeResources owns compressed transfer deduplication and scheduling. PokeAssets delegates to it in production. Decoded DOM images and GPU textures retain separate lifetimes. Discovery and battle images are higher priority than speculative materials. Playmat now shares front transfers and never uses a different-print fallback.
+The checked-in catalog is the authoring source for principal assignments. PokeCards builds separate species, print and language-resource indexes at installation. Immutable presentation references include exact image, thumbnail, material and proxy mapping. References distinguish print, language and resource revision; existing missing Spanish assets/proxy records remain explicit data gaps and are not replaced automatically.
 
-Carousel shells preserve layout for all positions, while only current -1 through +3 instantiate images. Moving releases distant image references. Closing releases all carousel references after capturing the reverse-animation clone. Album tiles use print identity and detached tiles are purged when rebuilding. Catalog refresh clears derived visual caches and rebinds the album catalog; already presented cards keep their original source until presentation ends.
+The build hashes principal catalog content as well as alternatives and proxies. `/catalog-bundle.json` serves the catalog and both metadata tables with their manifest from the same Worker version. The browser validates both tables before replacing any active metadata. Catalog refresh installs these together, clears derived caches and rebuilds album references. Already mounted presentations finish with their original images.
 
-Decode failure invalidates compressed memory and persistent local cache so a failed resource can retry. Sprites remain an explicit emergency presentation and cannot satisfy battle preparation. The existing gesture engine retains source identity throughout flight.
+## Transfer and preparation
 
-Verification: card-identity.test.mjs and resource-coordinator.test.mjs exercise bounded carousel hydration, exact print identity, immutable references, language/revision separation, shared requests, failed cache eviction, consumer release and concurrency. Existing battle/readiness suites guard presentation behavior.
+PokeResources owns compressed transfer deduplication, concurrency, priorities and persistent cache. PokeAssets delegates material transfer to it. All principal images, alternatives, debug previews, lazy grid images, album thumbnails and playmat fronts use this coordinator. Thumbnail intersections defer loading and release offscreen presentation leases. Cards keep their chosen source throughout display and gestures; debug preview no longer upgrades a visible low image to another source.
 
-Remaining boundaries: native lazy thumbnails and debug peek still use browser image loading; alternative preparation still bridges native Image into readiness. The normalized reference is a compatibility layer over authoring data, not yet a physical migration of all historical JSON into relational print/locale tables. Cache budgets remain soft when owners pin resources; decoded/GPU residency and Safari frame timing require real-device measurement. Do not infer RAM savings from serialized JSON size. Atomic versioned catalog/proxy deployment remains handled by the existing build manifest; historical proxy entries remain supported.
+`bindImage` creates a presentation lease with independent queued/decoding/presentable/error state, readiness promise and decode timing. Shared downloads do not imply shared readiness. Rebinding cancels only the obsolete presentation and ignores late results. A failed decode invalidates the compressed entry and persistent copy after any pending cache write. Sprites never satisfy card readiness.
+
+DOM image leases pin needed files; release drops ownership without cancelling another consumer's transfer. Detached formerly mounted images release automatically; the viewer explicitly releases distant images and close teardown. The carousel retains current -1 through +3, and warm artwork is bounded while preserving battle-owned preparations. Reward cache lookup uses the same print identity as insertion.
+
+## Budgets and measurements
+
+Compressed memory: 20 MiB / 64 entries, soft under active ownership. Persistent same-origin cache: 32 entries. Network: four transfers with speculative work leaving a slot for urgent images. Discovery lookahead: 6–24 images under existing byte and save-data constraints. Prepared carousel: at most five images. GPU and decoded DOM presentation lifetimes remain separate from compressed transfer caching.
+
+`snapshot()` reports transfer timings, queue time, bytes, failures, active leases, decoded image count and estimated RGBA pixel bytes. This pixel estimate is not browser heap or measured GPU residency. Actual Safari frame timing and peak memory require a real-device run. Publication and tests cannot establish those numbers.
+
+## Verification
+
+Identity, shared transfers, independent preparation, rebind cancellation, decode failure eviction, atomic bundle rejection, Worker bundle response, carousel bounds, battle readiness, material routes and final battle progress are covered by automated suites. User votes, history and recommendation semantics retain their existing schema. Normalized registries are derived from the authoring catalog rather than duplicating editable assignments in a second file.

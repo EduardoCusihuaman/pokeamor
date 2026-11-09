@@ -20,7 +20,7 @@ def build():
   if accepted:pokemon[pid]=[[r['printId'],r['image'],r['rarity'],r.get('artist','')] for r in accepted]
  sets=sorted({r['set'] for r in records.values()})
  prints={pid:[sets.index(r['set']),r['number'],r['name']] for pid,r in sorted(records.items())}
- version=hashlib.sha256(raw([pokemon,sets,prints])).hexdigest()[:16]
+ version=hashlib.sha256(raw([catalog,pokemon,sets,prints])).hexdigest()[:16]
  out=ROOT/'generated/card-resources';out.mkdir(parents=True,exist_ok=True)
  manifest={'schema':1,'dataVersion':version};report={'species':len(pokemon),'alternatives':sum(map(len,pokemon.values())),'proxies':len(prints),'unresolved':[p['id'] for p in catalog if p.get('card') not in records],'sizes':{}}
  for kind,body in [('alternatives',{'pokemon':pokemon}),('proxies',{'sets':sets,'prints':prints})]:
