@@ -1,0 +1,6 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';
+const s=fs.readFileSync('src/app.js','utf8'),source=s.slice(s.indexOf('function artworkReady('),s.indexOf('function warmArtwork('));
+function setup(complete,width){const listeners={},art={complete,naturalWidth:width,src:'exact',addEventListener:(k,v)=>listeners[k]=v,removeEventListener(){},async decode(){}},ctx={fallback:()=> 'sprite'};vm.createContext(ctx);vm.runInContext(source,ctx);return{art,ctx,listeners}}
+test('native preloaded alternative image acquires battle readiness without redownload',async()=>{const {art,ctx}=setup(true,600);assert.equal(art.artReady,undefined);assert.equal(await ctx.artworkReady(art,{}),true);assert.equal(art.cardReady,true)});
+test('native image with empty source waits rather than failing immediately',async()=>{const {art,ctx,listeners}=setup(true,0);let done=false;const ready=ctx.artworkReady(art,{}).then(ok=>(done=true,ok));await Promise.resolve();assert.equal(done,false);art.naturalWidth=600;await listeners.load();assert.equal(await ready,true)});
+test('failed native artwork settles false and cannot impersonate a valid card',async()=>{const {art,ctx,listeners}=setup(false,0);const ready=ctx.artworkReady(art,{});listeners.error();assert.equal(await ready,false);assert.equal(art.cardReady,false)});

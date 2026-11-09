@@ -1,7 +1,7 @@
 import json,hashlib
 from pathlib import Path
 p=Path(__file__).resolve().parent.parent
-c=json.loads((p/'catalog.json').read_text());assert len(c)==1025 and len({x['id'] for x in c})==1025
+c=json.loads((p/'data/catalog.json').read_text());assert len(c)==1025 and len({x['id'] for x in c})==1025
 assert all('proxy' not in x for x in c)
 m=json.loads((p/'generated/card-resources/manifest.json').read_text())
 for kind in ['alternatives','proxies']:

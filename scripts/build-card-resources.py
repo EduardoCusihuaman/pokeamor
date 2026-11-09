@@ -4,7 +4,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent
 def raw(x):return json.dumps(x,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
 def build():
- catalog=json.loads((ROOT/'catalog.json').read_text())
+ catalog=json.loads((ROOT/'data/catalog.json').read_text())
  curated=json.loads((ROOT/'data/alternatives-curated.json').read_text())
  records=json.loads((ROOT/'data/card-metadata/proxies.json').read_text())
  records.update(json.loads((ROOT/'data/proxy-overrides.json').read_text()))
