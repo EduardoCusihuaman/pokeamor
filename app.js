@@ -645,3 +645,36 @@ function updateCompletedNavigation(){
  document.addEventListener('pointerdown',stop,{passive:true});
  reducedMotion.addEventListener?.('change',stop);
 })();
+
+// A settled batch opens in place; native scrolling never changes layout mid-gesture.
+(()=>{
+const sheet=$('#sheet'),root=$('#round-memories'),reduced=matchMedia('(prefers-reduced-motion: reduce)');
+let expanded=null,timer=0,settle=0,pressed=false,quietUntil=0;const cooldown=new WeakMap(),animations=new Set();
+const enabled=()=>sheet.classList.contains('open')&&sheet.classList.contains('rounds-mode')&&!sheet.classList.contains('debug-mode')&&!sheet.classList.contains('scrubbing')&&!document.hidden&&!reduced.matches&&!$('#card-detail').open;
+const bounds=()=>{const r=sheet.getBoundingClientRect(),h=sheet.querySelector('header').getBoundingClientRect();return{top:Math.max(r.top,h.bottom)+8,bottom:Math.min(r.bottom,innerHeight)-16}};
+function cancel(){clearTimeout(timer);clearTimeout(settle)}
+function change(section,open){
+ const view=bounds(),tiles=[...root.querySelectorAll('.memory-card,.batch-placeholder')],visible=tiles.filter(t=>{const r=t.getBoundingClientRect();return r.bottom>view.top&&r.top<view.bottom}),before=new Map(visible.map(t=>[t,t.getBoundingClientRect()]));
+ const own=[...section.querySelectorAll('.memory-card')];const anchor=own.reduce((best,t)=>{const r=t.getBoundingClientRect(),distance=Math.abs((r.top+r.bottom)/2-(view.top+view.bottom)/2);return !best||distance<best.distance?{tile:t,top:r.top,distance}:best},null);
+ for(const a of animations)a.cancel();animations.clear();section.classList.toggle('reading-batch',open);expanded=open?section:null;quietUntil=performance.now()+300;
+ if(anchor)sheet.scrollTop+=anchor.tile.getBoundingClientRect().top-anchor.top;
+ for(const [tile,r] of before){const next=tile.getBoundingClientRect();if(!next.width||!next.height)continue;const a=tile.animate([{transform:`translate(${r.left-next.left}px,${r.top-next.top}px) scale(${r.width/next.width},${r.height/next.height})`},{transform:'none'}],{duration:230,easing:'cubic-bezier(.2,.75,.2,1)'});animations.add(a);a.finished.then(()=>animations.delete(a),()=>animations.delete(a))}
+ if(!open)cooldown.set(section,performance.now()+12000);
+}
+function inspect(){
+ cancel();if(!enabled()||pressed)return;const view=bounds();
+ if(expanded){const r=expanded.getBoundingClientRect();if(r.bottom>view.top+70&&r.top<view.bottom-70)return;change(expanded,false);settle=setTimeout(inspect,320);return}
+ const height=view.bottom-view.top;let candidate=null,best=0;
+ for(const section of root.querySelectorAll('.batch-group')){if((cooldown.get(section)||0)>performance.now()||section.querySelectorAll('.memory-card').length<4)continue;const r=section.getBoundingClientRect(),overlap=Math.max(0,Math.min(r.bottom,view.bottom)-Math.max(r.top,view.top));if(overlap<Math.min(r.height*.65,height*.55))continue;if(overlap>best){best=overlap;candidate=section}}
+ if(candidate)timer=setTimeout(()=>{if(enabled()&&!pressed&&candidate.isConnected)change(candidate,true)},2000);
+}
+function pause(){cancel();pressed=true}
+function resume(){pressed=false;cancel();settle=setTimeout(inspect,220)}
+sheet.addEventListener('pointerdown',pause,{passive:true});document.addEventListener('pointerup',resume,{passive:true});document.addEventListener('pointercancel',resume,{passive:true});
+sheet.addEventListener('scroll',()=>{cancel();if(performance.now()<quietUntil)return;settle=setTimeout(inspect,200)},{passive:true});
+sheet.addEventListener('wheel',()=>{cancel();settle=setTimeout(inspect,240)},{passive:true});
+sheet.addEventListener('click',()=>{cancel();settle=setTimeout(inspect,300)},{passive:true});
+new MutationObserver(()=>{cancel();if(!enabled()){if(expanded)expanded.classList.remove('reading-batch');expanded=null;return}settle=setTimeout(inspect,300)}).observe(sheet,{attributes:true,attributeFilter:['class']});
+new MutationObserver(()=>{cancel();if(expanded&&!expanded.isConnected)expanded=null;settle=setTimeout(inspect,300)}).observe(root,{childList:true});
+document.addEventListener('visibilitychange',()=>{cancel();if(!document.hidden)resume()});window.addEventListener('blur',()=>{pressed=false;cancel()});reduced.addEventListener('change',()=>{cancel();if(reduced.matches&&expanded){expanded.classList.remove('reading-batch');expanded=null}});
+})();
