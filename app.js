@@ -509,7 +509,7 @@ function chooseRefinement(winner){
  const [a,b]=inlinePair,ra=score(a),rb=score(b),expected=1/(1+10**((rb-ra)/400)),actual=winner===2?.5:winner===0?1:0;
  for(const [p,v] of [[a,ra+28*(actual-expected)],[b,rb-28*(actual-expected)]])state.ratings[p.id]={score:v,played:(state.ratings[p.id]?.played||0)+1};
  const event={id:crypto.randomUUID(),ids,winner,time:Date.now()};
- state.comparisons=state.comparisons||[];state.comparisons.push(event);state.duels++;
+ state.comparisons=state.comparisons||[];state.comparisons.push(event);state.duels++;commitBattleProgress();
  state.history.push({refinement:true,eventId:event.id,ratings:before,previousSchedule,ids});
  adaptiveBlock='';sound('like');tactile('like');
  save();
@@ -574,8 +574,31 @@ window.PokeOpenBatch=function(ids){
 // Optional short refinement session; automatic encounters remain single choices.
 let manualSession=null,battleCandidate=null;
 const manualIcon='<svg viewBox="0 0 24 30" aria-hidden="true"><g><path d="M8 2h8v3c2.2.8 3.5 2.8 3.5 5v.5A3.5 3.5 0 0 1 16 14h-4.5A3.5 3.5 0 0 1 8 10.5V9L6.5 7.5A1.5 1.5 0 0 0 4 8.6V10a3 3 0 0 0 4 2.8"/><path d="M8 5h8"/></g><g transform="translate(0 30) scale(1 -1)"><path d="M8 2h8v3c2.2.8 3.5 2.8 3.5 5v.5A3.5 3.5 0 0 1 16 14h-4.5A3.5 3.5 0 0 1 8 10.5V9L6.5 7.5A1.5 1.5 0 0 0 4 8.6V10a3 3 0 0 0 4 2.8"/><path d="M8 5h8"/></g></svg>';
+let completedBattleCue=null,battleCueTimer;
+function battleProgressState(){
+ const session=manualSession;
+ if(session)return {total:session.target,done:Math.min(session.target,session.done+(session.choiceCommitted?1:0)),active:true};
+ if(completedBattleCue&&performance.now()<completedBattleCue.until)return {total:completedBattleCue.total,done:completedBattleCue.total,active:false};
+ return null;
+}
+function paintBattleProgress(){
+ const b=$('#front-refine'),progress=battleProgressState();
+ if(progress){
+ const signature=progress.total+':'+progress.active;
+ if(b.dataset.progressSignature!==signature){b.dataset.progressSignature=signature;b.innerHTML='<span class="refine-dots" aria-hidden="true">'+Array.from({length:progress.total},()=>'<i></i>').join('')+'</span>'+(progress.active?'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>':manualIcon)}
+ b.querySelectorAll('.refine-dots i').forEach((dot,i)=>{dot.classList.toggle('filled',i<progress.done);dot.classList.toggle('current',i===progress.done)});
+ b.classList.toggle('session-complete',progress.done===progress.total);
+ b.setAttribute('aria-label',progress.done===progress.total?'Ronda completada':('Salir del afinador, '+progress.done+' de '+progress.total));
+ }else if(!inlinePair){delete b.dataset.progressSignature;b.classList.remove('session-complete');b.innerHTML=manualIcon;b.setAttribute('aria-label','Afinar mis favoritos')}
+}
+function commitBattleProgress(){
+ if(!manualSession)return;manualSession.choiceCommitted=true;
+ if(manualSession.done+1===manualSession.target){completedBattleCue={total:manualSession.target,until:performance.now()+650};clearTimeout(battleCueTimer);battleCueTimer=setTimeout(()=>{completedBattleCue=null;paintBattleProgress()},660)}
+ paintBattleProgress();
+}
 const oldPaintRefinement=paintRefinement;
-paintRefinement=function(){oldPaintRefinement();const b=$('#front-refine');if(manualSession){b.innerHTML='<span class="refine-dots" aria-hidden="true">'+Array.from({length:manualSession.target},(_,i)=>'<i class="'+(i<manualSession.done?'filled':'')+'"></i>').join('')+'</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>';b.setAttribute('aria-label','Salir del afinador, '+manualSession.done+' de '+manualSession.target)}else if(!inlinePair)b.innerHTML=manualIcon};
+paintRefinement=function(){delete $('#front-refine').dataset.progressSignature;oldPaintRefinement();paintBattleProgress()};
+
 function refinementFavorites(){return catalog.filter(p=>state.votes[p.id]?.value==='yes').map(p=>p.id+':'+p.card).join('|')}
 function validRefinementSession(session){return session.favorites===refinementFavorites()&&session.resetAt===(state.resetAt||0)}
 function prepareRefinementPair(session,index){
@@ -610,7 +633,7 @@ function beginManualRefinement(){
 
 const singleFinishRefinement=finishRefinement;
 finishRefinement=function(skipped=false){
- if(manualSession&&!skipped){manualSession.done++;if(manualSession.done<manualSession.target&&validRefinementSession(manualSession)){inlinePair=null;inlineBusy=false;startRefinement(true);return}sound('round')}
+ if(manualSession&&!skipped){manualSession.done++;manualSession.choiceCommitted=false;if(manualSession.done<manualSession.target&&validRefinementSession(manualSession)){inlinePair=null;inlineBusy=false;startRefinement(true);return}sound('round')}
  manualSession=null;singleFinishRefinement(skipped);
 };
 const singleStartRefinement=startRefinement;
