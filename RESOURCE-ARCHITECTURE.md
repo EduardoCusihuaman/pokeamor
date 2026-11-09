@@ -33,3 +33,9 @@ Outgoing cards own their resources until their own animation cleanup; render no 
 The buffer reserves a minimum prefix and limits speculative decoded images to five with a 16 MiB estimated pixel budget for additional entries. The minimum three positions can exceed that soft budget. This preserves the recommender's existing three-position lock. Background battle/alternative preparation yields when discovery has fewer than two ready positions; explicit battle entry remains urgent. Network size statistics now distinguish frontals, thumbnails and materials.
 
 Persistence and Journey state updates retain their current semantics; broad deferral of batch/reward updates was deliberately not introduced without event-snapshot tests. Repeated like-icon markup is avoided. Further UI coalescing, strict total decoded memory accounting, global observer replacement and device performance tuning remain follow-up work, not measured improvements of this change.
+
+## Burst and material quiet interval
+
+Discovery preparation grows from five toward ten entries during sub-300 ms advances, within a 24 MiB estimated decoded pixel budget (the minimum stable prefix remains a soft exception). Slow advances shrink the window gradually. This reduces buffer starvation during bursts; it cannot guarantee uninterrupted consumption on an arbitrarily slow connection.
+
+Pointer gestures now hold the material gate, as do outgoing flights. Releasing a gate waits 180 ms before allowing deferred material decoding/texture work; another gesture keeps it blocked. The image remains interactive as soon as its front is ready, independent of foil readiness. Decode checks the gate before acquiring and decoding material bytes, and uploads check it again. Reused WebGL canvas contents are cleared transparently before mounting to avoid showing a previous scene's pixels.
