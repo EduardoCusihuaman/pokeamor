@@ -381,7 +381,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.sheet::-webkit-scrollbar,.sheet
 #refinement-event #both:after{content:'';display:block;position:absolute;left:50%;top:50%;width:12px;height:6px;border-top:2px solid #79526e;border-bottom:2px solid #79526e;transform:translate(-50%,-50%)}
 #refinement-event #pair>button{touch-action:none;-webkit-touch-callout:none;user-select:none;transition:transform 140ms cubic-bezier(.2,.7,.2,1),opacity 140ms ease;animation:refine-first 180ms ease-out backwards}
 #refinement-event #pair>button:nth-child(2){animation:refine-second 210ms cubic-bezier(.2,.7,.2,1) backwards}
-#refinement-event #pair>button.pressing{transform:scale(.988)}
+#refinement-event #pair>button.pressing{scale:.988}
 #refinement-event #pair>button.chosen{z-index:3;transform:translateY(-3px) scale(1.008);filter:none;box-shadow:0 5px 16px #49304024}
 #refinement-event #pair>button.unchosen{opacity:0;transform:translateY(10px) scale(.985)}
 #refinement-event #pair .chosen:after{content:none}
@@ -392,7 +392,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,.sheet::-webkit-scrollbar,.sheet
 
 /* Choosing reveals the full card through travel, never a white fade. */
 #refinement-event{z-index:6}
-#refinement-event #pair>button{transition:transform 210ms cubic-bezier(.2,.75,.2,1);will-change:transform}
+#refinement-event #pair>button{transition:transform 210ms cubic-bezier(.2,.75,.2,1),scale 120ms ease;will-change:transform}
 #refinement-event #pair>button.chosen{opacity:1;transform:none;box-shadow:none}
 #refinement-event #pair>button:nth-child(2).chosen{transform:translateY(var(--choice-rise,0px))}
 #refinement-event #pair>button:first-child.chosen:has(+.chosen){transform:none}
