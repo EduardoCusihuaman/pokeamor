@@ -487,7 +487,7 @@ function cueBattleEntrance(){
  const stop=()=>{if(disposed)return;disposed=true;clearTimeout(idleTimer);clearTimeout(impactTimer);animations.forEach(a=>a.cancel());bolt.remove();eventLayer.classList.remove('battle-entering');for(const type of ['pointerdown','keydown'])eventLayer.removeEventListener(type,stop,true);equalTools.removeEventListener('pointerdown',stop,true)};
  battleEntranceCleanup=stop;eventLayer.classList.add('battle-entering');
  buttons.forEach((b,i)=>{const sign=i===0?-1:1,axis=wide?'X':'Y';b.style.animation='none';animations.push(b.animate([{transform:`translate${axis}(${sign*22}px)`},{transform:`translate${axis}(${-sign*3}px)`,offset:.55},{transform:'translate(0,0)'}],{duration:280,easing:'cubic-bezier(.2,.75,.25,1)'}))});
- animations.push(bolt.animate([{opacity:0,transform:'scale(.9)'},{opacity:1,transform:'scale(1)',offset:.25},{opacity:1,transform:'scale(1)',offset:.72},{opacity:0,transform:'scale(1.025)'}],{duration:560}));
+ animations.push(bolt.animate([{opacity:0,transform:'scale(.9)'},{opacity:1,transform:'scale(1)',offset:.19},{opacity:1,transform:'scale(1)',offset:.76},{opacity:0,transform:'scale(1.025)'}],{duration:740}));
  impactTimer=setTimeout(()=>{if(disposed)return;sound('battle');eventLayer.classList.remove('battle-entering')},140);
  idleTimer=setTimeout(()=>{if(disposed||!inlinePair||inlineBusy||eventLayer.hidden)return;buttons.forEach((b,i)=>{animations.push(b.animate([{transform:'translateY(0)'},{transform:'translateY(-4px)',offset:.45},{transform:'translateY(0)'}],{duration:400,delay:i*440,easing:'ease-in-out'}))});bolt.remove()},1150);
  for(const type of ['pointerdown','keydown'])eventLayer.addEventListener(type,stop,true);equalTools.addEventListener('pointerdown',stop,true);
