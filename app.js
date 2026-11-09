@@ -654,10 +654,13 @@ const enabled=()=>sheet.classList.contains('open')&&sheet.classList.contains('ro
 const bounds=()=>{const r=sheet.getBoundingClientRect(),h=sheet.querySelector('header').getBoundingClientRect();return{top:Math.max(r.top,h.bottom)+8,bottom:Math.min(r.bottom,innerHeight)-16}};
 function cancel(){clearTimeout(timer);clearTimeout(settle)}
 function change(section,open){
- const view=bounds(),tiles=[...root.querySelectorAll('.memory-card,.batch-placeholder')],visible=tiles.filter(t=>{const r=t.getBoundingClientRect();return r.bottom>view.top&&r.top<view.bottom}),before=new Map(visible.map(t=>[t,t.getBoundingClientRect()]));
- const own=[...section.querySelectorAll('.memory-card')];const anchor=own.reduce((best,t)=>{const r=t.getBoundingClientRect(),distance=Math.abs((r.top+r.bottom)/2-(view.top+view.bottom)/2);return !best||distance<best.distance?{tile:t,top:r.top,distance}:best},null);
+ const view=bounds(),elements=[...root.querySelectorAll('.memory-card,.batch-placeholder,.batch-group h3')],own=[...section.querySelectorAll('.memory-card,.batch-placeholder,h3')],visible=elements.filter(t=>{const r=t.getBoundingClientRect();return r.bottom>view.top&&r.top<view.bottom}),before=new Map([...new Set([...visible,...own])].map(t=>[t,t.getBoundingClientRect()]));
+ // Opening follows the batch heading. Closing follows the content the reader reached.
+ const heading=section.querySelector('h3')||section;
+ const outside=visible.filter(t=>!section.contains(t));
+ const anchor=open?{tile:heading,top:view.top}:outside.reduce((best,t)=>{const r=t.getBoundingClientRect(),distance=Math.abs(r.top-view.top);return !best||distance<best.distance?{tile:t,top:r.top,distance}:best},null)||{tile:heading,top:heading.getBoundingClientRect().top};
  for(const a of animations)a.cancel();animations.clear();section.classList.toggle('reading-batch',open);expanded=open?section:null;quietUntil=performance.now()+300;
- if(anchor)sheet.scrollTop+=anchor.tile.getBoundingClientRect().top-anchor.top;
+ sheet.scrollTop+=anchor.tile.getBoundingClientRect().top-anchor.top;
  for(const [tile,r] of before){const next=tile.getBoundingClientRect();if(!next.width||!next.height)continue;const a=tile.animate([{transform:`translate(${r.left-next.left}px,${r.top-next.top}px) scale(${r.width/next.width},${r.height/next.height})`},{transform:'none'}],{duration:230,easing:'cubic-bezier(.2,.75,.2,1)'});animations.add(a);a.finished.then(()=>animations.delete(a),()=>animations.delete(a))}
  if(!open)cooldown.set(section,performance.now()+12000);
 }
@@ -671,7 +674,7 @@ function inspect(){
 function pause(){cancel();pressed=true}
 function resume(){pressed=false;cancel();settle=setTimeout(inspect,220)}
 sheet.addEventListener('pointerdown',pause,{passive:true});document.addEventListener('pointerup',resume,{passive:true});document.addEventListener('pointercancel',resume,{passive:true});
-sheet.addEventListener('scroll',()=>{cancel();if(performance.now()<quietUntil)return;settle=setTimeout(inspect,200)},{passive:true});
+sheet.addEventListener('scroll',()=>{cancel();settle=setTimeout(inspect,Math.max(200,quietUntil-performance.now()+20))},{passive:true});
 sheet.addEventListener('wheel',()=>{cancel();settle=setTimeout(inspect,240)},{passive:true});
 sheet.addEventListener('click',()=>{cancel();settle=setTimeout(inspect,300)},{passive:true});
 new MutationObserver(()=>{cancel();if(!enabled()){if(expanded)expanded.classList.remove('reading-batch');expanded=null;return}settle=setTimeout(inspect,300)}).observe(sheet,{attributes:true,attributeFilter:['class']});
