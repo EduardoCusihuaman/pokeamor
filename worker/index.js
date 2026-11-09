@@ -29053,10 +29053,10 @@ const CATALOG=[
     "id": 890,
     "name": "Eternatus",
     "slug": "eternatus",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh11tg/TG21/high.webp",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh11/TG21/high.webp",
     "card": "swsh11tg-TG21",
-    "rarity": "Promo",
-    "artist": "5ban Graphics",
+    "rarity": "Ultra Rara",
+    "artist": "kodama",
     "palette": {
       "h": 217,
       "s": 63,
@@ -29072,7 +29072,7 @@ const CATALOG=[
       "evolution_chain_id:469"
     ],
     "communityVotes2020": 15699,
-    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh11tg/TG21/high.webp"
+    "fallbackImage": "https://assets.tcgdex.net/es/swsh/swsh11/TG21/high.webp"
   },
   {
     "id": 891,

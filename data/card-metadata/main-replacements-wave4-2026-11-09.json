@@ -447,12 +447,18 @@
     "pokemonId": 890,
     "previousPrintId": "swshp-SWSH044",
     "printId": "swsh11tg-TG21",
-    "image": "https://assets.tcgdex.net/es/swsh/swsh11tg/TG21/high.webp",
+    "image": "https://assets.tcgdex.net/es/swsh/swsh11/TG21/high.webp",
     "language": "es",
     "proxy": {
       "name": "Eternatus V",
       "set": "LOR",
       "number": "TG21"
+    },
+    "metadataSource": "https://api.tcgdex.net/v2/es/cards/swsh11tg-TG21",
+    "validation": {
+      "width": 600,
+      "height": 825,
+      "bytes": 85820
     }
   }
 ]
