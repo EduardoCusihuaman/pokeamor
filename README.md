@@ -60,9 +60,14 @@ scripts/archive/      one-off/audit scripts (kept for provenance)
 data/                 catalog + card resources
 data/archive/         unused/audit data
 docs/                 design docs & screenshots
-generated/            build output (content-addressed resources)
-worker/index.js       generated Worker (deployable artifact)
+generated/            build output (gitignored — content-addressed resources)
+worker/index.js       build output (gitignored — generated Worker)
+dist/                 build output (gitignored — deployable artifact)
 ```
+
+Only the **source** is versioned. `generated/`, `worker/index.js`, and `dist/` are
+deterministic build outputs that `scripts/build.sh` regenerates from `src/` + `data/`.
+The deploy pipeline runs the build, so these three never need to be committed.
 
 ## Getting started
 

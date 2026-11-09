@@ -1,2 +1,4 @@
 dist/
 site.tar.gz
+generated/
+worker/index.js
