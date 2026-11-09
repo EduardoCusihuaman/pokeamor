@@ -32,15 +32,18 @@ const obj=await env.BUCKET.put(key,body,{onlyIf:request.headers,httpMetadata:{co
 if(request.method!=='GET'&&request.method!=='HEAD')return response('{}',405);
 if(MATERIALS[u.pathname]){
  const source=MATERIALS[u.pathname],key='material-cache'+u.pathname;
+ const edge=globalThis.caches?.default,cacheRequest=new Request(u.origin+u.pathname);
+ const remember=res=>{if(edge&&request.method==='GET'){const task=edge.put(cacheRequest,res.clone()).catch(()=>{});if(ctx?.waitUntil)ctx.waitUntil(task)}return res};
+ if(edge){try{const hit=await edge.match(cacheRequest);if(hit)return request.method==='HEAD'?new Response(null,{headers:hit.headers}):hit}catch{}}
  const headers={'Content-Type':source.contentType,'Cache-Control':'public,max-age=31536000,immutable','X-Content-Type-Options':'nosniff'};
  try{
-  if(env.BUCKET){const cached=await env.BUCKET.get(key);if(cached)return new Response(request.method==='HEAD'?null:cached.body,{headers:{...headers,...(cached.httpEtag?{'ETag':cached.httpEtag}:{})}})}
+  if(env.BUCKET){const cached=await env.BUCKET.get(key);if(cached)return remember(new Response(request.method==='HEAD'?null:cached.body,{headers:{...headers,...(cached.httpEtag?{'ETag':cached.httpEtag}:{})}}))}
   const upstream=await fetch(source.url,{headers:{'User-Agent':'Pokeamor/1.0 (+https://pokeamor-cartas.h4lconn.chatgpt.site)','Accept':'image/png'},signal:AbortSignal.timeout(20000)});
   if(!upstream.ok||Number(upstream.headers.get('Content-Length')||0)>8388608)return response('{"error":"material_unavailable"}',502);
   const bytes=await upstream.arrayBuffer(),signature=new Uint8Array(bytes,0,Math.min(8,bytes.byteLength));
   if(bytes.byteLength<24||bytes.byteLength>8388608||signature.join(',')!=='137,80,78,71,13,10,26,10')return response('{"error":"invalid_material"}',502);
   if(env.BUCKET){const put=env.BUCKET.put(key,bytes,{httpMetadata:{contentType:source.contentType}}).catch(()=>{});if(ctx?.waitUntil)ctx.waitUntil(put);else await put}
-  return new Response(request.method==='HEAD'?null:bytes,{headers});
+  return remember(new Response(request.method==='HEAD'?null:bytes,{headers}));
  }catch{return response('{"error":"material_unavailable"}',502)}
 }
 

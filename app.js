@@ -52,7 +52,7 @@ const fallback=p=>'https://raw.githubusercontent.com/PokeAPI/sprites/master/spri
 function img(p,exact=false){
  const im=document.createElement('img'),material=p.surface?.effect==='asset-foil',url=window.PokeResources?.path(p)||p.image;
  im.alt=p.name;im.draggable=false;im.decoding='async';im.cardIdentity=window.PokeResources?.key(p);im.cardReady=false;im.materialSource=!!(exact&&material);let attempt=0;
- im.addEventListener('load',()=>{im.cardReady=im.src!==fallback(p)&&im.naturalWidth>0});
+ im.artReady=new Promise(resolve=>{im.addEventListener('load',async()=>{if(im.src===fallback(p)){resolve(false);return}try{await im.decode?.();im.cardReady=im.naturalWidth>0;resolve(im.cardReady)}catch{resolve(false)}},{once:true})});
  im.onerror=()=>{im.cardReady=false;if(attempt++===0&&url){im.src=url;return}im.materialSource=false;im.parentElement?.classList.add('art-fallback','official');im.onerror=null;im.src=fallback(p)};
  const cached=window.PokeResources?.peek(url);if(cached)im.src=cached;else if(url){
  if(exact&&window.PokeResources)window.PokeResources.front(p).then(src=>{im.src=src}).catch(()=>{im.src=url});else im.src=url;
@@ -124,7 +124,7 @@ function paintSwipeSeal(seal,direction,strength){
  seal.style.setProperty('--seal-fill',String(Math.max(0,Math.min(1,(amount-.6)/.4))));
 }
 function makeCard(p,under=false){
- const c=document.createElement('div');c.pokemon=p;c.className='card'+(under?' under':'')+(!p.image?' official':'');const source=warmArt.get(p.surface?.assets?.front||p.image||fallback(p));const artwork=source?.complete&&source.naturalWidth&&source.cardReady!==false&&source.src!==fallback(p)?source:img(p,true);warmArt.delete(p.surface?.assets?.front||p.image||fallback(p));artwork.decoding='async';const fitArt=()=>{c.materialFrontReady=!!(artwork.materialSource&&!c.classList.contains('art-fallback')&&artwork.naturalWidth>0);if(c.classList.contains('official')||!artwork.naturalWidth||!artwork.naturalHeight)return;c.artRatio=artwork.naturalWidth/artwork.naturalHeight;c.style.aspectRatio=String(c.artRatio);if(!under){fitCard();window.PokeMaterial?.refresh()}};artwork.onload=fitArt;c.append(artwork);if(artwork.complete)queueMicrotask(fitArt);
+ const c=document.createElement('div');c.pokemon=p;c.className='card'+(under?' under':'')+(!p.image?' official':'');const source=warmArt.get(p.surface?.assets?.front||p.image||fallback(p));const artwork=source&&source.src!==fallback(p)?source:img(p,true);warmArt.delete(p.surface?.assets?.front||p.image||fallback(p));artwork.decoding='async';const fitArt=()=>{c.materialFrontReady=!!(artwork.materialSource&&!c.classList.contains('art-fallback')&&artwork.naturalWidth>0);if(c.classList.contains('official')||!artwork.naturalWidth||!artwork.naturalHeight)return;c.artRatio=artwork.naturalWidth/artwork.naturalHeight;c.style.aspectRatio=String(c.artRatio);if(!under){fitCard();window.PokeMaterial?.refresh()}};artwork.onload=fitArt;c.append(artwork);if(artwork.complete)queueMicrotask(fitArt);
  c.activate=()=>{if(c.activated)return;c.activated=true;under=false;c.classList.remove('under');c.style.transform='';c.style.filter='';c.removeAttribute('aria-hidden');
  c.pokemon=p;c.setAttribute('aria-label',p.name);const choice=document.createElement('div');choice.className='choice-light';c.append(choice);
  const seal=document.createElement('div');seal.className='swipe-seal';seal.setAttribute('aria-hidden','true');
@@ -155,13 +155,13 @@ function makeCard(p,under=false){
  c.onpointercancel=()=>{start=null;reset()};c.onlostpointercapture=()=>{if(start){start=null;reset()}};queueMicrotask(()=>afterSwipe('discovery-surface',()=>{if(c.isConnected&&c.activated&&!c.classList.contains('exiting'))surface=window.PokeHolo?.attach(c,p,{onTilt:(rx,ry)=>{if(!held&&!start)move({rx,ry})}})}))};if(under)c.setAttribute('aria-hidden','true');else c.activate();return c
 }
 const warmArt=new Map();
-function warmArtwork(p){const url=p.surface?.assets?.front||p.image||fallback(p);if(warmArt.has(url))return;const art=img(p,true);warmArt.set(url,art);art.addEventListener?.('load',()=>{if(typeof scheduleEvents==='function')scheduleEvents()},{once:true});art.decode?.().catch(()=>{});if(warmArt.size>5)warmArt.delete(warmArt.keys().next().value)}
+function warmArtwork(p){const url=p.surface?.assets?.front||p.image||fallback(p);if(warmArt.has(url))return;const art=img(p,true);warmArt.set(url,art);art.addEventListener?.('load',()=>{if(typeof scheduleEvents==='function')scheduleEvents()},{once:true});art.artReady?.then(ok=>{if(!ok&&warmArt.get(url)===art)warmArt.delete(url)});if(warmArt.size>5)warmArt.delete(warmArt.keys().next().value)}
 function render(){clearFeedback();const queue=pending(),p=queue[0],n=Object.keys(state.votes).length,likes=Object.values(state.votes).filter(v=>v.value==='yes').length;$('#likes').innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.1-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.8a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z"/></svg><span>'+likes+'</span>';$('#open').setAttribute('aria-label','Mi colección, '+likes+' Pokémon');$('#count').textContent=n+' de '+catalog.length;const seenCounter=$('#album-seen');if(seenCounter){seenCounter.textContent=likes+' / '+catalog.length;seenCounter.setAttribute('aria-label',likes+' de '+catalog.length+' Pokémon te gustan')}$('#progress').style.width=(n/catalog.length*100)+'%';$('#undo').disabled=!state.history.length;
  window.PokeJourney?.update(catalog,state,key);const stage=$('#stage'),flights=[...stage.querySelectorAll('.exiting')].slice(-2);$('#yes').disabled=$('#no').disabled=!p;$('#name').textContent=p?p.name:'Tu colección está completa ♡';$('#art').textContent=p?.reencounter?'Otra mirada':'';$('#dex').textContent='';
  updateCompletedNavigation();
  if(!p){for(const c of stage.querySelectorAll('.card'))c.stopMotion?.();stage.replaceChildren();if(discoveryComplete()&&!inlinePair){$('#sheet').classList.add('open');showCollectionTab(true);window.PokeJourney?.compose()}return}
  setScene(p);window.PokeResources?.plan('discovery',queue,{adaptive:true});window.PokeMaterial?.prepare(queue.slice(0,4));
- reconcileDeck(stage,queue,flights);fitCard();afterSwipe('decode-lookahead',()=>{for(const next of queue.slice(1,4))warmArtwork(next)})
+ reconcileDeck(stage,queue,flights);fitCard();for(const next of queue.slice(1,4))warmArtwork(next)
 }
 // Keep the released artwork opaque and moving until its trailing edge clears the viewport.
 function swipeArc(x,width){const angle=Math.atan(x/Math.max(1,width*2));return{y:width*.4*(1-Math.cos(angle)),r:angle*180/Math.PI*.65}}
