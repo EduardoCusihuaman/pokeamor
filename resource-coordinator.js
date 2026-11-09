@@ -21,15 +21,16 @@ async function invalidate(url){const e=entries.get(url);if(e?.state==='ready'){b
 /* One preparation contract for all image consumers. Each bind is a presentation lease. */
 const bindings=new WeakMap(),leases=new Map();let imageObserver;let leaseId=0;
 function bindImage(im,p,{variant='front',priority=0}={}){
- bindings.get(im)?.release();const ref=window.PokeCards?.resolve(p),url=variant==='thumbnail'?ref?.thumbnail||path(p):path(p),id='image-'+(++leaseId);let active=true,settled=false,presentationSource=null;
+ bindings.get(im)?.release();const ref=window.PokeCards?.resolve(p),url=variant==='thumbnail'?ref?.thumbnail||path(p):path(p),id='image-'+(++leaseId);let active=true,settled=false,presentationSource=null,nativeAttempt=false,nativeTimer;
  im.cardIdentity=key(p);im.cardReady=false;im.resourceState='queued';im.materialSource=variant==='front'&&p.surface?.effect==='asset-foil';im.artTiming={started:performance.now()};
- const release=()=>{active=false;ownerPriorities.delete(owners.get(id));owners.delete(id);leases.delete(id);bindings.delete(im);im.removeEventListener('load',loaded);im.removeEventListener('error',failed);if(!settled){settled=true;resolve(false)}trim()};
+ const release=()=>{active=false;clearTimeout(nativeTimer);im.resourceState='released';ownerPriorities.delete(owners.get(id));owners.delete(id);leases.delete(id);bindings.delete(im);im.removeEventListener('load',loaded);im.removeEventListener('error',failed);if(!settled){settled=true;resolve(false)}trim()};
  let resolve;im.artReady=new Promise(r=>resolve=r);
- const finish=ok=>{if(settled)return;settled=true;im.cardReady=ok;im.resourceState=ok?'presentable':'error';if(!ok){ownerPriorities.delete(owners.get(id));owners.delete(id);leases.delete(id)}resolve(ok)};
- const failed=()=>{if(!active)return;invalidate(url);finish(false)};
+ const finish=ok=>{if(settled)return;settled=true;clearTimeout(nativeTimer);im.cardReady=ok;im.resourceState=ok?'presentable':'error';if(!ok){ownerPriorities.delete(owners.get(id));owners.delete(id);leases.delete(id)}resolve(ok)};
+ const tryNative=()=>{if(!active||nativeAttempt)return false;nativeAttempt=true;nativeTimer=setTimeout(()=>{if(active)finish(false)},12000);im.resourceState='decoding';im.src=url;presentationSource=im.src;return true};
+ const failed=()=>{if(!active||settled||!presentationSource||im.src!==presentationSource)return;invalidate(url);if(tryNative())return;finish(false)};
  const loaded=async()=>{if(!active||settled||!presentationSource||im.src!==presentationSource)return;im.resourceState='decoding';im.artTiming.loaded=performance.now();try{await im.decode?.();if(!active)return;im.artTiming.decodeMs=performance.now()-im.artTiming.loaded;if(!im.naturalWidth)throw Error('empty image');finish(true)}catch{failed()}};
  im.addEventListener('load',loaded);im.addEventListener('error',failed);const interest=new Set([url]);owners.set(id,interest);ownerPriorities.set(interest,priority);leases.set(id,{image:im,url,key:im.cardIdentity});bindings.set(im,{release});
- getBlob(url,priority).then(()=>{if(!active)return;const src=peek(url);if(!src)throw Error('resource evicted');im.resourceState='decoding';presentationSource=src;im.src=src}).catch(()=>{if(active)finish(false)});
+ getBlob(url,priority).then(()=>{if(!active)return;const src=peek(url);if(!src)throw Error('resource evicted');im.resourceState='decoding';presentationSource=src;im.src=src}).catch(()=>{if(active&&!tryNative())finish(false)});
  return im;
 }
 function observeImage(im,p,options={}){let started=false;im.startResource=()=>{if(started)return;started=true;bindImage(im,p,options)};im.stopResource=()=>{if(!started||im.resourceEager)return;started=false;releaseImage(im);im.removeAttribute('src')};if(typeof IntersectionObserver==='undefined')im.startResource();else{imageObserver??=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting)e.target.startResource?.();else e.target.stopResource?.()},{rootMargin:'400px'});imageObserver.observe(im)}return im}
