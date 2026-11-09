@@ -1,8 +1,8 @@
 /* Shared resource queue. Compressed lookahead is independent of decoded artwork. */
 (()=>{'use strict';
 const entries=new Map(),owners=new Map(),metrics={requests:0,hits:0,failures:0,bytes:0,downloadMs:0},MAX=20*1024*1024;const timings=[];let running=0,bytes=0,clock=0,windowSize=12,lastAdvance=0,lastId,interval=700;
-const path=p=>p?.surface?.assets?.front||p?.image;
-const key=p=>[p.card,p.language||(/\/es\//.test(p.image||'')?'es':'source'),path(p)].join('|');
+const path=p=>window.PokeCards?.resolve(p)?.image||p?.surface?.assets?.front||p?.image;
+const key=p=>window.PokeCards?.key(p)||[p.card,p.language||(/\/es\//.test(p.image||'')?'es':'source'),path(p)].join('|');
 function wanted(url){return [...owners.values()].some(xs=>xs.has(url))}
 function trim(){for(const [url,e] of [...entries].sort((a,b)=>a[1].used-b[1].used)){if(bytes<=MAX&&entries.size<=64)break;if(e.state!=='ready'||wanted(url))continue;bytes-=e.blob.size;if(e.url)URL.revokeObjectURL(e.url);entries.delete(url)}}
 async function read(url,signal,priority){let cache=null;try{if(url.startsWith('/')&&globalThis.caches)cache=await caches.open('pokeamor-resources-v1');const cached=await cache?.match(url);if(cached)return cached}catch{}
@@ -15,7 +15,9 @@ function getBlob(url,priority=0){if(typeof url!=='string'||(!url.startsWith('/ma
 function peek(url){const e=entries.get(url);if(e?.state!=='ready')return null;e.used=++clock;return e.url||(e.url=URL.createObjectURL(e.blob))}
 async function front(p,priority=0){const url=path(p);await getBlob(url,priority);const result=peek(url);if(!result)throw Error('resource evicted');return result}
 function plan(owner,cards,{adaptive=false}={}){if(adaptive&&cards[0]?.id!==lastId){const hadPrevious=!!lastAdvance;const now=performance.now();if(lastAdvance)interval=.7*interval+.3*Math.max(100,now-lastAdvance);lastAdvance=now;lastId=cards[0]?.id;const target=Math.max(6,Math.min(24,Math.ceil(3000/interval)));if(hadPrevious)windowSize=target>windowSize?target:Math.max(target,windowSize-1)}const average=metrics.bytes/Math.max(1,metrics.completed||0)||93257;const n=Math.min(Math.max(3,Math.floor(4194304/average)),navigator.connection?.saveData?3:adaptive?windowSize:Math.min(cards.length,12)),selected=cards.slice(0,n),paths=new Set(selected.map(path).filter(Boolean));owners.set(owner,paths);for(const e of entries.values())if(e.state==='queued'){e.priority=50;for(const xs of owners.values()){const i=[...xs].indexOf(e.path);if(i>=0)e.priority=Math.min(e.priority,i<3?i:10+i)}}for(const [i,p] of selected.entries())if(path(p))getBlob(path(p),i<3?i:10+i).catch(()=>{});for(const [url,e] of entries)if(e.state==='queued'&&!wanted(url)&&e.priority>2){entries.delete(url);e.reject(Error('outside lookahead'))}trim();return selected}
-function release(owner){owners.delete(owner);trim()}
+function release(owner){owners.delete(owner);for(const [url,e] of entries)if(e.state==='queued'&&!wanted(url)&&e.priority>2){entries.delete(url);e.reject(Error('released lookahead'))}trim()}
+async function invalidate(url){const e=entries.get(url);if(e?.state==='ready'){bytes-=e.blob.size;if(e.url)URL.revokeObjectURL(e.url);entries.delete(url)}try{if(url?.startsWith('/')&&globalThis.caches)await (await caches.open('pokeamor-resources-v1')).delete(url)}catch{}}
+
 document.addEventListener('visibilitychange',pump);
-window.PokeResources={key,path,getBlob,peek,front,plan,release,snapshot:()=>({...metrics,timings:timings.slice(),running,entries:entries.size,bytes,windowSize,states:[...entries.values()].reduce((a,e)=>(a[e.state]=(a[e.state]||0)+1,a),{})})};
+window.PokeResources={key,path,invalidate,getBlob,peek,front,plan,release,snapshot:()=>({...metrics,timings:timings.slice(),running,entries:entries.size,bytes,windowSize,states:[...entries.values()].reduce((a,e)=>(a[e.state]=(a[e.state]||0)+1,a),{})})};
 })();
