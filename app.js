@@ -155,7 +155,17 @@ function makeCard(p,under=false){
  c.onpointercancel=()=>{start=null;reset()};c.onlostpointercapture=()=>{if(start){start=null;reset()}};queueMicrotask(()=>afterSwipe('discovery-surface',()=>{if(c.isConnected&&c.activated&&!c.classList.contains('exiting'))surface=window.PokeHolo?.attach(c,p,{onTilt:(rx,ry)=>{if(!held&&!start)move({rx,ry})}})}))};if(under)c.setAttribute('aria-hidden','true');else c.activate();return c
 }
 const warmArt=new Map();
-function warmArtwork(p){const url=p.surface?.assets?.front||p.image||fallback(p);if(warmArt.has(url))return;const art=img(p,true);warmArt.set(url,art);art.addEventListener?.('load',()=>{if(typeof scheduleEvents==='function')scheduleEvents()},{once:true});art.artReady?.then(ok=>{if(!ok&&warmArt.get(url)===art)warmArt.delete(url)});if(warmArt.size>5)warmArt.delete(warmArt.keys().next().value)}
+function artworkReady(art,p){
+ if(art.artReady)return art.artReady;
+ // Alternative encounters may warm native Image objects, not images created by img().
+ art.artReady=new Promise(resolve=>{
+  let settled=false;
+  const finish=ok=>{if(settled)return;settled=true;art.removeEventListener('load',loaded);art.removeEventListener('error',failed);art.cardReady=!!ok;resolve(!!ok)};
+  const loaded=async()=>{if(!art.naturalWidth||art.src===fallback(p)){finish(false);return}try{await art.decode?.();finish(art.naturalWidth>0)}catch{finish(false)}};
+  const failed=()=>finish(false);art.addEventListener('load',loaded);art.addEventListener('error',failed);if(art.complete&&art.naturalWidth>0)loaded();
+ });return art.artReady;
+}
+function warmArtwork(p){const url=p.surface?.assets?.front||p.image||fallback(p);if(warmArt.has(url)){const existing=warmArt.get(url);artworkReady(existing,p).then(ok=>{if(!ok&&warmArt.get(url)===existing)warmArt.delete(url)});return}const art=img(p,true);warmArt.set(url,art);art.addEventListener?.('load',()=>{if(typeof scheduleEvents==='function')scheduleEvents()},{once:true});art.artReady?.then(ok=>{if(!ok&&warmArt.get(url)===art)warmArt.delete(url)});if(warmArt.size>5)warmArt.delete(warmArt.keys().next().value)}
 function render(){clearFeedback();const queue=pending(),p=queue[0],n=Object.keys(state.votes).length,likes=Object.values(state.votes).filter(v=>v.value==='yes').length;$('#likes').innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.1-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.8a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z"/></svg><span>'+likes+'</span>';$('#open').setAttribute('aria-label','Mi colección, '+likes+' Pokémon');$('#count').textContent=n+' de '+catalog.length;const seenCounter=$('#album-seen');if(seenCounter){seenCounter.textContent=likes+' / '+catalog.length;seenCounter.setAttribute('aria-label',likes+' de '+catalog.length+' Pokémon te gustan')}$('#progress').style.width=(n/catalog.length*100)+'%';$('#undo').disabled=!state.history.length;
  window.PokeJourney?.update(catalog,state,key);const stage=$('#stage'),flights=[...stage.querySelectorAll('.exiting')].slice(-2);$('#yes').disabled=$('#no').disabled=!p;$('#name').textContent=p?p.name:'Tu colección está completa ♡';$('#art').textContent=p?.reencounter?'Otra mirada':'';$('#dex').textContent='';
  updateCompletedNavigation();
@@ -607,7 +617,7 @@ function prepareRefinementPair(session,index){
  window.PokeResources?.plan(session===manualSession?'battle':'battle-preview',pair);session.art??=new Map();
  const ready=Promise.all(pair.map(p=>new Promise(resolve=>{
   warmArtwork(p);const art=warmArt.get(p.surface?.assets?.front||p.image||fallback(p));if(!art){resolve(false);return}
-  session.art.set(p.id+':'+p.card,art);let done=false;const finish=ok=>{if(done)return;done=true;clearTimeout(timer);resolve(!!ok)};
+  session.art.set(p.id+':'+p.card,art);let done=false;const finish=ok=>{if(done)return;done=true;clearTimeout(timer);if(!ok){session.loadFailures??=[];session.loadFailures.push({card:p.card,source:art.src,reason:art.cardReady===false?'image-not-ready':'preparation-timeout'});if(warmArt.get(p.surface?.assets?.front||p.image||fallback(p))===art)warmArt.delete(p.surface?.assets?.front||p.image||fallback(p))}resolve(!!ok)};
   const timer=setTimeout(()=>finish(false),22000);
   // An img without src is complete=true too. Only the exact decoded image is ready.
   Promise.resolve(art.artReady).then(ok=>finish(ok&&art.cardReady&&art.naturalWidth>0),()=>finish(false));
@@ -628,7 +638,7 @@ function beginManualRefinement(){
  if(!session){toast('Elegí al menos dos favoritos.');return}
  manualSession=session;battleCandidate=null;inlineBusy=true;$('#front-refine').setAttribute('aria-busy','true');
  window.PokeResources?.plan('battle',session.pairs[0]);window.PokeResources?.release('battle-preview');
- prepareRefinementPair(session,0).then(ok=>{if(manualSession!==session)return;inlineBusy=false;$('#front-refine').removeAttribute('aria-busy');window.PokeBattleStats={planMs:session.planMs,reusedCandidate:reused,readyAfterTapMs:performance.now()-tapped,cards:[...(session.art?.values()||[])].map(a=>a.artTiming)};if(!ok||!validRefinementSession(session)){manualSession=null;window.PokeResources?.release('battle');if(!ok)toast('No se pudieron cargar las cartas. Intentá de nuevo.');return}startRefinement(true);window.PokeBattleStats.mountedAfterTapMs=performance.now()-tapped});
+ prepareRefinementPair(session,0).then(ok=>{if(manualSession!==session)return;inlineBusy=false;$('#front-refine').removeAttribute('aria-busy');window.PokeBattleStats={planMs:session.planMs,reusedCandidate:reused,readyAfterTapMs:performance.now()-tapped,failures:session.loadFailures||[],resources:window.PokeResources?.snapshot(),cards:[...(session.art?.values()||[])].map(a=>a.artTiming)};if(!ok||!validRefinementSession(session)){manualSession=null;window.PokeResources?.release('battle');if(!ok)toast('No se pudieron cargar las cartas. Intentá de nuevo.');return}startRefinement(true);window.PokeBattleStats.mountedAfterTapMs=performance.now()-tapped});
 }
 
 const singleFinishRefinement=finishRefinement;
