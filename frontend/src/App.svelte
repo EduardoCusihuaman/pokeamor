@@ -1,5 +1,4 @@
 <script lang="ts">
-  import CollectionScreen from '@/components/collection/CollectionScreen.svelte';
   import DiscoveryScreen from '@/components/discovery/DiscoveryScreen.svelte';
   import { appNavigation, type AppView } from '@/application/navigation.svelte';
 
@@ -9,6 +8,12 @@
   ];
 
   const current = $derived(appNavigation.current);
+
+  // Álbum/colección bajo demanda (plan §16): chunk separado cargado al abrir.
+  type CollectionChunk = typeof import('@/components/collection/CollectionScreen.svelte');
+  let collectionChunk: Promise<CollectionChunk> | null = null;
+  const loadCollection = (): Promise<CollectionChunk> =>
+    (collectionChunk ??= import('@/components/collection/CollectionScreen.svelte'));
 </script>
 
 <div class="app">
@@ -28,7 +33,9 @@
 
   <main class="app-shell">
     {#if current === 'collection'}
-      <CollectionScreen />
+      {#await loadCollection() then { default: CollectionScreen }}
+        <CollectionScreen />
+      {/await}
     {:else if current === 'settings'}
       <section class="settings-placeholder" aria-labelledby="settings-title">
         <h1 id="settings-title">Ajustes</h1>
