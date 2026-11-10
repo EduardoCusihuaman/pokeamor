@@ -1,6 +1,12 @@
-# Fases 4–6 — Slice vertical, colección y descubrimiento (completadas)
+# Fases 4–6 — Slice vertical, colección y descubrimiento (paridad pendiente)
 
 **Fecha:** 2026-11-10
+
+> **Corrección del estado:** este documento registra módulos y pruebas de una
+> implementación parcial, no la finalización de las fases. La auditoría de
+> [paridad en ejecución](./visual-runtime-audit.md) encontró diferencias de
+> presentación y flujos todavía sin integrar. Los resultados históricos de
+> abajo no demuestran equivalencia visual, funcional ni de rendimiento.
 
 ## Fase 4 — Slice vertical de discovery
 
@@ -32,16 +38,22 @@
 
 ## Tests
 
-| Nivel | Herramienta | Resultado |
-|---|---|---|
-| Unitario | Vitest (Node) | 187 tests / 39 archivos |
-| Componentes | Vitest Browser Mode | 7 tests / 4 archivos |
-| E2E | Playwright (chromium) | 5 flows |
-| Legacy (aceptación) | node:test | 154/154 |
+| Nivel               | Herramienta           | Resultado               |
+| ------------------- | --------------------- | ----------------------- |
+| Unitario            | Vitest (Node)         | 187 tests / 39 archivos |
+| Componentes         | Vitest Browser Mode   | 7 tests / 4 archivos    |
+| E2E                 | Playwright (chromium) | 5 flows                 |
+| Legacy (aceptación) | node:test             | 154/154                 |
 
 ## Siguiente
 
-- Fase 7: modernización de CSS/APIs (mejora progresiva, migración `@layer` por
-  grupos con capturas).
-- Fase 8: comparación de performance + publicación (requiere el despliegue de
-  Cloudflare — en pausa — y dispositivos físicos).
+- Cerrar la paridad de las fases 4–6 contra DOM, CSS computado y estados
+  renderizados del legacy, con fixtures comunes y pruebas comparativas.
+- Integrar y verificar los flujos pendientes: ajustes/respaldo, detalle,
+  afinador/equipo, efectos y sensor. Un módulo extraído no implica un flujo
+  usable en la interfaz nueva.
+- Solo después, evaluar la fase 7 sin rediseñar la experiencia ni introducir
+  `@layer` sobre CSS legacy sin verificación de cascada.
+- La comparación de rendimiento sigue pendiente. Cloudflare permanece en
+  pausa; la publicación y la validación en dispositivos físicos no se han
+  completado.

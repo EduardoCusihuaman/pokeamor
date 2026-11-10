@@ -61,7 +61,7 @@ body {
   background: var(--pa-bg);
   color: var(--pa-text);
   font-family: var(--pa-font-sans);
-  line-height: 1.5;
+  line-height: normal;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
 }

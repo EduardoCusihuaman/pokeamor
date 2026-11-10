@@ -1,5 +1,6 @@
 <script lang="ts">
   import DiscoveryScreen from '@/components/discovery/DiscoveryScreen.svelte';
+  import { scene } from '@/components/discovery/scene';
   import { appDiscovery, type DiscoveryApi } from '@/application/discovery.svelte';
   import { appNavigation } from '@/application/navigation.svelte';
 
@@ -15,6 +16,7 @@
   const yesCount = $derived(discovery.yesCount);
   const roundStep = $derived(discovery.progress.step);
   const roundTarget = $derived(discovery.progress.target);
+  const roundRatio = $derived(roundTarget > 0 ? roundStep / roundTarget : 0);
   const discoveredCount = $derived(discovery.discoveredCount);
   const cardCount = $derived(discovery.cardCount);
   const trackWidth = $derived(
@@ -38,8 +40,14 @@
   }
 </script>
 
-<div class="world" aria-hidden="true">
-  <div class="ambient"></div>
+<div class="world" aria-hidden="true" use:scene={discovery.currentCard?.palette ?? null}>
+  <div class="ambient" id="ambient-a"></div>
+  <div class="ambient" id="ambient-b"></div>
+  <div
+    id="tanda-light"
+    style:transform={`translateX(-50%) scale(${0.28 + roundRatio * 0.85})`}
+    style:opacity={0.12 + roundRatio * 0.2}
+  ></div>
 </div>
 
 <div class="decision-glow" aria-hidden="true">
@@ -64,6 +72,19 @@
 
   <div class="identity">
     <div class="brand">poké<span>amor</span></div>
+    <span class="motion-indicator" aria-hidden="true">
+      <svg
+        viewBox="0 0 24 24"
+        width="20"
+        height="20"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.4"
+      >
+        <path d="m12 3 2.7 6.3L21 12l-6.3 2.7L12 21l-2.7-6.3L3 12l6.3-2.7Z" />
+        <path d="M20 2v4m-2-2h4" />
+      </svg>
+    </span>
   </div>
 
   <button
@@ -80,7 +101,7 @@
   </button>
 
   <button type="button" class="collection" aria-label="Abrir mi colección" onclick={openCollection}>
-    <b>
+    <b id="likes">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path
           d="M20.8 8.8c0 5.1-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.8a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z"
@@ -99,10 +120,19 @@
   aria-label="Afinar mis favoritos"
   title="Afinar mis favoritos"
 >
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <rect x="3" y="5" width="7" height="13" rx="2" />
-    <rect x="14" y="5" width="7" height="13" rx="2" />
-    <path d="m11 10 1 1 1-1m-2 4 1-1 1 1" />
+  <svg viewBox="0 0 24 30" aria-hidden="true">
+    <g>
+      <path
+        d="M8 2h8v3c2.2.8 3.5 2.8 3.5 5v.5A3.5 3.5 0 0 1 16 14h-4.5A3.5 3.5 0 0 1 8 10.5V9L6.5 7.5A1.5 1.5 0 0 0 4 8.6V10a3 3 0 0 0 4 2.8"
+      />
+      <path d="M8 5h8" />
+    </g>
+    <g transform="translate(0 30) scale(1 -1)">
+      <path
+        d="M8 2h8v3c2.2.8 3.5 2.8 3.5 5v.5A3.5 3.5 0 0 1 16 14h-4.5A3.5 3.5 0 0 1 8 10.5V9L6.5 7.5A1.5 1.5 0 0 0 4 8.6V10a3 3 0 0 0 4 2.8"
+      />
+      <path d="M8 5h8" />
+    </g>
   </svg>
 </button>
 

@@ -46,7 +46,17 @@
 #sheet .inner {
   max-width: 640px;
   margin: 0 auto;
+  padding-right: 8px;
+  padding-left: 8px;
   padding-bottom: 28px;
+}
+
+#sheet.rounds-mode {
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+#sheet.rounds-mode .inner {
+  padding-bottom: 0;
 }
 
 /* Encabezado sticky: volver · «Tu colección» + contador · ajustes. */
@@ -66,15 +76,19 @@
 
 #sheet .album-heading-wrap {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 3px;
   min-width: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 18px;
 }
 
 #sheet #album-heading {
   overflow: hidden;
-  color: #775c70;
+  color: #785f70;
   font-size: 15px;
   font-weight: 500;
   text-align: center;
@@ -88,7 +102,12 @@
   font-variant-numeric: tabular-nums;
   font-weight: 400;
   letter-spacing: 0.15px;
+  line-height: 12px;
   white-space: nowrap;
+}
+
+#sheet #album-seen::after {
+  content: attr(data-batches);
 }
 
 #sheet:not(.rounds-mode) #album-seen {
@@ -105,7 +124,7 @@
   border: 0;
   border-radius: 50%;
   background: transparent;
-  color: #775c70;
+  color: #292a26;
   font-size: 23px;
   line-height: 1;
 }
@@ -133,7 +152,7 @@
 
 /* Cambio de vista: «Tus tandas» · «Ajustes y respaldo». */
 #sheet .collection-switch {
-  display: flex;
+  display: none;
   gap: 24px;
   margin: 0 0 18px;
   background: #faf7f6;
@@ -186,14 +205,28 @@
  * accesibilidad sin ocupar espacio (los controles siguen siendo alcanzables).
  */
 #sheet .tabs.tabs-is-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
+  display: none;
+}
+
+#sheet .collection-title,
+#sheet #summary,
+#sheet .tabs,
+#sheet .grid,
+#sheet .collection-dock,
+#sheet #gallery-more {
+  display: none;
+}
+
+#sheet .settings-panel {
+  padding: 10px 18px 24px;
+  color: #765c6e;
+  font-size: 13px;
+}
+
+#sheet .settings-panel .menu-label {
+  margin: 25px 0 10px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
 }
 
 /* Conteo del filtro anunciado a lectores de pantalla sin sumar una línea visual. */
@@ -240,6 +273,10 @@
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px 7px;
+}
+
+#sheet:not(.rounds-mode) .grid {
+  display: none;
 }
 
 #sheet .grid-empty {
@@ -306,9 +343,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px;
   min-height: 44px;
   margin: 0 0 4px;
+}
+
+#sheet .batch-export-bar[hidden] {
+  display: none;
 }
 
 #sheet .batch-export-heading {
@@ -325,6 +366,7 @@
 }
 
 #sheet .batch-export-heading small {
+  display: none;
   color: #a08b99;
   font-size: 10px;
   font-variant-numeric: tabular-nums;
@@ -338,7 +380,7 @@
   gap: 7px;
   min-width: 44px;
   min-height: 44px;
-  padding: 8px 10px;
+  padding: 8px 0 8px 10px;
   border: 0;
   border-radius: 8px;
   background: transparent;
@@ -353,8 +395,9 @@
 }
 
 #sheet .batch-export svg {
-  width: 17px;
-  height: 17px;
+  display: block;
+  width: 19px;
+  height: 19px;
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
@@ -363,28 +406,36 @@
 }
 
 #sheet .batch-export-one {
-  display: inline-flex;
-  flex: 0 0 40px;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  width: 40px;
-  min-width: 40px;
-  height: 40px;
-  min-height: 40px;
-  padding: 10px;
+  justify-content: flex-start;
+  gap: 10px;
+  width: auto;
+  min-height: 44px;
+  padding: 0 8px 0 0;
   border: 0;
   border-radius: 10px;
   background: transparent;
   color: #9e8697;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 #sheet .batch-export-one:disabled {
-  opacity: 0.4;
+  opacity: 0.55;
+}
+
+#sheet .batch-export-one .export-symbol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.75;
 }
 
 #sheet .batch-export-one svg {
-  width: 17px;
-  height: 17px;
+  display: block;
+  width: 16px;
+  height: 16px;
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
@@ -394,21 +445,32 @@
 
 /* Tandas: grupos compactos en cinco columnas. */
 #sheet .memories-section {
-  padding: 8px 10px 0 0;
+  padding: 0 12px 0 0;
 }
 
 #sheet .batch-group {
-  margin: 0 0 12px;
-  padding: 0 0 12px;
+  margin: 0;
+  padding: 0;
   border: 0;
+}
+
+#sheet .round-memories {
+  display: grid;
+  gap: 20px;
+}
+
+#sheet .next-batch {
+  margin: 0 0 18px;
+  color: #a28a9a;
+  font-size: 11px;
 }
 
 #sheet .batch-group h3 {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  min-height: 22px;
+  justify-content: flex-start;
+  gap: 0;
+  min-height: 44px;
   margin: 0 0 6px;
   padding: 0;
   background: #faf7f6;
@@ -419,17 +481,21 @@
 
 #sheet .batch-heading {
   display: inline-flex;
-  flex: 1;
+  flex: none;
   align-items: center;
   gap: 8px;
   min-width: 0;
+  color: #a08398;
+  font-size: 10px;
+  font-weight: 400;
 }
 
 #sheet .batch-title {
   overflow: hidden;
-  font-size: 11px;
+  color: #806878;
+  font-size: 12px;
   font-weight: 500;
-  line-height: 1.25;
+  line-height: 15px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -443,17 +509,15 @@
 }
 
 #sheet .active-batch {
-  margin-right: -8px;
-  margin-left: -8px;
-  padding: 8px 8px 12px;
-  border-radius: 12px;
-  background: linear-gradient(145deg, #f4e7f0b3, transparent);
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
 #sheet .batch-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 6px;
+  gap: 7px;
 }
 
 #sheet .memory-card {
@@ -501,8 +565,183 @@
   margin: 0 0 12px;
 }
 
+/* Índice imperativo: el controlador escribe únicamente variables del rail y
+   los hijos de #album-index-cards; Svelte no administra esas miniaturas. */
+#album-index {
+  position: fixed;
+  z-index: 6;
+  top: 33%;
+  right: 1px;
+  width: 44px;
+  height: min(46dvh, 360px);
+  opacity: 0.8;
+  touch-action: none;
+}
+
+#album-index[hidden],
+#album-index-preview[hidden] {
+  display: none;
+}
+
+#album-index.short-album:not(.scrubbing):not(:focus-within) {
+  opacity: 0.5;
+}
+
+#album-index::before {
+  position: absolute;
+  top: 28px;
+  right: 9px;
+  bottom: 28px;
+  width: 2px;
+  border-radius: 2px;
+  background: #d8c8d333;
+  content: '';
+  pointer-events: none;
+}
+
+#album-index.scrubbing {
+  z-index: 8;
+  top: var(--drag-top);
+  height: var(--drag-height);
+  opacity: 1;
+}
+
+#album-scrubber {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: grid;
+  width: 44px;
+  height: 60px;
+  padding: 8px;
+  place-items: center;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #9d7790;
+  transform: translate3d(0, var(--index-offset, 0px), 0);
+  touch-action: none;
+  will-change: transform;
+}
+
+#album-scrubber::before {
+  position: absolute;
+  top: 18px;
+  right: 9px;
+  bottom: 18px;
+  width: 4px;
+  border-radius: 4px;
+  background: #b493a9;
+  content: '';
+  transition: opacity 80ms ease-out;
+}
+
+#album-index.scrubbing #album-scrubber::before {
+  opacity: 0;
+}
+
+#album-index-preview {
+  position: fixed;
+  z-index: 7;
+  top: 40%;
+  right: 48px;
+  box-sizing: border-box;
+  width: min(234px, calc(100vw - 70px), 55dvh);
+  padding: 6px;
+  overflow: hidden;
+  border: 1px solid #e8dfe5;
+  border-radius: 9px;
+  background: #fcf9fc;
+  box-shadow: 0 3px 14px #76526c14;
+  pointer-events: none;
+}
+
+#album-index-preview.map-preview:not([hidden]) {
+  right: 34px;
+  width: min(280px, calc(100vw - 50px));
+  max-width: none;
+  height: 75px;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  isolation: isolate;
+}
+
+#album-index-preview.map-preview::before {
+  position: absolute;
+  z-index: -1;
+  inset: -4px -1px -4px calc(40% - 4px);
+  border: 1px solid #e8dfe5;
+  border-radius: 9px;
+  background: #fcf9fc;
+  box-shadow: 0 3px 12px #76526c14;
+  content: '';
+  transition: inset 100ms ease-out;
+}
+
+#album-index-preview.map-preview.expanded::before {
+  inset: -4px -1px -4px -4px;
+}
+
+#album-index-preview.map-preview #album-index-label {
+  position: absolute;
+  top: calc(50% - 11px);
+  right: -30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #eee4ec;
+  color: #87657c;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  line-height: 1;
+}
+
+#album-index-preview.map-preview #album-index-cards {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 75px;
+}
+
+#album-index-preview.map-preview #album-index-cards img {
+  position: absolute;
+  top: 0;
+  right: calc(var(--slot) * 20%);
+  width: calc(20% - 3px);
+  max-width: 53px;
+  height: 75px;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px #5b3e5520;
+  object-fit: contain;
+  transition: right 100ms ease-out;
+}
+
+#sheet.album-scrubbing .batch-export-one .export-symbol {
+  opacity: 0;
+}
+
+#sheet.album-scrubbing .batch-export-one {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #album-scrubber::before,
+  #album-index-preview.map-preview::before,
+  #album-index-preview.map-preview #album-index-cards img {
+    transition: none;
+  }
+}
+
 /* Dock inferior; el legacy lo mantiene fuera del modo tandas. */
 #sheet .collection-dock {
+  display: none;
   position: fixed;
   right: 0;
   bottom: 0;

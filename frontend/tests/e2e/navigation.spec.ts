@@ -24,7 +24,10 @@ test('opens the collection sheet and returns to discovery preserving the session
   await page.getByRole('button', { name: 'Abrir mi colección' }).click();
 
   await expect(page.getByRole('heading', { name: 'Tu colección' })).toBeVisible();
-  await expect(page.getByRole('group', { name: 'Filtrar la colección' })).toBeVisible();
+  // The rendered legacy opens tandas, not the obsolete favorites/filter view.
+  await expect(page.getByRole('region', { name: 'Tus tandas', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Seguir descubriendo Pokémon' })).toBeVisible();
+  await expect(page.locator('.collection-switch')).toBeHidden();
 
   const inCollection = new URL(page.url());
   expect(inCollection.pathname).toBe('/');

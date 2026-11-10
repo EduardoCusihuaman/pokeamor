@@ -33,6 +33,7 @@
   let controller: DeckController | null = null;
 
   const CARD_RATIO = 0.716;
+  let frontRatio = CARD_RATIO;
 
   function queue(): readonly Card[] {
     if (!current) return [];
@@ -47,7 +48,7 @@
     if (!stage) return;
     const width = Math.max(
       0,
-      Math.min(stage.clientWidth - 2, (stage.clientHeight - 6) * CARD_RATIO),
+      Math.min(stage.clientWidth - 2, (stage.clientHeight - 6) * frontRatio),
     );
     stage.style.setProperty('--card-width', `${width}px`);
   }
@@ -57,6 +58,10 @@
 
     const instance = createDeckController(stage, {
       onDecision: (decision, card) => onDecision(decision, card),
+      onArtworkGeometry: (ratio) => {
+        frontRatio = ratio ?? CARD_RATIO;
+        fitCard();
+      },
       resources,
     });
     controller = instance;

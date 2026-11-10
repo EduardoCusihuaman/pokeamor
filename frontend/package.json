@@ -16,6 +16,7 @@
     "test": "npm run test:unit && npm run test:browser",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:parity": "playwright test --config=playwright.parity.config.ts",
     "test:legacy": "npm --prefix .. run test"
   },
   "devDependencies": {

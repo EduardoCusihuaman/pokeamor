@@ -437,6 +437,9 @@ export function createSwipeController(
     const py = clampPercent(
       ((y - (bounds.top + (bounds.height - cardHeight) / 2)) / cardHeight) * 100,
     );
+    element.style.setProperty?.('--x', `${px}%`);
+    element.style.setProperty?.('--y', `${py}%`);
+    element.style.setProperty?.('--angle', `${100 + px * 0.4}deg`);
     return { px, py };
   };
 

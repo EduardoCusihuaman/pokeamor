@@ -48,8 +48,8 @@ export type CollectionFilter = 'all' | 'yes' | 'no' | 'pending' | 'top';
 
 /**
  * Vista superior del sheet. El legacy abre en `rounds` ("Tus tandas"): el
- * álbum de tandas de 15 con un único slot «+» al final. `settings` muestra la
- * galería editorial de elegidos con sus filtros y el acceso a ajustes.
+ * álbum de tandas de 15 con un único slot «+» al final. `settings` abre el
+ * panel de ajustes dentro de la colección.
  */
 export type CollectionMode = 'rounds' | 'settings';
 

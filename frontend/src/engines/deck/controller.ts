@@ -84,6 +84,8 @@ interface DeckCardNodeInternal extends DeckCardNode<Card> {
 export interface DeckControllerDeps {
   /** Decisión confirmada por el gesto. El host actualiza su estado aquí. */
   readonly onDecision: (decision: VoteDecision, card: Card) => void;
+  /** Proporción del frente, o null cuando usa la proporción predeterminada. */
+  readonly onArtworkGeometry?: (ratio: number | null) => void;
   /** Coordinador compartido de recursos; `null` desactiva la preparación. */
   readonly resources?: ResourceCoordinatorApi | null;
   /** Fábrica de imágenes; por defecto `document.createElement('img')`. */
@@ -122,6 +124,7 @@ const HEART_PATH =
   'M20.8 8.8c0 5.1-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.8a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z';
 const CROSS_PATH = 'm6 6 12 12M18 6 6 18';
 const SVG_NS = 'http://www.w3.org/2000/svg';
+const feedbackOwners = new WeakMap<Document, HTMLElement>();
 
 function defaultMatchMedia(query: string): { readonly matches: boolean } {
   if (typeof globalThis.matchMedia !== 'function') return { matches: false };
@@ -137,7 +140,7 @@ function defaultCancelAnimationFrame(handle: number): void {
 }
 
 function defaultSetTimeout(handler: () => void, ms: number): number {
-  return globalThis.setTimeout(handler, ms);
+  return window.setTimeout(handler, ms);
 }
 
 function defaultClearTimeout(handle: number): void {
@@ -343,6 +346,7 @@ export function createDeckController(stage: HTMLElement, deps: DeckControllerDep
   ): void {
     if (destroyed || node.decided || node !== currentNode) return;
 
+    clearFeedback(node.element);
     node.decided = true;
     commitSwipeSeal(node.seal, context.direction);
 
@@ -380,6 +384,13 @@ export function createDeckController(stage: HTMLElement, deps: DeckControllerDep
     lastDecided = node.pokemon;
     if (queue[0] === node.pokemon) render(queue.slice(1));
     else render(queue);
+  }
+
+  function clearFeedback(element: HTMLElement): void {
+    if (feedbackOwners.get(document) !== element) return;
+    feedbackOwners.delete(document);
+    document.documentElement.style.setProperty('--yes-intent', '0');
+    document.documentElement.style.setProperty('--no-intent', '0');
   }
 
   function makeCard(card: Card, under: boolean): DeckCardNodeInternal {
@@ -420,10 +431,41 @@ export function createDeckController(stage: HTMLElement, deps: DeckControllerDep
 
     const presentation = createPresentation(card, image, under ? 'back' : 'front', under ? 1 : 0);
 
+    let artworkRatio: number | null = null;
+    let disposed = false;
+    const fitArtwork = (): void => {
+      if (disposed || !card.image || element.classList.contains('official')) return;
+      const width = image.naturalWidth;
+      const height = image.naturalHeight ?? 0;
+      if (!(width > 0 && height > 0)) return;
+      artworkRatio = width / height;
+      element.style.aspectRatio = String(artworkRatio);
+      if (holder.current?.activated) deps.onArtworkGeometry?.(artworkRatio);
+    };
+    image.addEventListener?.('load', fitArtwork);
+    if (image.complete) queueMicrotask(fitArtwork);
+
     const holder: { current: DeckCardNodeInternal | null } = { current: null };
     const swipe = createSwipeController(
       element,
       {
+        onDrag(state) {
+          feedbackOwners.set(document, element);
+          document.documentElement.style.setProperty(
+            '--yes-intent',
+            String(state.dx > 0 ? state.strength * 0.8 : 0),
+          );
+          document.documentElement.style.setProperty(
+            '--no-intent',
+            String(state.dx < 0 ? state.strength * 0.75 : 0),
+          );
+        },
+        onRelease() {
+          clearFeedback(element);
+        },
+        onReset() {
+          clearFeedback(element);
+        },
         onDecision(decision, context) {
           if (holder.current) handleDecision(holder.current, decision, context);
         },
@@ -495,8 +537,10 @@ export function createDeckController(stage: HTMLElement, deps: DeckControllerDep
         element.removeAttribute('aria-hidden');
         node.activated = true;
         node.presentation.transferTo('front', 0);
+        deps.onArtworkGeometry?.(artworkRatio);
       },
       setUnder() {
+        clearFeedback(element);
         swipe.cancel();
         element.style.transform = '';
         element.style.filter = '';
@@ -508,6 +552,9 @@ export function createDeckController(stage: HTMLElement, deps: DeckControllerDep
       stopMotion() {
         // El nodo sale del deck: desconecta el gesto y sus frames. Es
         // idempotente si el vuelo ya lo había detenido.
+        clearFeedback(element);
+        disposed = true;
+        image.removeEventListener?.('load', fitArtwork);
         swipe.destroy();
       },
       remove() {
@@ -577,8 +624,10 @@ export function createDeckController(stage: HTMLElement, deps: DeckControllerDep
     setEnabled(value: boolean): void {
       if (destroyed || enabled === value) return;
       enabled = value;
-      if (!enabled) currentNode?.swipe.cancel();
-      else currentNode?.swipe.setEnabled(true);
+      if (!enabled) {
+        if (currentNode) clearFeedback(currentNode.element);
+        currentNode?.swipe.cancel();
+      } else currentNode?.swipe.setEnabled(true);
     },
 
     undo(): void {
@@ -600,6 +649,7 @@ export function createDeckController(stage: HTMLElement, deps: DeckControllerDep
 
     cancel(): void {
       if (destroyed) return;
+      if (currentNode) clearFeedback(currentNode.element);
       currentNode?.swipe.cancel();
     },
 
@@ -615,7 +665,8 @@ export function createDeckController(stage: HTMLElement, deps: DeckControllerDep
           element.remove();
           continue;
         }
-        node.swipe.destroy();
+        clearFeedback(node.element);
+        node.stopMotion();
         node.presentation.release();
         node.element.remove();
       }
