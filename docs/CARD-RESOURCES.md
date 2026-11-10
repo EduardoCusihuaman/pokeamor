@@ -1,11 +1,11 @@
 # Optional card resources
 
-`python build-worker.py` deterministically builds optional resources from committed data. No network is used by this build. `scripts/build.sh` regenerates the Worker and validates resources before packaging.
+`bash scripts/build.sh` deterministically builds optional resources from committed data. No network is used by this build. It regenerates the Worker and validates resources before packaging.
 
 - `data/alternatives-curated.json`: explicit alternatives, at most two per species; includes verification evidence.
 - `data/card-metadata/proxies.json`: cumulative print-to-export mappings. Preserve historical entries.
 - `data/proxy-overrides.json`: explicit corrections take precedence.
-- `generated/card-resources/`: append-only content-addressed resources. NEVER delete previously published hashed files. All retained versions are embedded server-side, not in browser JavaScript. Requested resources are also backed up to R2 under `card-resources/data/...`. No profile data is stored there.
+- `generated/card-resources/`: deterministic build output (gitignored), regenerated from committed data. Only the manifest-referenced `alternatives.*`/`proxies.*` files are retained; stale versions are auto-pruned on each build. Retained resources are embedded server-side, not in browser JavaScript. Requested resources are also backed up to R2 under `card-resources/data/...`. No profile data is stored there.
 
 ## User-managed artwork review
 
@@ -13,7 +13,7 @@ Artwork selection belongs to the user. No automatic artwork reviewer or candidat
 
 In Settings → debug catalog, Principales shows the current 1,025 species; Alternativas explicitly loads and displays the existing alternative prints. Both views share exact-print selection and Limitless export. The user can send the selected list for subsequent explicit edits. Selecting a print does not approve, remove or change it.
 
-After user-supplied changes, edit the explicit rows in `data/alternatives-curated.json`; `enabled` controls availability and `reviewStatus` records the user's review. Never generate approval from rarity, name, color or an AI assessment. Keep historical proxy mappings. Build with `python build-worker.py` and validate with `python scripts/validate-card-resources.py`.
+After user-supplied changes, edit the explicit rows in `data/alternatives-curated.json`; `enabled` controls availability and `reviewStatus` records the user's review. Never generate approval from rarity, name, color or an AI assessment. Keep historical proxy mappings. Build with `bash scripts/build.sh` and validate with `python scripts/validate-card-resources.py`.
 
 Runtime has no TCGdex metadata requests. Alternatives begin idle loading at six likes; one image is prepared at a time. Failed images are excluded for five minutes; one automatic retry is scheduled after 30 seconds. Event cadence and preference weights remain unchanged. Print construction clears inherited print-specific metadata. Unverified materials use no foil.
 
