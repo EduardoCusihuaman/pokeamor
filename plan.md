@@ -1,9 +1,13 @@
 # Pokeamor — Especificación técnica de migración a Svelte 5
 
-**Versión:** 1.1  
-**Fecha:** 9 de noviembre de 2026  
-**Estado:** Arquitectura propuesta y revisada; pendiente de implementación y validación  
-**Revisión:** incorpora las correcciones de la revisión crítica de la v1.0  
+**Versión:** 1.2
+
+**Fecha:** 10 de noviembre de 2026
+
+**Estado:** Migración en curso; integración parcial de fases 5–6, sin paridad total ni publicación aprobadas
+
+**Revisión:** seguimiento del código y las verificaciones reales; conserva los requisitos y criterios de salida de la v1.1
+
 **Repositorio:** `EduardoCusihuaman/pokeamor`  
 **Objetivo:** Reestructurar Pokeamor como una SPA moderna, mantenible y extremadamente interactiva, preservando su comportamiento visual, sus optimizaciones y su experiencia de usuario.
 
@@ -74,6 +78,14 @@ La implementación existente será la referencia de comportamiento hasta que la 
 - Se añade linting con información de tipos y verificación de dependencias.
 - Se separa la migración estructural de la modernización visual.
 - Se amplían las reglas para agentes con reglas específicas de Svelte 5.
+
+### Cambios incorporados en la v1.2
+
+- Se registra el avance real por fase y por funcionalidad en §20.
+- Se distingue extracción de módulos, integración en la interfaz y validación completa.
+- Se identifican los bloqueos de hosting, CI, compatibilidad y rendimiento.
+- Se actualiza la Definition of Done únicamente con requisitos comprobados.
+- No se reducen los contratos de experiencia, recursos, persistencia ni los criterios de salida. Cloudflare permanece en pausa por decisión del usuario.
 
 ---
 
@@ -1386,6 +1398,101 @@ Los logs de desarrollo no deben ejecutarse constantemente en producción.
 
 ## 20. Plan de migración
 
+### Seguimiento actual — 10 de noviembre de 2026
+
+**Referencia del código revisado:** `68f0b20`, sobre `main`. Baseline legacy:
+tag `migration-baseline`, commit `37a8b3f`.
+
+La base técnica está avanzada y hay una implementación local usable de discovery
+y tandas. **La migración no está terminada: módulo extraído y probado no equivale
+a funcionalidad integrada y validada.** Los estados siguientes describen progreso,
+no sustituyen los criterios de salida de cada fase.
+
+| Fase | Estado comprobado | Pendiente para cerrar |
+|---|---|---|
+| 1. Baseline | Referencia congelada y 154 pruebas legacy | Videos y estados completos, mediciones repetidas, variabilidad y umbrales de §16 |
+| 2. Bootstrap | Svelte/Vite/TypeScript y herramientas funcionando localmente; proxy de desarrollo | CI reproducible completo y demostración del hosting con rutas, hashes, MIME y caché |
+| 3. Módulos independientes | Extracción principal documentada; dominio y motores con pruebas por imports | No confundir esta extracción con el uso de esos módulos desde la app; conservar invariantes al integrarlos |
+| 4. Slice vertical | Discovery con datos, estado, componentes, build y E2E locales | Completar equivalencia de producción y verificar el build desplegado |
+| 5. Colección y paneles | Tandas, navegación básica y scrubber integrados | Detalle/visor, ajustes reales, comportamientos restantes del álbum y equivalencia visual/accesible completa |
+| 6. Discovery y swipe | Isla imperativa, gesto, votos, promoción, vuelos y undo básico | Recomendador, buffer adaptable, gates de recursos, materiales y verificación completa de concurrencia, cancelación y timing |
+| 7. Modernización CSS/APIs | Pendiente como fase separada | Evaluar mejoras justificadas después de estabilizar la paridad; verificar cada grupo de cascada y animación |
+| 8. Performance/publicación | Pendiente | Comparación estadística, navegadores mínimos y dispositivos, presupuestos, publicación controlada y rollback probado |
+
+**Deuda de gates:** se avanzó localmente sin cerrar la demostración de hosting
+de fase 2 ni las mediciones de fase 1. Esto se registra como pendiente, no como
+cumplimiento ni como autorización para omitir esos requisitos. La publicación
+permanece pausada y las fases 2, 4 y 8 no pueden darse por cerradas por un build
+local o un push a GitHub.
+
+#### Funcionalidades conectadas y pendientes
+
+| Funcionalidad | Estado en la nueva app | Trabajo restante |
+|---|---|---|
+| Catálogo y shell | Carga de catálogo, estados básicos de carga/error y shell Svelte | Completar instalación atómica del bundle y sus tablas auxiliares en el flujo real |
+| Swipe y votos | Gesto positivo/negativo, sello, luz de intención y controles alternativos | Validación de todos los estados animados, ráfagas, abandono de pantalla y recuperación de errores |
+| Promoción y vuelos | Identidad de imagen conservada en los escenarios probados; proporción natural; pose de undercard limpiada al promover | Verificar todos los contratos de §6–§8 con carga lenta, vuelos concurrentes y cambios de pantalla |
+| Undo | Restaura voto/carta en el flujo básico | Cerrar equivalencia visual, cancelación de vuelos y coordinación con recomendador y encuentros |
+| Recomendaciones | Módulo extraído, no conectado al discovery activo | Worker, cola adaptativa, ranking, alternativas/reencuentros y reconstrucción tras undo; hoy se avanza por orden del catálogo |
+| Preparación de imágenes | Coordinador de recursos conectado al deck | Integrar buffer adaptable/lookahead, gate de imagen lista, reintentos y presupuestos completos del legacy |
+| Colección y tandas | Overlay lazy-loaded, grupos, progreso y scrubber con scroll, preview, arrastre, cancelación y teclado | Cerrar diferencias de píxeles, aterrizaje visual del scrubber y comportamientos restantes del álbum |
+| Detalle de carta | Módulo parcial extraído; la UI no conecta `onOpenCard` | Apertura, visor/carrusel, gestos, navegación, gestión de foco y retorno animado a la miniatura |
+| Duelos y equipo | Reglas y motores extraídos; sin flujo completo de UI | Afinador manual, encuentros automáticos, empate, preferencias y equipo; el botón de guantes aún no tiene acción |
+| Recompensas y final de tanda | Cálculos de progreso/recompensas disponibles | Celebraciones, previews, aperturas y automatismos equivalentes al legacy |
+| WebGL y materiales | Motores extraídos, no conectados a la presentación | Renderer real, texturas, lifecycle y pausa de trabajo pesado durante gesto/vuelo; no usar foil sintético como sustituto |
+| Sensor, sonido y háptica | Sin integración funcional completa | Permisos opt-in, preferencias persistidas y feedback equivalente; el destello del header es decorativo |
+| Ajustes y respaldo | El panel abre un aviso de indisponibilidad | Compartir/recuperar, importar/exportar, borrar, sensaciones, diagnóstico y contenidos del panel legacy |
+| Copia de tandas/proxies | Botones y planificación de exportación disponibles | Instalar las tablas versionadas en el flujo real y validar el texto con datos reales; no contabilizar solo el botón como feature cerrada |
+| Sesiones y sync | Persistencia local y controlador ETag conectados al entrar con token `#s=` | Inicio/restauración sin depender de un enlace previo, recuperación completa y validación real multidispositivo |
+| Accesibilidad | Etiquetas, controles alternativos y reduced motion en los flujos probados | Foco y navegación de los paneles pendientes, contraste y cobertura completa de §17 |
+
+#### Evidencia y validación disponible
+
+Últimos checks ejecutados sobre el cambio de swipe `68f0b20`:
+
+| Verificación | Resultado | Alcance |
+|---|---|---|
+| Typecheck | Sin errores ni warnings | Svelte y configuraciones TypeScript |
+| ESLint | Sin errores | Frontend |
+| Unit | 187/187 | Módulos y lógica; no acredita integración de toda la UI |
+| Browser | 22/22 | Componentes y motores en Chromium |
+| E2E Chromium | 8/8 | Incluye comparación con legacy y estabilidad de pantalla en 390×844 y 1440×900 |
+| Legacy | 154/154 | Última ejecución al cierre de la ola anterior; backend y legacy no modificados por el fix de swipe |
+| Build Vite | Satisfactorio | Compilación local, no demostración de despliegue |
+| Comparación visual estricta | Última corrida completa: 1/8 verde, 7/8 rojos | Ola de paridad anterior al fix `68f0b20`; repetir antes de aprobar paridad total |
+| Degradado del swipe | CSS computado y siete muestras RGBA por captura coincidentes | Misma carta blanca/paleta a 0, ±50 y ±85 px en 390×844; no acredita igualdad de todos los píxeles ni materiales |
+| Firefox/WebKit | Sin ejecución satisfactoria en este entorno | Binarios descargados; faltan dependencias nativas del sistema |
+| Safari/iPhone físico | Pendiente | Sensores, GPU, viewport y gestos reales |
+| Rendimiento de §16 | Pendiente | No hay comparación estadística ni umbrales aprobados |
+| CI/hosting | Pendiente | Despliegue Cloudflare pausado por el usuario |
+
+Las pruebas verdes no cierran por sí solas los flujos mínimos de §15 ni la
+Definition of Done. El harness de paridad usa fixtures sintéticas normalizadas
+y compara contra DOM/CSS **renderizados**, no contra HTML inicial. No ampliar
+tolerancias ni actualizar referencias Svelte para ocultar diferencias.
+
+Evidencia detallada:
+
+- [Baseline](docs/migration/baseline.md) y [bootstrap](docs/migration/phase2-bootstrap.md).
+- [Extracción de módulos](docs/migration/phase3.md) y [estado corregido de fases 4–6](docs/migration/phase4-6.md).
+- [Auditoría runtime](docs/migration/visual-runtime-audit.md), [harness comparativo](docs/migration/parity-acceptance.md) y [ola de paridad](docs/migration/parity-wave-1.md).
+- [Corrección de franjas, promoción y comparación del degradado](docs/migration/swipe-artwork-regression.md).
+
+#### Próximas unidades de trabajo
+
+1. **Recursos y discovery:** instalar bundle/tablas, conectar buffer y gates de readiness; integrar recomendador/Worker, alternativas y undo. Verificar identidad, errores, ráfagas y abandono de pantalla.
+2. **Duelos y equipo:** conectar los motores extraídos a un flujo usable, manual y automático, sin modificar reglas ni votos.
+3. **Detalle y álbum:** apertura desde miniaturas, visor, preview, retorno animado y cierre de paridad del scrubber.
+4. **Materiales y sensaciones:** integrar renderer, sensor, sonido y háptica con cleanup y coordinación de trabajo pesado.
+5. **Ajustes y sesiones:** respaldo, recuperación, importación/exportación, preferencias y escenarios multidispositivo.
+6. **Cierre de paridad y calidad:** completar E2E de §15, navegadores, accesibilidad y CI; evaluar modernización de fase 7 por grupos, sin rediseñar.
+7. **Aceptación de rendimiento y publicación:** completar baseline/umbrales y comparaciones de §16; demostrar hosting y rollback cuando el usuario reanude despliegues.
+
+Cada unidad requiere pruebas previas que detecten la carencia, verificación
+contra legacy ejecutado y registro de riesgos. Son unidades de integración,
+no una autorización para cambiar varios subsistemas críticos simultáneamente.
+El hosting se valida al reanudar su acceso, sin dar por aprobado el gate temprano.
+
 ### Fase 1 — Baseline y congelamiento de contratos
 
 **Acciones:**
@@ -1607,13 +1714,18 @@ Los tests de rendimiento de dispositivos físicos serán una validación adicion
 
 La migración estará terminada solamente cuando:
 
-- [ ] La SPA esté construida con Svelte 5 y Vite.
-- [ ] TypeScript estricto esté activo en código nuevo.
+**Seguimiento al 10 de noviembre de 2026:** solo se marcan requisitos comprobados
+en el alcance indicado en §20. Una casilla pendiente puede tener implementación
+parcial; no se marca completa por existir un módulo o un test aislado. Esta lista
+no sustituye los criterios de salida pendientes de hosting ni de rendimiento.
+
+- [x] La SPA esté construida con Svelte 5 y Vite.
+- [x] TypeScript estricto esté activo en código nuevo.
 - [ ] El código crítico esté separado en módulos.
 - [ ] No queden dependencias circulares relevantes.
 - [ ] No queden globals legacy innecesarios.
 - [ ] Los comportamientos existentes estén cubiertos por tests.
-- [ ] Los tests puedan importar módulos reales.
+- [x] Los tests puedan importar módulos reales.
 - [ ] La identidad de imágenes esté preservada.
 - [ ] Las animaciones salientes funcionen correctamente.
 - [ ] Undo y cancelaciones funcionen.
@@ -1624,18 +1736,18 @@ La migración estará terminada solamente cuando:
 - [ ] El backend y R2 funcionen sin cambios incompatibles.
 - [ ] La aplicación funcione en las versiones mínimas de Chrome, Firefox y Safari/iOS definidas en §10.
 - [ ] El hosting actual sirva la SPA compilada y las rutas existentes desde la fase de bootstrap.
-- [ ] El enlace de sesión `#s=...` siga funcionando.
-- [ ] Las pruebas de componentes corran en navegador real.
+- [x] El enlace de sesión `#s=...` siga funcionando.
+- [x] Las pruebas de componentes corran en navegador real.
 - [ ] La experiencia sea usable mediante los controles alternativos.
 - [ ] Los contratos exactos de §16 tengan tolerancia cero y estén verificados.
 - [ ] Los umbrales estadísticos estén definidos y cumplidos.
 - [ ] Los presupuestos de JavaScript por ámbito estén definidos y cumplidos.
 - [ ] La cascada CSS se haya migrado por grupos con verificación visual.
 - [ ] No existan violaciones de los contratos exactos ni regresiones estadísticas fuera del umbral acordado.
-- [ ] El alias `@` esté configurado y no se use `$lib` sin configurar.
+- [x] El alias `@` esté configurado y no se use `$lib` sin configurar.
 - [ ] El build de producción sea reproducible.
 - [ ] CI pase completamente con `npm ci`.
-- [ ] Exista documentación actualizada.
+- [x] Exista documentación actualizada.
 - [ ] Exista un procedimiento de rollback.
 
 ---
@@ -1797,4 +1909,4 @@ El éxito no se medirá solamente por la cantidad de código eliminado.
 
 **Se medirá por una Pokeamor más fácil de mantener, con la misma experiencia o mejor, y con un rendimiento demostrado mediante pruebas reales.**
 
-La v1.1 no autoriza a iniciar una migración grande sin la demostración temprana de despliegue de §20. El mayor riesgo no es una limitación de Svelte: es introducir más decodificaciones, trabajo reactivo, conflictos de DOM o cambios de timing que la versión actual evita cuidadosamente.
+La especificación conserva el requisito de demostración temprana de despliegue de §20. La v1.2 registra el avance local y la deuda de validación existente; no da por cumplido ni elimina ese gate. El mayor riesgo no es una limitación de Svelte: es introducir más decodificaciones, trabajo reactivo, conflictos de DOM o cambios de timing que la versión actual evita cuidadosamente.
