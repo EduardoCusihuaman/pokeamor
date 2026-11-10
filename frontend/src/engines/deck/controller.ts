@@ -410,16 +410,8 @@ export function createDeckController(stage: HTMLElement, deps: DeckControllerDep
     image.alt = `Carta de ${card.name}`;
     image.draggable = false;
 
-    // Capas estáticas de la carta. El material WebGL queda diferido; estos
-    // nodos preservan la estructura y los efectos del legacy (glint/foil).
-    const glint = document.createElement('div');
-    glint.className = 'glint';
-    glint.setAttribute('aria-hidden', 'true');
-
-    const foil = document.createElement('div');
-    foil.className = 'foil';
-    foil.setAttribute('aria-hidden', 'true');
-
+    // The rendered legacy preserves the original print during swipe. Do not
+    // substitute a synthetic striped foil for the still-unintegrated material.
     const choice = document.createElement('div');
     choice.className = 'choice-light';
     choice.setAttribute('aria-hidden', 'true');
@@ -427,7 +419,7 @@ export function createDeckController(stage: HTMLElement, deps: DeckControllerDep
     const seal = createSeal(document);
     const meta = createMeta(document, card);
 
-    element.append(image as unknown as Node, glint, foil, choice, seal, meta);
+    element.append(image as unknown as Node, choice, seal, meta);
 
     const presentation = createPresentation(card, image, under ? 'back' : 'front', under ? 1 : 0);
 
@@ -532,8 +524,12 @@ export function createDeckController(stage: HTMLElement, deps: DeckControllerDep
         return swipe.getPose();
       },
       activate() {
-        if (node.decided) return;
+        if (node.decided || node.activated) return;
         element.classList.remove('under');
+        // Promotion must leave the undercard pose behind, just like legacy.
+        // Otherwise the next pointerdown jumps from that pose to the swipe's.
+        element.style.transform = '';
+        element.style.filter = '';
         element.removeAttribute('aria-hidden');
         node.activated = true;
         node.presentation.transferTo('front', 0);

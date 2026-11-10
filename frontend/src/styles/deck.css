@@ -7,8 +7,8 @@
  *
  * La geometría y los colores son los del legacy (`src/page.html`), con los
  * overrides pastel finales: fondo papel, sombras ciruela muy suaves y acentos
- * rosa. El canvas WebGL de material queda fuera de esta fase; las capas
- * estáticas (`glint`, `foil`, `choice-light` y el sello) sí se conservan.
+ * rosa. El material WebGL queda fuera de esta fase: se conserva el artwork
+ * original, la luz de decisión y el sello, sin una textura foil sintética.
  */
 
 @import './theme.css';
@@ -542,60 +542,11 @@
   color: #785d71;
 }
 
-.card .glint,
-.card .foil,
 .card .choice-light {
   position: absolute;
   inset: 0;
   border-radius: inherit;
   pointer-events: none;
-}
-
-.card .glint {
-  z-index: 1;
-  background: radial-gradient(
-    ellipse at var(--x, 50%) var(--y, 35%),
-    #ffffff40,
-    #ffffff0a 25%,
-    transparent 58%
-  );
-  mix-blend-mode: screen;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.card.active .glint {
-  opacity: 1;
-}
-
-.card .foil {
-  z-index: 2;
-  background:
-    repeating-linear-gradient(
-      115deg,
-      #e44668 0%,
-      #dfbc46 15%,
-      #49ba91 30%,
-      #5082d6 45%,
-      #b05bcd 60%,
-      #e44668 75%
-    ),
-    repeating-linear-gradient(0deg, #252833 0, #c0cad4 1px, #252833 3px);
-  background-position:
-    var(--x, 50%) var(--y, 50%),
-    center;
-  background-size:
-    300% 300%,
-    100% 100%;
-  background-blend-mode: soft-light;
-  filter: contrast(1.3) saturate(1.2);
-  mix-blend-mode: color-dodge;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.card.active .foil {
-  opacity: 0.55;
 }
 
 .card .choice-light {
@@ -961,8 +912,6 @@
   .ambient,
   .card,
   .card.under,
-  .card .glint,
-  .card .foil,
   .card .choice-light,
   .vote.yes svg,
   .track i,
