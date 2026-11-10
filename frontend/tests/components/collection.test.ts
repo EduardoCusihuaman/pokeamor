@@ -61,38 +61,55 @@ function makeSource(): CollectionSource {
   };
 }
 
-test('renders the sheet, switches to tandas and filters the favorites grid', async () => {
+test('opens in tandas with one + slot, then switches to the favorites grid', async () => {
   const collection = createCollection({ source: makeSource() });
   const screen = await render(CollectionScreen, { collection });
 
-  // El overlay legacy se monta abierto, con encabezado, título y resumen.
+  // El sheet legacy abre en «Tus tandas» con su contador y la tanda activa.
   await expect.element(screen.getByRole('heading', { name: 'Tu colección' })).toBeVisible();
+  await expect.element(screen.getByText(/2 \/ 4 · 1 tanda/)).toBeVisible();
+  await expect
+    .element(screen.getByRole('button', { name: 'Tus tandas' }))
+    .toHaveAttribute('aria-pressed', 'true');
+  await expect
+    .element(screen.getByRole('button', { name: 'Ajustes y respaldo' }))
+    .toHaveAttribute('aria-pressed', 'false');
+
+  await expect.element(screen.getByText('Tanda 1')).toBeVisible();
+  await expect.element(screen.getByText(/2\/15/)).toBeVisible();
+  await expect.element(screen.getByRole('button', { name: 'Ver Pikachu' })).toBeVisible();
+  await expect.element(screen.getByRole('button', { name: 'Ver Bulbasaur' })).toBeVisible();
+  expect(screen.getByRole('button', { name: 'Ver Charmander' }).query()).toBeNull();
+
+  // Un solo slot «+» para seguir descubriendo, no quince celdas fijas.
+  expect(
+    screen.getByRole('button', { name: 'Seguir descubriendo Pokémon' }).elements(),
+  ).toHaveLength(1);
+  await expect.element(screen.getByRole('button', { name: 'Copiar tandas' })).toBeEnabled();
+  await expect.element(screen.getByRole('button', { name: 'Copiar tanda 1' })).toBeEnabled();
+
+  // «Ajustes y respaldo»: título editorial, resumen y galería de elegidos.
+  await screen.getByRole('button', { name: 'Ajustes y respaldo' }).click();
+  await expect
+    .element(screen.getByRole('button', { name: 'Ajustes y respaldo' }))
+    .toHaveAttribute('aria-pressed', 'true');
   await expect.element(screen.getByRole('heading', { name: 'Tus elegidos.' })).toBeVisible();
   await expect.element(screen.getByText(/2 favoritos/)).toBeVisible();
-
-  // Vista inicial: la galería de elegidos con el filtro de favoritas.
+  await expect.element(screen.getByRole('group', { name: 'Filtrar la colección' })).toBeVisible();
   await expect
-    .element(screen.getByRole('button', { name: 'Tus elegidos' }))
+    .element(screen.getByRole('button', { name: 'Favoritas' }))
     .toHaveAttribute('aria-pressed', 'true');
   await expect.element(screen.getByRole('button', { name: 'Ver Pikachu' })).toBeVisible();
   await expect.element(screen.getByRole('button', { name: 'Ver Bulbasaur' })).toBeVisible();
   expect(screen.getByRole('button', { name: 'Ver Charmander' }).query()).toBeNull();
-  await expect
-    .element(screen.getByRole('button', { name: 'Favoritas' }))
-    .toHaveAttribute('aria-pressed', 'true');
 
-  // Tus tandas: la tanda activa de 15 con tarjetas de memoria.
+  // Volver a «Tus tandas» conserva los datos y oculta la galería editorial.
   await screen.getByRole('button', { name: 'Tus tandas' }).click();
-  await expect
-    .element(screen.getByRole('button', { name: 'Tus tandas' }))
-    .toHaveAttribute('aria-pressed', 'true');
   await expect.element(screen.getByText('Tanda 1')).toBeVisible();
-  await expect.element(screen.getByText('2 / 15')).toBeVisible();
-  await expect.element(screen.getByRole('button', { name: 'Ver Pikachu' })).toBeVisible();
-  expect(screen.getByRole('button', { name: 'Ver Charmander' }).query()).toBeNull();
+  expect(screen.getByRole('heading', { name: 'Tus elegidos.' }).query()).toBeNull();
 
-  // Volver a elegidos conserva el filtro y permite cambiarlo.
-  await screen.getByRole('button', { name: 'Tus elegidos' }).click();
+  // De nuevo en ajustes, los filtros siguen operativos.
+  await screen.getByRole('button', { name: 'Ajustes y respaldo' }).click();
   await screen.getByRole('button', { name: 'Todas' }).click();
   await expect.element(screen.getByRole('button', { name: 'Ver Charmander' })).toBeVisible();
   expect(screen.getByRole('button', { name: 'Ver Squirtle' }).query()).toBeNull();
@@ -129,7 +146,7 @@ test('the settings control exposes the backup entry point', async () => {
   const onSettings = vi.fn();
 
   const screen = await render(CollectionScreen, { collection, onSettings });
-  await screen.getByRole('button', { name: 'Ajustes y respaldo' }).click();
+  await screen.getByRole('button', { name: 'Abrir ajustes y respaldo' }).click();
 
   expect(onSettings).toHaveBeenCalledTimes(1);
 });

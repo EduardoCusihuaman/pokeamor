@@ -25,7 +25,9 @@
 
 import { appDiscovery } from '@/application/discovery.svelte';
 import type { SessionState, Vote } from '@/application/sync';
+import { cardResources } from '@/domain/cards/resources';
 import type { Card } from '@/domain/catalog';
+import { plan, type BatchExportResult, type ProxyLookup } from '@/domain/collection/batch-export';
 import {
   BATCH_SIZE,
   TEAM_SIZE,
@@ -43,6 +45,13 @@ import {
 import { model, type Comparison } from '@/domain/collection/preference';
 
 export type CollectionFilter = 'all' | 'yes' | 'no' | 'pending' | 'top';
+
+/**
+ * Vista superior del sheet. El legacy abre en `rounds` ("Tus tandas"): el
+ * álbum de tandas de 15 con un único slot «+» al final. `settings` muestra la
+ * galería editorial de elegidos con sus filtros y el acceso a ajustes.
+ */
+export type CollectionMode = 'rounds' | 'settings';
 
 export const COLLECTION_FILTERS: readonly CollectionFilter[] = [
   'all',
@@ -68,9 +77,13 @@ export interface CollectionOptions {
   readonly source?: CollectionSource;
   /** Cartas que muestra la galería antes de "Ver más". Por defecto 40 (legacy). */
   readonly pageSize?: number;
+  /** Impresiones para «Copiar tandas». Por defecto `cardResources`. */
+  readonly lookupProxy?: ProxyLookup;
 }
 
 export interface CollectionApi {
+  /** Vista activa del sheet; arranca en `rounds`, como el legacy. */
+  readonly mode: CollectionMode;
   readonly filter: CollectionFilter;
   readonly visibleCount: number;
   readonly pageSize: number;
@@ -89,9 +102,19 @@ export interface CollectionApi {
   /** Recompensas pendientes según `celebration`; la UI decide cuándo mostrarlas. */
   readonly rewards: readonly JourneyReward[];
   readonly hasMore: boolean;
+  /** Favoritos elegidos: el `N` del contador `N / total · M tandas`. */
+  readonly seenCount: number;
+  /** Tandas no vacías que muestra el álbum (el `M` del contador). */
+  readonly tandaCount: number;
+  setMode(mode: CollectionMode): void;
   setFilter(filter: CollectionFilter): void;
   showMore(): void;
   resetVisible(): void;
+  /**
+   * Genera las líneas de Limitless para todas las tandas o para una sola.
+   * No toca el portapapeles: la presentación decide cómo copiar el texto.
+   */
+  exportTandas(group?: number): BatchExportResult;
 }
 
 /**
@@ -128,7 +151,10 @@ function preferenceComparisons(session: SessionState): Comparison[] {
 export function createCollection(options: CollectionOptions = {}): CollectionApi {
   const source: CollectionSource = options.source ?? appDiscovery;
   const pageSize = Math.max(1, options.pageSize ?? 40);
+  const lookupProxy: ProxyLookup =
+    options.lookupProxy ?? ((printId) => cardResources.getProxy(printId));
 
+  let mode = $state<CollectionMode>('rounds');
   let filter = $state<CollectionFilter>('yes');
   let visibleCount = $state(pageSize);
 
@@ -162,6 +188,11 @@ export function createCollection(options: CollectionOptions = {}): CollectionApi
   const progress = $derived(journeyProgress(source.catalog, journeyState, grouped.groups));
   const rewards = $derived(celebration(source.catalog, journeyState, grouped.groups).rewards);
 
+  // El contador del legacy cuenta favoritos (no descubiertas) y las tandas que
+  // el álbum muestra; el catálogo completo queda como denominador.
+  const seenCount = $derived(favorites.length);
+  const tandaCount = $derived(grouped.groups.length);
+
   const counts: Readonly<Record<CollectionFilter, number>> = $derived({
     all: discovered.length,
     yes: favorites.length,
@@ -187,6 +218,10 @@ export function createCollection(options: CollectionOptions = {}): CollectionApi
 
   const visibleCards = $derived(filteredCards.slice(0, visibleCount));
 
+  function setMode(next: CollectionMode): void {
+    mode = next;
+  }
+
   function setFilter(next: CollectionFilter): void {
     filter = next;
     visibleCount = pageSize;
@@ -200,7 +235,21 @@ export function createCollection(options: CollectionOptions = {}): CollectionApi
     visibleCount = pageSize;
   }
 
+  /**
+   * Las tandas del dominio ya están ordenadas de la más antigua a la más
+   * reciente, así que se exportan en ese mismo orden (el legacy invertía la
+   * lista porque la dibujaba al revés).
+   */
+  function exportTandas(group?: number): BatchExportResult {
+    if (group === undefined) return plan(grouped.groups, lookupProxy);
+    const single = grouped.groups[group];
+    return plan(single ? [single] : [], lookupProxy);
+  }
+
   return {
+    get mode() {
+      return mode;
+    },
     get filter() {
       return filter;
     },
@@ -246,9 +295,17 @@ export function createCollection(options: CollectionOptions = {}): CollectionApi
     get hasMore() {
       return filteredCards.length > visibleCards.length;
     },
+    get seenCount() {
+      return seenCount;
+    },
+    get tandaCount() {
+      return tandaCount;
+    },
+    setMode,
     setFilter,
     showMore,
     resetVisible,
+    exportTandas,
   };
 }
 

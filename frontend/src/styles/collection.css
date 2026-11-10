@@ -39,16 +39,17 @@
 
 #sheet {
   --collection-accent: #b47693;
-  padding: 0 22px max(110px, calc(env(safe-area-inset-bottom) + 96px));
+  padding: 0 14px max(110px, calc(env(safe-area-inset-bottom) + 96px));
   background: #faf7f6;
 }
 
 #sheet .inner {
   max-width: 640px;
   margin: 0 auto;
+  padding-bottom: 28px;
 }
 
-/* Encabezado sticky: volver · título · ajustes. */
+/* Encabezado sticky: volver · «Tu colección» + contador · ajustes. */
 #sheet .collection-header {
   position: sticky;
   top: 0;
@@ -57,13 +58,21 @@
   align-items: center;
   grid-template-columns: 44px minmax(0, 1fr) 44px;
   gap: 8px;
-  height: calc(62px + env(safe-area-inset-top));
+  height: calc(52px + env(safe-area-inset-top));
   padding-top: max(10px, env(safe-area-inset-top));
   margin-bottom: 8px;
   background: #faf7f6;
 }
 
-#sheet .collection-header > span {
+#sheet .album-heading-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+#sheet #album-heading {
   overflow: hidden;
   color: #775c70;
   font-size: 15px;
@@ -71,6 +80,19 @@
   text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+#sheet #album-seen {
+  color: #a08c99;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+  letter-spacing: 0.15px;
+  white-space: nowrap;
+}
+
+#sheet:not(.rounds-mode) #album-seen {
+  display: none;
 }
 
 #sheet .collection-header .close {
@@ -92,11 +114,16 @@
   justify-self: end;
   width: 40px;
   height: 40px;
+  border: 1px solid #eee4ea;
+  background: #fff9fc;
+  color: #917487;
+  box-shadow: 0 2px 8px #70546b0c;
 }
 
 #sheet .collection-header .settings-icon svg {
-  width: 22px;
-  height: 22px;
+  display: block;
+  width: 20px;
+  height: 20px;
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
@@ -104,11 +131,12 @@
   stroke-width: 1.5;
 }
 
-/* Cambio de vista: tandas · elegidos. */
+/* Cambio de vista: «Tus tandas» · «Ajustes y respaldo». */
 #sheet .collection-switch {
   display: flex;
   gap: 24px;
-  margin: 8px 0 18px;
+  margin: 0 0 18px;
+  background: #faf7f6;
 }
 
 #sheet .collection-switch button {
@@ -126,7 +154,7 @@
   color: #77576e;
 }
 
-/* Título editorial. */
+/* Título editorial (solo en «Ajustes y respaldo»). */
 #sheet .collection-title {
   margin: 26px 0 4px;
   color: #292a26;
@@ -139,14 +167,10 @@
 }
 
 #sheet #summary {
-  margin: 0 0 30px;
+  margin: 0 0 14px;
   color: #9c8794;
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.7;
-}
-
-#sheet.rounds-mode #summary {
-  margin-bottom: 14px;
 }
 
 /* Filtros del álbum (pills del legacy). */
@@ -154,7 +178,22 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 18px 0;
+  margin: 0 0 18px;
+}
+
+/*
+ * En «Tus tandas» el legacy no muestra filtros. Los mantenemos en el árbol de
+ * accesibilidad sin ocupar espacio (los controles siguen siendo alcanzables).
+ */
+#sheet .tabs.tabs-is-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 /* Conteo del filtro anunciado a lectores de pantalla sin sumar una línea visual. */
@@ -175,7 +214,7 @@
   padding: 10px 14px;
   border: 0;
   border-radius: 20px;
-  background: #e7e7de;
+  background: #eee6eb;
   color: #77576e;
   font-size: 12px;
   line-height: 1.2;
@@ -196,18 +235,11 @@
   color: #f0dce8;
 }
 
-/* Grilla de elegidos. */
+/* Grilla editorial de elegidos. */
 #sheet .grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 26px 18px;
-}
-
-@media (min-width: 700px) {
-  #sheet .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 17px 10px;
-  }
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px 7px;
 }
 
 #sheet .grid-empty {
@@ -237,7 +269,7 @@
   width: 100%;
   aspect-ratio: 0.716;
   object-fit: contain;
-  border-radius: 10px;
+  border-radius: 7px;
   background: transparent;
   box-shadow: 0 6px 18px -10px #7b63764d;
 }
@@ -245,9 +277,9 @@
 #sheet .tile b {
   display: block;
   overflow: hidden;
-  margin: 10px 2px 0;
+  margin: 6px 1px 0;
   color: #77616f;
-  font-size: 12px;
+  font-size: 8px;
   font-weight: 500;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -269,48 +301,151 @@
   display: none;
 }
 
-/* Tandas: grupos de 15 cartas en cinco columnas. */
-#sheet .memories-section {
-  padding: 0;
-}
-
-#sheet .batch-group {
-  margin: 0 0 24px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #eae1e8;
-}
-
-#sheet .batch-group:last-child {
-  border-bottom: 0;
-}
-
-#sheet .batch-group h3 {
-  position: sticky;
-  top: calc(62px + env(safe-area-inset-top));
-  z-index: 2;
+/* Barra «Tus tandas» + «Copiar tandas» (batch-export.js del legacy). */
+#sheet .batch-export-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 28px;
+  gap: 12px;
+  min-height: 44px;
+  margin: 0 0 4px;
+}
+
+#sheet .batch-export-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+#sheet .batch-export-heading strong {
+  color: #74566c;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+#sheet .batch-export-heading small {
+  color: #a08b99;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+#sheet .batch-export {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #74566c;
+  font-size: 11px;
+  font-weight: 500;
+  touch-action: manipulation;
+}
+
+#sheet .batch-export:disabled {
+  opacity: 0.55;
+}
+
+#sheet .batch-export svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+#sheet .batch-export-one {
+  display: inline-flex;
+  flex: 0 0 40px;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  min-height: 40px;
+  padding: 10px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #9e8697;
+}
+
+#sheet .batch-export-one:disabled {
+  opacity: 0.4;
+}
+
+#sheet .batch-export-one svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+/* Tandas: grupos compactos en cinco columnas. */
+#sheet .memories-section {
+  padding: 8px 10px 0 0;
+}
+
+#sheet .batch-group {
+  margin: 0 0 12px;
+  padding: 0 0 12px;
+  border: 0;
+}
+
+#sheet .batch-group h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 22px;
   margin: 0 0 6px;
-  padding: 5px 0;
+  padding: 0;
   background: #faf7f6;
   color: #876c7e;
   font-size: 11px;
   font-weight: 500;
 }
 
-#sheet .batch-group h3 span:last-child {
+#sheet .batch-heading {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+#sheet .batch-title {
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#sheet .batch-state {
   color: #a08398;
   font-size: 10px;
   font-variant-numeric: tabular-nums;
   font-weight: 400;
+  line-height: 1.25;
 }
 
 #sheet .active-batch {
   margin-right: -8px;
   margin-left: -8px;
-  padding: 12px 8px 20px;
+  padding: 8px 8px 12px;
   border-radius: 12px;
   background: linear-gradient(145deg, #f4e7f0b3, transparent);
 }
@@ -324,9 +459,10 @@
 #sheet .memory-card {
   position: relative;
   display: block;
-  aspect-ratio: 0.716;
+  width: 100%;
   padding: 0;
   overflow: hidden;
+  aspect-ratio: 0.716;
   border: 0;
   border-radius: 4px;
   background: #eee5eb;
@@ -338,6 +474,8 @@
   display: block;
   width: 100%;
   height: 100%;
+  color: #96758a;
+  font-size: 9px;
   object-fit: contain;
 }
 
@@ -347,7 +485,9 @@
 
 #sheet .batch-placeholder {
   display: grid;
+  width: 100%;
   aspect-ratio: 0.716;
+  padding: 0;
   place-items: center;
   border: 1px solid #ded0da;
   border-radius: 5px;
@@ -357,25 +497,11 @@
   line-height: 1;
 }
 
-#sheet .batch-search {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0 0 18px;
+#sheet .batch-copy-status {
+  margin: 0 0 12px;
 }
 
-#sheet .batch-search input {
-  flex: 1;
-  min-width: 0;
-  padding: 12px;
-  border: 0;
-  border-radius: 12px;
-  background: #f0e9ee;
-  color: #77576e;
-  font-size: 14px;
-}
-
-/* Dock inferior. */
+/* Dock inferior; el legacy lo mantiene fuera del modo tandas. */
 #sheet .collection-dock {
   position: fixed;
   right: 0;
@@ -402,10 +528,6 @@
   color: #fff8fc;
   font-size: 13px;
   pointer-events: auto;
-}
-
-#sheet .collection-dock button:disabled {
-  display: none;
 }
 
 #sheet .muted {
