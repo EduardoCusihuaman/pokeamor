@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
 
   import { appDiscovery, type DiscoveryApi } from '@/application/discovery.svelte';
+  import { appNavigation } from '@/application/navigation.svelte';
   import DiscoveryControls from '@/components/discovery/DiscoveryControls.svelte';
   import DiscoveryDeck from '@/components/discovery/DiscoveryDeck.svelte';
 
@@ -27,8 +28,34 @@
     return null;
   });
 
+  function isTypingTarget(target: EventTarget | null): boolean {
+    if (!(target instanceof HTMLElement)) return false;
+    const tag = target.tagName;
+    return target.isContentEditable || tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT';
+  }
+
+  /**
+   * Atajo de teclado para votar sin depender del swipe. Los botones siguen
+   * siendo la ruta accesible principal; esto es una alternativa cómoda.
+   */
+  function onKeydown(event: KeyboardEvent): void {
+    if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey) return;
+    if (appNavigation.current !== 'discovery') return;
+    if (isTypingTarget(event.target)) return;
+
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      vote('yes');
+    } else if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      vote('no');
+    }
+  }
+
   onMount(() => {
     if (discovery.status === 'idle') void discovery.load();
+    window.addEventListener('keydown', onKeydown);
+    return () => window.removeEventListener('keydown', onKeydown);
   });
 
   function retry(): void {
@@ -76,15 +103,7 @@
   />
 {/if}
 
-<DiscoveryControls
-  disabled={currentCard === null}
-  step={discovery.progress.step}
-  target={discovery.progress.target}
-  arcOffset={discovery.progress.arcDashoffset}
-  pearls={discovery.progress.pearls}
-  name={currentCard?.name ?? ''}
-  onVote={vote}
-/>
+<DiscoveryControls disabled={currentCard === null} name={currentCard?.name ?? ''} onVote={vote} />
 
 <p class="tally" aria-live="polite">
   <strong>{discovery.yesCount}</strong> me gusta · <strong>{discovery.noCount}</strong> pasos

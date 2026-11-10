@@ -3,33 +3,25 @@
 
   interface Props {
     readonly disabled?: boolean;
-    readonly step: number;
-    readonly target: number;
-    readonly arcOffset: number;
-    readonly pearls: string;
     readonly name: string;
     readonly onVote: (value: VoteValue) => void;
   }
 
-  let { disabled = false, step, target, arcOffset, pearls, name, onVote }: Props = $props();
+  let { disabled = false, name, onVote }: Props = $props();
 </script>
 
 <div class="controls">
+  <!--
+    Los votos son swipe-only en la superficie, pero los botones siguen en el
+    árbol de accesibilidad y se pueden activar con teclado o lector de pantalla.
+  -->
   <button type="button" class="vote no" aria-label="Paso" {disabled} onclick={() => onVote('no')}>
     <span aria-hidden="true">×</span>
   </button>
 
   <div class="caption">
     <div>
-      <button type="button" id="round-progress" aria-label="Progreso de la tanda">
-        <svg class="round-ring" viewBox="0 0 52 52" aria-hidden="true">
-          <circle cx="26" cy="26" r="23" />
-          <circle id="round-arc" cx="26" cy="26" r="23" style="stroke-dashoffset: {arcOffset}" />
-        </svg>
-        <span id="round-number">{step}/{target}</span>
-      </button>
       <strong id="name">{name}</strong>
-      <span id="round-pearls" aria-hidden="true">{pearls}</span>
     </div>
   </div>
 

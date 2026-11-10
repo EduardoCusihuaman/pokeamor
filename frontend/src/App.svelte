@@ -13,6 +13,10 @@
   const current = $derived(appNavigation.current);
   const canUndo = $derived(discovery.canUndo);
   const yesCount = $derived(discovery.yesCount);
+  const roundStep = $derived(discovery.progress.step);
+  const roundTarget = $derived(discovery.progress.target);
+  const discoveredCount = $derived(discovery.discoveredCount);
+  const cardCount = $derived(discovery.cardCount);
   const trackWidth = $derived(
     discovery.cardCount > 0
       ? Math.min(100, (discovery.discoveredCount / discovery.cardCount) * 100)
@@ -62,6 +66,19 @@
     <div class="brand">poké<span>amor</span></div>
   </div>
 
+  <button
+    type="button"
+    id="round-progress"
+    aria-label="Progreso de la tanda"
+    title="Progreso de la tanda"
+  >
+    <svg class="round-ring" viewBox="0 0 52 52" aria-hidden="true">
+      <circle cx="26" cy="26" r="23" />
+      <circle id="round-arc" cx="26" cy="26" r="23" />
+    </svg>
+    <span id="round-number">{roundStep}/{roundTarget}</span>
+  </button>
+
   <button type="button" class="collection" aria-label="Abrir mi colección" onclick={openCollection}>
     <b>
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -75,6 +92,23 @@
 </header>
 
 <DiscoveryScreen {discovery} />
+
+<button
+  type="button"
+  id="front-refine"
+  aria-label="Afinar mis favoritos"
+  title="Afinar mis favoritos"
+>
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <rect x="3" y="5" width="7" height="13" rx="2" />
+    <rect x="14" y="5" width="7" height="13" rx="2" />
+    <path d="m11 10 1 1 1-1m-2 4 1-1 1 1" />
+  </svg>
+</button>
+
+<span id="discovery-count" aria-label="{discoveredCount} de {cardCount} Pokémon descubiertos">
+  {discoveredCount} / {cardCount}
+</span>
 
 <div class="track"><i style="width: {trackWidth}%"></i></div>
 

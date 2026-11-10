@@ -1,9 +1,11 @@
 /**
  * Flujo E2E de descubrimiento (plan §15, nivel 4).
  *
- * Cubre arranque desde sesión vacía, voto positivo, voto negativo y deshacer
- * usando los controles accesibles. La red se resuelve con `page.route`, de modo
- * que no se depende del Worker ni de internet.
+ * Cubre arranque desde sesión vacía, voto positivo, voto negativo y deshacer.
+ * La superficie de voto es swipe-only; los botones quedan visualmente ocultos
+ * pero accesibles, y las flechas del teclado son la alternativa equivalente.
+ * La red se resuelve con `page.route`, de modo que no se depende del Worker ni
+ * de internet.
  */
 
 import { expect, test } from '@playwright/test';
@@ -27,7 +29,7 @@ test('votes yes, advances and persists the vote locally', async ({ page }) => {
   await gotoApp(page);
   await expect(page.getByRole('article', { name: 'Pikachu' })).toBeVisible();
 
-  await page.getByRole('button', { name: 'Me gusta' }).click();
+  await page.keyboard.press('ArrowRight');
 
   await expect(page.getByRole('article', { name: 'Bulbasaur' })).toBeVisible();
   await expect(page.locator('.tally')).toContainText('1 me gusta');
@@ -38,7 +40,7 @@ test('votes no and advances to the next card', async ({ page }) => {
   await gotoApp(page);
   await expect(page.getByRole('article', { name: 'Pikachu' })).toBeVisible();
 
-  await page.getByRole('button', { name: 'Paso' }).click();
+  await page.keyboard.press('ArrowLeft');
 
   await expect(page.getByRole('article', { name: 'Bulbasaur' })).toBeVisible();
   await expect(page.locator('.tally')).toContainText('1 pasos');
@@ -48,7 +50,7 @@ test('undo returns to the previous card without keeping the vote', async ({ page
   await gotoApp(page);
   await expect(page.getByRole('article', { name: 'Pikachu' })).toBeVisible();
 
-  await page.getByRole('button', { name: 'Me gusta' }).click();
+  await page.keyboard.press('ArrowRight');
   await expect(page.getByRole('article', { name: 'Bulbasaur' })).toBeVisible();
 
   await page.getByRole('button', { name: 'Deshacer última elección' }).click();

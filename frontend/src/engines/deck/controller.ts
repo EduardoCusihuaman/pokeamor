@@ -184,9 +184,9 @@ function asPresentable(image: ArtworkImage): PresentableImage {
 
 function createSeal(document: Document): HTMLElement {
   const seal = document.createElement('div');
-  // `swipe-seal` es el nodo que pinta el motor de gesto; `stamp` conserva el
-  // contrato visual legacy de la capa de decisión dentro de la carta.
-  seal.className = 'swipe-seal stamp';
+  // El badge vive dentro de la carta y comparte su vuelo. El motor de gesto
+  // pinta opacidad, escala y `--seal-fill` sobre este mismo nodo.
+  seal.className = 'swipe-seal';
   seal.setAttribute('aria-hidden', 'true');
 
   const fill = document.createElement('span');
