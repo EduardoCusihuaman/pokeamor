@@ -1,3 +1,4 @@
+// Tests: src/app.js — chooseRefinement (rating update)
 const {test}=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
 const code=fs.readFileSync('src/app.js','utf8');
 const choose=code.slice(code.indexOf('function chooseRefinement('),code.indexOf('const renderDiscovery='));

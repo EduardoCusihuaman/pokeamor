@@ -1,3 +1,4 @@
+// Tests: worker/index.js — /materials/ route whitelist & caching
 import test from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';
 const worker=(await import('../worker/index.js')).default,manifest=JSON.parse(await readFile('data/materials.json','utf8')),path=Object.keys(manifest).find(p=>p.includes('sv06-214')&&p.endsWith('foil.png'));
 const png=new Uint8Array(32);png.set([137,80,78,71,13,10,26,10]);

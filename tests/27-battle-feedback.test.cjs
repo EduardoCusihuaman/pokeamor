@@ -1,2 +1,3 @@
+// Tests: src/app.js — chosen-half battle feedback
 const test=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');const app=fs.readFileSync('src/app.js','utf8'),code=app.slice(app.indexOf('function markBattleChoice('),app.indexOf('function paintRefinement(){'));
 test('battle feedback marks only the chosen half, or both for equality',()=>{const selected=[false,false],ctx={pairBox:{children:[0,1].map(i=>({classList:{toggle:(name,on)=>selected[i]=on}}))}};vm.createContext(ctx);vm.runInContext(code,ctx);ctx.markBattleChoice(0);assert.deepEqual(selected,[true,false]);ctx.markBattleChoice(1);assert.deepEqual(selected,[false,true]);ctx.markBattleChoice(2);assert.deepEqual(selected,[true,true])});

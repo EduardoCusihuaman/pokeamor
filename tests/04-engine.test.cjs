@@ -1,3 +1,4 @@
+// Tests: src/recommender.js — online logistic model (Web Worker)
 const {test}=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
 function run(votes={},comparisons=[]){let result;const c={Float32Array,Map,Set,Math,performance,self:{postMessage:r=>result=r}};vm.createContext(c);vm.runInContext(fs.readFileSync('src/recommender.js','utf8'),c);const catalog=Array.from({length:80},(_,i)=>({id:i+1,traits:['type:'+i%2,'shape:'+i%4]}));c.self.onmessage({data:{type:'init',catalog,state:{votes,comparisons},revision:1}});return result}
 test('opposite preferences change unseen predictions and preserve coverage',()=>{const a={},b={};for(let i=1;i<=30;i++){a[i]={value:i%2?'yes':'no'};b[i]={value:i%2?'no':'yes'}}const x=run(a),y=run(b);assert.equal(x.ids.length,50);assert.equal(new Set(x.ids).size,50);assert(x.scores.find(p=>p.id===31).p>y.scores.find(p=>p.id===31).p)});

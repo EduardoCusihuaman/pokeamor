@@ -1,3 +1,4 @@
+// Tests: src/material-assets.js — lookahead foil/etch asset pool
 import test from 'node:test';import assert from 'node:assert/strict';import vm from 'node:vm';import {readFile} from 'node:fs/promises';
 const source=await readFile('src/material-assets.js','utf8');
 const card=id=>({surface:{etched:true,assets:{front:`/materials/${id}/front.png`,foil:`/materials/${id}/foil.png`,etch:`/materials/${id}/etch.png`}}});

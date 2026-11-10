@@ -1,3 +1,4 @@
+// Tests: src/app.js (debugProxyText) + data/proxies.json — Limitless export
 const {test}=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
 const ctx={};vm.createContext(ctx);vm.runInContext(fs.readFileSync('src/app.js','utf8').match(/function debugProxyText\(.*\n/)[0],ctx);
 test('exact print export and missing mapping blocks copy',()=>{const ids=new Set(['swsh10.5-076','sv08.5-146']),prints=new Map([['swsh10.5-076',{pokemonId:149,printId:'swsh10.5-076',name:'Dragonite'}],['sv08.5-146',{pokemonId:136,printId:'sv08.5-146',name:'Flareon'}]]),lookup=id=>id==='sv08.5-146'?{name:'Flareon ex',set:'PRE',number:'146'}:{name:'Dragonite V',set:'PGO',number:'76'};assert.equal(ctx.debugProxyText(ids,prints,lookup),'1 Flareon ex PRE 146\n1 Dragonite V PGO 76');assert.throws(()=>ctx.debugProxyText(ids,prints,()=>null),/2 sin código/)});

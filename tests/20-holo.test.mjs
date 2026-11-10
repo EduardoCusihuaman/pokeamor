@@ -1,3 +1,4 @@
+// Tests: src/holo.js — motion sensor + foil overlay
 import test from 'node:test';import assert from 'node:assert/strict';import vm from 'node:vm';import {readFile} from 'node:fs/promises';
 const source=await readFile(new URL('../src/holo.js',import.meta.url),'utf8');
 function setup({permission='granted',supported=true,reduced=false}={}){

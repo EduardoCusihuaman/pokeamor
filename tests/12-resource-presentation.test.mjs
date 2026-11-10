@@ -1,3 +1,4 @@
+// Tests: src/resource-coordinator.js + worker — presentation leases & bundle delivery
 import test from 'node:test';import assert from 'node:assert/strict';import vm from 'node:vm';import fs from 'node:fs';
 const turn=()=>new Promise(r=>setImmediate(r));
 class Art extends EventTarget{naturalWidth=600;naturalHeight=825;decode=async()=>{};src='';}

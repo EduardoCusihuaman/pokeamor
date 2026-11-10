@@ -1,3 +1,4 @@
+// Tests: src/app.js — debug tile hit-test & zoom preview
 const test=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
 const source=fs.readFileSync('src/app.js','utf8');
 const hitTest=source.match(/function debugTileAtPoint\(x,y\)\{.*?\nfunction moveDebugPeek\(x,y\)\{.*?\n/)[0];

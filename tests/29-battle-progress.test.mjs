@@ -1,3 +1,4 @@
+// Tests: src/app.js — battle session progress dots
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';
 const app=fs.readFileSync('src/app.js','utf8'),source=app.slice(app.indexOf('let completedBattleCue='),app.indexOf('const oldPaintRefinement=paintRefinement;'));
 function setup(){let now=0;const ctx={performance:{now:()=>now},manualSession:{done:2,target:3},setTimeout(){return 1},clearTimeout(){}};vm.createContext(ctx);vm.runInContext(source+'\npaintBattleProgress=()=>{};',ctx);return {ctx,time:t=>now=t}}

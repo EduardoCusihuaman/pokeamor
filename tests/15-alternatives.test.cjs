@@ -1,3 +1,4 @@
+// Tests: src/app.js (makeAlternativeCard) + data/alternatives-curated.json
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');const source=fs.readFileSync('src/app.js','utf8');
 test('alternative clears inherited print metadata',()=>{const ctx={};vm.createContext(ctx);vm.runInContext(source.match(/function makeAlternativeCard\(.*\n/)[0],ctx);const p=ctx.makeAlternativeCard({id:1,name:'Bulbasaur',card:'old',surface:{},proxy:{}},['new','https://example.test/new','IR','Artist']);assert.equal(p.card,'new');assert.equal(p.surface,null);assert.equal(p.proxy,undefined);assert.equal(p.image,p.fallbackImage)});
 test('no runtime metadata searches or legacy alternative map',()=>{assert.ok(!source.includes('api.tcgdex.net'));assert.ok(!source.includes('alternateCards'))});

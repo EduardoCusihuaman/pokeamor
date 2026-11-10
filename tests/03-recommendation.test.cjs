@@ -1,3 +1,4 @@
+// Tests: src/app.js + src/recommender.js — adaptive discovery queue & alternate encounters
 const {test}=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
 const source='//'+fs.readFileSync('src/app.js','utf8').split('// Small local content model.')[1].split("$('#refine-favorites')")[0];
 function setup(n=0){const catalog=Array.from({length:60},(_,i)=>({id:i+1,card:'base-'+i,traits:['shape:'+i%4],communityVotes2020:10000-i*100})),state={votes:{},history:[],encounters:{}};for(let i=0;i<n;i++){state.votes[i+1]={value:'yes'};state.history.push({id:i+1})}const ctx={engineWorker:null,scheduleAlternate(){},eventBoundary:true,inlinePair:null,catalog,order:catalog,state,warmArt:new Map(),warmArtwork:p=>ctx.warmArt.set(p.image,{complete:true,naturalWidth:100}),fetch:()=>Promise.reject(),AbortSignal};vm.createContext(ctx);vm.runInContext(source+';prepareAlternate=async()=>{};',ctx);return {ctx,run:s=>vm.runInContext(s,ctx)}}

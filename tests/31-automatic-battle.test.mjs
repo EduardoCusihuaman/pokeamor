@@ -1,3 +1,4 @@
+// Tests: src/app.js — automatic battle preload/promotion
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';
 const source=fs.readFileSync('src/app.js','utf8');
 function setup(){const pending=[],released=[];let schedules=0;const ctx={state:{votes:{1:{value:'yes'},2:{value:'yes'}}},queuedPair:null,document:{createElement(){return {}}},window:{PokeResources:{bindImage(art,p){art.artReady=new Promise(resolve=>pending.push({art,p,resolve}));return art},releaseImage(art){released.push(art)}}},scheduleEvents(){schedules++}};vm.createContext(ctx);vm.runInContext(source.slice(source.indexOf('let automaticBattle=null;'),source.indexOf('const eventLayer=')),ctx);return {ctx,pending,released,get schedules(){return schedules},ready(i){const r=pending[i];Object.assign(r.art,{cardReady:true,resourceState:'presentable',naturalWidth:600});r.resolve(true)}}}

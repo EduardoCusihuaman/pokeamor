@@ -1,3 +1,4 @@
+// Tests: src/card-identity.js — immutable presentation references
 import test from 'node:test';import assert from 'node:assert/strict';import vm from 'node:vm';import fs from 'node:fs';
 const window={};vm.runInNewContext(fs.readFileSync('src/card-identity.js','utf8'),{window});const api=window.PokeCards;
 test('identity separates language, print and resource revision',()=>{const p={card:'a',image:'https://assets.tcgdex.net/es/a/high.webp'};const ref=api.resolve(p);assert(Object.isFrozen(ref));assert.equal(api.resolve(p),ref);for(const change of [{language:'en'},{card:'b'},{resourceRevision:'2'}])assert.notEqual(api.key({...p,...change}),ref.key);assert.equal(ref.thumbnail,'https://assets.tcgdex.net/es/a/low.webp')});

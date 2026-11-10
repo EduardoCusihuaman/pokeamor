@@ -1,3 +1,4 @@
+// Tests: src/app.js — artworkReady() for native preloaded images
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';
 const s=fs.readFileSync('src/app.js','utf8'),source=s.slice(s.indexOf('function artworkReady('),s.indexOf('function warmArtwork('));
 function setup(complete,width){const listeners={},art={complete,naturalWidth:width,src:'exact',addEventListener:(k,v)=>listeners[k]=v,removeEventListener(){},async decode(){}},ctx={fallback:()=> 'sprite'};vm.createContext(ctx);vm.runInContext(source,ctx);return{art,ctx,listeners}}

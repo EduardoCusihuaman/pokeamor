@@ -1,3 +1,4 @@
+// Tests: src/app.js — battle readiness gates on decoded artwork
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';
 const s=fs.readFileSync('src/app.js','utf8'),source=s.slice(s.indexOf('function prepareRefinementPair('),s.indexOf('function beginManualRefinement('));
 function setup(){let resolve;const p={image:'exact'},art={complete:true,naturalWidth:0,cardReady:false,artReady:new Promise(r=>resolve=r)},session={pairs:[[p,p]],ready:new Map()},ctx={manualSession:null,window:{},warmArtwork(){},warmArt:new Map([['exact',art]]),fallback:()=> 'sprite',Promise,setTimeout,clearTimeout};vm.createContext(ctx);vm.runInContext(source,ctx);return{ctx,art,session,resolve}}

@@ -1,3 +1,4 @@
+// Tests: src/card-resources.js — lazy content-addressed resource loading
 const {test}=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
 function setup(fetch){const window={POKE_CARD_RESOURCES:{dataVersion:'v',alternatives:'/a',proxies:'/p'}},ctx={window,fetch,AbortController,setTimeout,clearTimeout};vm.createContext(ctx);vm.runInContext(fs.readFileSync('src/card-resources.js','utf8'),ctx);return window.PokeCardResources}
 test('lazy and concurrent deduplicated loads; memory reuse',async()=>{let n=0;const api=setup(async()=>{n++;return {ok:true,json:async()=>({schema:1,dataVersion:'v',sets:['PGO'],prints:{id:[0,'76','Dragonite V']}})}});assert.equal(n,0);const a=api.loadProxies(),b=api.loadProxies();assert.equal(a,b);await a;await api.loadProxies();assert.equal(n,1);assert.equal(api.getProxy('id').set,'PGO');assert.equal(api.getStatus().alternatives,'idle')});

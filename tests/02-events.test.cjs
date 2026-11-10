@@ -1,3 +1,4 @@
+// Tests: src/app.js — event scheduler (runEvents, cooldowns, refinement queue)
 const {test}=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
 const text=fs.readFileSync('src/app.js','utf8');const run=text.slice(text.indexOf('function runEvents(){'),text.indexOf('const seenLabel='));
 function setup(){const c={busy:false,inlinePair:null,queuedPair:null,document:{hidden:false,querySelector:()=>null},$:()=>null,eventSeen:()=>25,state:{votes:Object.fromEntries(Array.from({length:6},(_,i)=>[i,{value:'yes'}]))},eventPauseUntil:0,activeEncounter:null,automaticBattle:null,current:()=>({id:1}),render(){},prepareBattleCandidate(){},startRefinement(){c.started=(c.started||0)+1}};vm.createContext(c);vm.runInContext(run,c);return c}

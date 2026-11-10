@@ -1,3 +1,4 @@
+// Tests: src/discovery-buffer.js — presentation buffer for swipe continuity
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';
 const window={};vm.runInNewContext(fs.readFileSync('src/discovery-buffer.js','utf8'),{window});
 function setup(){let made=0;const buffer=window.PokeDiscoveryBuffer.create({key:p=>p.card,prepare:p=>{made++;let resolve;const e={image:{naturalWidth:600,naturalHeight:825},status:'loading',owner:'buffer',result:new Promise(r=>resolve=r),transferTo(o){e.owner=o},release(){e.status='released'},ready(){e.status='ready';resolve({status:'ready'})}};return e}});return{buffer,get made(){return made}}}

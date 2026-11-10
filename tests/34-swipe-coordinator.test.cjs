@@ -1,3 +1,4 @@
+// Tests: src/app.js — afterSwipe task coalescing
 const test=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
 const app=fs.readFileSync('src/app.js','utf8');
 function setup(){let blocked=true,now=0,n=0;const timers=new Map(),ctx={document:{querySelector:()=>blocked?{}:null,addEventListener(){}},performance:{now:()=>now},setTimeout:(f,ms)=>(timers.set(++n,{f,ms}),n),clearTimeout:id=>timers.delete(id)};vm.createContext(ctx);vm.runInContext(app.slice(app.indexOf('const swipeTasks='),app.indexOf('const q=new URLSearchParams')),ctx);return{ctx,timers,release(){blocked=false;ctx.flushSwipeTasks()},advance(t){now=t;ctx.flushSwipeTasks()}}}

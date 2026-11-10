@@ -1,3 +1,4 @@
+// Tests: src/app.js — bindDebugPress (long-press selection)
 const {test}=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
 function setup(mode=false){let timer,selected=0,opened=0,peek=false;const ctx={debugPeekSession:null,debugSelectionMode:mode,setTimeout:fn=>(timer=fn,1),clearTimeout:()=>timer=null,Math,toggleDebugSelection:()=>selected++,syncDebugSelection(){},tactile(){},inspectCard:()=>opened++,showDebugPeek:()=>{peek=true;ctx.debugPeekSession={}},hideDebugPeek:()=>{peek=false;ctx.debugPeekSession=null}};vm.createContext(ctx);vm.runInContext(fs.readFileSync('src/app.js','utf8').match(/function bindDebugPress\(.*\n/)[0],ctx);const button={addEventListener(){},style:{},classList:{add(){},remove(){}}};ctx.bindDebugPress(button,{});return {button,ctx,hold:()=>timer?.(),counts:()=>[selected,opened,peek]}}
 const down={isPrimary:true,button:0,clientX:0,clientY:0};
