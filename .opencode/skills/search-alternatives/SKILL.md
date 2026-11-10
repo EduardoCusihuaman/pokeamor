@@ -73,9 +73,14 @@ Considerar especialmente cartas modernas de 2025–2026 y posteriores, sin desca
 
 ## 5. VERIFICACIÓN
 
-- **Illudex:** descubrimiento y comparación artística.
-- **Bases TCG:** autenticidad, expansión y numeración.
-- **Limitless:** comprobar referencias en `limitlesstcg.com/cards` y compatibilidad con `limitlesstcg.com/tools/proxies`.
+Verificar **en este orden**:
+
+1. **Limitless:** comprobar la referencia en `limitlesstcg.com/cards` y que sea
+   compatible con `limitlesstcg.com/tools/proxies`.
+2. **TCGdex:** resolver el `printId` con la API de TCGdex
+   (`https://api.tcgdex.net/v2/en/cards/{id}`) y confirmar que el `dexId`
+   coincide con la especie.
+3. **Bases TCG:** autenticidad, expansión y numeración.
 
 No afirmar que una importación fue comprobada si únicamente se verificó la existencia de la carta.
 
@@ -83,27 +88,27 @@ Si una opción no resulta compatible, elegir la siguiente mejor.
 
 ## 6. FORMATO DE RESPUESTA
 
-Responder únicamente con **un bloque de código de texto plano**, listo para copiar en Limitless Proxy.
+Responder con **dos bloques de código**:
 
-Formato obligatorio:
-
-`1 NombreOficial SET NÚMERO`
-
-**Si se piden 3 alternativas:**
+**Bloque 1 — Limitless** (para copiar en `limitlesstcg.com/tools/proxies`):
 
 ```text
 1 Bulbasaur SET NUMERO
 1 Bulbasaur SET NUMERO
 1 Bulbasaur SET NUMERO
+```
 
+**Bloque 2 — IDs** (printIds de TCGdex, en el MISMO orden, para la ingesta):
 
-1 Ivysaur SET NUMERO
-1 Ivysaur SET NUMERO
-1 Ivysaur SET NUMERO
+```text
+sv07-143
+me01-133
+sv03.5-166
 ```
 
 Los identificadores del ejemplo son marcadores de posición, no referencias reales.
 
+**Reglas del bloque 1 (Limitless):**
 - Una línea vacía entre cada alternativa.
 - Dos líneas vacías entre especies diferentes.
 - Mantener el orden original de la lista.
@@ -112,7 +117,14 @@ Los identificadores del ejemplo son marcadores de posición, no referencias real
 - Nunca inventar cartas para completar la cantidad solicitada.
 - Si no existen suficientes alternativas verificables, devolver únicamente las disponibles.
 
-Máximo 3 líneas adicionales fuera del bloque para problemas excepcionales.
+**Reglas del bloque 2 (IDs):**
+- Un `printId` de TCGdex por línea, en el MISMO orden que el bloque 1.
+- Resolver cada `printId` con la API de TCGdex (`https://api.tcgdex.net/v2/en/cards/{id}`);
+  nunca inventarlo.
+- Confirmar que el `dexId` de la carta coincide con la especie del bloque 1.
+- Si una carta no tiene imagen en TCGdex, omitirla del bloque 2 y avisarlo.
+
+Máximo 3 líneas adicionales fuera de los bloques para problemas excepcionales.
 
 ## PRINCIPIO FINAL
 

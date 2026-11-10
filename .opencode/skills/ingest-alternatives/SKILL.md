@@ -13,6 +13,10 @@ las ilustraciones): una lista en formato **Limitless Proxy**
 El `cantidad` (el `1 ` que prefija cada línea) se ignora; puede incluir sufijos
 de carta (`Venusaur ex`, `Charizard VSTAR`) y códigos de promos (`PR-SV`).
 
+`search-alternatives` entrega **dos bloques**: el bloque *Limitless* y un bloque
+de **printIds** de TCGdex ya resueltos. Cuando tengas el bloque de IDs, usá
+`--ids` para **verificar en vez de re-buscar** (ver abajo).
+
 ```
 Bulbasaur SCR 143
 Pikachu CRZ GG30
@@ -28,7 +32,12 @@ a diferencia del build (`bash scripts/build.sh`) que es offline.
 ```sh
 python scripts/ingest-alternatives.py <lista.txt>       # dry run, solo reporta
 python scripts/ingest-alternatives.py <lista.txt> --apply  # escribe los archivos
+python scripts/ingest-alternatives.py <ids.txt> --ids [--apply]  # bloque de printIds
 ```
+
+`--ids` lee printIds de TCGdex (uno por línea, ej. `sv03.5-037`), opcionalmente
+prefijados por la especie (`Vulpix sv03.5-037`). Cada id se **verifica** contra
+TCGdex (dexId + imagen) pero no se re-resuelve desde set+número.
 
 ## Loop completo
 

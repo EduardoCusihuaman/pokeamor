@@ -13,11 +13,15 @@ The regular build (`bash scripts/build.sh`) remains offline and never
 queries APIs.
 
 Usage:
-  python scripts/ingest-alternatives.py <input.txt> [--apply]
+  python scripts/ingest-alternatives.py <input.txt> [--apply] [--ids]
 
 Without `--apply` it is a dry run: it resolves every line and prints a
 report. With `--apply` it merges the resolved alternatives into the data
 files, preserving existing rows and proxy entries.
+
+`--ids` reads TCGdex print ids (one per line) instead of `Name SET number`.
+Each id is fetched and verified but not re-resolved from set+number. A
+species name may prefix the id for cross-checking (`Vulpix sv03.5-037`).
 
 Input format (one card per line; grouping is irrelevant):
 
@@ -100,6 +104,15 @@ TRAINER_GALLERY = {
     'ASR': ('swsh10tg', 'swsh10tg'),  # Astral Radiance
     'SIT': ('swsh12tg', 'swsh12tg'),  # Silver Tempest
 }
+
+# Reverse map: TCGdex set id -> Limitless set code (for --ids mode, where the
+# input is a print id and the proxy's `set` field must be reconstructed).
+SETID_TO_CODE = {}
+for _code, _setid in SET_TO_SETID.items():
+    SETID_TO_CODE.setdefault(_setid, _code)
+SETID_TO_CODE['swsh12.5gg'] = 'CRZ'  # Crown Zenith Galarian Gallery
+for _code, (_setid, _pcode) in TRAINER_GALLERY.items():
+    SETID_TO_CODE[_setid] = _code
 
 USER_AGENT = 'pokeamor-ingest/1.0'
 MAX_ALTERNATIVES = 3  # Keep in sync with build-card-resources.py and card-resources.js.
@@ -246,6 +259,7 @@ def main(argv):
         return 2
     input_path = Path(argv[1])
     apply_flag = '--apply' in argv[2:]
+    ids_mode = '--ids' in argv[2:]
 
     catalog = load_json(CATALOG_PATH)
     species = build_species_index(catalog)
@@ -265,15 +279,29 @@ def main(argv):
         line = raw.strip()
         if not line or line.startswith('#'):
             continue
-        parsed = parse_line(line, known_sets)
-        if not parsed:
-            problems.append((lineno, f'no se pudo parsear: {line!r}'))
-            continue
-        name, set_code, number = parsed
-        print_id, set_id, card = resolve_print(set_code, number)
-        if card is None:
-            problems.append((lineno, f'carta no resuelta: {name} {set_code} {number}'))
-            continue
+        if ids_mode:
+            parts = line.split()
+            print_id = parts[-1]
+            name = ' '.join(parts[:-1]) if len(parts) > 1 else None
+            if '-' not in print_id:
+                problems.append((lineno, f'printId inválido: {line!r}'))
+                continue
+            set_id, number = print_id.rsplit('-', 1)
+            set_code = SETID_TO_CODE.get(set_id, '')
+            card = fetch_card(print_id)
+            if '_error' in card or not card.get('name'):
+                problems.append((lineno, f'carta no encontrada: {print_id}'))
+                continue
+        else:
+            parsed = parse_line(line, known_sets)
+            if not parsed:
+                problems.append((lineno, f'no se pudo parsear: {line!r}'))
+                continue
+            name, set_code, number = parsed
+            print_id, set_id, card = resolve_print(set_code, number)
+            if card is None:
+                problems.append((lineno, f'carta no resuelta: {name} {set_code} {number}'))
+                continue
         dex_ids = card.get('dexId') or []
         if not dex_ids:
             problems.append((lineno, f'"{card.get("name")}" no es una carta de Pokémon'))
@@ -282,10 +310,10 @@ def main(argv):
         if pid not in names:
             problems.append((lineno, f'dexId {pid} fuera de rango para "{card.get("name")}"'))
             continue
-        intended = species_id(name, species)
+        intended = species_id(name, species) if name else None
         if intended is not None and intended != pid:
             problems.append((lineno,
-                             f'{set_code} {number} es "{card.get("name")}" '
+                             f'{print_id} es "{card.get("name")}" '
                              f'(dijiste {name}, pero es {names[pid]})'))
             continue
         if print_id == principal[pid]:
