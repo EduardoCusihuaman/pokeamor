@@ -3,7 +3,7 @@
 `bash scripts/build.sh` deterministically builds optional resources from committed data. No network is used by this build. It regenerates the Worker and validates resources before packaging.
 
 - `data/alternatives-curated.json`: explicit alternatives, at most two per species; includes verification evidence.
-- `data/card-metadata/proxies.json`: cumulative print-to-export mappings. Preserve historical entries.
+- `data/proxies.json`: cumulative print-to-export mappings. Preserve historical entries.
 - `data/proxy-overrides.json`: explicit corrections take precedence.
 - `generated/card-resources/`: deterministic build output (gitignored), regenerated from committed data. Only the manifest-referenced `alternatives.*`/`proxies.*` files are retained; stale versions are auto-pruned on each build. Retained resources are embedded server-side, not in browser JavaScript. Requested resources are also backed up to R2 under `card-resources/data/...`. No profile data is stored there.
 
