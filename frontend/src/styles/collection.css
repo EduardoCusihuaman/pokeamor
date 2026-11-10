@@ -1,0 +1,428 @@
+/*
+ * Hoja de colección/álbum.
+ *
+ * Portada de `src/page.html` (`#sheet` y sus descendientes). Se mantiene como
+ * CSS global porque el sheet se monta como overlay a pantalla completa y sus
+ * nodos se crean en varios componentes (`CollectionScreen`, `CollectionGrid`,
+ * `CollectionTile`). Los valores de color, tipografía, radios y espaciados
+ * provienen del legacy; los selectores `#sheet` conservan la especificidad
+ * original para poder comparar capturas sin sorpresas de cascada.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500&display=swap');
+
+/*
+ * El sheet se monta únicamente cuando debe verse, así que la base no lo oculta:
+ * App.svelte puede envolver el componente en otro `.sheet` (contenedor) y un
+ * `display:none` global dejaría invisible el overlay real. El contrato legacy
+ * se conserva en `.sheet.open`.
+ */
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  overflow: auto;
+  padding: max(24px, env(safe-area-inset-top)) 22px max(26px, env(safe-area-inset-bottom));
+  background: #faf7f6;
+  color: #292a26;
+  font-family:
+    'DM Sans',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+}
+
+.sheet.open {
+  display: block;
+}
+
+#sheet {
+  --collection-accent: #b47693;
+  padding: 0 22px max(110px, calc(env(safe-area-inset-bottom) + 96px));
+  background: #faf7f6;
+}
+
+#sheet .inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* Encabezado sticky: volver · título · ajustes. */
+#sheet .collection-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  gap: 8px;
+  height: calc(62px + env(safe-area-inset-top));
+  padding-top: max(10px, env(safe-area-inset-top));
+  margin-bottom: 8px;
+  background: #faf7f6;
+}
+
+#sheet .collection-header > span {
+  overflow: hidden;
+  color: #775c70;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#sheet .collection-header .close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #775c70;
+  font-size: 23px;
+  line-height: 1;
+}
+
+#sheet .collection-header .settings-icon {
+  justify-self: end;
+  width: 40px;
+  height: 40px;
+}
+
+#sheet .collection-header .settings-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
+}
+
+/* Cambio de vista: tandas · elegidos. */
+#sheet .collection-switch {
+  display: flex;
+  gap: 24px;
+  margin: 8px 0 18px;
+}
+
+#sheet .collection-switch button {
+  min-height: 44px;
+  padding: 9px 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: #a28a9a;
+  font-size: 14px;
+}
+
+#sheet .collection-switch button.selected {
+  border-color: #77576e;
+  color: #77576e;
+}
+
+/* Título editorial. */
+#sheet .collection-title {
+  margin: 26px 0 4px;
+  color: #292a26;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 34px;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+
+#sheet #summary {
+  margin: 0 0 30px;
+  color: #9c8794;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+#sheet.rounds-mode #summary {
+  margin-bottom: 14px;
+}
+
+/* Filtros del álbum (pills del legacy). */
+#sheet .tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0;
+}
+
+/* Conteo del filtro anunciado a lectores de pantalla sin sumar una línea visual. */
+#sheet .collection-results {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+#sheet .pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 20px;
+  background: #e7e7de;
+  color: #77576e;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+#sheet .pill.selected {
+  background: #77576e;
+  color: #fff8fc;
+}
+
+#sheet .pill-count {
+  color: #a28a9a;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+#sheet .pill.selected .pill-count {
+  color: #f0dce8;
+}
+
+/* Grilla de elegidos. */
+#sheet .grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px 18px;
+}
+
+@media (min-width: 700px) {
+  #sheet .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px 10px;
+  }
+}
+
+#sheet .grid-empty {
+  grid-template-columns: 1fr;
+  align-content: center;
+  justify-items: center;
+  min-height: 35dvh;
+  text-align: center;
+}
+
+#sheet .grid-empty .muted {
+  margin: 0;
+}
+
+#sheet .tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #292a26;
+  text-align: left;
+}
+
+#sheet .tile img {
+  width: 100%;
+  aspect-ratio: 0.716;
+  object-fit: contain;
+  border-radius: 10px;
+  background: transparent;
+  box-shadow: 0 6px 18px -10px #7b63764d;
+}
+
+#sheet .tile b {
+  display: block;
+  overflow: hidden;
+  margin: 10px 2px 0;
+  color: #77616f;
+  font-size: 12px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* El legacy oculta la rareza en la galería del sheet. */
+#sheet .tile small {
+  display: none;
+  color: #7a8174;
+  font-size: 9px;
+}
+
+#sheet #gallery-more {
+  display: block;
+  margin: 30px auto;
+}
+
+#sheet #gallery-more[hidden] {
+  display: none;
+}
+
+/* Tandas: grupos de 15 cartas en cinco columnas. */
+#sheet .memories-section {
+  padding: 0;
+}
+
+#sheet .batch-group {
+  margin: 0 0 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eae1e8;
+}
+
+#sheet .batch-group:last-child {
+  border-bottom: 0;
+}
+
+#sheet .batch-group h3 {
+  position: sticky;
+  top: calc(62px + env(safe-area-inset-top));
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 28px;
+  margin: 0 0 6px;
+  padding: 5px 0;
+  background: #faf7f6;
+  color: #876c7e;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+#sheet .batch-group h3 span:last-child {
+  color: #a08398;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+}
+
+#sheet .active-batch {
+  margin-right: -8px;
+  margin-left: -8px;
+  padding: 12px 8px 20px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #f4e7f0b3, transparent);
+}
+
+#sheet .batch-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+
+#sheet .memory-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 0.716;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 4px;
+  background: #eee5eb;
+  touch-action: pan-y;
+  transition: transform 90ms ease;
+}
+
+#sheet .memory-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#sheet .memory-card:active {
+  transform: scale(0.95);
+}
+
+#sheet .batch-placeholder {
+  display: grid;
+  aspect-ratio: 0.716;
+  place-items: center;
+  border: 1px solid #ded0da;
+  border-radius: 5px;
+  background: linear-gradient(145deg, #f8f2f6, #eee3eb);
+  color: #ad819d;
+  font-size: 22px;
+  line-height: 1;
+}
+
+#sheet .batch-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 18px;
+}
+
+#sheet .batch-search input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+  border: 0;
+  border-radius: 12px;
+  background: #f0e9ee;
+  color: #77576e;
+  font-size: 14px;
+}
+
+/* Dock inferior. */
+#sheet .collection-dock {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  padding: 18px 22px max(15px, env(safe-area-inset-bottom));
+  background: linear-gradient(transparent, #faf7f6 22%);
+  pointer-events: none;
+}
+
+#sheet .collection-dock button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 596px;
+  min-height: 50px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--collection-accent);
+  color: #fff8fc;
+  font-size: 13px;
+  pointer-events: auto;
+}
+
+#sheet .collection-dock button:disabled {
+  display: none;
+}
+
+#sheet .muted {
+  color: #9c8794;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+#sheet button:focus-visible {
+  outline: 2px solid #ad7395;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #sheet .memory-card,
+  #sheet .memory-card:active {
+    transition: none;
+    transform: none;
+  }
+}

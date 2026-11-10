@@ -32,12 +32,29 @@
   let stage: HTMLDivElement;
   let controller: DeckController | null = null;
 
+  const CARD_RATIO = 0.716;
+
   function queue(): readonly Card[] {
     if (!current) return [];
     return next ? [current, next] : [current];
   }
 
+  /**
+   * Reproduce `fitCard()` del legacy: la carta se ajusta a la altura real del
+   * escenario sin desbordar su ancho. El motor sigue leyendo `--card-width`.
+   */
+  function fitCard(): void {
+    if (!stage) return;
+    const width = Math.max(
+      0,
+      Math.min(stage.clientWidth - 2, (stage.clientHeight - 6) * CARD_RATIO),
+    );
+    stage.style.setProperty('--card-width', `${width}px`);
+  }
+
   onMount(() => {
+    fitCard();
+
     const instance = createDeckController(stage, {
       onDecision: (decision, card) => onDecision(decision, card),
       resources,
@@ -46,7 +63,11 @@
     instance.setEnabled(enabled);
     instance.setCards(queue());
 
+    const observer = new ResizeObserver(() => fitCard());
+    observer.observe(stage);
+
     return () => {
+      observer.disconnect();
       controller = null;
       instance.destroy();
     };
@@ -71,18 +92,4 @@
   }
 </script>
 
-<div
-  class="discovery-deck"
-  bind:this={stage}
-  role="region"
-  aria-label="Mazo de descubrimiento"
-></div>
-
-<style>
-  .discovery-deck {
-    position: relative;
-    width: min(100%, 20rem);
-    aspect-ratio: 245 / 342;
-    margin-inline: auto;
-  }
-</style>
+<div class="stage" bind:this={stage} role="region" aria-label="Mazo de descubrimiento"></div>

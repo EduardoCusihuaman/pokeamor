@@ -1,8 +1,10 @@
 /**
  * Flujo E2E de navegación entre descubrimiento y colección (plan §15 y §18).
  *
- * Comprueba que la SPA cambia de vista sin router hash: el enlace de sesión
- * existente `#s=<64hex>` se conserva y nunca aparece un `#/` ajeno.
+ * La colección se abre como una hoja superpuesta desde el botón del corazón,
+ * igual que el legacy, y se cierra con "Volver a las cartas". La SPA no usa un
+ * router hash: el enlace de sesión `#s=<64hex>` se conserva y nunca aparece un
+ * `#/` ajeno.
  */
 
 import { expect, test } from '@playwright/test';
@@ -13,15 +15,13 @@ test.beforeEach(async ({ page }) => {
   await mockBackend(page);
 });
 
-test('enters the collection and returns to discovery preserving the session hash', async ({
+test('opens the collection sheet and returns to discovery preserving the session hash', async ({
   page,
 }) => {
   await gotoApp(page);
-  await expect(page.getByRole('heading', { name: 'Pikachu' })).toBeVisible();
+  await expect(page.getByRole('article', { name: 'Pikachu' })).toBeVisible();
 
-  const nav = page.getByRole('navigation', { name: 'Secciones de pokéamor' });
-
-  await nav.getByRole('button', { name: 'Colección' }).click();
+  await page.getByRole('button', { name: 'Abrir mi colección' }).click();
 
   await expect(page.getByRole('heading', { name: 'Tu colección' })).toBeVisible();
   await expect(page.getByRole('group', { name: 'Filtrar la colección' })).toBeVisible();
@@ -31,13 +31,9 @@ test('enters the collection and returns to discovery preserving the session hash
   expect(inCollection.hash).toBe(`#s=${SESSION_TOKEN}`);
   expect(page.url()).not.toContain('#/');
 
-  await nav.getByRole('button', { name: 'Descubrir' }).click();
+  await page.getByRole('button', { name: 'Volver a las cartas' }).click();
 
-  await expect(page.getByRole('heading', { name: 'Pikachu' })).toBeVisible();
-  await expect(nav.getByRole('button', { name: 'Descubrir' })).toHaveAttribute(
-    'aria-current',
-    'page',
-  );
+  await expect(page.getByRole('article', { name: 'Pikachu' })).toBeVisible();
 
   const backInDiscovery = new URL(page.url());
   expect(backInDiscovery.pathname).toBe('/');

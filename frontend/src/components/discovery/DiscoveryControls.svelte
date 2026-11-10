@@ -2,144 +2,50 @@
   import type { VoteValue } from '@/application/sync';
 
   interface Props {
-    readonly canUndo: boolean;
     readonly disabled?: boolean;
+    readonly step: number;
+    readonly target: number;
+    readonly arcOffset: number;
+    readonly pearls: string;
+    readonly name: string;
     readonly onVote: (value: VoteValue) => void;
-    readonly onUndo: () => void;
   }
 
-  let { canUndo, disabled = false, onVote, onUndo }: Props = $props();
+  let { disabled = false, step, target, arcOffset, pearls, name, onVote }: Props = $props();
 </script>
 
-<div class="discovery-controls" role="group" aria-label="Decidir sobre esta carta">
-  <button
-    type="button"
-    class="vote vote-no"
-    aria-label="Paso"
-    {disabled}
-    onclick={() => onVote('no')}
-  >
-    <span class="icon" aria-hidden="true">✕</span>
-    <span class="label">Paso</span>
+<div class="controls">
+  <button type="button" class="vote no" aria-label="Paso" {disabled} onclick={() => onVote('no')}>
+    <span aria-hidden="true">×</span>
   </button>
+
+  <div class="caption">
+    <div>
+      <button type="button" id="round-progress" aria-label="Progreso de la tanda">
+        <svg class="round-ring" viewBox="0 0 52 52" aria-hidden="true">
+          <circle cx="26" cy="26" r="23" />
+          <circle id="round-arc" cx="26" cy="26" r="23" style="stroke-dashoffset: {arcOffset}" />
+        </svg>
+        <span id="round-number">{step}/{target}</span>
+      </button>
+      <strong id="name">{name}</strong>
+      <span id="round-pearls" aria-hidden="true">{pearls}</span>
+    </div>
+  </div>
 
   <button
     type="button"
-    class="undo"
-    aria-label="Deshacer última elección"
-    disabled={!canUndo}
-    onclick={onUndo}
-  >
-    <span class="icon" aria-hidden="true">↶</span>
-    <span class="label">Deshacer</span>
-  </button>
-
-  <button
-    type="button"
-    class="vote vote-yes"
+    class="vote yes"
     aria-label="Me gusta"
     {disabled}
     onclick={() => onVote('yes')}
   >
-    <span class="icon" aria-hidden="true">❤️</span>
-    <span class="label">Me gusta</span>
+    <span aria-hidden="true">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M20.8 8.8c0 5.1-8.8 10.2-8.8 10.2S3.2 13.9 3.2 8.8a4.7 4.7 0 0 1 8.8-2.2 4.7 4.7 0 0 1 8.8 2.2Z"
+        />
+      </svg>
+    </span>
   </button>
 </div>
-
-<style>
-  .discovery-controls {
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    gap: var(--space-3);
-    width: 100%;
-  }
-
-  button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-2);
-    min-height: 3rem;
-    padding: var(--space-2) var(--space-4);
-    border: 1px solid transparent;
-    border-radius: var(--radius-pill);
-    font-weight: 600;
-    transition:
-      background-color var(--motion-fast) ease-in-out,
-      border-color var(--motion-fast) ease-in-out,
-      transform var(--motion-fast) ease-in-out;
-  }
-
-  button:active:not(:disabled) {
-    transform: scale(0.97);
-  }
-
-  button:disabled {
-    cursor: not-allowed;
-    opacity: 0.45;
-  }
-
-  .vote {
-    flex: 1;
-    max-width: 9rem;
-    border-color: rgb(43 29 36 / 14%);
-    background: var(--color-surface);
-  }
-
-  .vote-yes {
-    border-color: var(--color-accent);
-    background: var(--color-accent);
-    color: var(--color-surface);
-  }
-
-  .vote-yes:hover:not(:disabled) {
-    background: var(--color-accent-strong);
-    border-color: var(--color-accent-strong);
-  }
-
-  .vote-no:hover:not(:disabled) {
-    border-color: var(--color-accent-strong);
-  }
-
-  .undo {
-    flex: 0 0 auto;
-    padding-inline: var(--space-3);
-    background: transparent;
-    color: var(--color-muted);
-  }
-
-  .undo:hover:not(:disabled) {
-    background: rgb(43 29 36 / 6%);
-  }
-
-  .icon {
-    font-size: 1.1rem;
-    line-height: 1;
-  }
-
-  .label {
-    font-size: 0.875rem;
-  }
-
-  @media (max-width: 22rem) {
-    .label {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip-path: inset(50%);
-      white-space: nowrap;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    button {
-      transition: none;
-    }
-
-    button:active:not(:disabled) {
-      transform: none;
-    }
-  }
-</style>

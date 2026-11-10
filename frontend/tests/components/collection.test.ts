@@ -61,14 +61,19 @@ function makeSource(): CollectionSource {
   };
 }
 
-test('renders favorites, filters cards and exposes accessible tile names', async () => {
+test('renders the sheet, switches to tandas and filters the favorites grid', async () => {
   const collection = createCollection({ source: makeSource() });
   const screen = await render(CollectionScreen, { collection });
 
+  // El overlay legacy se monta abierto, con encabezado, título y resumen.
   await expect.element(screen.getByRole('heading', { name: 'Tu colección' })).toBeVisible();
+  await expect.element(screen.getByRole('heading', { name: 'Tus elegidos.' })).toBeVisible();
   await expect.element(screen.getByText(/2 favoritos/)).toBeVisible();
 
-  // Filtro inicial: solo favoritas (yes), cada una con nombre accesible.
+  // Vista inicial: la galería de elegidos con el filtro de favoritas.
+  await expect
+    .element(screen.getByRole('button', { name: 'Tus elegidos' }))
+    .toHaveAttribute('aria-pressed', 'true');
   await expect.element(screen.getByRole('button', { name: 'Ver Pikachu' })).toBeVisible();
   await expect.element(screen.getByRole('button', { name: 'Ver Bulbasaur' })).toBeVisible();
   expect(screen.getByRole('button', { name: 'Ver Charmander' }).query()).toBeNull();
@@ -76,7 +81,18 @@ test('renders favorites, filters cards and exposes accessible tile names', async
     .element(screen.getByRole('button', { name: 'Favoritas' }))
     .toHaveAttribute('aria-pressed', 'true');
 
-  // Todas: las cartas descubiertas, sin las pendientes.
+  // Tus tandas: la tanda activa de 15 con tarjetas de memoria.
+  await screen.getByRole('button', { name: 'Tus tandas' }).click();
+  await expect
+    .element(screen.getByRole('button', { name: 'Tus tandas' }))
+    .toHaveAttribute('aria-pressed', 'true');
+  await expect.element(screen.getByText('Tanda 1')).toBeVisible();
+  await expect.element(screen.getByText('2 / 15')).toBeVisible();
+  await expect.element(screen.getByRole('button', { name: 'Ver Pikachu' })).toBeVisible();
+  expect(screen.getByRole('button', { name: 'Ver Charmander' }).query()).toBeNull();
+
+  // Volver a elegidos conserva el filtro y permite cambiarlo.
+  await screen.getByRole('button', { name: 'Tus elegidos' }).click();
   await screen.getByRole('button', { name: 'Todas' }).click();
   await expect.element(screen.getByRole('button', { name: 'Ver Charmander' })).toBeVisible();
   expect(screen.getByRole('button', { name: 'Ver Squirtle' }).query()).toBeNull();
@@ -98,12 +114,22 @@ test('renders favorites, filters cards and exposes accessible tile names', async
   await expect.element(screen.getByText('1 carta en Finalistas')).toBeVisible();
 });
 
-test('the back control returns to discovery', async () => {
+test('the close control returns to discovery', async () => {
   const collection = createCollection({ source: makeSource() });
   const onBack = vi.fn();
 
   const screen = await render(CollectionScreen, { collection, onBack });
-  await screen.getByRole('button', { name: 'Volver a descubrir' }).click();
+  await screen.getByRole('button', { name: 'Volver a las cartas' }).click();
 
   expect(onBack).toHaveBeenCalledTimes(1);
+});
+
+test('the settings control exposes the backup entry point', async () => {
+  const collection = createCollection({ source: makeSource() });
+  const onSettings = vi.fn();
+
+  const screen = await render(CollectionScreen, { collection, onSettings });
+  await screen.getByRole('button', { name: 'Ajustes y respaldo' }).click();
+
+  expect(onSettings).toHaveBeenCalledTimes(1);
 });

@@ -184,7 +184,9 @@ function asPresentable(image: ArtworkImage): PresentableImage {
 
 function createSeal(document: Document): HTMLElement {
   const seal = document.createElement('div');
-  seal.className = 'swipe-seal';
+  // `swipe-seal` es el nodo que pinta el motor de gesto; `stamp` conserva el
+  // contrato visual legacy de la capa de decisión dentro de la carta.
+  seal.className = 'swipe-seal stamp';
   seal.setAttribute('aria-hidden', 'true');
 
   const fill = document.createElement('span');
@@ -397,6 +399,16 @@ export function createDeckController(stage: HTMLElement, deps: DeckControllerDep
     image.alt = `Carta de ${card.name}`;
     image.draggable = false;
 
+    // Capas estáticas de la carta. El material WebGL queda diferido; estos
+    // nodos preservan la estructura y los efectos del legacy (glint/foil).
+    const glint = document.createElement('div');
+    glint.className = 'glint';
+    glint.setAttribute('aria-hidden', 'true');
+
+    const foil = document.createElement('div');
+    foil.className = 'foil';
+    foil.setAttribute('aria-hidden', 'true');
+
     const choice = document.createElement('div');
     choice.className = 'choice-light';
     choice.setAttribute('aria-hidden', 'true');
@@ -404,7 +416,7 @@ export function createDeckController(stage: HTMLElement, deps: DeckControllerDep
     const seal = createSeal(document);
     const meta = createMeta(document, card);
 
-    element.append(image as unknown as Node, choice, seal, meta);
+    element.append(image as unknown as Node, glint, foil, choice, seal, meta);
 
     const presentation = createPresentation(card, image, under ? 'back' : 'front', under ? 1 : 0);
 

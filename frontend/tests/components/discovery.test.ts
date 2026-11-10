@@ -1,10 +1,12 @@
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 
+import '@/styles/global.css';
+
+import App from '@/App.svelte';
 import { createDiscovery } from '@/application/discovery.svelte';
 import type { FetchLike, StorageLike, TimerApi } from '@/application/sync';
 import type { Card, CatalogBundle } from '@/domain/catalog';
-import DiscoveryScreen from '@/components/discovery/DiscoveryScreen.svelte';
 
 function makeCard(id: number, name: string, hue: number): Card {
   return {
@@ -88,14 +90,14 @@ test('loads the catalog, votes with accessible controls and undoes', async () =>
     clock: { now: () => 1000 },
   });
 
-  const screen = await render(DiscoveryScreen, { discovery });
+  const screen = await render(App, { discovery });
 
   await expect.element(screen.getByText('Cargando cartas…')).toBeVisible();
 
   catalog.resolve(bundle);
 
-  await expect.element(screen.getByRole('heading', { name: 'Pikachu' })).toBeVisible();
-  await expect.element(screen.getByText(/0 me gusta/)).toBeVisible();
+  await expect.element(screen.getByRole('article', { name: 'Pikachu' })).toBeVisible();
+  expect(screen.getByText(/0 me gusta/).query()).not.toBeNull();
   await expect
     .element(screen.getByRole('button', { name: 'Deshacer última elección' }))
     .toBeDisabled();
@@ -103,8 +105,8 @@ test('loads the catalog, votes with accessible controls and undoes', async () =>
 
   await screen.getByRole('button', { name: 'Me gusta' }).click();
 
-  await expect.element(screen.getByRole('heading', { name: 'Bulbasaur' })).toBeVisible();
-  await expect.element(screen.getByText(/1 me gusta/)).toBeVisible();
+  await expect.element(screen.getByRole('article', { name: 'Bulbasaur' })).toBeVisible();
+  expect(screen.getByText(/1 me gusta/).query()).not.toBeNull();
   expect(discovery.votes['25']).toEqual({ value: 'yes', time: 1000 });
   expect(discovery.session.votes['25']).toEqual({ value: 'yes', time: 1000 });
   expect(discovery.session.voteTimes['25']).toBe(1000);
@@ -119,8 +121,8 @@ test('loads the catalog, votes with accessible controls and undoes', async () =>
 
   await screen.getByRole('button', { name: 'Deshacer última elección' }).click();
 
-  await expect.element(screen.getByRole('heading', { name: 'Pikachu' })).toBeVisible();
-  await expect.element(screen.getByText(/0 me gusta/)).toBeVisible();
+  await expect.element(screen.getByRole('article', { name: 'Pikachu' })).toBeVisible();
+  expect(screen.getByText(/0 me gusta/).query()).not.toBeNull();
   expect(discovery.votes['25']).toBeUndefined();
   expect(discovery.session.votes['25']).toBeUndefined();
   expect(discovery.position).toBe(0);

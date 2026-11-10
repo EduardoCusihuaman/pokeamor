@@ -1,0 +1,122 @@
+/**
+ * Tema claro y pastel de pokéamor (paridad con los overrides finales de
+ * `src/page.html`).
+ *
+ * El legacy arranca con un tema oscuro y lo sustituye por una capa pastel al
+ * final de la hoja. Acá se declara solo el resultado final: fondo papel, texto
+ * ciruela apagado y acentos rosa. La tipografía también es la del legacy.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500&display=swap');
+
+:root {
+  color-scheme: light;
+  font-family: 'DM Sans', sans-serif;
+  color: #554e51;
+  background: #faf6f2;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Intención de gesto: la luz de decisión lee estas variables. */
+  --yes-intent: 0;
+  --no-intent: 0;
+
+  /* Tokens de superficie. */
+  --pa-bg: #faf6f2;
+  --pa-surface: #fffdfd;
+  --pa-paper: #faf4f7;
+  --pa-text: #554e51;
+  --pa-ink: #292a26;
+  --pa-muted: #9c9297;
+  --pa-muted-strong: #928a90;
+  --pa-line: #c696ad55;
+  --pa-pink: #ba667d;
+  --pa-pink-strong: #a52e5a;
+  --pa-pink-deep: #b06e8c;
+  --pa-pink-ring: #b77598;
+  --pa-blue: #749bab;
+
+  --pa-font-sans: 'DM Sans', sans-serif;
+  --pa-font-display: 'Playfair Display', Georgia, serif;
+
+  --pa-card-radius: 17px;
+  --pa-card-shadow: 0 3px 5px #725b6c14, 0 20px 42px -23px #745d704d;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--pa-bg);
+  color: var(--pa-text);
+  font-family: var(--pa-font-sans);
+  line-height: 1.5;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+body input,
+body textarea,
+body [contenteditable='true'],
+body [contenteditable='true'] * {
+  -webkit-user-select: text;
+  -webkit-touch-callout: default;
+}
+
+button,
+a,
+input {
+  font: inherit;
+}
+
+button {
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #df9fb7;
+  outline-offset: 4px;
+}
+
+button:disabled {
+  cursor: default;
+  opacity: 0.24;
+}
+
+h1,
+h2,
+h3,
+p,
+figure {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-family: var(--pa-font-display);
+  font-style: italic;
+  font-weight: 500;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
