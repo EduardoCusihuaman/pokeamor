@@ -2,3 +2,4 @@ dist/
 site.tar.gz
 generated/
 worker/index.js
+__pycache__/

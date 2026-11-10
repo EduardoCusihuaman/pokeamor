@@ -7,8 +7,11 @@ description: Ingresar la lista de cartas alternativas que da el usuario (formato
 
 Convierte una lista de cartas que pasa el usuario en **alternativas curadas** para Pokéamor.
 
-El usuario entrega cartas en formato *Limitless* (el mismo que exporta el modo
-depuración): una por línea, `Nombre SET número`.
+El input es la salida de la skill `search-alternatives` (cómo busca el usuario
+las ilustraciones): una lista en formato **Limitless Proxy**
+(`limitlesstcg.com/tools/proxies`), una por línea, `cantidad Nombre SET número`.
+El `cantidad` (el `1 ` que prefija cada línea) se ignora; puede incluir sufijos
+de carta (`Venusaur ex`, `Charizard VSTAR`) y códigos de promos (`PR-SV`).
 
 ```
 Bulbasaur SCR 143
@@ -74,3 +77,15 @@ python scripts/ingest-alternatives.py <lista.txt> --apply  # escribe los archivo
 
 La decisión de **qué hacer con una referencia inválida** (corregirla, buscar otra
 ilustración, o descartarla) es del usuario. El script reporta; no adivina.
+
+## Proponer reemplazos (siempre)
+
+Cuando el usuario pida que propongas el reemplazo de una carta inválida,
+respetá **siempre** sus criterios de búsqueda (definidos en `search-alternatives`):
+
+- **Prohibido:** Shiny / Shiny Vault / Gold Star shiny, Gold, Rainbow Rare,
+  Mega y Teracristal/Tera, formas regionales (Alolan/Galarian/Hisuian/Paldean).
+- **Prioridad:** SIR > IR > promos y artes alternativos > Trainer/Galarian
+  Gallery > Full Art / clásicas excepcionales.
+- La belleza del arte prevalece sobre rareza, precio y antigüedad.
+- Nunca inventes una carta; si no hay alternativa verificable, decilo.

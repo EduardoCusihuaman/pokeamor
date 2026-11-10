@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Ingest user-supplied alternative card references into committed data.
 
-Converts a plain-text list of "Name SET number" references (the same
-Limitless-style format the debug export emits) into rows in
+Converts a plain-text list of "quantity Name SET number" references (the
+Limitless Proxy export format from limitlesstcg.com/tools/proxies, also
+emitted by the search-alternatives skill and the debug export) into rows in
 `data/alternatives-curated.json` and new print entries in
 `data/proxies.json`.
 
@@ -57,6 +58,7 @@ SET_TO_SETID = {
     'MEG': 'me01',      # Mega Evolution
     'PGO': 'swsh10.5',  # Pokémon GO
     'SVP': 'svp',       # Scarlet & Violet Black Star Promos
+    'PR-SV': 'svp',     # Limitless code for the same S&V promos
     'PFL': 'me02',      # Phantasmal Flames
     'BRS': 'swsh9',     # Brilliant Stars
     'JTG': 'sv09',      # Journey Together
@@ -92,6 +94,11 @@ TRAINER_GALLERY = {
 
 USER_AGENT = 'pokeamor-ingest/1.0'
 MAX_ALTERNATIVES = 3  # Keep in sync with build-card-resources.py and card-resources.js.
+
+# Card-name suffix to strip when matching an input name back to a species
+# (Limitless lists print "Venusaur ex", "Charizard VSTAR", etc.).
+CARD_SUFFIX = re.compile(r'\s+(?:ex|gx|v|vmax|vstar|break|prime|lv\.x|v-union)\s*$',
+                         re.IGNORECASE)
 
 
 def load_json(path):
@@ -167,14 +174,19 @@ def build_species_index(catalog):
 def species_id(name, index):
     """Map a (possibly noisy) name to a catalog Pokémon id, or None.
 
-    Tolerates a leading count/order prefix ("1 Bulbasaur") and the
-    "Team Rocket's " card-name prefix.
+    Tolerates a leading count/order prefix ("1 Bulbasaur"), the
+    "Team Rocket's " card-name prefix, and card-name suffixes
+    ("Venusaur ex", "Charizard VSTAR").
     """
     candidate = re.sub(r'^\d+\s+', '', name.strip().lower())
     if not candidate:
         return None
-    for key in (candidate, candidate.removeprefix('team rocket\u2019s ').strip(),
-                candidate.removeprefix("team rocket's ").strip()):
+    base = candidate
+    for prefix in ('team rocket\u2019s ', "team rocket's "):
+        if base.startswith(prefix):
+            base = base[len(prefix):]
+            break
+    for key in (base, CARD_SUFFIX.sub('', base).strip()):
         found = index.get(key)
         if found:
             return found
@@ -223,6 +235,7 @@ def main(argv):
     species = build_species_index(catalog)
     names = {p['id']: p['name'] for p in catalog}
     principal = {p['id']: p['card'] for p in catalog}
+    existing_proxies = load_json(PROXIES_PATH)
 
     known_sets = set(SET_TO_SETID) | set(TRAINER_GALLERY) | set(GALLERY)
 
@@ -241,18 +254,23 @@ def main(argv):
             problems.append((lineno, f'no se pudo parsear: {line!r}'))
             continue
         name, set_code, number = parsed
-        pid = species_id(name, species)
-        if pid is None:
-            problems.append((lineno, f'Pokémon no encontrado: {name!r}'))
-            continue
         print_id, set_id, card = resolve_print(set_code, number)
         if card is None:
             problems.append((lineno, f'carta no resuelta: {name} {set_code} {number}'))
             continue
-        expected = names[pid].lower()
-        if expected not in card.get('name', '').lower():
+        dex_ids = card.get('dexId') or []
+        if not dex_ids:
+            problems.append((lineno, f'"{card.get("name")}" no es una carta de Pokémon'))
+            continue
+        pid = dex_ids[0]
+        if pid not in names:
+            problems.append((lineno, f'dexId {pid} fuera de rango para "{card.get("name")}"'))
+            continue
+        intended = species_id(name, species)
+        if intended is not None and intended != pid:
             problems.append((lineno,
-                             f'{set_code} {number} es "{card.get("name")}" (esperaba {names[pid]})'))
+                             f'{set_code} {number} es "{card.get("name")}" '
+                             f'(dijiste {name}, pero es {names[pid]})'))
             continue
         if print_id == principal[pid]:
             principal_dups.append((pid, print_id))
@@ -285,7 +303,7 @@ def main(argv):
     print(f'Pokémon con alternativas: {len(resolved)}')
     print(f'Alternativas resueltas:    {total}')
     print(f'Duplicados de principal:    {len(principal_dups)}')
-    print(f'Proxies nuevos:             {len(new_proxies)}')
+    print(f'Proxies nuevos:             {sum(1 for p in new_proxies if p not in existing_proxies)}')
     print(f'Errores:                    {len(problems)}')
 
     over_cap = [pid for pid, rows in resolved.items() if len(rows) > MAX_ALTERNATIVES]
@@ -320,7 +338,7 @@ def main(argv):
         fh.write('\n')
 
     # Merge into proxies.json (never overwrite existing entries).
-    proxies = load_json(PROXIES_PATH)
+    proxies = existing_proxies
     for print_id, info in new_proxies.items():
         if print_id not in proxies:
             proxies[print_id] = info
