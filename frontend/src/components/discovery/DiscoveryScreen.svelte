@@ -2,8 +2,8 @@
   import { onMount } from 'svelte';
 
   import { appDiscovery, type DiscoveryApi } from '@/application/discovery.svelte';
-  import DiscoveryCard from '@/components/discovery/DiscoveryCard.svelte';
   import DiscoveryControls from '@/components/discovery/DiscoveryControls.svelte';
+  import DiscoveryDeck from '@/components/discovery/DiscoveryDeck.svelte';
 
   interface Props {
     /** Instancia inyectable; la app usa la compartida. */
@@ -15,6 +15,17 @@
   const isLoading = $derived(discovery.status === 'idle' || discovery.status === 'loading');
   const isReady = $derived(discovery.status === 'ready');
   const currentCard = $derived(discovery.currentCard);
+  const nextCard = $derived.by(() => {
+    const current = discovery.currentCard;
+    if (!current) return null;
+
+    const start = discovery.catalog.indexOf(current);
+    for (let index = start + 1; index < discovery.catalog.length; index += 1) {
+      const candidate = discovery.catalog[index];
+      if (candidate && !discovery.votes[String(candidate.id)]) return candidate;
+    }
+    return null;
+  });
   const progressText = $derived(
     `${discovery.progress.discovered} de ${discovery.progress.total} descubiertas`,
   );
@@ -60,7 +71,13 @@
       <p class="state">No hay cartas en el catálogo.</p>
     {:else}
       {#if currentCard}
-        <DiscoveryCard card={currentCard} />
+        <DiscoveryDeck
+          current={currentCard}
+          next={nextCard}
+          enabled={isReady}
+          onDecision={vote}
+          onUndo={undo}
+        />
       {:else}
         <p class="state">No hay más cartas por descubrir.</p>
       {/if}

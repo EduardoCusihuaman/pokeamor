@@ -1,0 +1,88 @@
+<script lang="ts">
+  import { onMount } from 'svelte';
+
+  import type { Card } from '@/domain/catalog';
+  import { createDeckController, type DeckController } from '@/engines/deck/controller';
+  import { resourceCoordinator } from '@/engines/resources/resource-coordinator';
+  import type { VoteDecision } from '@/engines/swipe/gesture';
+
+  interface Props {
+    /** Carta frontal actual. `null` vacía el deck. */
+    readonly current: Card | null;
+    /** Carta de debajo; `null` deja el deck con una sola carta. */
+    readonly next?: Card | null;
+    readonly enabled?: boolean;
+    /** Confirmación del gesto (o de los controles accesibles del host). */
+    readonly onDecision: (decision: VoteDecision, card: Card) => void;
+    /** Deshacer del host; el botón accesible vive fuera de este componente. */
+    readonly onUndo?: () => void;
+    /** Coordinador de recursos; `null` desactiva la preparación de arte. */
+    readonly resources?: typeof resourceCoordinator | null;
+  }
+
+  let {
+    current,
+    next = null,
+    enabled = true,
+    onDecision,
+    onUndo,
+    resources = resourceCoordinator,
+  }: Props = $props();
+
+  let stage: HTMLDivElement;
+  let controller: DeckController | null = null;
+
+  function queue(): readonly Card[] {
+    if (!current) return [];
+    return next ? [current, next] : [current];
+  }
+
+  onMount(() => {
+    const instance = createDeckController(stage, {
+      onDecision: (decision, card) => onDecision(decision, card),
+      resources,
+    });
+    controller = instance;
+    instance.setEnabled(enabled);
+    instance.setCards(queue());
+
+    return () => {
+      controller = null;
+      instance.destroy();
+    };
+  });
+
+  $effect(() => {
+    const cards = queue();
+    if (!controller) return;
+    controller.setEnabled(enabled);
+    controller.setCards(cards);
+  });
+
+  /** Deshace en el host y re-muestra la carta sin emitir un voto nuevo. */
+  export function undo(): void {
+    onUndo?.();
+    controller?.undo();
+  }
+
+  /** Cancela el gesto activo sin decisión. */
+  export function cancel(): void {
+    controller?.cancel();
+  }
+</script>
+
+<div
+  class="discovery-deck"
+  bind:this={stage}
+  role="region"
+  aria-label="Mazo de descubrimiento"
+></div>
+
+<style>
+  .discovery-deck {
+    position: relative;
+    width: min(100%, 20rem);
+    aspect-ratio: 245 / 342;
+    margin-inline: auto;
+  }
+</style>
