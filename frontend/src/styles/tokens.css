@@ -1,0 +1,25 @@
+@layer tokens {
+  :root {
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+
+    --radius-sm: 0.5rem;
+    --radius-card: 1rem;
+    --radius-pill: 999px;
+
+    --color-bg: #fdf8fa;
+    --color-surface: #ffffff;
+    --color-text: #2b1d24;
+    --color-muted: #6f5a64;
+    --color-accent: #d6557a;
+    --color-accent-strong: #a92f54;
+    --color-danger: #8f2438;
+
+    --motion-fast: 160ms;
+    --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+}
