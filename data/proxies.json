@@ -6028,5 +6028,255 @@
     "name": "Eternatus V",
     "set": "LOR",
     "number": "TG21"
+  },
+  "me01-002": {
+    "name": "Ivysaur",
+    "set": "MEG",
+    "number": "2"
+  },
+  "me01-102": {
+    "name": "Spearow",
+    "set": "MEG",
+    "number": "102"
+  },
+  "me01-103": {
+    "name": "Fearow",
+    "set": "MEG",
+    "number": "103"
+  },
+  "me02-012": {
+    "name": "Charmeleon",
+    "set": "PFL",
+    "number": "12"
+  },
+  "me03-060": {
+    "name": "Rattata",
+    "set": "POR",
+    "number": "60"
+  },
+  "me03-061": {
+    "name": "Raticate",
+    "set": "POR",
+    "number": "61"
+  },
+  "sm4-1": {
+    "name": "Weedle",
+    "set": "CRI",
+    "number": "1"
+  },
+  "sm4-2": {
+    "name": "Kakuna",
+    "set": "CRI",
+    "number": "2"
+  },
+  "sm4-3": {
+    "name": "Beedrill",
+    "set": "CRI",
+    "number": "3"
+  },
+  "sv03-162": {
+    "name": "Pidgey",
+    "set": "OBF",
+    "number": "162"
+  },
+  "sv03-163": {
+    "name": "Pidgeotto",
+    "set": "OBF",
+    "number": "163"
+  },
+  "sv03-217": {
+    "name": "Pidgeot ex",
+    "set": "OBF",
+    "number": "217"
+  },
+  "sv03.5-004": {
+    "name": "Charmander",
+    "set": "MEW",
+    "number": "4"
+  },
+  "sv03.5-005": {
+    "name": "Charmeleon",
+    "set": "MEW",
+    "number": "5"
+  },
+  "sv03.5-008": {
+    "name": "Wartortle",
+    "set": "MEW",
+    "number": "8"
+  },
+  "sv03.5-009": {
+    "name": "Blastoise ex",
+    "set": "MEW",
+    "number": "9"
+  },
+  "sv03.5-010": {
+    "name": "Caterpie",
+    "set": "MEW",
+    "number": "10"
+  },
+  "sv03.5-011": {
+    "name": "Metapod",
+    "set": "MEW",
+    "number": "11"
+  },
+  "sv03.5-013": {
+    "name": "Weedle",
+    "set": "MEW",
+    "number": "13"
+  },
+  "sv03.5-014": {
+    "name": "Kakuna",
+    "set": "MEW",
+    "number": "14"
+  },
+  "sv03.5-015": {
+    "name": "Beedrill",
+    "set": "MEW",
+    "number": "15"
+  },
+  "sv03.5-016": {
+    "name": "Pidgey",
+    "set": "MEW",
+    "number": "16"
+  },
+  "sv03.5-017": {
+    "name": "Pidgeotto",
+    "set": "MEW",
+    "number": "17"
+  },
+  "sv03.5-021": {
+    "name": "Spearow",
+    "set": "MEW",
+    "number": "21"
+  },
+  "sv03.5-022": {
+    "name": "Fearow",
+    "set": "MEW",
+    "number": "22"
+  },
+  "sv03.5-023": {
+    "name": "Ekans",
+    "set": "MEW",
+    "number": "23"
+  },
+  "sv03.5-182": {
+    "name": "Venusaur ex",
+    "set": "MEW",
+    "number": "182"
+  },
+  "sv03.5-184": {
+    "name": "Blastoise ex",
+    "set": "MEW",
+    "number": "184"
+  },
+  "sv03.5-185": {
+    "name": "Arbok ex",
+    "set": "MEW",
+    "number": "185"
+  },
+  "sv05-100": {
+    "name": "Ekans",
+    "set": "TEF",
+    "number": "100"
+  },
+  "sv09-001": {
+    "name": "Caterpie",
+    "set": "JTG",
+    "number": "1"
+  },
+  "sv09-002": {
+    "name": "Metapod",
+    "set": "JTG",
+    "number": "2"
+  },
+  "sv09-003": {
+    "name": "Butterfree",
+    "set": "JTG",
+    "number": "3"
+  },
+  "sv10-113": {
+    "name": "Team Rocket's Arbok",
+    "set": "DRI",
+    "number": "113"
+  },
+  "sv10-147": {
+    "name": "Team Rocket's Rattata",
+    "set": "DRI",
+    "number": "147"
+  },
+  "sv10-202": {
+    "name": "Team Rocket's Raticate",
+    "set": "DRI",
+    "number": "202"
+  },
+  "svp-044": {
+    "name": "Charmander",
+    "set": "SVP",
+    "number": "44"
+  },
+  "svp-048": {
+    "name": "Squirtle",
+    "set": "SVP",
+    "number": "48"
+  },
+  "swsh10-161": {
+    "name": "Beedrill V",
+    "set": "ASR",
+    "number": "161"
+  },
+  "swsh10.5-003": {
+    "name": "Venusaur",
+    "set": "PGO",
+    "number": "3"
+  },
+  "swsh10.5-016": {
+    "name": "Wartortle",
+    "set": "PGO",
+    "number": "16"
+  },
+  "swsh11-188": {
+    "name": "Pidgeot V",
+    "set": "LOR",
+    "number": "188"
+  },
+  "swsh11tg-TG17": {
+    "name": "Pikachu VMAX",
+    "set": "LOR",
+    "number": "TG17"
+  },
+  "swsh12.5gg-GG30": {
+    "name": "Pikachu",
+    "set": "CRZ",
+    "number": "GG30"
+  },
+  "swsh2-2": {
+    "name": "Metapod",
+    "set": "RCL",
+    "number": "2"
+  },
+  "swsh4-1": {
+    "name": "Weedle",
+    "set": "VIV",
+    "number": "1"
+  },
+  "swsh6-2": {
+    "name": "Kakuna",
+    "set": "CRE",
+    "number": "2"
+  },
+  "swsh8-3": {
+    "name": "Butterfree",
+    "set": "FST",
+    "number": "3"
+  },
+  "swsh9-154": {
+    "name": "Charizard V",
+    "set": "BRS",
+    "number": "154"
+  },
+  "swsh9-174": {
+    "name": "Charizard VSTAR",
+    "set": "BRS",
+    "number": "174"
   }
 }

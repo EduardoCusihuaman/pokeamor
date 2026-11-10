@@ -12,7 +12,7 @@ def build():
  by={str(p['id']):p for p in catalog}
  for pid,rows in curated['pokemon'].items():
   accepted=[r for r in rows if r.get('enabled')]
-  assert pid in by and len(accepted)<=2
+  assert pid in by and len(accepted)<=3
   assert len({r['printId'] for r in accepted})==len(accepted)
   for r in accepted:
    assert r.get('technicalCheck')

@@ -1,4 +1,796 @@
 {
   "schema": 1,
-  "pokemon": {}
+  "pokemon": {
+    "1": [
+      {
+        "printId": "me01-133",
+        "image": "https://assets.tcgdex.net/en/me/me01/133/high.webp",
+        "rarity": "Illustration rare",
+        "artist": "mashu",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-166",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/166/high.webp",
+        "rarity": "Illustration rare",
+        "artist": "Yoriyuki Ikegami",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "2": [
+      {
+        "printId": "me01-134",
+        "image": "https://assets.tcgdex.net/en/me/me01/134/high.webp",
+        "rarity": "Illustration rare",
+        "artist": "mashu",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "me01-002",
+        "image": "https://assets.tcgdex.net/en/me/me01/002/high.webp",
+        "rarity": "Common",
+        "artist": "Takumi Wada",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "3": [
+      {
+        "printId": "swsh10.5-003",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh10.5/003/high.webp",
+        "rarity": "Holo Rare",
+        "artist": "KEIICHIRO ITO",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-182",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/182/high.webp",
+        "rarity": "Ultra Rare",
+        "artist": "PLANETA Yamashita",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "4": [
+      {
+        "printId": "svp-044",
+        "image": "https://assets.tcgdex.net/en/sv/svp/044/high.webp",
+        "rarity": "Promo",
+        "artist": "MINAMINAMI Take",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-004",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/004/high.webp",
+        "rarity": "Common",
+        "artist": "GIDORA",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "5": [
+      {
+        "printId": "me02-012",
+        "image": "https://assets.tcgdex.net/en/me/me02/012/high.webp",
+        "rarity": "Common",
+        "artist": "Uninori",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-005",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/005/high.webp",
+        "rarity": "Uncommon",
+        "artist": "GIDORA",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "6": [
+      {
+        "printId": "swsh9-154",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh9/154/high.webp",
+        "rarity": "Ultra Rare",
+        "artist": "Ryota Murayama",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "swsh9-174",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh9/174/high.webp",
+        "rarity": "Secret Rare",
+        "artist": "5ban Graphics",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "7": [
+      {
+        "printId": "sv03.5-170",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/170/high.webp",
+        "rarity": "Illustration rare",
+        "artist": "Mitsuhiro Arita",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "svp-048",
+        "image": "https://assets.tcgdex.net/en/sv/svp/048/high.webp",
+        "rarity": "Promo",
+        "artist": "Gemi",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "8": [
+      {
+        "printId": "swsh10.5-016",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh10.5/016/high.webp",
+        "rarity": "Uncommon",
+        "artist": "kurumitsu",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-008",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/008/high.webp",
+        "rarity": "Uncommon",
+        "artist": "kantaro",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "9": [
+      {
+        "printId": "sv03.5-184",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/184/high.webp",
+        "rarity": "Ultra Rare",
+        "artist": "PLANETA Yamashita",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-009",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/009/high.webp",
+        "rarity": "Double rare",
+        "artist": "PLANETA Yamashita",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "10": [
+      {
+        "printId": "sv09-001",
+        "image": "https://assets.tcgdex.net/en/sv/sv09/001/high.webp",
+        "rarity": "Common",
+        "artist": "Shimaris Yukichi",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-010",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/010/high.webp",
+        "rarity": "Common",
+        "artist": "Tika Matsuno",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "11": [
+      {
+        "printId": "sv09-002",
+        "image": "https://assets.tcgdex.net/en/sv/sv09/002/high.webp",
+        "rarity": "Common",
+        "artist": "OKUBO",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "swsh2-2",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh2/2/high.webp",
+        "rarity": "Uncommon",
+        "artist": "Asako Ito",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-011",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/011/high.webp",
+        "rarity": "Common",
+        "artist": "Tika Matsuno",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "12": [
+      {
+        "printId": "sv09-003",
+        "image": "https://assets.tcgdex.net/en/sv/sv09/003/high.webp",
+        "rarity": "Rare",
+        "artist": "satoma",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "swsh8-3",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh8/3/high.webp",
+        "rarity": "Holo Rare",
+        "artist": "ryoma uratsuka",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "13": [
+      {
+        "printId": "sm4-1",
+        "image": "https://assets.tcgdex.net/en/sm/sm4/1/high.webp",
+        "rarity": "Common",
+        "artist": "Yukiko Baba",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-013",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/013/high.webp",
+        "rarity": "Common",
+        "artist": "nisimono",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "swsh4-1",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh4/1/high.webp",
+        "rarity": "Common",
+        "artist": "sui",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "14": [
+      {
+        "printId": "sm4-2",
+        "image": "https://assets.tcgdex.net/en/sm/sm4/2/high.webp",
+        "rarity": "Uncommon",
+        "artist": "miki kudo",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-014",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/014/high.webp",
+        "rarity": "Common",
+        "artist": "nisimono",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "swsh6-2",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh6/2/high.webp",
+        "rarity": "Uncommon",
+        "artist": "nagimiso",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "15": [
+      {
+        "printId": "swsh10-161",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh10/161/high.webp",
+        "rarity": "Ultra Rare",
+        "artist": "Narumi Sato",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sm4-3",
+        "image": "https://assets.tcgdex.net/en/sm/sm4/3/high.webp",
+        "rarity": "Rare",
+        "artist": "kirisAki",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-015",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/015/high.webp",
+        "rarity": "Rare",
+        "artist": "nisimono",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "16": [
+      {
+        "printId": "sv03.5-016",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/016/high.webp",
+        "rarity": "Common",
+        "artist": "Oswaldo KATO",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03-162",
+        "image": "https://assets.tcgdex.net/en/sv/sv03/162/high.webp",
+        "rarity": "Common",
+        "artist": "Naoyo Kimura",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "17": [
+      {
+        "printId": "sv03.5-017",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/017/high.webp",
+        "rarity": "Common",
+        "artist": "Oswaldo KATO",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03-163",
+        "image": "https://assets.tcgdex.net/en/sv/sv03/163/high.webp",
+        "rarity": "Uncommon",
+        "artist": "Kariya",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "18": [
+      {
+        "printId": "swsh11-188",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh11/188/high.webp",
+        "rarity": "Ultra Rare",
+        "artist": "Saki Hayashiro",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03-217",
+        "image": "https://assets.tcgdex.net/en/sv/sv03/217/high.webp",
+        "rarity": "Ultra Rare",
+        "artist": "takuyoa",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "19": [
+      {
+        "printId": "me03-060",
+        "image": "https://assets.tcgdex.net/en/me/me03/060/high.webp",
+        "rarity": "Common",
+        "artist": "Shinya Komatsu",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv10-147",
+        "image": "https://assets.tcgdex.net/en/sv/sv10/147/high.webp",
+        "rarity": "Common",
+        "artist": "Dsuke",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-019",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/019/high.webp",
+        "rarity": "Common",
+        "artist": "sowsow",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "20": [
+      {
+        "printId": "sv10-202",
+        "image": "https://assets.tcgdex.net/en/sv/sv10/202/high.webp",
+        "rarity": "Illustration rare",
+        "artist": "Mékayu",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "me03-061",
+        "image": "https://assets.tcgdex.net/en/me/me03/061/high.webp",
+        "rarity": "Uncommon",
+        "artist": "Minahamu",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "21": [
+      {
+        "printId": "me01-102",
+        "image": "https://assets.tcgdex.net/en/me/me01/102/high.webp",
+        "rarity": "Common",
+        "artist": "Scav",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-021",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/021/high.webp",
+        "rarity": "Common",
+        "artist": "Gemi",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "22": [
+      {
+        "printId": "swsh5-112",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh5/112/high.webp",
+        "rarity": "Uncommon",
+        "artist": "Yukiko Baba",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "me01-103",
+        "image": "https://assets.tcgdex.net/en/me/me01/103/high.webp",
+        "rarity": "Common",
+        "artist": "Saboteri",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-022",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/022/high.webp",
+        "rarity": "Uncommon",
+        "artist": "Gemi",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "23": [
+      {
+        "printId": "sv05-100",
+        "image": "https://assets.tcgdex.net/en/sv/sv05/100/high.webp",
+        "rarity": "Common",
+        "artist": "Shimaris Yukichi",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-023",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/023/high.webp",
+        "rarity": "Common",
+        "artist": "Kedamahadaitai Yawarakai",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "24": [
+      {
+        "printId": "sv03.5-185",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/185/high.webp",
+        "rarity": "Ultra Rare",
+        "artist": "Eske Yoshinob",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv10-113",
+        "image": "https://assets.tcgdex.net/en/sv/sv10/113/high.webp",
+        "rarity": "Uncommon",
+        "artist": "Teeziro",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "25": [
+      {
+        "printId": "sv03.5-173",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/173/high.webp",
+        "rarity": "Illustration rare",
+        "artist": "Hiroyuki Yamamoto",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "swsh12.5gg-GG30",
+        "image": "https://images.pokemontcg.io/swsh12pt5gg/GG30_hires.png",
+        "rarity": "Rare",
+        "artist": "Kouki Saitou",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "swsh11tg-TG17",
+        "image": "https://images.pokemontcg.io/swsh11tg/TG17_hires.png",
+        "rarity": "Ultra Rare",
+        "artist": "Souichirou Gunjima",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; image downloaded and decoded",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ]
+  }
 }
