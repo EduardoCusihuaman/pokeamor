@@ -6,7 +6,8 @@ function flushSwipeTasks(){for(const [key,task] of [...swipeTasks]){if(swipeBloc
 function afterSwipe(key,run,maxWait=Infinity){const old=swipeTasks.get(key);if(old)clearTimeout(old.timer);const deadline=old?.deadline??performance.now()+maxWait;const task={run,deadline,timer:null};swipeTasks.set(key,task);if(Number.isFinite(deadline))task.timer=setTimeout(flushSwipeTasks,Math.max(0,deadline-performance.now()));if(!swipeBlocked())flushSwipeTasks()}
 document.addEventListener('pointerup',()=>setTimeout(flushSwipeTasks,0),{passive:true});
 document.addEventListener('pointercancel',()=>setTimeout(flushSwipeTasks,0),{passive:true});
-const q=new URLSearchParams(location.hash.slice(1)),token=q.get('s')||localStorage.getItem('pokeamor-token')||crypto.randomUUID().replaceAll('-','')+crypto.randomUUID().replaceAll('-','');localStorage.setItem('pokeamor-token',token);history.replaceState(null,'','#s='+token);const key='pokeamor-'+token;
+const uid=()=>crypto.randomUUID?crypto.randomUUID():(()=>{const b=crypto.getRandomValues(new Uint8Array(16));b[6]=(b[6]&15)|64;b[8]=(b[8]&63)|128;return [...b].map(x=>x.toString(16).padStart(2,'0')).join('').replace(/(.{8})(.{4})(.{4})(.{4})(.{12})/,'$1-$2-$3-$4-$5')})();
+const q=new URLSearchParams(location.hash.slice(1)),token=q.get('s')||localStorage.getItem('pokeamor-token')||uid().replaceAll('-','')+uid().replaceAll('-','');localStorage.setItem('pokeamor-token',token);history.replaceState(null,'','#s='+token);const key='pokeamor-'+token;
 let state;try{state=JSON.parse(localStorage.getItem(key))}catch{}state=state||{votes:{},ratings:{},duels:0,history:[],revision:0};state.voteTimes=state.voteTimes||{};state.ratingTimes=state.ratingTimes||{};
 let etag=null,cloudReady=false,dirty=localStorage.getItem(key+'-pending')==='1',syncing=false,restoring=null,retryDelay=1200,refreshTimer;
 const clone=v=>JSON.parse(JSON.stringify(v));let observedVotes=clone(state.votes),observedRatings=clone(state.ratings);
@@ -554,7 +555,7 @@ function chooseRefinement(winner){
  const ids=inlinePair.map(p=>p.id),before=clone(state.ratings),previousSchedule=clone(state.refinementSchedule||{});
  const [a,b]=inlinePair,ra=score(a),rb=score(b),expected=1/(1+10**((rb-ra)/400)),actual=winner===2?.5:winner===0?1:0;
  for(const [p,v] of [[a,ra+28*(actual-expected)],[b,rb-28*(actual-expected)]])state.ratings[p.id]={score:v,played:(state.ratings[p.id]?.played||0)+1};
- const event={id:crypto.randomUUID(),ids,winner,time:Date.now()};
+ const event={id:uid(),ids,winner,time:Date.now()};
  state.comparisons=state.comparisons||[];state.comparisons.push(event);state.duels++;commitBattleProgress();
  state.history.push({refinement:true,eventId:event.id,ratings:before,previousSchedule,ids});
  adaptiveBlock='';sound('like');tactile('like');
