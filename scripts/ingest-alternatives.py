@@ -22,6 +22,9 @@ files, preserving existing rows and proxy entries.
 `--ids` reads TCGdex print ids (one per line) instead of `Name SET number`.
 Each id is fetched and verified but not re-resolved from set+number. A
 species name may prefix the id for cross-checking (`Vulpix sv03.5-037`).
+For a full double-check against the Limitless reference, pass the complete
+line `Name SET number printId` (e.g. `Magmortar CRZ GG03 swsh12.5gg-GG03`):
+the script resolves `SET number` and flags any mismatch with the given id.
 
 Input format (one card per line; grouping is irrelevant):
 
@@ -145,11 +148,20 @@ def number_variants(number):
     """Ordered candidate number suffixes to try for a TCGdex print id.
 
     Older sets number without padding (`swsh2-2`); newer sets pad to three
-    digits (`sv03.5-027`, `me01-068`). Try as-given, stripped, then padded.
+    digits (`sv03.5-027`, `me01-068`). Gallery prints also pad to three
+    (`GG3` -> `GG03`; `GG30` and `TG17` stay as-is).
     """
-    if not number.isdigit():
-        return [number]  # gallery prints (GG30, TG17) are already exact
     variants = []
+    m = re.match(r'^([A-Za-z]+)(\d+)$', number)
+    if m:
+        prefix, digits = m.group(1), m.group(2)
+        for d in (digits, digits.lstrip('0') or '0', digits.zfill(3)):
+            v = prefix + d
+            if v not in variants:
+                variants.append(v)
+        return variants
+    if not number.isdigit():
+        return [number]
     for candidate in (number, number.lstrip('0') or '0', number.zfill(3)):
         if candidate not in variants:
             variants.append(candidate)
@@ -282,10 +294,26 @@ def main(argv):
         if ids_mode:
             parts = line.split()
             print_id = parts[-1]
-            name = ' '.join(parts[:-1]) if len(parts) > 1 else None
             if '-' not in print_id:
                 problems.append((lineno, f'printId inválido: {line!r}'))
                 continue
+            name = None
+            # Full format "Name SET number printId" -> double-check that the
+            # SET+number resolves to the same card as the given printId.
+            if len(parts) >= 4 and parts[-3].upper() in known_sets:
+                name = ' '.join(parts[:-3])
+                ref_set, ref_num = parts[-3].upper(), parts[-2]
+                resolved_id, _, _ = resolve_print(ref_set, ref_num)
+                if resolved_id is None:
+                    problems.append((lineno, f'no se pudo resolver {ref_set} {ref_num}'))
+                    continue
+                if resolved_id != print_id:
+                    problems.append((lineno,
+                                     f'DISCREPANCIA: {ref_set} {ref_num} resuelve a '
+                                     f'{resolved_id}, no a {print_id}'))
+                    continue
+            elif len(parts) >= 2:
+                name = ' '.join(parts[:-1])
             set_id, number = print_id.rsplit('-', 1)
             set_code = SETID_TO_CODE.get(set_id, '')
             card = fetch_card(print_id)

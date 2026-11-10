@@ -39,6 +39,12 @@ python scripts/ingest-alternatives.py <ids.txt> --ids [--apply]  # bloque de pri
 prefijados por la especie (`Vulpix sv03.5-037`). Cada id se **verifica** contra
 TCGdex (dexId + imagen) pero no se re-resuelve desde set+número.
 
+**Doble check:** para cruzar el bloque Limitless con el de IDs, pasá la línea
+completa `Nombre SET número printId` (ej. `Magmortar CRZ GG03 swsh12.5gg-GG03`).
+El script resuelve `SET número` y marca `DISCREPANCIA` si no coincide con el
+`printId` dado. Es la forma de garantizar que ambos bloques apuntan a la **misma
+carta**.
+
 ## Loop completo
 
 1. **Recibir la lista** del usuario y guardarla en un `.txt`.
