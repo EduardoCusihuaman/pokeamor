@@ -78,8 +78,10 @@ Verificar **en este orden**:
 1. **Limitless:** comprobar la referencia en `limitlesstcg.com/cards` y que sea
    compatible con `limitlesstcg.com/tools/proxies`.
 2. **TCGdex:** resolver el `printId` con la API de TCGdex
-   (`https://api.tcgdex.net/v2/en/cards/{id}`) y confirmar que el `dexId`
-   coincide con la especie.
+   (`https://api.tcgdex.net/v2/en/cards/{id}`) y confirmar que es la **misma
+   carta** del bloque 1 (mismo set + número), no solo la especie. El nombre de
+   la carta puede diferir de la especie: "Team Rocket's Rattata" es un Rattata,
+   "Pikachu VMAX" es un Pikachu, "Vileplume-GX" es un Vileplume.
 3. **Bases TCG:** autenticidad, expansión y numeración.
 
 No afirmar que una importación fue comprobada si únicamente se verificó la existencia de la carta.
@@ -93,9 +95,14 @@ Responder con **dos bloques de código**:
 **Bloque 1 — Limitless** (para copiar en `limitlesstcg.com/tools/proxies`):
 
 ```text
-1 Bulbasaur SET NUMERO
-1 Bulbasaur SET NUMERO
-1 Bulbasaur SET NUMERO
+1 Bulbasaur SCR 143
+1 Bulbasaur MEG 133
+
+1 Team Rocket's Rattata DRI 147
+1 Rattata MEW 019
+
+1 Pikachu VMAX LOR TG17
+1 Pikachu CRZ GG30
 ```
 
 **Bloque 2 — IDs** (printIds de TCGdex, en el MISMO orden, para la ingesta):
@@ -103,10 +110,17 @@ Responder con **dos bloques de código**:
 ```text
 sv07-143
 me01-133
-sv03.5-166
+
+sv10-147
+sv03.5-019
+
+swsh11tg-TG17
+swsh12.5gg-GG30
 ```
 
-Los identificadores del ejemplo son marcadores de posición, no referencias reales.
+Nótese que el nombre de carta puede no ser el de la especie: `Team Rocket's
+Rattata` (especie Rattata), `Pikachu VMAX` (especie Pikachu). Los IDs del
+bloque 2 apuntan a esas mismas cartas.
 
 **Reglas del bloque 1 (Limitless):**
 - Una línea vacía entre cada alternativa.
@@ -121,7 +135,9 @@ Los identificadores del ejemplo son marcadores de posición, no referencias real
 - Un `printId` de TCGdex por línea, en el MISMO orden que el bloque 1.
 - Resolver cada `printId` con la API de TCGdex (`https://api.tcgdex.net/v2/en/cards/{id}`);
   nunca inventarlo.
-- Confirmar que el `dexId` de la carta coincide con la especie del bloque 1.
+- Confirmar que cada `printId` es la **misma carta** que su línea del bloque 1
+  (mismo set + número); el `dexId` confirma la especie, pero el nombre de carta
+  puede diferir (ej. `sv10-147` → "Team Rocket's Rattata", especie Rattata).
 - Si una carta no tiene imagen en TCGdex, omitirla del bloque 2 y avisarlo.
 
 Máximo 3 líneas adicionales fuera de los bloques para problemas excepcionales.
