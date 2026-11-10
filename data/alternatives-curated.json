@@ -1455,6 +1455,88 @@
           "language": "en"
         }
       }
+    ],
+    "467": [
+      {
+        "printId": "swsh12.5gg-GG03",
+        "image": "https://images.pokemontcg.io/swsh12pt5gg/GG03_hires.png",
+        "rarity": "Rare",
+        "artist": "Saya Tsuruta",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv09-021",
+        "image": "https://assets.tcgdex.net/en/sv/sv09/021/high.webp",
+        "rarity": "Rare",
+        "artist": "Tonji Matsuno",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "swsh2-30",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh2/30/high.webp",
+        "rarity": "Rare",
+        "artist": "Kazuma Koda",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "226": [
+      {
+        "printId": "swsh10-034",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh10/034/high.webp",
+        "rarity": "Common",
+        "artist": "OKACHEKE",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv08-040",
+        "image": "https://assets.tcgdex.net/en/sv/sv08/040/high.webp",
+        "rarity": "Common",
+        "artist": "satoma",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "me01-032",
+        "image": "https://assets.tcgdex.net/en/me/me01/032/high.webp",
+        "rarity": "Common",
+        "artist": "Shimaris Yukichi",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
     ]
   }
 }

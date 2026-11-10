@@ -6518,5 +6518,35 @@
     "name": "Vileplume",
     "set": "LOR",
     "number": "3"
+  },
+  "swsh12.5gg-GG03": {
+    "name": "Magmortar",
+    "set": "CRZ",
+    "number": "GG03"
+  },
+  "sv09-021": {
+    "name": "Magmortar",
+    "set": "JTG",
+    "number": "21"
+  },
+  "swsh2-30": {
+    "name": "Magmortar",
+    "set": "RCL",
+    "number": "30"
+  },
+  "swsh10-034": {
+    "name": "Mantine",
+    "set": "ASR",
+    "number": "34"
+  },
+  "sv08-040": {
+    "name": "Mantine",
+    "set": "SSP",
+    "number": "40"
+  },
+  "me01-032": {
+    "name": "Mantine",
+    "set": "MEG",
+    "number": "32"
   }
 }
