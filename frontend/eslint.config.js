@@ -63,19 +63,9 @@ export default defineConfig([
         // `allowDefaultProject` keeps standalone config files and tests
         // lintable while they are not part of a tsconfig include list.
         // Files that are already covered by a project must NOT be listed here.
-        projectService: {
-          // Note: `**` is disallowed in allowDefaultProject globs, so list
-          // each test directory explicitly.
-          allowDefaultProject: [
-            'tests/*.ts',
-            'tests/unit/*.ts',
-            'tests/components/*.ts',
-            'tests/components/*.svelte',
-            'tests/integration/*.ts',
-            'tests/e2e/*.ts',
-            'tests/performance/*.ts',
-          ],
-        },
+        // Tests live in their own tsconfig (tsconfig.test.json), so no
+        // allowDefaultProject fallback is needed and the 8-file cap is avoided.
+        projectService: true,
         tsconfigRootDir: import.meta.dirname,
         extraFileExtensions: ['.svelte'],
       },

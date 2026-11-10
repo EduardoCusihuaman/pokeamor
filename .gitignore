@@ -3,3 +3,8 @@ site.tar.gz
 generated/
 worker/index.js
 __pycache__/
+
+# Local secrets
+.env
+.env.*
+!.env.example
