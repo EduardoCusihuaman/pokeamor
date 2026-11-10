@@ -791,6 +791,670 @@
           "language": "en"
         }
       }
+    ],
+    "26": [
+      {
+        "printId": "me02.5-056",
+        "image": "https://assets.tcgdex.net/en/me/me02.5/056/high.webp",
+        "rarity": "Uncommon",
+        "artist": "Iori Suzuki",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sm12-67",
+        "image": "https://assets.tcgdex.net/en/sm/sm12/67/high.webp",
+        "rarity": "Rare",
+        "artist": "AKIRA EGAWA",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "27": [
+      {
+        "printId": "me01-068",
+        "image": "https://assets.tcgdex.net/en/me/me01/068/high.webp",
+        "rarity": "Common",
+        "artist": "Shinji Kanda",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "swsh8-131",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh8/131/high.webp",
+        "rarity": "Common",
+        "artist": "Yuka Morii",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-027",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/027/high.webp",
+        "rarity": "Common",
+        "artist": "kodama",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "28": [
+      {
+        "printId": "me01-069",
+        "image": "https://assets.tcgdex.net/en/me/me01/069/high.webp",
+        "rarity": "Common",
+        "artist": "imoniii",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-028",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/028/high.webp",
+        "rarity": "Uncommon",
+        "artist": "kodama",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "29": [
+      {
+        "printId": "sm9-54",
+        "image": "https://assets.tcgdex.net/en/sm/sm9/54/high.webp",
+        "rarity": "Common",
+        "artist": "miki kudo",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-029",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/029/high.webp",
+        "rarity": "Common",
+        "artist": "Teeziro",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv10-114",
+        "image": "https://assets.tcgdex.net/en/sv/sv10/114/high.webp",
+        "rarity": "Common",
+        "artist": "REND",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "30": [
+      {
+        "printId": "sv10-115",
+        "image": "https://assets.tcgdex.net/en/sv/sv10/115/high.webp",
+        "rarity": "Common",
+        "artist": "Taiga Kasai",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sm9-55",
+        "image": "https://assets.tcgdex.net/en/sm/sm9/55/high.webp",
+        "rarity": "Uncommon",
+        "artist": "Kagemaru Himeno",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-030",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/030/high.webp",
+        "rarity": "Uncommon",
+        "artist": "Teeziro",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "31": [
+      {
+        "printId": "sm9-56",
+        "image": "https://assets.tcgdex.net/en/sm/sm9/56/high.webp",
+        "rarity": "Rare",
+        "artist": "nagimiso",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-031",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/031/high.webp",
+        "rarity": "Uncommon",
+        "artist": "Teeziro",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv10-116",
+        "image": "https://assets.tcgdex.net/en/sv/sv10/116/high.webp",
+        "rarity": "Uncommon",
+        "artist": "hncl",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "32": [
+      {
+        "printId": "sm9-57",
+        "image": "https://assets.tcgdex.net/en/sm/sm9/57/high.webp",
+        "rarity": "Common",
+        "artist": "Naoyo Kimura",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-032",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/032/high.webp",
+        "rarity": "Common",
+        "artist": "Shiburingaru",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv10-117",
+        "image": "https://assets.tcgdex.net/en/sv/sv10/117/high.webp",
+        "rarity": "Common",
+        "artist": "buchi",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "33": [
+      {
+        "printId": "sv10-118",
+        "image": "https://assets.tcgdex.net/en/sv/sv10/118/high.webp",
+        "rarity": "Common",
+        "artist": "KEIICHIRO ITO",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-033",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/033/high.webp",
+        "rarity": "Uncommon",
+        "artist": "Shiburingaru",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sm9-58",
+        "image": "https://assets.tcgdex.net/en/sm/sm9/58/high.webp",
+        "rarity": "Uncommon",
+        "artist": "Kouki Saitou",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "34": [
+      {
+        "printId": "sv10-233",
+        "image": "https://assets.tcgdex.net/en/sv/sv10/233/high.webp",
+        "rarity": "Special illustration rare",
+        "artist": "Uninori",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sm9-59",
+        "image": "https://assets.tcgdex.net/en/sm/sm9/59/high.webp",
+        "rarity": "Rare",
+        "artist": "kawayoo",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "35": [
+      {
+        "printId": "me02.5-280",
+        "image": "https://assets.tcgdex.net/en/me/me02.5/280/high.webp",
+        "rarity": "Special illustration rare",
+        "artist": "Naoki Saito",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv09-184",
+        "image": "https://assets.tcgdex.net/en/sv/sv09/184/high.webp",
+        "rarity": "Special illustration rare",
+        "artist": "Susumu Maeya",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "36": [
+      {
+        "printId": "swsh9-054",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh9/054/high.webp",
+        "rarity": "Rare",
+        "artist": "Mizue",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-036",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/036/high.webp",
+        "rarity": "Uncommon",
+        "artist": "ryoma uratsuka",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "37": [
+      {
+        "printId": "sv06-026",
+        "image": "https://assets.tcgdex.net/en/sv/sv06/026/high.webp",
+        "rarity": "Common",
+        "artist": "sowsow",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-037",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/037/high.webp",
+        "rarity": "Common",
+        "artist": "kawayoo",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "38": [
+      {
+        "printId": "sv08-017",
+        "image": "https://assets.tcgdex.net/en/sv/sv08/017/high.webp",
+        "rarity": "Uncommon",
+        "artist": "Kamome Shirahama",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-186",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/186/high.webp",
+        "rarity": "Ultra Rare",
+        "artist": "PLANETA Tsuji",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "39": [
+      {
+        "printId": "me02-076",
+        "image": "https://assets.tcgdex.net/en/me/me02/076/high.webp",
+        "rarity": "Common",
+        "artist": "Naoyo Kimura",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03.5-039",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/039/high.webp",
+        "rarity": "Common",
+        "artist": "saino misaki",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "swsh8-110",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh8/110/high.webp",
+        "rarity": "Common",
+        "artist": "Saya Tsuruta",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "40": [
+      {
+        "printId": "sv02-084",
+        "image": "https://assets.tcgdex.net/en/sv/sv02/084/high.webp",
+        "rarity": "Rare",
+        "artist": "Hitoshi Ariga",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "swsh8-111",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh8/111/high.webp",
+        "rarity": "Uncommon",
+        "artist": "Asako Ito",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "41": [
+      {
+        "printId": "sv03.5-041",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/041/high.webp",
+        "rarity": "Common",
+        "artist": "Scav",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv10-120",
+        "image": "https://assets.tcgdex.net/en/sv/sv10/120/high.webp",
+        "rarity": "Common",
+        "artist": "toi8",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "42": [
+      {
+        "printId": "sv03.5-042",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/042/high.webp",
+        "rarity": "Uncommon",
+        "artist": "Scav",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "swsh5-90",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh5/90/high.webp",
+        "rarity": "Uncommon",
+        "artist": "sui",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "43": [
+      {
+        "printId": "sv03.5-043",
+        "image": "https://assets.tcgdex.net/en/sv/sv03.5/043/high.webp",
+        "rarity": "Common",
+        "artist": "Sekio",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "me02.5-001",
+        "image": "https://assets.tcgdex.net/en/me/me02.5/001/high.webp",
+        "rarity": "Common",
+        "artist": "Yoriyuki Ikegami",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "sv03-001",
+        "image": "https://assets.tcgdex.net/en/sv/sv03/001/high.webp",
+        "rarity": "Common",
+        "artist": "Midori Harada",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "44": [
+      {
+        "printId": "swsh11-002",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh11/002/high.webp",
+        "rarity": "Uncommon",
+        "artist": "Tomokazu Komiya",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "me02.5-002",
+        "image": "https://assets.tcgdex.net/en/me/me02.5/002/high.webp",
+        "rarity": "Uncommon",
+        "artist": "MARINA Chikazawa",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
+    ],
+    "45": [
+      {
+        "printId": "me02-003",
+        "image": "https://assets.tcgdex.net/en/me/me02/003/high.webp",
+        "rarity": "Rare",
+        "artist": "Shibuzoh.",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      },
+      {
+        "printId": "swsh11-003",
+        "image": "https://assets.tcgdex.net/en/swsh/swsh11/003/high.webp",
+        "rarity": "Holo Rare",
+        "artist": "Jiro Sasumo",
+        "enabled": true,
+        "reviewStatus": "user-selected",
+        "technicalCheck": {
+          "source": "Exact user-selected print; resolved via TCGdex API",
+          "imageDecoded": true,
+          "language": "en"
+        }
+      }
     ]
   }
 }

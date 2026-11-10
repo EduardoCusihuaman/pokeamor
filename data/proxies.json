@@ -6278,5 +6278,245 @@
     "name": "Charizard VSTAR",
     "set": "BRS",
     "number": "174"
+  },
+  "me02.5-056": {
+    "name": "Raichu",
+    "set": "ASC",
+    "number": "56"
+  },
+  "sm12-67": {
+    "name": "Raichu",
+    "set": "CEC",
+    "number": "67"
+  },
+  "me01-068": {
+    "name": "Sandshrew",
+    "set": "MEG",
+    "number": "68"
+  },
+  "swsh8-131": {
+    "name": "Sandshrew",
+    "set": "FST",
+    "number": "131"
+  },
+  "sv03.5-027": {
+    "name": "Sandshrew",
+    "set": "MEW",
+    "number": "27"
+  },
+  "me01-069": {
+    "name": "Sandslash",
+    "set": "MEG",
+    "number": "69"
+  },
+  "sv03.5-028": {
+    "name": "Sandslash",
+    "set": "MEW",
+    "number": "28"
+  },
+  "sm9-54": {
+    "name": "Nidoran♀",
+    "set": "TEU",
+    "number": "54"
+  },
+  "sv03.5-029": {
+    "name": "Nidoran♀",
+    "set": "MEW",
+    "number": "29"
+  },
+  "sv10-114": {
+    "name": "Team Rocket's Nidoran♀",
+    "set": "DRI",
+    "number": "114"
+  },
+  "sv10-115": {
+    "name": "Team Rocket's Nidorina",
+    "set": "DRI",
+    "number": "115"
+  },
+  "sm9-55": {
+    "name": "Nidorina",
+    "set": "TEU",
+    "number": "55"
+  },
+  "sv03.5-030": {
+    "name": "Nidorina",
+    "set": "MEW",
+    "number": "30"
+  },
+  "sm9-56": {
+    "name": "Nidoqueen",
+    "set": "TEU",
+    "number": "56"
+  },
+  "sv03.5-031": {
+    "name": "Nidoqueen",
+    "set": "MEW",
+    "number": "31"
+  },
+  "sv10-116": {
+    "name": "Team Rocket's Nidoqueen",
+    "set": "DRI",
+    "number": "116"
+  },
+  "sm9-57": {
+    "name": "Nidoran♂",
+    "set": "TEU",
+    "number": "57"
+  },
+  "sv03.5-032": {
+    "name": "Nidoran♂",
+    "set": "MEW",
+    "number": "32"
+  },
+  "sv10-117": {
+    "name": "Team Rocket's Nidoran♂",
+    "set": "DRI",
+    "number": "117"
+  },
+  "sv10-118": {
+    "name": "Team Rocket's Nidorino",
+    "set": "DRI",
+    "number": "118"
+  },
+  "sv03.5-033": {
+    "name": "Nidorino",
+    "set": "MEW",
+    "number": "33"
+  },
+  "sm9-58": {
+    "name": "Nidorino",
+    "set": "TEU",
+    "number": "58"
+  },
+  "sv10-233": {
+    "name": "Team Rocket's Nidoking ex",
+    "set": "DRI",
+    "number": "233"
+  },
+  "sm9-59": {
+    "name": "Nidoking",
+    "set": "TEU",
+    "number": "59"
+  },
+  "me02.5-280": {
+    "name": "Lillie's Clefairy ex",
+    "set": "ASC",
+    "number": "280"
+  },
+  "sv09-184": {
+    "name": "Lillie's Clefairy ex",
+    "set": "JTG",
+    "number": "184"
+  },
+  "swsh9-054": {
+    "name": "Clefable",
+    "set": "BRS",
+    "number": "54"
+  },
+  "sv03.5-036": {
+    "name": "Clefable",
+    "set": "MEW",
+    "number": "36"
+  },
+  "sv06-026": {
+    "name": "Vulpix",
+    "set": "TWM",
+    "number": "26"
+  },
+  "sv03.5-037": {
+    "name": "Vulpix",
+    "set": "MEW",
+    "number": "37"
+  },
+  "sv08-017": {
+    "name": "Ninetales",
+    "set": "SSP",
+    "number": "17"
+  },
+  "sv03.5-186": {
+    "name": "Ninetales ex",
+    "set": "MEW",
+    "number": "186"
+  },
+  "me02-076": {
+    "name": "Jigglypuff",
+    "set": "PFL",
+    "number": "76"
+  },
+  "sv03.5-039": {
+    "name": "Jigglypuff",
+    "set": "MEW",
+    "number": "39"
+  },
+  "swsh8-110": {
+    "name": "Jigglypuff",
+    "set": "FST",
+    "number": "110"
+  },
+  "sv02-084": {
+    "name": "Wigglytuff",
+    "set": "PAL",
+    "number": "84"
+  },
+  "swsh8-111": {
+    "name": "Wigglytuff",
+    "set": "FST",
+    "number": "111"
+  },
+  "sv03.5-041": {
+    "name": "Zubat",
+    "set": "MEW",
+    "number": "41"
+  },
+  "sv10-120": {
+    "name": "Team Rocket's Zubat",
+    "set": "DRI",
+    "number": "120"
+  },
+  "sv03.5-042": {
+    "name": "Golbat",
+    "set": "MEW",
+    "number": "42"
+  },
+  "swsh5-90": {
+    "name": "Golbat",
+    "set": "BST",
+    "number": "90"
+  },
+  "sv03.5-043": {
+    "name": "Oddish",
+    "set": "MEW",
+    "number": "43"
+  },
+  "me02.5-001": {
+    "name": "Erika's Oddish",
+    "set": "ASC",
+    "number": "1"
+  },
+  "sv03-001": {
+    "name": "Oddish",
+    "set": "OBF",
+    "number": "1"
+  },
+  "swsh11-002": {
+    "name": "Gloom",
+    "set": "LOR",
+    "number": "2"
+  },
+  "me02.5-002": {
+    "name": "Erika's Gloom",
+    "set": "ASC",
+    "number": "2"
+  },
+  "me02-003": {
+    "name": "Vileplume",
+    "set": "PFL",
+    "number": "3"
+  },
+  "swsh11-003": {
+    "name": "Vileplume",
+    "set": "LOR",
+    "number": "3"
   }
 }

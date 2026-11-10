@@ -76,6 +76,15 @@ SET_TO_SETID = {
     'TEF': 'sv05',      # Temporal Forces
     'BST': 'swsh5',     # Battle Styles
     'CRZ': 'swsh12.5',  # Crown Zenith
+    'PAL': 'sv02',      # Paldea Evolved
+    'ASC': 'me02.5',    # Ascended Heroes
+    'CEC': 'sm12',      # Cosmic Eclipse
+    'BKT': 'xy8',       # BREAKthrough
+    'TEU': 'sm9',       # Team Up
+    'MEP': 'mep',       # MEP Black Star Promos
+    'BKP': 'xy9',       # BREAKpoint
+    'TWM': 'sv06',      # Twilight Masquerade
+    'SSP': 'sv08',      # Surging Sparks
 }
 
 # Gallery prints whose TCGdex `image` is missing (TCGdex has no asset for
@@ -97,7 +106,7 @@ MAX_ALTERNATIVES = 3  # Keep in sync with build-card-resources.py and card-resou
 
 # Card-name suffix to strip when matching an input name back to a species
 # (Limitless lists print "Venusaur ex", "Charizard VSTAR", etc.).
-CARD_SUFFIX = re.compile(r'\s+(?:ex|gx|v|vmax|vstar|break|prime|lv\.x|v-union)\s*$',
+CARD_SUFFIX = re.compile(r'[\s-]+(?:ex|gx|v|vmax|vstar|break|prime|lv\.x|v-union)\s*$',
                          re.IGNORECASE)
 
 
@@ -120,11 +129,18 @@ def fetch_card(print_id):
 
 
 def number_variants(number):
-    """Ordered candidate number suffixes to try for a TCGdex print id."""
+    """Ordered candidate number suffixes to try for a TCGdex print id.
+
+    Older sets number without padding (`swsh2-2`); newer sets pad to three
+    digits (`sv03.5-027`, `me01-068`). Try as-given, stripped, then padded.
+    """
     if not number.isdigit():
         return [number]  # gallery prints (GG30, TG17) are already exact
-    stripped = number.lstrip('0') or '0'
-    return list(dict.fromkeys([number, stripped]))
+    variants = []
+    for candidate in (number, number.lstrip('0') or '0', number.zfill(3)):
+        if candidate not in variants:
+            variants.append(candidate)
+    return variants
 
 
 def resolve_print(set_code, number):
