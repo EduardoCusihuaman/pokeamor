@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { appSession } from '@/application/session.svelte';
-  import DiscoveryPlaceholder from '@/components/DiscoveryPlaceholder.svelte';
+  import DiscoveryScreen from '@/components/discovery/DiscoveryScreen.svelte';
 </script>
 
 <main class="app-shell">
-  <DiscoveryPlaceholder session={appSession} />
+  <DiscoveryScreen />
 </main>
 
 <style>
